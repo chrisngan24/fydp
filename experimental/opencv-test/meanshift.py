@@ -1,5 +1,6 @@
 import numpy as np
 import cv2
+from matplotlib import pyplot as plt
 
 cap = cv2.VideoCapture(0)
 
@@ -38,13 +39,27 @@ while(1):
     if ret == True:
         hsv = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
         dst = cv2.calcBackProject([hsv],[0,1],roi_hist,[0,180,0,256],1)
+        plt.imshow(dst)
 
         # apply meanshift to get the new location
-        ret, track_window = cv2.meanShift(dst, track_window, term_crit)
+        i, track_window = cv2.meanShift(dst, track_window, term_crit)
+
+        # Draw it on image (used for camshift only)
+        #pts = cv2.boxPoints(ret)
+        #pts = np.int0(pts)
+        #img2 = cv2.polylines(frame,[pts],True, 255,2)
+        #cv2.imshow('img2',img2)
 
         # Draw it on image
         x,y,w,h = track_window
-        cv2.rectangle(frame, (x,y), (x+w,y+h), 255,2)
+        
+        # Number of iterations to reach meanShift convergence, it is a
+        # measure of "quality" almost
+        if i > 8:
+            cv2.rectangle(frame, (x,y), (x+w,y+h), (0,0,255),2)
+        else:
+            cv2.rectangle(frame, (x,y), (x+w,y+h), (0,255,0),2)
+
         cv2.imshow('img2',frame)
 
         k = cv2.waitKey(1) & 0xff
@@ -52,6 +67,8 @@ while(1):
             break
         elif k == ord('s'):
             cv2.imwrite("meanshift_snap.jpg",frame)
+        elif k == ord('h'):
+            plt.show()
 
     else:
         break
