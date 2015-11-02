@@ -62,3 +62,6 @@ target/
 
 # MAc STUFF
 .DS_Store
+
+# OpenCV
+*.jpg
