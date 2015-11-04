@@ -5,7 +5,7 @@ import sys
 import datetime
 
 BAUD_RATE = 9600 
-PORT = '/dev/cu.usbmodem1411'
+PORT = '/dev/cu.usbmodem1421'
 
 def get_current_timestamp():
     return (datetime.datetime.utcnow() - \

@@ -2,7 +2,7 @@
 //
 //#include <helper_3dmath.h>
 //#include <MPU6050.h>
-//#include <MPU6050_6Axis_MotionApps20.h>
+#include <MPU6050_6Axis_MotionApps20.h>
 //#include <MPU6050_9Axis_MotionApps41.h>
 
 
@@ -10,7 +10,10 @@
 // I2Cdev and MPU6050 must be installed as libraries, or else the .cpp/.h files
 // for both classes must be in the include path of your project
 #include "I2Cdev.h"
-#include "MPU6050.h"
+//#include "MPU6050.h"
+
+
+
 
 // Arduino Wire library is required if I2Cdev I2CDEV_ARDUINO_WIRE implementation
 // is used in I2Cdev.h
@@ -24,10 +27,14 @@
 // AD0 high = 0x69
 MPU6050 accelgyro;
 //MPU6050 accelgyro(0x69); // <-- use for AD0 high
-
+//ioctl("TIOCMGET"):
 int16_t ax, ay, az;
+uint16_t packetSize;    // expected DMP packet size (default is 42 bytes)
 int16_t gx, gy, gz;
-
+float euler[3];         // [psi, theta, phi]    Euler angle container
+uint16_t fifoCount;     // count of all bytes currently in FIFO
+uint8_t fifoBuffer[64]; // FIFO storage buffer
+Quaternion q;           // [w, x, y, z]         quaternion container
 
 
 // uncomment "OUTPUT_READABLE_ACCELGYRO" if you want to see a tab-separated
@@ -61,10 +68,13 @@ void setup() {
     // initialize device
     //Serial.println("Initializing I2C devices...");
     accelgyro.initialize();
+    accelgyro.dmpInitialize();
     accelgyro.testConnection();
+    accelgyro.setDMPEnabled(true);
     // verify connection
 //    Serial.println("Testing device connections...");
 //    Serial.println(accelgyro.testConnection() ? "MPU6050 connection successful" : "MPU6050 connection failed");
+    packetSize = accelgyro.dmpGetFIFOPacketSize();
 
 
     // configure Arduino LED for
@@ -75,19 +85,32 @@ void loop() {
     // read raw accel/gyro measurements from device
     accelgyro.getMotion6(&ax, &ay, &az, &gx, &gy, &gz);
 
-    // these methods (and a few others) are also available
-    //accelgyro.getAcceleration(&ax, &ay, &az);
-    //accelgyro.getRotation(&gx, &gy, &gz);
+//
+//    fifoCount = accelgyro.getFIFOCount();
+//
+//
+//    while (fifoCount < packetSize) fifoCount = accelgyro.getFIFOCount();
+//
+//    accelgyro.getFIFOBytes(fifoBuffer, packetSize);
+
+    fifoCount -= packetSize;
+    accelgyro.dmpGetQuaternion(&q, fifoBuffer);
+//    accelgyro.dmpGetEuler(euler, &q);
+
 
     #ifdef OUTPUT_READABLE_ACCELGYRO
         // display tab-separated accel/gyro x/y/z values
         // Serial.print("a/g:\t");
+//        Serial.print("e1:");Serial.print(euler[0]); Serial.print(",");
+//        Serial.print("e2:");Serial.print(euler[1]); Serial.print(",");
+//        Serial.print("e3:");Serial.print(euler[2]); Serial.print(",");
         Serial.print("ax:");Serial.print(ax); Serial.print(",");
         Serial.print("ay:");Serial.print(ay); Serial.print(",");
         Serial.print("az:");Serial.print(az); Serial.print(",");
         Serial.print("gx:");Serial.print(gx); Serial.print(",");
         Serial.print("gy:");Serial.print(gy); Serial.print(",");
         Serial.print("gz:");Serial.println(gz);
+     
     #endif
 
     #ifdef OUTPUT_BINARY_ACCELGYRO
