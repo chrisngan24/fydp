@@ -42,8 +42,8 @@ while(1):
     if ret == True:
 
         gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
-        faces = face_cascade.detectMultiScale(gray, 1.3, 1, 0, (100,100))
-        profiles = profile_cascade.detectMultiScale(gray, 1.3, 3, 0)
+        faces = face_cascade.detectMultiScale(gray, 1.4, 1, 3, (100,100))
+        profiles = profile_cascade.detectMultiScale(gray, 1.4, 3, 0)
 
         this_event = {}
 
@@ -77,12 +77,12 @@ while(1):
             #cv2.normalize(roi_hist,roi_hist,0,255,cv2.NORM_MINMAX)
             #track_window = (x,y,w,h)
             
-            eyes = eye_cascade.detectMultiScale(roi_gray, 1.3, 3, 0)
+            eyes = eye_cascade.detectMultiScale(roi_gray, 1.4, 8, 0)
 
             for (ex,ey,ew,eh) in eyes:
                 cv2.rectangle(roi_color,(ex,ey),(ex+ew,ey+eh),(0,255,0),2)
 
-            noses = nose_cascade.detectMultiScale(roi_gray, 1.3, 3, 0, (20,20))
+            noses = nose_cascade.detectMultiScale(roi_gray, 1.4, 5, 0, (20,20))
 
             for (nx,ny,nw,nh) in noses:
                 cv2.rectangle(roi_color,(nx,ny),(nx+nw,ny+nh),(0,0,255),2)
@@ -98,7 +98,7 @@ while(1):
         if k == ord('q'):
             break
         elif k == ord('s'):
-            cv2.imwrite("meanshift_snap.jpg",frame)
+            cv2.imwrite("viola_snap.jpg",frame)
         elif k == ord('h'):
             plt.show()
 

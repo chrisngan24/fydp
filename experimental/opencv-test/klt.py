@@ -5,7 +5,7 @@ import time
 import pandas as pd
 
 # params for ShiTomasi corner detection
-feature_params = dict( maxCorners = 100,
+feature_params = dict( maxCorners = 20,
                        qualityLevel = 0.1,
                        minDistance = 7,
                        blockSize = 7 )
@@ -47,6 +47,7 @@ old_frame = []
 face_frame = []
 face_mask = []
 
+
 while(not face_found):
 
     ret,frame = cap.read()
@@ -59,8 +60,8 @@ while(not face_found):
         for (x,y,w,h) in faces:
             
             face_roi = gray[y:y+h, x:x+w]
-            eyes = eye_cascade.detectMultiScale(face_roi, 1.3, 3, 0)
-            nose = nose_cascade.detectMultiScale(face_roi, 1.3, 3, 0)
+            eyes = eye_cascade.detectMultiScale(face_roi, 1.3, 8, 0)
+            nose = nose_cascade.detectMultiScale(face_roi, 1.3, 5, 0)
 
             if (len(eyes) == 2 and len(nose) == 1):
 
@@ -94,11 +95,17 @@ while(1):
 
     if ret == True:
 
+        this_event = dict(
+            time=time.time(),
+            deltaX=-1,
+            deltaY=-1
+            )
+
         frame_gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
 
         # calculate optical flow
         p1, st, err = cv2.calcOpticalFlowPyrLK(old_gray, frame_gray, p0, None, **lk_params)
-     
+
         # Select good points
         good_new = p1[st==1]
         good_old = p0[st==1]
