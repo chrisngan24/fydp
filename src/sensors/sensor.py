@@ -41,11 +41,13 @@ class SensorMaster:
         Stops the sensor thread
         """
         for sensor in self.sensors:
-            sensor.stop()
+            pass
+            # sensor.stop()
 
-    def sample_sensors(self):
+    def sample_sensors(self, callback = lambda sensors: None):
         """
         Start sampling data from the sensors
+        callback must take the SEnsorMaster as a parameter
         """
         try:
             for sensor in self.sensors:
@@ -55,6 +57,7 @@ class SensorMaster:
         except KeyboardInterrupt:
             # hack only use the keyboard interrupt
             self.save_sensors()
+            callback(self)
         finally:
             self.stop_sensors()
 
@@ -76,6 +79,7 @@ class BaseSensor(threading.Thread):
         self.data_store = []
         self.dir_path = dir_path
         self.sensor_name = sensor_name
+        self.file_name = '%s/%s.csv' % (self.dir_path, self.sensor_name)
 
     @abc.abstractmethod
     def init_sensor(self):
@@ -108,6 +112,4 @@ class BaseSensor(threading.Thread):
         """
         if not os.path.exists(self.dir_path) and not os.path.isdir(self.dir_path):
             os.mkdir(self.dir_path)
-        pd.DataFrame(self.data_store).to_csv('%s/%s.csv' %
-                (self.dir_path, self.sensor_name)
-                )
+        pd.DataFrame(self.data_store).to_csv(self.file_name, index=False)

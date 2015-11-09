@@ -6,7 +6,7 @@ from sensor import BaseSensor
 from sensor import SensorMaster
 
 class WheelSensor(BaseSensor):
-    def __init__(self, dir_path, port, baudrate = 9600):
+    def __init__(self, dir_path, port, baudrate = 9600, gyro_coef = 16.4):
         """
         %dir_path%
         %port% - is the usb port the duino is hooked up to
@@ -16,6 +16,7 @@ class WheelSensor(BaseSensor):
         self.port = port
         self.baudrate = baudrate
         self.prev_timestamp = time.time()
+        self.gyro_coef = gyro_coef
 
     def init_sensor(self):
         """
@@ -37,7 +38,7 @@ class WheelSensor(BaseSensor):
         """
         va = self.serial.readline()[:-2]
         time.sleep(0.10)
-        while len(va) < 20:
+        while len(va.split(':')) ==6: 
             # keep reading if va values is no good
             va = self.serial.readline()[:-2]
         row = {
@@ -46,15 +47,16 @@ class WheelSensor(BaseSensor):
                     map(lambda x: x.split(':'), va.split(',')) \
                     if len(k) == 2
                     }
+        row['gz'] = row['gz'] / self.gyro_coef
+        timestamp=time.time()
+        row['time_diff'] = timestamp - self.prev_timestamp
+        row['timestamp'] = timestamp
         # calculate theta 
-        row['theta'] = self.prev_theta + self.prev_timestamp * row['gz']
+        row['theta'] = self.prev_theta + row['time_diff'] * row['gz'] 
         self.prev_theta = row['theta']
+        self.prev_timestamp = timestamp
 
-        return dict(
-                timestamp=time.time(),
-                gz=row['gz'],
-                theta=row['theta'],
-                )
+        return row
 
 if __name__ == '__main__':
     PORT = '/dev/cu.usbmodem1411'
