@@ -36,7 +36,7 @@ class WheelSensor(BaseSensor):
         read it until something usable is given
         """
         va = self.serial.readline()[:-2]
-        time.sleep(10)
+        time.sleep(0.10)
         while len(va) < 20:
             # keep reading if va values is no good
             va = self.serial.readline()[:-2]
