@@ -3,6 +3,7 @@ import logging
 
 from sensors import sensor, wheel_sensor, camera_sensor
 import fusion
+import visualize
 import time
 import sys
 
@@ -11,7 +12,7 @@ logging.basicConfig(stream=sys.stdout, level=logging.DEBUG)
 GYRO_PORT = '/dev/cu.usbmodem1411'
 VIDEO_PORT = 0
 
-direc = ''
+data_direc = ''
 
 def run_fusion(sensors):
     """
@@ -22,13 +23,22 @@ def run_fusion(sensors):
     file_1 = sensors.sensors[0].file_name
     file_2 = sensors.sensors[1].file_name
     df = fusion.fuse_csv(file_1, file_2)
-    df.to_csv('%s/fused.csv' % direc)
+    df.to_csv('%s/fused.csv' % data_direc)
+    visualize.make_line_plot(
+            df, 
+            'timestamp_x', 
+            ['theta', 'gz'], 
+            file_dir=data_direc, 
+            title='Angle of Wheel',
+            ylabel='Theta (degrees)',
+            xlabel='Timestamp (s)',
+            )
+
 
 if __name__ == '__main__':
     sensors = sensor.SensorMaster()
     now = time.time()
     data_direc = 'data/%s' % int(now)
-    direc = data_direc
     sensors.add_sensor(
             wheel_sensor.WheelSensor(
                 data_direc,
