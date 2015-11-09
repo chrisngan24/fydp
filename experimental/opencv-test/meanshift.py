@@ -1,7 +1,9 @@
 import numpy as np
 import cv2
+import time
 from matplotlib import pyplot as plt
 
+out = open('meanshift.out', 'w')
 cap = cv2.VideoCapture(0)
 
 # setup initial location of window  
@@ -9,21 +11,8 @@ cap = cv2.VideoCapture(0)
 c,r,w,h = 0,0,150,150
 track_window = (c,r,w,h)
 
-while(1):
-    # take first frame of the video
-    ret,frame = cap.read()
-    if ret == True:
-        cv2.rectangle(frame, (c,r), (c+w,r+h), 255, 2)
-        cv2.imshow('img1', frame)
+frame = cv2.imread('viola_detect.jpg')
 
-        if cv2.waitKey(1) & 0xff == ord('s'):
-            break
-
-# No need for the mask
-# mask = cv2.inRange(hsv_roi, np.array((0., 60.,32.)), np.array((180.,255.,255.)))
-
-# set up the ROI for tracking
-roi = frame[r:r+h, c:c+w]
 hsv_roi =  cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
 roi_hist = cv2.calcHist([hsv_roi], [0, 1], None, [180, 180], [0, 180, 0, 180])
 
@@ -57,8 +46,14 @@ while(1):
         # measure of "quality" almost
         if i > 8:
             cv2.rectangle(frame, (x,y), (x+w,y+h), (0,0,255),2)
+            msg = str(time.time()) + ' 0\n'
+            out.write(msg)
+            print msg
         else:
             cv2.rectangle(frame, (x,y), (x+w,y+h), (0,255,0),2)
+            msg = str(time.time()) + ' 1\n'
+            out.write(msg)
+            print msg
 
         cv2.imshow('img2',frame)
 
@@ -73,5 +68,6 @@ while(1):
     else:
         break
 
+out.close()
 cv2.destroyAllWindows()
 cap.release()
