@@ -28,6 +28,10 @@ class CameraSensor(BaseSensor):
         self.profile_cascade = cv2.CascadeClassifier(self.profile_model_file)
 
     def viola_face(self, frame):
+        """
+        Run viola jones to find the face
+        %frame% - the image frame
+        """
         gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
         faces = self.face_cascade.detectMultiScale(gray, 1.4, 1, 3, (100,100))
         profiles = self.profile_cascade.detectMultiScale(gray, 1.4, 3, 0)
@@ -77,11 +81,13 @@ class CameraSensor(BaseSensor):
 
 
     def read_sensor(self):
+        """
+        Will try and extract a vector from the frame
+        """
         ret = False
         frame = None
         while ret == False:
             ret,frame = self.camera.read()
-        # INSERT CODE CFUNG
         row = self.viola_face(frame)
         row['timestamp'] = time.time()
         return row

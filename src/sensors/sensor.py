@@ -11,19 +11,42 @@ import serial
 
  
 class SensorMaster:
+    """
+    Thread manager
+    Samples each sensor in different threads
+    manages when to save the data and how to kill the threads
+    """
     def __init__(self):
         self.sensors = [] # each sensor inherits threading.Thread
 
     def add_sensor(self, sensor_thread):
+        """
+        Add a new sensor thread to manage
+
+        %sensor_thread% - the BaseSensor object that represents the interface to the sensor
+        """
         i = len(self.sensors)
         self.sensors.append(sensor_thread)
         self.sensors[i].daemon = True
 
     def save_sensors(self):
+        """
+        Saves data in each sensor thread
+        """
         for sensor in self.sensors:
             sensor.save()
-        
+            
+    def stop_sensors(self):
+        """
+        Stops the sensor thread
+        """
+        for sensor in self.sensors:
+            sensor.stop()
+
     def sample_sensors(self):
+        """
+        Start sampling data from the sensors
+        """
         try:
             for sensor in self.sensors:
                 sensor.start()
@@ -32,15 +55,24 @@ class SensorMaster:
         except KeyboardInterrupt:
             # hack only use the keyboard interrupt
             self.save_sensors()
-        except e:
-            sensor.stop()
-            print e
+        finally:
+            self.stop_sensors()
 
 class BaseSensor(threading.Thread):
+    """
+    A base class that all sensor's can inherit froms. 
+    Outlines the threading approach
+    """
     __metaclass__ = abc.ABCMeta
 
     def __init__(self, dir_path, sensor_name):
+        """
+        Give the directory path to save to
+        %dir_path% - directory to save data to
+        %sensor_name% - the str constant that is the sensor
+        """
         threading.Thread.__init__(self)
+        # raw data points
         self.data_store = []
         self.dir_path = dir_path
         self.sensor_name = sensor_name
@@ -56,6 +88,7 @@ class BaseSensor(threading.Thread):
     def read_sensor(self):
         """
         Read one data value from the sensor
+        return - a hash map with the data
         """
         pass 
 
