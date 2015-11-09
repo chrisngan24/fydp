@@ -1,7 +1,11 @@
 import cv2
+import logging
 
 from sensors import sensor, wheel_sensor, camera_sensor
 import time
+import sys
+
+logging.basicConfig(stream=sys.stdout, level=logging.DEBUG)
 
 GYRO_PORT = '/dev/cu.usbmodem1411'
 VIDEO_PORT = 0
