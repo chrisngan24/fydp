@@ -24,6 +24,8 @@ if (os.path.isfile(nose_model_file) == True):
 face_cascade = cv2.CascadeClassifier(face_model_file)
 eye_cascade = cv2.CascadeClassifier(eye_model_file)
 nose_cascade = cv2.CascadeClassifier(nose_model_file)
+
+# Not used 
 profile_cascade = cv2.CascadeClassifier(profile_model_file)
 
 cap = cv2.VideoCapture(0)
@@ -42,8 +44,11 @@ while(1):
     if ret == True:
 
         gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
-        faces = face_cascade.detectMultiScale(gray, 1.4, 1, 3, (100,100))
-        profiles = profile_cascade.detectMultiScale(gray, 1.4, 3, 0)
+        faces = face_cascade.detectMultiScale(image = gray, 
+            scaleFactor = 1.3, 
+            minNeighbors = 5, 
+            flags = 0, 
+            minSize=(100,100))
 
         this_event = {}
 
@@ -51,15 +56,12 @@ while(1):
         this_event = dict(
             time=time.time(),
             isFrontFace=len(faces),
-            isRotatedFace=len(profiles),
+            isRotatedFace=0,
             faceX=-1,
             faceY=-1,
             noseX=-1,
             noseY=-1
             )
-
-        for (px,py,pw,ph) in profiles:
-            cv2.rectangle(frame,(px,py),(px+pw,py+ph),(255,255,0),2)
 
         for (x,y,w,h) in faces:
             
@@ -72,17 +74,20 @@ while(1):
 
             roi_gray = gray[y:y+h, x:x+w]
             roi_color = frame[y:y+h, x:x+w]
-            #hsv_roi =  cv2.cvtColor(roi_color, cv2.COLOR_BGR2HSV)
-            #roi_hist = cv2.calcHist([hsv_roi], [0, 1], None, [180, 180], [0, 180, 0, 180])
-            #cv2.normalize(roi_hist,roi_hist,0,255,cv2.NORM_MINMAX)
-            #track_window = (x,y,w,h)
             
-            eyes = eye_cascade.detectMultiScale(roi_gray, 1.4, 8, 0)
+            eyes = eye_cascade.detectMultiScale(image = roi_gray, 
+                scaleFactor = 1.1, 
+                minNeighbors = 5, 
+                flags = 0)
 
             for (ex,ey,ew,eh) in eyes:
                 cv2.rectangle(roi_color,(ex,ey),(ex+ew,ey+eh),(0,255,0),2)
 
-            noses = nose_cascade.detectMultiScale(roi_gray, 1.4, 5, 0, (20,20))
+            noses = nose_cascade.detectMultiScale(image = roi_gray, 
+                scaleFactor = 1.1, 
+                minNeighbors = 4, 
+                flags = 0, 
+                minSize=(20,20))
 
             for (nx,ny,nw,nh) in noses:
                 cv2.rectangle(roi_color,(nx,ny),(nx+nw,ny+nh),(0,0,255),2)
