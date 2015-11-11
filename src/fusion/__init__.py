@@ -43,18 +43,23 @@ def fuse_data(df_base, df_inject, distance_col):
     return df_
     
 
-def fuse_csv(csv_1, csv_2, distance_col = 'timestamp'):
+def fuse_csv(files, distance_col = 'timestamp'):
     """
     Fuses two csv files
     %csv_1% - the path to the first csv file
     %csv_2% - the path to the second csv file
     %returns% - a data frame of the fused data
     """
-    df_1 = pd.read_csv(csv_1)
-    df_2 = pd.read_csv(csv_2)
-
-    df_dense, df_sparse = compare_df(df_1, df_2)
-    return fuse_data(df_dense, df_sparse, distance_col)
+    assert not len(files) == 0
+    df = pd.read_csv(files[0])
+    if len(files) > 1:
+        for i in range(1, len(files)):
+            df_n = pd.read_csv(files[i])
+            print len(df_n)
+            if len(df_n) > 0:
+                df_dense, df_sparse = compare_df(df, df_n)
+                df = fuse_data(df_dense, df_sparse, distance_col)
+    return df
 
 
 

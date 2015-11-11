@@ -22,23 +22,10 @@ def run_fusion(sensors):
     runs fusion on the two data
     csv files
     """
-    file_1 = sensors.sensors[0].file_name
-    df = pd.read_csv(file_1)
-    df['timestamp_x'] = df['timestamp']
-    '''
-    file_2 = sensors.sensors[1].file_name
-    df = fusion.fuse_csv(file_1, file_2)
+    files = map(lambda x: x.file_name, sensors.sensors)
+    print files
+    df = fusion.fuse_csv(files)
     df.to_csv('%s/fused.csv' % data_direc)
-    visualize.make_line_plot(
-            df,
-            'timestamp_x',
-            ['theta', 'gz'],
-            file_dir=data_direc,
-            title='Angle of Wheel',
-            ylabel='Theta (degrees)',
-            xlabel='Timestamp (s)',
-            )
-    '''
     visualize.make_line_plot(
             df,
             'timestamp_x',
@@ -50,6 +37,16 @@ def run_fusion(sensors):
             )
 
 
+    visualize.make_line_plot(
+            df,
+            'timestamp_x',
+            ['theta', 'gz'],
+            file_dir=data_direc,
+            title='Angle of Wheel',
+            ylabel='Theta (degrees)',
+            xlabel='Timestamp (s)',
+            )
+
 
 
 if __name__ == '__main__':
@@ -57,14 +54,6 @@ if __name__ == '__main__':
     now = time.time()
     #data_direc = 'data/%s' % 'latest'
     data_direc = 'data/%s' % int(now)
-    '''
-    sensors.add_sensor(
-            wheel_sensor.WheelSensor(
-                data_direc,
-                GYRO_PORT,
-                )
-            )
-    '''
     # need to initiate openCV2 in the main thread
     camera = cv2.VideoCapture(VIDEO_PORT)
     sensors.add_sensor(
@@ -73,5 +62,12 @@ if __name__ == '__main__':
                 camera,
                 )
             )
+    sensors.add_sensor(
+            wheel_sensor.WheelSensor(
+                data_direc,
+                GYRO_PORT,
+                )
+            )
+
     # sample the sensors, and fuse data as a callback
     sensors.sample_sensors(callback=run_fusion)
