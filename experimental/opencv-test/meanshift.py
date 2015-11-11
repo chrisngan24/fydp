@@ -17,7 +17,6 @@ hsv_roi =  cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
 roi_hist = cv2.calcHist([hsv_roi], [0, 1], None, [180, 180], [0, 180, 0, 180])
 
 cv2.normalize(roi_hist,roi_hist,0,255,cv2.NORM_MINMAX)
-cv2.imwrite("meanshift_start.jpg",frame)
 
 # Setup the termination criteria, either 10 iteration or move by atleast 1 pt
 term_crit = ( cv2.TERM_CRITERIA_EPS | cv2.TERM_CRITERIA_COUNT, 10, 1 )
@@ -48,12 +47,10 @@ while(1):
             cv2.rectangle(frame, (x,y), (x+w,y+h), (0,0,255),2)
             msg = str(time.time()) + ' 0\n'
             out.write(msg)
-            print msg
         else:
             cv2.rectangle(frame, (x,y), (x+w,y+h), (0,255,0),2)
             msg = str(time.time()) + ' 1\n'
             out.write(msg)
-            print msg
 
         cv2.imshow('img2',frame)
 

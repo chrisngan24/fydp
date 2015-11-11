@@ -77,15 +77,15 @@ while(1):
             
             eyes = eye_cascade.detectMultiScale(image = roi_gray, 
                 scaleFactor = 1.1, 
-                minNeighbors = 5, 
+                minNeighbors = 8, 
                 flags = 0)
 
             for (ex,ey,ew,eh) in eyes:
                 cv2.rectangle(roi_color,(ex,ey),(ex+ew,ey+eh),(0,255,0),2)
 
             noses = nose_cascade.detectMultiScale(image = roi_gray, 
-                scaleFactor = 1.1, 
-                minNeighbors = 4, 
+                scaleFactor = 1.15, 
+                minNeighbors = 8, 
                 flags = 0, 
                 minSize=(20,20))
 

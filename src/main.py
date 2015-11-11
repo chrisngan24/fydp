@@ -9,7 +9,8 @@ import sys
 
 logging.basicConfig(stream=sys.stdout, level=logging.DEBUG)
 
-GYRO_PORT = '/dev/cu.usbmodem1411'
+#GYRO_PORT = '/dev/cu.usbmodem1411'
+GYRO_PORT = '/dev/ttyACM0'
 VIDEO_PORT = 0
 
 data_direc = ''
@@ -38,7 +39,7 @@ def run_fusion(sensors):
 if __name__ == '__main__':
     sensors = sensor.SensorMaster()
     now = time.time()
-    data_direc = 'data/%s' % int(now)
+    data_direc = 'data/%s' % 'latest'
     sensors.add_sensor(
             wheel_sensor.WheelSensor(
                 data_direc,
