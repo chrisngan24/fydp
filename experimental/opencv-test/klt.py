@@ -38,22 +38,23 @@ def find_new_KLT():
 
                 roi_gray = gray[y:y+h, x:x+w]
                 roi_color = frame[y:y+h, x:x+w]
+                roi_bottom = roi_gray
 
                 eyes = eye_cascade.detectMultiScale(image = roi_gray, 
                     scaleFactor = 1.1, 
-                    minNeighbors = 5, 
+                    minNeighbors = 3, 
                     flags = 0)
 
-                nose = nose_cascade.detectMultiScale(image = roi_gray, 
-                    scaleFactor = 1.1, 
-                    minNeighbors = 4, 
+                for (ex,ey,ew,eh) in eyes:
+                    cv2.rectangle(roi_color,(ex,ey),(ex+ew,ey+eh),(0,255,0),2)
+
+                nose = nose_cascade.detectMultiScale(image = roi_bottom, 
+                    scaleFactor = 1.15, 
+                    minNeighbors = 8, 
                     flags = 0,
                     minSize = (20,20))
 
                 print "Found face " + str(len(eyes)) + " " + str(len(nose))
-
-                for (ex,ey,ew,eh) in eyes:
-                    cv2.rectangle(roi_color,(ex,ey),(ex+ew,ey+eh),(0,255,0),2)
 
                 for (nx,ny,nw,nh) in nose:
                     cv2.rectangle(roi_color,(nx,ny),(nx+nw,ny+nh),(0,0,255),2)
@@ -206,6 +207,7 @@ while(1):
             # Define the ROI for eyes and noise
             roi_gray = frame_gray[y:y+h, x:x+w]
             roi_color = frame[y:y+h, x:x+w]
+            roi_bottom = roi_gray
 
             # Detect Eyes
             eyes = eye_cascade.detectMultiScale(image = roi_gray, 
@@ -217,9 +219,9 @@ while(1):
                 cv2.rectangle(roi_color,(ex,ey),(ex+ew,ey+eh),(0,255,0),2)
 
             # Detect noses
-            noses = nose_cascade.detectMultiScale(image = roi_gray, 
-                scaleFactor = 1.1, 
-                minNeighbors = 4, 
+            noses = nose_cascade.detectMultiScale(image = roi_bottom, 
+                scaleFactor = 1.15, 
+                minNeighbors = 8, 
                 flags = 0,
                 minSize = (20,20))
 
