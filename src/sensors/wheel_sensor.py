@@ -4,6 +4,7 @@ import logging
 
 from sensor import BaseSensor 
 from sensor import SensorMaster
+import util
 
 class WheelSensor(BaseSensor):
     def __init__(self, dir_path, port, baudrate = 9600, gyro_coef = 16.4):
@@ -47,16 +48,32 @@ class WheelSensor(BaseSensor):
                     map(lambda x: x.split(':'), va.split(',')) \
                     if len(k) == 2
                     }
-        row['gz'] = row['gz'] / self.gyro_coef
+        # row['gz'] = row['gz'] / self.gyro_coef
         timestamp=time.time()
         row['time_diff'] = timestamp - self.prev_timestamp
         row['timestamp'] = timestamp
         # calculate theta 
-        row['theta'] = self.prev_theta + row['time_diff'] * row['gz'] 
-        self.prev_theta = row['theta']
+        # row['theta'] = self.prev_theta + row['time_diff'] * row['gz'] 
+        # self.prev_theta = row['theta']
         self.prev_timestamp = timestamp
 
         return row
+
+    def filter(self,df):
+        """
+        How to filter the dataframe
+        """
+        return df
+
+    def process(self,df):
+        """
+        Pre-process data before the behavorial analysis
+
+        """
+        row['gz'] = row['gz'] / self.gyro_coef
+        # calculate theta 
+        df['theta'] = util.integrate_col(df['gz'], df['timediff'], 0)
+        return df
 
 if __name__ == '__main__':
     PORT = '/dev/cu.usbmodem1411'

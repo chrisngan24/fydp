@@ -193,6 +193,13 @@ class CameraSensor(BaseSensor):
         row['timestamp'] = time.time()
         return row
 
+
+    def filter(self, df):
+        return df
+
+    def process(self,df):
+        return df
+
 if __name__ == '__main__':
     sensors = SensorMaster()
 

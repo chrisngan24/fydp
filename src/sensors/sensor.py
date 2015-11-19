@@ -96,6 +96,22 @@ class BaseSensor(threading.Thread):
         """
         pass 
 
+    @abc.abstractmethod
+    def filter(self, df):
+        """
+        After data is collected
+        how to filter out the data frame
+        """
+        pass
+
+    @abc.abstractmethod
+    def process(self, df):
+        """
+        After data is collected, how to process
+        the panda data frame
+        """
+        pass
+
     def run(self):
         """
         Some while loop that keeps on reading from the thread

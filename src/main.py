@@ -16,16 +16,7 @@ VIDEO_PORT = 0
 
 data_direc = ''
 
-def run_fusion(sensors):
-    """
-    Callback function that
-    runs fusion on the two data
-    csv files
-    """
-    files = map(lambda x: x.file_name, sensors.sensors)
-    print files
-    df = fusion.fuse_csv(files)
-    df.to_csv('%s/fused.csv' % data_direc)
+def visualize(df):
     visualize.make_line_plot(
             df,
             'timestamp_x',
@@ -49,6 +40,20 @@ def run_fusion(sensors):
 
 
 
+
+def run_fusion(sensors):
+    """
+    Callback function that
+    runs fusion on the two data
+    csv files
+    """
+    files = map(lambda x: x.file_name, sensors.sensors)
+    print files
+    df = fusion.fuse_csv(files)
+    df.to_csv('%s/fused.csv' % data_direc)
+    # visualize(df)
+    
+
 if __name__ == '__main__':
     sensors = sensor.SensorMaster()
     now = time.time()
@@ -62,12 +67,13 @@ if __name__ == '__main__':
                 camera,
                 )
             )
+    ''' 
     sensors.add_sensor(
             wheel_sensor.WheelSensor(
                 data_direc,
                 GYRO_PORT,
                 )
             )
-
+    '''
     # sample the sensors, and fuse data as a callback
     sensors.sample_sensors(callback=run_fusion)
