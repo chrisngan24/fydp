@@ -75,6 +75,14 @@ class WheelSensor(BaseSensor):
         df['theta'] = util.integrate_col(df['gz'], df['timediff'], 0)
         return df
 
+    def metric(self, df):
+        """
+        After the data is processed and filtered,
+        run the metric computation on it
+        """
+        assert init_values.has_key('theta')
+        return np.sum(np.power(df['theta'] - init_values['theta'],2)) / (len(df) - 1)
+
 if __name__ == '__main__':
     PORT = '/dev/cu.usbmodem1411'
     sensors = SensorMaster()

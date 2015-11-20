@@ -200,6 +200,9 @@ class CameraSensor(BaseSensor):
     def process(self,df):
         return df
 
+    def metric(self, df, init_values):
+        pass
+
 if __name__ == '__main__':
     sensors = SensorMaster()
 

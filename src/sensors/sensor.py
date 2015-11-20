@@ -112,6 +112,14 @@ class BaseSensor(threading.Thread):
         """
         pass
 
+    @abc.abstractmethod
+    def metric(self, df, init_values):
+        """
+        After processing and filter,
+        compute some steady state metric values
+        """
+        pass
+
     def run(self):
         """
         Some while loop that keeps on reading from the thread
