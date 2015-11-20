@@ -68,7 +68,7 @@ class CameraSensor(BaseSensor):
                     roi_gray = gray[y:y+h, x:x+w]
                     eyes = self.eye_cascade.detectMultiScale(image = roi_gray, 
                         scaleFactor = 1.1, 
-                        minNeighbors = 3, 
+                        minNeighbors = 5, 
                         flags = 0)
 
                     nose = self.nose_cascade.detectMultiScale(image = roi_gray, 

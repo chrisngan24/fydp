@@ -1,4 +1,6 @@
 import numpy as np
+import colorcorrect.algorithm as cca
+from colorcorrect.util import from_pil, to_pil
 import cv2
 
 cap = cv2.VideoCapture(1)
@@ -7,12 +9,10 @@ while(True):
     # Capture frame-by-frame
     ret, frame = cap.read()
 
-    # Our operations on the frame come here
-    gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
-    norm_gray = cv2.equalizeHist(gray)
+    new_frame = to_pil(cca.stretch(from_pil(frame)))
 
     # Display the resulting frame
-    cv2.imshow('frame',norm_gray)
+    cv2.imshow('frame',new_frame)
     if cv2.waitKey(1) & 0xFF == ord('q'):
         break
 

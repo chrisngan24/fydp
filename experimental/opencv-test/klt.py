@@ -42,7 +42,7 @@ def find_new_KLT():
 
                 eyes = eye_cascade.detectMultiScale(image = roi_gray, 
                     scaleFactor = 1.1, 
-                    minNeighbors = 3, 
+                    minNeighbors = 5, 
                     flags = 0)
 
                 for (ex,ey,ew,eh) in eyes:
@@ -123,7 +123,7 @@ eye_cascade = cv2.CascadeClassifier(eye_model_file)
 nose_cascade = cv2.CascadeClassifier(nose_model_file)
 profile_cascade = cv2.CascadeClassifier(profile_model_file)
 
-cap = cv2.VideoCapture(0)
+cap = cv2.VideoCapture(1)
 events = []
 
 (old_gray, frame, p0_nose) = find_new_KLT()
@@ -153,10 +153,10 @@ while(1):
         #good_new_eyes = p1_eyes[st==1]
         #good_old_eyes = p0_eyes[st==1]
 
-        if (len(p0_nose) < 4):
+        if (len(p0_nose) < 3):
             (old_gray, frame, p0_nose) = find_new_KLT()
 
-        frame_gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)            
+        frame_gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
         p1_nose, st, err = cv2.calcOpticalFlowPyrLK(old_gray, frame_gray, p0_nose, None, **lk_params)
 
         good_new_nose = p1_nose[st==1]

@@ -39,7 +39,7 @@ class WheelSensor(BaseSensor):
         """
         va = self.serial.readline()[:-2]
         time.sleep(0.10)
-        while len(va.split(':')) ==6: 
+        while len(va.split(':')) ==6 and not va.find('gz') == -1: 
             # keep reading if va values is no good
             va = self.serial.readline()[:-2]
         row = {
