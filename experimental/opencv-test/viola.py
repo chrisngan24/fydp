@@ -28,7 +28,7 @@ nose_cascade = cv2.CascadeClassifier(nose_model_file)
 # Not used 
 profile_cascade = cv2.CascadeClassifier(profile_model_file)
 
-cap = cv2.VideoCapture(1)
+cap = cv2.VideoCapture(0)
 
 roi_hist = 0;
 
