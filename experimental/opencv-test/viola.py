@@ -43,7 +43,7 @@ while(1):
     ret,frame = cap.read()
     if ret == True:
 
-        gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
+        gray = cv2.equalizeHist(cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY))
         faces = face_cascade.detectMultiScale(image = gray, 
             scaleFactor = 1.3, 
             minNeighbors = 5, 
@@ -66,7 +66,7 @@ while(1):
         for (x,y,w,h) in faces:
             
             # Detect the face and save to DF
-            cv2.rectangle(frame,(x,y),(x+w,y+h),(255,0,0), 2)
+            cv2.rectangle(gray,(x,y),(x+w,y+h),(255,0,0), 2)
             this_event.update(dict(
                 faceX=(x+w/2),
                 faceY=(y+h/2)
@@ -74,30 +74,32 @@ while(1):
 
             roi_gray = gray[y:y+h, x:x+w]
             roi_color = frame[y:y+h, x:x+w]
+            roi_23down = gray[y+(h/3):y+h, x:x+w]
+            roi_23up = gray[y:y+(2*h/3), x:x+w]
             
-            eyes = eye_cascade.detectMultiScale(image = roi_gray, 
+            eyes = eye_cascade.detectMultiScale(image = roi_23up, 
                 scaleFactor = 1.1, 
                 minNeighbors = 8, 
                 flags = 0)
 
             for (ex,ey,ew,eh) in eyes:
-                cv2.rectangle(roi_color,(ex,ey),(ex+ew,ey+eh),(0,255,0),2)
+                cv2.rectangle(roi_gray,(ex,ey),(ex+ew,ey+eh),(0,255,0),2)
 
-            noses = nose_cascade.detectMultiScale(image = roi_gray, 
+            noses = nose_cascade.detectMultiScale(image = roi_23down, 
                 scaleFactor = 1.15, 
                 minNeighbors = 8, 
                 flags = 0, 
                 minSize=(20,20))
 
             for (nx,ny,nw,nh) in noses:
-                cv2.rectangle(roi_color,(nx,ny),(nx+nw,ny+nh),(0,0,255),2)
+                cv2.rectangle(roi_gray,(nx,ny+(h/3)),(nx+nw,ny+nh+(h/3)),(0,0,255),2)
                 this_event.update(dict(
                     noseX=(nx+nw/2),
                     noseY=(ny+nh/2)
                     ))
 
         events.append(this_event)
-        cv2.imshow('img',frame)
+        cv2.imshow('img',gray)
 
         k = cv2.waitKey(1) & 0xff
         if k == ord('q'):
