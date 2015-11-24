@@ -7,7 +7,7 @@ from sensor import SensorMaster
 import util
 
 class WheelSensor(BaseSensor):
-    def __init__(self, dir_path, port, baudrate = 9600, gyro_coef = 16.4):
+    def __init__(self, dir_path, port, baudrate = 9600, gyro_coef = 16.4, noise_mean = -15.44):
         """
         %dir_path%
         %port% - is the usb port the duino is hooked up to
@@ -18,6 +18,7 @@ class WheelSensor(BaseSensor):
         self.baudrate = baudrate
         self.prev_timestamp = time.time()
         self.gyro_coef = gyro_coef
+        self.noise_mean = noise_mean
 
     def init_sensor(self):
         """
@@ -63,6 +64,10 @@ class WheelSensor(BaseSensor):
         """
         How to filter the dataframe
         """
+        # make a raw version of original signal
+        df['gz_raw'] = df['gz']
+        df['gz'] = df['gz'] - self.noise_mean
+        df['gz'] = scipy.signal.medfilt(df['gz'], kernel_size=3)
         return df
 
     def process(self,df):
@@ -72,7 +77,7 @@ class WheelSensor(BaseSensor):
         """
         row['gz'] = row['gz'] / self.gyro_coef
         # calculate theta 
-        df['theta'] = util.integrate_col(df['gz'], df['timediff'], 0)
+        df['theta'] = util.integrate_trapezoid_col(df['gz'], df['timediff'], 0)
         return df
 
     def metric(self, df):
