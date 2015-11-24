@@ -3,7 +3,7 @@ import logging
 
 from sensors import sensor, wheel_sensor, camera_sensor
 import fusion
-import visualize
+import visualization
 import time
 import sys
 import pandas as pd
@@ -17,26 +17,26 @@ VIDEO_PORT = 0
 data_direc = ''
 
 def visualize(df):
-    visualize.make_line_plot(
-            df,
-            'timestamp_x',
-            ['noseX'],
-            file_dir=data_direc,
-            title='',
-            ylabel='Nose X-coord in the Frame',
-            xlabel='Timestamp (s)',
-            )
+    visualization.make_line_plot(
+        df,
+       'timestamp',
+       ['noseX'],
+       file_dir=data_direc,
+       title='',
+       ylabel='Nose X-coord in the Frame',
+       xlabel='Timestamp (s)',
+       )
 
 
-    visualize.make_line_plot(
-            df,
-            'timestamp_x',
-            ['theta', 'gz'],
-            file_dir=data_direc,
-            title='Angle of Wheel',
-            ylabel='Theta (degrees)',
-            xlabel='Timestamp (s)',
-            )
+    #visualization.make_line_plot(
+    #        df,
+    #        'timestamp_x',
+    #        ['theta', 'gz'],
+    #        file_dir=data_direc,
+    #        title='Angle of Wheel',
+    #        ylabel='Theta (degrees)',
+    #        xlabel='Timestamp (s)',
+    #        )
 
 
 
@@ -51,7 +51,7 @@ def run_fusion(sensors):
     print files
     df = fusion.fuse_csv(files)
     df.to_csv('%s/fused.csv' % data_direc)
-    # visualize(df)
+    visualize(df)
     
 
 if __name__ == '__main__':
