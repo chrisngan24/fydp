@@ -31,6 +31,7 @@ class CameraSensor(BaseSensor):
                           criteria = (cv2.TERM_CRITERIA_EPS | cv2.TERM_CRITERIA_COUNT, 10, 0.03))
 
         self.ERROR_ALLOWANCE = 5
+        self.FRAME_RESIZE = (320, 240)
 
         self.p0_nose = []
         self.old_frame = []
@@ -51,7 +52,7 @@ class CameraSensor(BaseSensor):
                 scaleFactor = 1.3, 
                 minNeighbors = 3, 
                 flags = 0, 
-                minSize= (100,100))
+                minSize= (50,50))
         eyes = []
         noses = []
 
@@ -81,7 +82,7 @@ class CameraSensor(BaseSensor):
             ret,frame = self.camera.read()
             if ret == True:
 
-                frame = cca.stretch(frame)
+                frame = cca.stretch(cv2.resize(frame, self.FRAME_RESIZE))
                 gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
 
                 (faces, eyes, noses) = self.get_features(gray)
@@ -131,7 +132,7 @@ class CameraSensor(BaseSensor):
         # 1. We have KLT points which are stable and within the Viola-Area
         # 2. We have no KLT points, but we have a face. Initialize KLT.
 
-        frame = cca.stretch(frame)
+        frame = cca.stretch(cv2.resize(frame, self.FRAME_RESIZE))
         this_event = dict(
             time=time.time(),
             isFrontFace=0,
@@ -143,7 +144,7 @@ class CameraSensor(BaseSensor):
             noseY=-1,
             )
      
-        if (len(self.p0_nose) < 3):
+        while (len(self.p0_nose) < 3):
             print "Only " + str(len(self.p0_nose)) + " points left. Reinitializing.. " + str(time.time())
             self.find_new_KLT()
 
