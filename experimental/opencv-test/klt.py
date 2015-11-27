@@ -21,7 +21,7 @@ def get_features(gray):
             scaleFactor = 1.3, 
             minNeighbors = 3, 
             flags = 0, 
-            minSize= (100,100))
+            minSize= (150,150))
     eyes = []
     noses = []
 
@@ -45,6 +45,9 @@ def get_features(gray):
 def find_new_KLT():
 
     face_found = False
+    nose_mask = []
+    old_gray = []
+    p0_nose = []
 
     while(not face_found):
 
@@ -174,7 +177,7 @@ while(1):
         #good_new_eyes = p1_eyes[st==1]
         #good_old_eyes = p0_eyes[st==1]
 
-        if (len(p0_nose) < 3):
+        while (p0_nose == None or len(p0_nose) < 3):
             (old_gray, frame, p0_nose) = find_new_KLT()
 
         frame_gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
