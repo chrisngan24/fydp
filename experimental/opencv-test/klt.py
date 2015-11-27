@@ -21,7 +21,7 @@ def get_features(gray):
             scaleFactor = 1.3, 
             minNeighbors = 3, 
             flags = 0, 
-            minSize= (150,150))
+            minSize= (50,50))
     eyes = []
     noses = []
 
@@ -54,7 +54,7 @@ def find_new_KLT():
         ret,frame = cap.read()
         if ret == True:
 
-            frame = cca.stretch(frame)
+            frame = cca.stretch(cv2.resize(frame, FRAME_RESIZE))
             cv2.imshow('frame',frame)
 
             if (not display_and_wait(frame)):
@@ -121,6 +121,7 @@ lk_params = dict( winSize  = (15,15),
                   maxLevel = 2,
                   criteria = (cv2.TERM_CRITERIA_EPS | cv2.TERM_CRITERIA_COUNT, 10, 0.03))
 
+FRAME_RESIZE = (320, 240)
 ERROR_ALLOWANCE = 5
 face_model_file = 'models/haarcascade_frontalface_default.xml'
 eye_model_file = 'models/haarcascade_eye.xml'
@@ -159,7 +160,7 @@ while(1):
         # 1. We have KLT points which are stable and within the Viola-Area
         # 2. We have no KLT points, but we have a face. Initialize KLT.
         
-        frame = cca.stretch(frame)
+        frame = cca.stretch(cv2.resize(frame, FRAME_RESIZE))
         this_event = dict(
             time=time.time(),
             isFrontFace=0,
