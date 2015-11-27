@@ -141,7 +141,6 @@ def find_new_KLT(cap):
 
 
 def run():
-    # params for ShiTomasi corner detection
     ERROR_ALLOWANCE = 5
     if (os.path.isfile(face_model_file) == True):
         print 'Face model found!' 
@@ -279,9 +278,11 @@ def run():
             if (not display_and_wait(frame)):
                 break
 
-    pd.DataFrame(events).to_csv("driven.out")
+    df = pd.DataFrame(events)
     cv2.destroyAllWindows()
     cap.release()
+    return df
 
 if __name__ == '__main__':
-    run() 
+    df = run() 
+    df.to_csv('driven.out')
