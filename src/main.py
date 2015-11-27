@@ -2,6 +2,7 @@ import cv2
 import logging
 
 from sensors import sensor, wheel_sensor, camera_sensor
+import analysis
 import fusion
 import visualization
 import time
@@ -10,16 +11,17 @@ import pandas as pd
 
 logging.basicConfig(stream=sys.stdout, level=logging.DEBUG)
 
-#GYRO_PORT = '/dev/cu.usbmodem1411'
-GYRO_PORT = '/dev/ttyACM0'
+GYRO_PORT = '/dev/cu.usbmodem1411'
+#GYRO_PORT = '/dev/ttyACM0'
 VIDEO_PORT = 0
 
 data_direc = ''
+model_direc = 'models'
 
-def visualize(df):
+def visualize(df, events_hash={}):
     visualization.make_line_plot(
         df,
-       'timestamp',
+       'timestamp_x',
        ['noseX'],
        file_dir=data_direc,
        title='',
@@ -27,8 +29,7 @@ def visualize(df):
        xlabel='Timestamp (s)',
        )
 
-
-    #visualization.make_line_plot(
+    # visualization.make_line_plot(
     #        df,
     #        'timestamp_x',
     #        ['theta', 'gz'],
@@ -40,6 +41,8 @@ def visualize(df):
 
 
 
+def analyze(df):
+    analysis.Analysis(model_direc, data_direc).run('dtw')
 
 def run_fusion(sensors):
     """
@@ -51,8 +54,9 @@ def run_fusion(sensors):
     print files
     df = fusion.fuse_csv(files)
     df.to_csv('%s/fused.csv' % data_direc)
-    visualize(df)
     
+    events_hash = analyze(df)
+    visualize(df, events_hash)
 
 if __name__ == '__main__':
     sensors = sensor.SensorMaster()
@@ -67,13 +71,11 @@ if __name__ == '__main__':
                 camera,
                 )
             )
-    ''' 
     sensors.add_sensor(
             wheel_sensor.WheelSensor(
                 data_direc,
                 GYRO_PORT,
                 )
             )
-    '''
     # sample the sensors, and fuse data as a callback
     sensors.sample_sensors(callback=run_fusion)

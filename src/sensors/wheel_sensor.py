@@ -1,6 +1,8 @@
 import serial
 import time
 import logging
+from scipy import signal
+import pandas as pd
 
 from sensor import BaseSensor 
 from sensor import SensorMaster
@@ -66,8 +68,9 @@ class WheelSensor(BaseSensor):
         """
         # make a raw version of original signal
         df['gz_raw'] = df['gz']
-        df['gz'] = df['gz'] - self.noise_mean
-        df['gz'] = scipy.signal.medfilt(df['gz'], kernel_size=3)
+        df['gz'] -= self.noise_mean
+        df['gz'] = signal.medfilt(df['gz'], kernel_size=3)
+
         return df
 
     def process(self,df):
@@ -75,9 +78,9 @@ class WheelSensor(BaseSensor):
         Pre-process data before the behavorial analysis
 
         """
-        row['gz'] = row['gz'] / self.gyro_coef
-        # calculate theta 
-        df['theta'] = util.integrate_trapezoid_col(df['gz'], df['timediff'], 0)
+        df['gz'] = df['gz'] / self.gyro_coef
+        df['theta'] = util.integrate_trapezoid_col(df['gz'], df['time_diff'], 0)
+
         return df
 
     def metric(self, df):
