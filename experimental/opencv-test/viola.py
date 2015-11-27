@@ -43,7 +43,7 @@ while(1):
     ret,frame = cap.read()
     if ret == True:
 
-        gray = cv2.equalizeHist(cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY))
+        gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
         faces = face_cascade.detectMultiScale(image = gray, 
             scaleFactor = 1.3, 
             minNeighbors = 5, 
@@ -66,7 +66,7 @@ while(1):
         for (x,y,w,h) in faces:
             
             # Detect the face and save to DF
-            cv2.rectangle(gray,(x,y),(x+w,y+h),(255,0,0), 2)
+            cv2.rectangle(frame,(x,y),(x+w,y+h),(255,0,0), 2)
             this_event.update(dict(
                 faceX=(x+w/2),
                 faceY=(y+h/2)
@@ -83,7 +83,7 @@ while(1):
                 flags = 0)
 
             for (ex,ey,ew,eh) in eyes:
-                cv2.rectangle(roi_gray,(ex,ey),(ex+ew,ey+eh),(0,255,0),2)
+                cv2.rectangle(roi_color,(ex,ey),(ex+ew,ey+eh),(0,255,0),2)
 
             noses = nose_cascade.detectMultiScale(image = roi_23down, 
                 scaleFactor = 1.15, 
@@ -92,14 +92,14 @@ while(1):
                 minSize=(20,20))
 
             for (nx,ny,nw,nh) in noses:
-                cv2.rectangle(roi_gray,(nx,ny+(h/3)),(nx+nw,ny+nh+(h/3)),(0,0,255),2)
+                cv2.rectangle(roi_color,(nx,ny+(h/3)),(nx+nw,ny+nh+(h/3)),(0,0,255),2)
                 this_event.update(dict(
                     noseX=(nx+nw/2),
                     noseY=(ny+nh/2)
                     ))
 
         events.append(this_event)
-        cv2.imshow('img',gray)
+        cv2.imshow('img',frame)
 
         k = cv2.waitKey(1) & 0xff
         if k == ord('q'):
