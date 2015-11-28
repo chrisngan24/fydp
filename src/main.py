@@ -8,6 +8,8 @@ import visualization
 import time
 import sys
 import pandas as pd
+import matplotlib.pyplot as plt
+from matplotlib import gridspec
 
 logging.basicConfig(stream=sys.stdout, level=logging.DEBUG)
 
@@ -19,26 +21,46 @@ data_direc = ''
 model_direc = 'models'
 
 def visualize(df, events_hash={}):
+    gs = gridspec.GridSpec(2, 1)
+    gs.update(hspace=0.5, right=0.8)
+
+    plt.style.use('ggplot')
+
+    fig = plt.figure()
+    ax1 = fig.add_subplot(gs[0,:])
+    ax2 = fig.add_subplot(gs[1,:])
+
     visualization.make_line_plot(
+        ax1,
         df,
        'timestamp_x',
        ['noseX'],
-       file_dir=data_direc,
-       title='',
+       title='Position of Nose',
        ylabel='Nose X-coord in the Frame',
-       xlabel='Timestamp (s)',
+       xlabel='# of Samples',
        )
 
-    # visualization.make_line_plot(
-    #        df,
-    #        'timestamp_x',
-    #        ['theta', 'gz'],
-    #        file_dir=data_direc,
-    #        title='Angle of Wheel',
-    #        ylabel='Theta (degrees)',
-    #        xlabel='Timestamp (s)',
-    #        )
+    visualization.make_line_plot(
+        ax2,
+        df,
+        'timestamp_x',
+        ['theta', 'gz'],
+        title='Angle of Wheel',
+        ylabel='Theta (degrees)',
+        xlabel='# of Samples',
+        )
 
+    # visualization.mark_event(
+    #     ax1,
+    #     {"left head turn": [10, 55, 80]}
+    #     )
+
+    # visualization.mark_event(
+    #     ax2,
+    #     {"left lane change": [60, 70], "right lane change": [100, 150]}
+    #     )
+
+    plt.savefig('%s/%s.png' % (data_direc, 'fused_plot'))
 
 
 def analyze(df):

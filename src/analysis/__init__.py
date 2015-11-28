@@ -25,8 +25,7 @@ class Analysis:
 		right_model_file_lines = right_model_file.read().split('\n')
 		right_model = np.array([float(i) for i in right_model_file_lines])
 
-		# data_file = open('%s/fused.csv' % self.data_dir)
-		data_file = open('data/%s/fused.csv' % '1448660313')
+		data_file = open('%s/fused.csv' % self.data_dir)
 
 		df = pd.read_csv(data_file, header=0, usecols=["theta"])
 
