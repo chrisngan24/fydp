@@ -49,7 +49,7 @@ def calculate_cost(x, y):
 
     return cost
 
-def find_start_end_indices(model, df):
+def find_start_end_indices(model, df, window_size=100):
 
     numbers = []
     min_cost = float("inf")
@@ -59,8 +59,6 @@ def find_start_end_indices(model, df):
     threshold = 0.005
     min_window = 20
     flag = 0
-
-    window_size = 60
 
     for index, row in df.iterrows():
         curr_theta = row['theta']

@@ -11,18 +11,28 @@ class Analysis:
 
 		events_hash = {}
 
-		model_file = open('%s/left_lane_change.txt' % self.model_dir)
-		model_file_lines = model_file.read().split('\n')
-		model = np.array([float(i) for i in model_file_lines])
+		window_size_file = open('%s/average_lane_change_length.txt' % self.model_dir)
+	
+		average_sizes = window_size_file.read().split('\n')
+		left_window_size = int(average_sizes[0])
+		right_window_size = int(average_sizes[1])
+
+		left_model_file = open('%s/left_lane_change.txt' % self.model_dir)
+		left_model_file_lines = left_model_file.read().split('\n')
+		left_model = np.array([float(i) for i in left_model_file_lines])
+
+		right_model_file = open('%s/right_lane_change.txt' % self.model_dir)
+		right_model_file_lines = right_model_file.read().split('\n')
+		right_model = np.array([float(i) for i in right_model_file_lines])
 
 		data_file = open('%s/fused.csv' % self.data_dir)
 
 		df = pd.read_csv(data_file, header=0, usecols=["theta"])
 
-		# TODO: make this a function call
-		if algorithm == 'dtw':
-			events_hash = dtw.find_start_end_indices(model, df)
-
-		print events_hash
+		# TODO: make dtw a function call
+		best_left = dtw.find_start_end_indices(left_model, df, left_window_size)
+		best_right = dtw.find_start_end_indices(right_model, df, right_window_size)
+		
+		events_hash = { 'left': best_left, 'right': best_right }
 
 		return events_hash
