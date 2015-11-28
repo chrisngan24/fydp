@@ -29,13 +29,13 @@ def integrate_trapezoid_col(fxdx_col, dx_col, init_val):
     Numeric integration from a panda data frame.
     Uses simply box method
     """
-    assert len(fx_col) == len(dx_col)
+    assert len(fxdx_col) == len(dx_col)
     fxdx_l = fxdx_col.tolist()
     dx_l = dx_col.tolist()
     prev_val = init_val
-    y = [init_val]*len(df)
+    y = [init_val]*len(dx_col)
     prev_fx = 0
-    for i in xrange(len(df)):
+    for i in xrange(len(dx_col)):
         y_val = prev_val + float(dx_l[i]) * (fxdx_l[i]  + prev_fx) / 2
         y[i] = y_val
         prev_val = y_val

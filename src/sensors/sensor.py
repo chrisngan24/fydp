@@ -136,6 +136,9 @@ class BaseSensor(threading.Thread):
         """
         if not os.path.exists(self.dir_path) and not os.path.isdir(self.dir_path):
             os.mkdir(self.dir_path)
-        self.data_store = self.filter(self.data_store)
-        self.data_store = self.process(self.data_store)
-        pd.DataFrame(self.data_store).to_csv(self.file_name, index=False)
+
+        df = pd.DataFrame(self.data_store)
+        print df.head()
+        df = self.filter(df)
+        df = self.process(df)
+        df.to_csv(self.file_name, index=False)
