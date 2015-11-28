@@ -2,6 +2,7 @@ import sys
 sys.path.append('../opencv-test')
 import os
 import time
+import pandas as pd 
 
 import klt
 
@@ -18,10 +19,13 @@ if __name__ == '__main__':
             str(int(time.time())),
             )
     df = None
+    events = []
     try:
-        df = klt.run()
+        df = klt.run(events)
     finally:
-
+        print events
+        if df == None:
+            df = pd.DataFrame(events)
         print 'end data collection'
         print df.head()
         df.to_csv(output_file, index=False)

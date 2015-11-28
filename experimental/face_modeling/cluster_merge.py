@@ -2,6 +2,7 @@ import os
 import numpy as np
 import pandas as pd
 
+import sys
 from sklearn.decomposition import PCA
 from sklearn.cluster import KMeans
 
@@ -82,10 +83,8 @@ def generate_training_set(director, k=4, window_size=10,ignore_columns = []):
             fi_path = '%s/%s' % (director, csv)
             df = pd.read_csv(fi_path)
             df['noseX_raw'] = df['noseX']
-            '''
             df = generate_delta_features(
-                df, step=4, ignore_columns=ignore_columns).fillna(0)
-            '''
+                df, step=6, ignore_columns=ignore_columns).fillna(0)
             df_w = generate_windows(df, 
                 window = window_size,
                 ignore_columns=ignore_columns,
@@ -112,9 +111,11 @@ def generate_training_set(director, k=4, window_size=10,ignore_columns = []):
             
 
 if __name__ == '__main__':
-    a = [1,1,1,0,0,0,0,3,3,3,3,2,2,2]
-    print relabel_by_time(a)
-    df = generate_training_set('data/look_left', k=3, window_size=10,
+    data_dir = sys.argv[1]
+    base_dir = 'data'
+    m_dir = '%s/%s' % (base_dir, data_dir)
+    output_dir = 'data/merged'
+    df = generate_training_set(m_dir, k=3, window_size=3,
             ignore_columns=['time', 'noseX_raw'])
-    df.to_csv('dump.csv', index=False)
+    df.to_csv('%s/%s.csv' % (output_dir, data_dir), index=False)
 

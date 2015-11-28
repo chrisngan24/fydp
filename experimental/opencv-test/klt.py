@@ -238,7 +238,7 @@ def getOneEvent(cap, old_gray, p0_nose):
     print(this_event)
     return (this_event, old_gray, p0_nose)
 
-def run():
+def run(events = []):
 
     if (os.path.isfile(face_model_file) == True):
         print 'Face model found!' 
@@ -262,7 +262,6 @@ def run():
         print 'Nose model NOT found!'     
 
     cap = cv2.VideoCapture(0)
-    events = []
 
     (old_gray, frame, p0_nose) = find_new_KLT(cap)
 
