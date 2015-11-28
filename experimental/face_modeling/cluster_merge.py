@@ -1,10 +1,13 @@
 import os
+import sys
 import numpy as np
 import pandas as pd
 
-import sys
 from sklearn.decomposition import PCA
 from sklearn.cluster import KMeans
+
+
+import features
 
 
 def relabel_by_time(y):
@@ -57,22 +60,6 @@ def generate_windows(df, window=10, ignore_columns = []):
     return pd.DataFrame(points)
 
 
-def subtract_from_prev_val(df, col, step=1):
-    return (df[col] - df.shift(periods=step)[col])
-
-def generate_delta_features(df, step=1, ignore_columns=[]):
-    cols = df.columns.values.tolist()
-    for c in ignore_columns:
-        cols.remove(c)
-    deltas = {}
-    for c in cols:
-        deltas[c] = subtract_from_prev_val(df, c, step=step)
-    df_new = pd.DataFrame(deltas)
-    for c in ignore_columns:
-        df_new[c] = df[c]
-    return df_new
-
-
 def generate_training_set(director, k=4, window_size=10,ignore_columns = []):
     """
     """
@@ -83,8 +70,8 @@ def generate_training_set(director, k=4, window_size=10,ignore_columns = []):
             fi_path = '%s/%s' % (director, csv)
             df = pd.read_csv(fi_path)
             df['noseX_raw'] = df['noseX']
-            df = generate_delta_features(
-                df, step=6, ignore_columns=ignore_columns).fillna(0)
+            df['noseY_raw'] = df['noseY']
+            df = features.apply_feature_engineering(df, ignore_columns).fillna(0)
             df_w = generate_windows(df, 
                 window = window_size,
                 ignore_columns=ignore_columns,
@@ -112,10 +99,11 @@ def generate_training_set(director, k=4, window_size=10,ignore_columns = []):
 
 if __name__ == '__main__':
     data_dir = sys.argv[1]
+    k = int(sys.argv[2])
     base_dir = 'data'
     m_dir = '%s/%s' % (base_dir, data_dir)
     output_dir = 'data/merged'
-    df = generate_training_set(m_dir, k=3, window_size=3,
-            ignore_columns=['time', 'noseX_raw'])
+    df = generate_training_set(m_dir, k=k, window_size=3,
+            ignore_columns=['time', 'noseX_raw', 'noseY_raw'])
     df.to_csv('%s/%s.csv' % (output_dir, data_dir), index=False)
 

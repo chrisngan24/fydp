@@ -1,0 +1,4 @@
+python cluster_merge.py look_left 3
+python cluster_merge.py look_right 3
+python cluster_merge.py multi_look 3
+python cluster_merge.py head_bob 3

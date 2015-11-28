@@ -26,9 +26,10 @@ if __name__ == '__main__':
         print events
         if df == None:
             df = pd.DataFrame(events)
-        print 'end data collection'
-        print df.head()
-        df.to_csv(output_file, index=False)
+        if len(df) > 0:
+            print 'end data collection'
+            print df.head()
+            df.to_csv(output_file, index=False)
 
 
         print 'copying data to: ', 
