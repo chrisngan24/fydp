@@ -1,4 +1,5 @@
 import numpy as np
+import pandas as pd
 
 def integrate_rect_col(fx_col, dx_col, init_val):
     """
@@ -42,3 +43,31 @@ def integrate_trapezoid_col(fxdx_col, dx_col, init_val):
         prev_fx = fxdx_l[i]
         
     return np.array(y)
+
+def generate_windows(df, window=10, ignore_columns = []):
+    """
+    Apply the future windows to the dataframe
+    """
+    points = []
+    cols = df.columns.values.tolist()
+    for ic in ignore_columns:
+        cols.remove(ic)
+    for i, r in df.iterrows():
+        w_start = i
+        w_end   = min(i + 100, len(df)-1)
+        row = r.to_dict()
+        df_w = df.loc[w_start:w_end].reset_index(drop=True)
+        for j in xrange(0,window):
+            if j < len(df_w):
+                window_row = df_w.loc[j].to_dict()
+            else:
+                window_row = None
+            for c in cols:
+                name = '%s_%s' % (c, j)
+                row[name] = window_row[c] if window_row != None else None
+        points.append(row)
+
+    return pd.DataFrame(points)
+
+
+

@@ -3,6 +3,7 @@ import logging
 
 from sensors import sensor, wheel_sensor, camera_sensor
 import analysis
+from analysis.head_annotator import HeadAnnotator
 import fusion
 import visualization
 import time
@@ -50,10 +51,10 @@ def visualize(df, events_hash={}):
         xlabel='# of Samples',
         )
 
-    # visualization.mark_event(
-    #     ax1,
-    #     {"left head turn": [10, 55, 80]}
-    #     )
+    visualization.mark_event(
+        ax1,
+        events_hash,
+        )
 
     # visualization.mark_event(
     #     ax2,
@@ -76,8 +77,10 @@ def run_fusion(sensors):
     print files
     df = fusion.fuse_csv(files)
     df.to_csv('%s/fused.csv' % data_direc)
-    
-    events_hash = analyze(df)
+    events_hash =  HeadAnnotator().annotate_events(df)
+    # TODO (angela) add back in and fuse the two
+    # hash maps
+    #events_hash = analyze(df)
     visualize(df, events_hash)
 
 if __name__ == '__main__':
