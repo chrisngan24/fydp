@@ -2,8 +2,8 @@ import cv2
 import logging
 
 from sensors import sensor, wheel_sensor, camera_sensor
-import analysis
 from analysis.head_annotator import HeadAnnotator
+from analysis.lane_annotator import LaneAnnotator
 import fusion
 import visualization
 import time
@@ -45,7 +45,7 @@ def visualize(df, events_hash={}):
         ax2,
         df,
         'timestamp_x',
-        ['theta', 'gz'],
+        ['theta'],
         title='Angle of Wheel',
         ylabel='Theta (degrees)',
         xlabel='# of Samples',
@@ -53,13 +53,13 @@ def visualize(df, events_hash={}):
 
     visualization.mark_event(
         ax1,
-        events_hash,
+        events_hash['head_turns'],
         )
 
-    # visualization.mark_event(
-    #     ax2,
-    #     {"left lane change": [60, 70], "right lane change": [100, 150]}
-    #     )
+    visualization.mark_event(
+        ax2,
+        events_hash['lane_changes'],
+        )
 
     plt.savefig('%s/%s.png' % (data_direc, 'fused_plot'))
 
@@ -77,16 +77,15 @@ def run_fusion(sensors):
     print files
     df = fusion.fuse_csv(files)
     df.to_csv('%s/fused.csv' % data_direc)
-    events_hash =  HeadAnnotator().annotate_events(df)
-    # TODO (angela) add back in and fuse the two
-    # hash maps
-    #events_hash = analyze(df)
-    visualize(df, events_hash)
+
+    head_events_hash =  HeadAnnotator().annotate_events(df)
+    lane_events_hash = LaneAnnotator().annotate_events(df)
+
+    visualize(df, { "head_turns": head_events_hash, "lane_changes": lane_events_hash })
 
 if __name__ == '__main__':
     sensors = sensor.SensorMaster()
     now = time.time()
-    #data_direc = 'data/%s' % 'latest'
     data_direc = 'data/%s' % int(now)
     # need to initiate openCV2 in the main thread
     camera = cv2.VideoCapture(VIDEO_PORT)

@@ -79,5 +79,5 @@ def find_start_end_indices(model, df, window_size=100):
 
         prev_theta = curr_theta
 
-    return { "start": best_window_index, "end": best_window_index + window_size }
+    return [ best_window_index, best_window_index + window_size ]
 
