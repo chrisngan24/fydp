@@ -6,7 +6,7 @@ import pandas as pd
 from util import generate_windows
 from sklearn.externals import joblib
 from collections import Counter
-import Queue
+import json
 
 
 class HeadAnnotator(EventAnnotator):
@@ -15,7 +15,9 @@ class HeadAnnotator(EventAnnotator):
         m_dir = os.path.dirname(__file__)
         base_dir = os.path.join(m_dir, '../models/head_turns/')
         self.model = joblib.load('%s/head_turns.pkl' % base_dir) 
-        self.window_size = 3
+        config_fi = open('%s/config.json' % base_dir, 'r')
+        self.config = json.loads(reduce(lambda x, y: x + y, config_fi))
+        self.window_size = self.config['window_size']
         self.active_features = \
                 pd.read_csv('%s/active_features.csv' % base_dir)['columns'].tolist()
 

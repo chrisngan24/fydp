@@ -5,6 +5,7 @@ import pandas as pd
 
 from sklearn.decomposition import PCA
 from sklearn.cluster import KMeans
+import json
 
 
 import features
@@ -98,12 +99,16 @@ def generate_training_set(director, k=4, window_size=10,ignore_columns = []):
             
 
 if __name__ == '__main__':
+    fi = open('config.json', 'r')
+    config = json.loads(reduce(lambda x, y: x + y, fi.readlines()))
+    window_size = config['window_size']
+
     data_dir = sys.argv[1]
     k = int(sys.argv[2])
     base_dir = 'data'
     m_dir = '%s/%s' % (base_dir, data_dir)
     output_dir = 'data/merged'
-    df = generate_training_set(m_dir, k=k, window_size=3,
+    df = generate_training_set(m_dir, k=k, window_size=window_size,
             ignore_columns=['time', 'noseX_raw', 'noseY_raw'])
     df.to_csv('%s/%s.csv' % (output_dir, data_dir), index=False)
 

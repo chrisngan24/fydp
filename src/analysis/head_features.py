@@ -5,11 +5,18 @@ import pandas as pd
 import abc
 
 class FeatureFactor:
+    """
+    Generic class for feature generations
+    """
     __metaclass__ = abc.ABCMeta
     def __init__(self):
         pass
 
     def get_active_columns(self, df, ignore_columns):
+        """
+        Assumes active columns are all columns in DF
+        except those that that are listed in ignore_columns
+        """
         cols = df.columns.values.tolist()
         for c in ignore_columns:
             cols.remove(c)
@@ -24,10 +31,27 @@ class FeatureFactor:
         return df
 
 def subtract_from_prev_val(df, col, step=1):
+    """
+    Subtract column value from the previous
+    column value n steps away
+    """
     return (df[col] - df.shift(periods=step)[col])
 
 class DeltaFeatureGenerator(FeatureFactor):
+    """
+    Take features from n steps away to compute 
+    a velocity feature vector
+    """
     def generate_features(self, df, suffix = '', step=1, ignore_columns=[]):
+        """
+        Generate the features, returns a new data frame of all 
+        transformed features (same length as input)
+        :param df: - input data frame
+        :param suffix: - the ending of the new column, default is change nothing
+                         to column name
+        :param step: - delta from how many index periods away
+        :param ignore_columns: - what are the columns to ignore
+        """
         cols = self.get_active_columns(df, ignore_columns)
         deltas = {}
         for c in cols:
