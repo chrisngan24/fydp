@@ -149,6 +149,8 @@ def getOneEvent(cap, old_gray, p0_nose):
 
     ERROR_ALLOWANCE = 5
 
+    cap = cv2.VideoCapture(1)
+
     if (cap.isOpened()):
         
         ret, frame = cap.read()
