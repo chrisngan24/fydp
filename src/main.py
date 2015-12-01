@@ -13,7 +13,7 @@ logging.basicConfig(stream=sys.stdout, level=logging.DEBUG)
 
 GYRO_PORT = '/dev/cu.usbmodem1411'
 #GYRO_PORT = '/dev/ttyACM0'
-VIDEO_PORT = 0
+VIDEO_PORT = 1
 
 data_direc = ''
 model_direc = 'models'
