@@ -258,7 +258,7 @@ def getOneEvent(cap, old_gray, p0_nose):
     print "cap is closed"
     return
 
-def run():
+def run(events = []):
 
     if (os.path.isfile(face_model_file) == True):
         print 'Face model found!' 

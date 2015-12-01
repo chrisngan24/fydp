@@ -1,0 +1,2 @@
+bin/retrain
+cp -r models/head_turns/ ../../src/models/head_turns
