@@ -18,21 +18,22 @@ lk_params = dict(
         criteria = (cv2.TERM_CRITERIA_EPS | cv2.TERM_CRITERIA_COUNT, 10, 0.03),
         )
 
-
-
 m_dir = os.path.dirname(__file__)
 face_model_file = os.path.join(m_dir, 'models/haarcascade_frontalface_default.xml')
 eye_model_file = os.path.join(m_dir, 'models/haarcascade_eye.xml')
 profile_model_file = os.path.join(m_dir, 'models/haarcascade_profileface.xml')
 nose_model_file = os.path.join(m_dir, 'models/nariz.xml')
 
+# Define the codec and create VideoWriter object
+# fourcc = cv2.VideoWriter_fourcc(*'XVID')
+fourcc = cv2.cv.CV_FOURCC(*'XVID')
 
 FRAME_RESIZE = (320, 240)
 face_cascade = cv2.CascadeClassifier(face_model_file)
 eye_cascade = cv2.CascadeClassifier(eye_model_file)
 nose_cascade = cv2.CascadeClassifier(nose_model_file)
 profile_cascade = cv2.CascadeClassifier(profile_model_file)
-
+out = cv2.VideoWriter('drivelog_temp.avi',fourcc, 20.0, FRAME_RESIZE)
 
 def display_and_wait():
 
@@ -40,6 +41,15 @@ def display_and_wait():
     if k == ord('q'):
         return False
     return True
+
+def display_and_wait(frame):
+
+    k = cv2.waitKey(1) & 0xff
+    if k == ord('q'):
+        return False
+    elif k == ord('s'):
+        cv2.imwrite("klt_snap.jpg",frame)
+    return True    
 
 def get_features(gray):
 
@@ -81,11 +91,11 @@ def find_new_KLT(cap):
         if ret == True:
 
             frame = cca.stretch(cv2.resize(frame, FRAME_RESIZE))
+            
             cv2.imshow('frame',frame)
-
-            if (not display_and_wait()):
-                break
-
+            out.write(frame)
+            cv2.waitKey(1)
+            
             gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
 
             (faces, eyes, noses) = get_features(gray)
@@ -138,18 +148,26 @@ def find_new_KLT(cap):
 def getOneEvent(cap, old_gray, p0_nose):
 
     ERROR_ALLOWANCE = 5
-    ret = False;
 
-    while (ret == False):
+    if (cap.isOpened()):
+        
         ret, frame = cap.read()
 
-        if (ret == True):
+        if (ret == False):
+            print "NO FRAME FOUND"
+            return 
+
+        else:
 
             # Within each iteration, there are 3 outcomes:
             # 1. We have KLT points which are stable and within the Viola-Area
             # 2. We have no KLT points, but we have a face. Initialize KLT.
 
             frame = cca.stretch(cv2.resize(frame, FRAME_RESIZE))
+
+            out.write(frame)
+            cv2.waitKey(1)
+
             this_event = dict(
                 time=time.time(),
                 isFrontFace=0,
@@ -232,11 +250,13 @@ def getOneEvent(cap, old_gray, p0_nose):
                     p0_nose = p0_nose[p0_nose_filter]
                     cv2.rectangle(frame,(x+nx,y+ny+(h/3)),(x+nx+nw,y+ny+nh+(h/3)),(0,0,255),2)
 
-    cv2.imshow('frame',frame)
-    display_and_wait()
+        cv2.imshow('frame',frame)
+        cv2.waitKey(1)
+        print(this_event)
+        return (this_event, old_gray, p0_nose)
 
-    print(this_event)
-    return (this_event, old_gray, p0_nose)
+    print "cap is closed"
+    return
 
 def run(events = []):
 
@@ -261,20 +281,33 @@ def run(events = []):
     else:
         print 'Nose model NOT found!'     
 
-    cap = cv2.VideoCapture(0)
+    cap = cv2.VideoCapture(1)
+    events = []
+    out = cv2.VideoWriter('drivelog.avi',fourcc, 20.0, FRAME_RESIZE)
 
     (old_gray, frame, p0_nose) = find_new_KLT(cap)
 
     while(1):
 
-        (this_event, old_gray, p0_nose) = getOneEvent(cap, old_gray, p0_nose)
-        events.append(this_event)
+        try:
+            (this_event, old_gray, p0_nose) = getOneEvent(cap, old_gray, p0_nose)
+            events.append(this_event)
+        except KeyboardInterrupt:
+            print 'Writing out to file'
+            df = pd.DataFrame(events)
+            cv2.destroyAllWindows()
+            out.release()
+            os.rename('drivelog_temp.avi', 'drivelog_latest.avi')
+            cap.release()
+            return df
 
     df = pd.DataFrame(events)
     cv2.destroyAllWindows()
+    out.release()
+    os.rename('drivelog_temp.avi', 'drivelog_latest.avi')
     cap.release()
     return df
 
 if __name__ == '__main__':
     df = run() 
-    df.to_csv('driven.out')
+    df.to_csv('drivelog.out')
