@@ -2,5 +2,9 @@ python cluster_merge.py look_left 3
 python cluster_merge.py look_right 3
 python cluster_merge.py multi_look 3
 python cluster_merge.py head_bob 3
+python cluster_merge.py look_left_test 3
+python cluster_merge.py look_right_test 3
+# one cluster since all is truly zero
+python cluster_merge.py look_straight_test 1
 python train.py head_turns
 cp config.json models/head_turns/config.json

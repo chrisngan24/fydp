@@ -3,6 +3,7 @@ from sklearn.neighbors import KNeighborsClassifier
 from sklearn.externals import joblib
 import pandas as pd
 import sys
+import numpy as np
 
 def load_training_data():
     df_left = pd.read_csv('data/merged/look_left.csv')
@@ -19,6 +20,24 @@ def load_training_data():
     df_right['class'] = df_right['class'].apply(lambda x: x + 2 if x > 0 else 0)
     df_cat = pd.concat([df_left, df_right])
     return df_cat
+
+def load_test_data():
+    df_left = pd.read_csv('data/merged/look_left_test.csv')
+    df_right = pd.read_csv('data/merged/look_right_test.csv')
+    df_null_test = pd.read_csv('data/merged/look_straight_test.csv')
+    ### hack
+    # Assume class 0 is always when face is forward for any data set
+    # Classes I expect:
+    #  0 - nothing interesting with the face
+    #  1 - face is starting a left rotation
+    #  2 - face is ending a left rotation
+    #  3 - face is starting a right rotation
+    #  4 - face is ending a right rotation
+    print 'Hacking classes...'
+    df_right['class'] = df_right['class'].apply(lambda x: x + 2 if x > 0 else 0)
+    df_cat = pd.concat([df_left, df_right, df_null_test])
+    return df_cat
+
 
 if __name__ == '__main__':
     model_name = sys.argv[1]
@@ -40,3 +59,10 @@ if __name__ == '__main__':
     df_cols = pd.DataFrame(dict(columns=active_cols))
     joblib.dump(knn, path)
     df_cols.to_csv('%s/active_features.csv' % base_dir)
+
+    ######
+    # test the model
+    #####
+    df_test = load_test_data()
+    Y_test = knn.predict(df_test[active_cols])
+    print np.sum(Y_test == df_test['class']) / float(len(df_test))
