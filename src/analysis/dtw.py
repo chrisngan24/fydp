@@ -65,7 +65,7 @@ def find_centroid(labels, indices):
     return indices_hash.values()
 
 def find_start_end_indices(left_models, right_models, df):
-    window_sizes = [40, 50, 60, 65]
+    window_sizes = [45, 60]
     COST_THRESHOLD = 300
 
     numbers = []
@@ -73,6 +73,7 @@ def find_start_end_indices(left_models, right_models, df):
     right_indices = []
 
     for index, row in df.iterrows():
+        print index
         curr_theta = row['theta']
         numbers.append(curr_theta)
 
@@ -105,16 +106,18 @@ def find_start_end_indices(left_models, right_models, df):
                 right_indices.append([index - w_size, index])
                 break
 
-    left_db = DBSCAN(eps=15).fit(left_indices)
-    left_centroids = find_centroid(left_db.labels_, left_indices)
+    if len(left_indices) > 0:
+        left_db = DBSCAN(eps=20).fit(left_indices)
+        left_indices = find_centroid(left_db.labels_, left_indices)
 
-    right_db = DBSCAN(eps=15).fit(right_indices)
-    right_centroids = find_centroid(right_db.labels_, right_indices)
+    if len(right_indices) > 0:
+        right_db = DBSCAN(eps=20).fit(right_indices)
+        right_indices = find_centroid(right_db.labels_, right_indices)
 
-    return { "left lane change start": [x[0] for x in left_centroids],
-             "left lane change end": [x[1] for x in left_centroids], 
-             "right lane change start": [x[0] for x in right_centroids],
-             "right lane change end": [x[1] for x in right_centroids], }
+    return { "left lane change start": [x[0] for x in left_indices],
+             "left lane change end": [x[1] for x in left_indices], 
+             "right lane change start": [x[0] for x in right_indices],
+             "right lane change end": [x[1] for x in right_indices], }
 
 
 
