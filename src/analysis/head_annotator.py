@@ -24,9 +24,9 @@ class HeadAnnotator(EventAnnotator):
     def annotate_events(self, df):
         window_size = self.window_size
         active_features = self.active_features
-        df = head_features.apply_feature_engineering(df, []).fillna(0)
+        df_feat = head_features.apply_feature_engineering(df, []).fillna(0)
         df_w = generate_windows(
-            df, 
+            df_feat, 
             window = window_size,
             )
         # Cut off the tail end of the data (lots of null values)
@@ -34,9 +34,9 @@ class HeadAnnotator(EventAnnotator):
         Y = self.model.predict(df_w[active_features])
         print Y
         # These are the raw events
-        return self.find_true_events(Y.tolist())
+        return self.find_true_events(df, Y.tolist())
 
-    def find_true_events(self, Y):
+    def find_true_events(self, df, Y):
         """
         THis is a hacky way to combine classified signal points
         to generate signals
@@ -49,7 +49,9 @@ class HeadAnnotator(EventAnnotator):
             }
         threshold = 2
         previous_event = 0
-        
+
+        timed_events = []
+        start_times = 0 
         for i in xrange(threshold-1, len(Y)):
             x = Y[i]
             lower = max(0, i - (threshold))
@@ -60,6 +62,7 @@ class HeadAnnotator(EventAnnotator):
                 print 'Start left'
                 previous_event = 1
                 events['left_turn_start'].append(i)
+                start_times = df.iloc[i]['timestamp_x']
 
             if previous_event == 1 and\
                     x == 2 and\
@@ -67,12 +70,18 @@ class HeadAnnotator(EventAnnotator):
                 print 'End left'
                 events['left_turn_end'].append(i)
                 previous_event = 0
+                timed_events.append((
+                    start_times,
+                    df.iloc[i]['timestamp_x'],
+                    'left_turn'
+                    ))
             if previous_event == 0 and \
                     x == 3 and \
                     Counter(Y[i:upper])[3] == threshold : # start left 
                 print 'Start right'
                 previous_event = 3
                 events['right_turn_start'].append(i)
+                start_times = df.iloc[i]['timestamp_x']
 
             if previous_event == 3 and\
                     x == 4 and\
@@ -80,7 +89,13 @@ class HeadAnnotator(EventAnnotator):
                 print 'End right'
                 events['right_turn_end'].append(i)
                 previous_event = 0
-        return events
+                timed_events.append((
+                    start_times,
+                    df.iloc[i]['timestamp_x'],
+                    'right_turn'
+                    ))
+
+        return events, timed_events
 
 
 

@@ -16,7 +16,7 @@ logging.basicConfig(stream=sys.stdout, level=logging.DEBUG)
 
 GYRO_PORT = '/dev/cu.usbmodem1411'
 #GYRO_PORT = '/dev/ttyACM0'
-VIDEO_PORT = 1
+VIDEO_PORT = 0
 
 data_direc = ''
 model_direc = 'models'
@@ -76,9 +76,13 @@ def run_fusion(sensors):
     files = map(lambda x: x.file_name, sensors.sensors)
     print files
     df = fusion.fuse_csv(files)
+    if not 'timestamp_x' in df.columns.values.tolist():
+        df['timestamp_x'] = df['timestamp']
     df.to_csv('%s/fused.csv' % data_direc)
 
-    head_events_hash =  HeadAnnotator().annotate_events(df)
+    head_events_hash, head_events_list =  HeadAnnotator().annotate_events(df)
+    print head_events_hash
+    print head_events_list
     lane_events_hash = LaneAnnotator().annotate_events(df)
 
     visualize(df, { "head_turns": head_events_hash, "lane_changes": lane_events_hash })
