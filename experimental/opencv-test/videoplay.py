@@ -1,7 +1,9 @@
 import numpy as np
 import cv2
+import sys
 
-cap = cv2.VideoCapture('drivelog_latest.avi')
+video_name = sys.argv[1]
+cap = cv2.VideoCapture(video_name)
 
 while(cap.isOpened()):
     

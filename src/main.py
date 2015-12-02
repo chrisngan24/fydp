@@ -12,6 +12,8 @@ import pandas as pd
 import matplotlib.pyplot as plt
 from matplotlib import gridspec
 
+import os
+
 logging.basicConfig(stream=sys.stdout, level=logging.DEBUG)
 
 GYRO_PORT = '/dev/cu.usbmodem1411'
@@ -64,6 +66,9 @@ def visualize(df, events_hash={}):
     plt.savefig('%s/%s.png' % (data_direc, 'fused_plot'))
 
 
+def move_video(video_name, data_direc):
+    os.rename(video_name, '%s/%s' % (data_direc, video_name))
+
 def analyze(df):
     analysis.Analysis(model_direc, data_direc).run('dtw')
 
@@ -79,6 +84,7 @@ def run_fusion(sensors):
     if not 'timestamp_x' in df.columns.values.tolist():
         df['timestamp_x'] = df['timestamp']
     df.to_csv('%s/fused.csv' % data_direc)
+    move_video('drivelog_temp.avi', data_direc)
 
     head_events_hash, head_events_list =  HeadAnnotator().annotate_events(df)
     print head_events_hash
@@ -99,11 +105,13 @@ if __name__ == '__main__':
                 camera,
                 )
             )
+    
     sensors.add_sensor(
             wheel_sensor.WheelSensor(
                 data_direc,
                 GYRO_PORT,
                 )
             )
+    
     # sample the sensors, and fuse data as a callback
     sensors.sample_sensors(callback=run_fusion)
