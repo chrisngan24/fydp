@@ -23,6 +23,7 @@ class CameraSensor(BaseSensor):
         self.profile_model_file = 'models/haarcascade_profileface.xml'
         self.nose_model_file = 'models/nariz.xml'
 
+        self.frame_index = 0
         self.p0_nose = []
         self.old_frame = []
 
@@ -41,7 +42,8 @@ class CameraSensor(BaseSensor):
         """
         Will try and extract a vector from the frame
         """
-        (row, self.old_frame, self.p0_nose) = klt.getOneEvent(self.camera, self.old_frame, self.p0_nose)
+        (row, self.frame_index, self.old_frame, self.p0_nose) = klt.getOneEvent(self.camera, self.frame_index, 
+            self.old_frame, self.p0_nose)
         row['timestamp'] = time.time()
         
         return row

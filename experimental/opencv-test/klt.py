@@ -33,7 +33,7 @@ face_cascade = cv2.CascadeClassifier(face_model_file)
 eye_cascade = cv2.CascadeClassifier(eye_model_file)
 nose_cascade = cv2.CascadeClassifier(nose_model_file)
 profile_cascade = cv2.CascadeClassifier(profile_model_file)
-out = cv2.VideoWriter('drivelog_temp.avi',fourcc, 20.0, FRAME_RESIZE)
+out = cv2.VideoWriter(filename = 'drivelog_temp.avi', fourcc = fourcc, fps = 1000.0, frameSize = FRAME_RESIZE)
 
 def display_and_wait():
 
@@ -78,7 +78,7 @@ def get_features(gray):
 
     return (faces, eyes, noses)
 
-def find_new_KLT(cap):
+def find_new_KLT(cap, frame_index):
 
     face_found = False
     nose_mask = []
@@ -93,6 +93,7 @@ def find_new_KLT(cap):
             frame = cca.stretch(cv2.resize(frame, FRAME_RESIZE))
             
             cv2.imshow('frame',frame)
+            frame_index += 1
             out.write(frame)
             cv2.waitKey(1)
             
@@ -143,9 +144,9 @@ def find_new_KLT(cap):
     #p0_eyes = cv2.goodFeaturesToTrack(old_gray, mask = eye_mask, **feature_params)
     p0_nose = cv2.goodFeaturesToTrack(old_gray, mask = nose_mask, **feature_params)
 
-    return (old_gray, frame, p0_nose)
+    return (old_gray, frame_index, frame, p0_nose)
 
-def getOneEvent(cap, old_gray, p0_nose):
+def getOneEvent(cap, frame_index, old_gray, p0_nose):
 
     ERROR_ALLOWANCE = 5
 
@@ -164,7 +165,7 @@ def getOneEvent(cap, old_gray, p0_nose):
             # 2. We have no KLT points, but we have a face. Initialize KLT.
 
             frame = cca.stretch(cv2.resize(frame, FRAME_RESIZE))
-
+            frame_index += 1
             out.write(frame)
             cv2.waitKey(1)
 
@@ -177,13 +178,15 @@ def getOneEvent(cap, old_gray, p0_nose):
                 faceBottom=-1,
                 noseX=-1,
                 noseY=-1,
+                frameIndex=-1
                 )
 
             ### KLT : Optical Flow
             # calculate optical flow
 
             while (p0_nose == None or len(p0_nose) < 3):               
-                (old_gray, frame, p0_nose) = find_new_KLT(cap)
+                (old_gray, index, frame, p0_nose) = find_new_KLT(cap, frame_index)
+                frame_index = index
 
             frame_gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
             p1_nose, st, err = cv2.calcOpticalFlowPyrLK(old_gray, frame_gray, p0_nose, None, **lk_params)
@@ -204,7 +207,8 @@ def getOneEvent(cap, old_gray, p0_nose):
 
             this_event.update(dict(
                 noseX=np.mean(p0_nose, axis=0)[0][0],
-                noseY=np.mean(p0_nose, axis=0)[0][1]
+                noseY=np.mean(p0_nose, axis=0)[0][1],
+                frameIndex = frame_index
                 ))
 
             ################################################################################
@@ -252,8 +256,8 @@ def getOneEvent(cap, old_gray, p0_nose):
 
         cv2.imshow('frame',frame)
         cv2.waitKey(1)
-        # print(this_event)
-        return (this_event, old_gray, p0_nose)
+
+        return (this_event, frame_index, old_gray, p0_nose)
 
     print "cap is closed"
     return
@@ -283,14 +287,15 @@ def run(events = []):
 
     cap = cv2.VideoCapture(0)
     events = []
+    frame_index = 0
     out = cv2.VideoWriter('drivelog.avi',fourcc, 20.0, FRAME_RESIZE)
 
-    (old_gray, frame, p0_nose) = find_new_KLT(cap)
+    (old_gray, frame_index, frame, p0_nose) = find_new_KLT(cap, frame_index)
 
     while(1):
 
         try:
-            (this_event, old_gray, p0_nose) = getOneEvent(cap, old_gray, p0_nose)
+            (this_event, frame_index, old_gray, p0_nose) = getOneEvent(cap, frame_index, old_gray, p0_nose)
             events.append(this_event)
         except KeyboardInterrupt:
             print 'Writing out to file'
