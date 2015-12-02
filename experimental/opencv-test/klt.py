@@ -252,7 +252,7 @@ def getOneEvent(cap, old_gray, p0_nose):
 
         cv2.imshow('frame',frame)
         cv2.waitKey(1)
-        print(this_event)
+        # print(this_event)
         return (this_event, old_gray, p0_nose)
 
     print "cap is closed"
@@ -281,7 +281,7 @@ def run(events = []):
     else:
         print 'Nose model NOT found!'     
 
-    cap = cv2.VideoCapture(1)
+    cap = cv2.VideoCapture(0)
     events = []
     out = cv2.VideoWriter('drivelog.avi',fourcc, 20.0, FRAME_RESIZE)
 

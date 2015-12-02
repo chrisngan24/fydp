@@ -83,7 +83,7 @@ def run_fusion(sensors):
     head_events_hash, head_events_list =  HeadAnnotator().annotate_events(df)
     print head_events_hash
     print head_events_list
-    lane_events_hash = LaneAnnotator().annotate_events(df)
+    lane_events_hash, lane_events_indices = LaneAnnotator().annotate_events(df)
 
     visualize(df, { "head_turns": head_events_hash, "lane_changes": lane_events_hash })
 
