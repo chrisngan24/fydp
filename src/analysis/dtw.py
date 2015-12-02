@@ -1,6 +1,7 @@
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
+from sklearn.cluster import DBSCAN
 
 def path_cost(x, y, accumulated_cost, distances):
     path = [[len(x)-1, len(y)-1]]
@@ -49,35 +50,71 @@ def calculate_cost(x, y):
 
     return cost
 
-def find_start_end_indices(model, df, window_size=100):
+def find_centroid(labels, indices):
+    assert len(labels) == len(indices)
+    indices_hash = {}
+    for i in xrange(len(labels)):
+        if labels[i] == -1 or len(indices[i]) > 2:
+            continue
+        if indices_hash.has_key(labels[i]):
+            indices_hash[labels[i]].append(indices[i])
+        else:
+            indices_hash[labels[i]] = [indices[i]]
+    for k, v in indices_hash.iteritems():
+        indices_hash[k] = [sum(l)/len(l) for l in zip(*v)]
+    return indices_hash.values()
+
+def find_start_end_indices(left_models, right_models, df):
+    window_sizes = [40, 50, 60, 65]
+    COST_THRESHOLD = 300
 
     numbers = []
-    min_cost = float("inf")
-    best_window_index = 0
-    best_window_size = 0
-    prev_theta = 0
-    threshold = 0.005
-    min_window = 20
-    flag = 0
+    left_indices = []
+    right_indices = []
 
     for index, row in df.iterrows():
         curr_theta = row['theta']
         numbers.append(curr_theta)
-        # delta = abs(curr_theta) - abs(prev_theta)
-        if len(numbers) < window_size:
+
+        if len(numbers) < window_sizes[-1]:
             continue
 
-        if len(numbers) > window_size:
+        if len(numbers) > window_sizes[-1]:
             numbers = numbers[1:]
 
-        curr_cost = calculate_cost(model, numbers)
-        if curr_cost < min_cost:
-            best_window_index = index - window_size
-            # best_window_index = index - len(numbers)
-            # best_window_size = len(numbers)
-            min_cost = curr_cost
+        for l in left_models:
+            min_cost = float("inf")
+            w_size = 0
+            for w in window_sizes:
+                left_curr_cost = calculate_cost(l, numbers[-w:])
+                if left_curr_cost < min_cost:
+                    min_cost = left_curr_cost
+                    w_size = w
+            if min_cost < COST_THRESHOLD and w_size > 0:
+                left_indices.append([index - w_size, index])
+                break
+        for r in right_models:
+            min_cost = float("inf")
+            w_size = 0
+            for w in window_sizes:
+                right_curr_cost = calculate_cost(r, numbers[-w:])
+                if right_curr_cost < min_cost:
+                    min_cost = right_curr_cost
+                    w_size = w
+            if min_cost < COST_THRESHOLD and w_size > 0:
+                right_indices.append([index - w_size, index])
+                break
 
-        prev_theta = curr_theta
+    left_db = DBSCAN(eps=15).fit(left_indices)
+    left_centroids = find_centroid(left_db.labels_, left_indices)
 
-    return [ best_window_index, best_window_index + window_size ]
+    right_db = DBSCAN(eps=15).fit(right_indices)
+    right_centroids = find_centroid(right_db.labels_, right_indices)
+
+    return { "left lane change start": [x[0] for x in left_centroids],
+             "left lane change end": [x[1] for x in left_centroids], 
+             "right lane change start": [x[0] for x in right_centroids],
+             "right lane change end": [x[1] for x in right_centroids], }
+
+
 

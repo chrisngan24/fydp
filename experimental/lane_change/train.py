@@ -9,8 +9,8 @@ output_direc = 'output'
 data_file_name = 'fused.csv'
 label_file_name = 'labels.txt'
 
-left_lane_change_model_file_name = 'left_lane_change.txt'
-right_lane_change_model_file_name = 'right_lane_change.txt'
+left_lane_change_model_file_name = 'left_lane_change'
+right_lane_change_model_file_name = 'right_lane_change'
 
 average_lane_change_length_file_name = 'average_lane_change_length.txt'
 
@@ -39,7 +39,7 @@ def train(df, labels):
 		start = int(start)
 		end = int(end)
 		lane_change_data = pd.np.array(df[start:end])
-		lane_change_data = signal.resample(lane_change_data, max_length)
+		# lane_change_data = signal.resample(lane_change_data, max_length)
 		
 		if label == 'left':
 			average_left_length += end - start
@@ -52,22 +52,25 @@ def train(df, labels):
 	average_left_length /= num_left
 	average_right_length /= len(labels) - num_left
 	
-	average_length_string = [average_left_length, average_right_length]
+	average_length_string = '\n'.join([str(average_left_length), str(average_right_length)])
 
-	average_left_model = sum(np.mean(left_models, axis=0).tolist(), [])
-	average_right_model = sum(np.mean(right_models, axis=0).tolist(), [])
+	for i in xrange(len(left_models)):
+		m = left_models[i].tolist()
+		m_flat = [str(val) for sublist in m for val in sublist]
+		save_model('\n'.join(m_flat), path.join(output_direc, 'left_%s.txt' % str(i)))
+
+	for j in xrange(len(right_models)):
+		m = right_models[j].tolist()
+		m_flat = [str(val) for sublist in m for val in sublist]
+		save_model('\n'.join(m_flat), path.join(output_direc, 'right_%s.txt' % str(j)))
 
 	save_model(average_length_string, path.join(output_direc, average_lane_change_length_file_name))
-	save_model(average_left_model, path.join(output_direc, left_lane_change_model_file_name))
-	save_model(average_right_model, path.join(output_direc, right_lane_change_model_file_name))
 
 def save_model(text, file_name):
-	target = open(file_name, 'w')
-	if isinstance(text, (list, tuple)):
-		for item in text:
-  			target.write("%s\n" % item)
-  	else:
-  		target.write(text)
+    target = open(file_name, 'w')
+    if text[-1:] == '\n':
+        text = text[:-1]
+    target.write(text)
 
 def generate_windows(df, window=10, relative_columns = None):
     points = []
