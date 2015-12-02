@@ -25,10 +25,8 @@ class LaneAnnotator(EventAnnotator):
     def annotate_events(self, df):
         best_left = dtw.find_start_end_indices(self.left_model, df, self.left_window_size)
         best_right = dtw.find_start_end_indices(self.right_model, df, self.right_window_size)
-        events_hash = { 'left_lane_change_start': [best_left[0]], 
-        				'left_lane_change_end': [best_left[1]],
-        				'right_lane_change_start': [best_right[0]], 
-        				'right_lane_change_end': [best_right[1]]
+        events_hash = { 'left_lane_change': best_left, 
+        				'right_lane_change': best_right,
         			  }
         print events_hash
         return events_hash

@@ -53,6 +53,7 @@ class WheelSensor(BaseSensor):
                     }
         # row['gz'] = row['gz'] / self.gyro_coef
         timestamp=time.time()
+        print row['gz']
         row['time_diff'] = timestamp - self.prev_timestamp
         row['timestamp'] = timestamp
         # calculate theta 
