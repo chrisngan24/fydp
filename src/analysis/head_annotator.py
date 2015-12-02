@@ -36,9 +36,9 @@ class HeadAnnotator(EventAnnotator):
         # These are the raw events
         return self.find_true_events(df, Y.tolist())
 
-    def find_true_events(self, df, Y):
+    def find_true_events(self, df, Y, index_col = 'timestamp_x'):
         """
-        THis is a hacky way to combine classified signal points
+        This is a hacky way to combine classified signal points
         to generate signals
         """
         events = {
@@ -62,7 +62,7 @@ class HeadAnnotator(EventAnnotator):
                 print 'Start left'
                 previous_event = 1
                 events['left_turn_start'].append(i)
-                start_times = df.iloc[i]['timestamp_x']
+                start_times = df.iloc[i][index_col]
 
             if previous_event == 1 and\
                     x == 2 and\
@@ -72,7 +72,7 @@ class HeadAnnotator(EventAnnotator):
                 previous_event = 0
                 timed_events.append((
                     start_times,
-                    df.iloc[i]['timestamp_x'],
+                    df.iloc[i][index_col],
                     'left_turn'
                     ))
             if previous_event == 0 and \
@@ -81,7 +81,7 @@ class HeadAnnotator(EventAnnotator):
                 print 'Start right'
                 previous_event = 3
                 events['right_turn_start'].append(i)
-                start_times = df.iloc[i]['timestamp_x']
+                start_times = df.iloc[i][index_col]
 
             if previous_event == 3 and\
                     x == 4 and\
@@ -91,7 +91,7 @@ class HeadAnnotator(EventAnnotator):
                 previous_event = 0
                 timed_events.append((
                     start_times,
-                    df.iloc[i]['timestamp_x'],
+                    df.iloc[i][index_col],
                     'right_turn'
                     ))
 

@@ -64,13 +64,14 @@ def find_centroid(labels, indices):
         indices_hash[k] = [sum(l)/len(l) for l in zip(*v)]
     return indices_hash.values()
 
-def find_start_end_indices(left_models, right_models, df):
+def find_start_end_indices(left_models, right_models, df, index_col = 'timestamp_x'):
     window_sizes = [40, 50, 60, 65]
     COST_THRESHOLD = 300
 
     numbers = []
     left_indices = []
     right_indices = []
+    event_indices = []
 
     for index, row in df.iterrows():
         curr_theta = row['theta']
@@ -92,6 +93,12 @@ def find_start_end_indices(left_models, right_models, df):
                     w_size = w
             if min_cost < COST_THRESHOLD and w_size > 0:
                 left_indices.append([index - w_size, index])
+                event = left_indices[len(left_indices)-1]
+                event_indices.append((
+                    df.iloc[event[0]][index_col],
+                    df.iloc[event[1]][index_col],
+                    'left_lane_change'
+                    ))
                 break
         for r in right_models:
             min_cost = float("inf")
@@ -103,6 +110,13 @@ def find_start_end_indices(left_models, right_models, df):
                     w_size = w
             if min_cost < COST_THRESHOLD and w_size > 0:
                 right_indices.append([index - w_size, index])
+                event = right_indices[len(right_indices)-1]
+                event_indices.append((
+                    df.iloc[event[0]][index_col],
+                    df.iloc[event[1]][index_col],
+                    'right_lane_change'
+                    ))
+
                 break
 
     left_db = DBSCAN(eps=15).fit(left_indices)
@@ -111,10 +125,12 @@ def find_start_end_indices(left_models, right_models, df):
     right_db = DBSCAN(eps=15).fit(right_indices)
     right_centroids = find_centroid(right_db.labels_, right_indices)
 
-    return { "left lane change start": [x[0] for x in left_centroids],
+    return ({ "left lane change start": [x[0] for x in left_centroids],
              "left lane change end": [x[1] for x in left_centroids], 
              "right lane change start": [x[0] for x in right_centroids],
-             "right lane change end": [x[1] for x in right_centroids], }
+             "right lane change end": [x[1] for x in right_centroids], },
+             event_indices
+             )
 
 
 
