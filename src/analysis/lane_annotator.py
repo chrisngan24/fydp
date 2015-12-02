@@ -25,7 +25,7 @@ class LaneAnnotator(EventAnnotator):
         self.right_window_size = int(average_sizes[1])
 
     def annotate_events(self, df):
-        events_hash, event_indices = dtw.find_start_end_indices(self.left_models, self.right_models, df)
+        events_hash, event_indices = dtw.find_start_end_indices(self.left_models, self.right_models, df, index_col = 'frameIndex')
         print events_hash
         print event_indices
         return events_hash, event_indices

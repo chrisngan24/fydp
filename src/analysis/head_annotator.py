@@ -34,7 +34,7 @@ class HeadAnnotator(EventAnnotator):
         Y = self.model.predict(df_w[active_features])
         print Y
         # These are the raw events
-        return self.find_true_events(df, Y.tolist())
+        return self.find_true_events(df, Y.tolist(), index_col='frameIndex')
 
     def find_true_events(self, df, Y, index_col = 'timestamp_x'):
         """
