@@ -94,7 +94,6 @@ def run_fusion(sensors):
     # annotate the video
     print "Creating video report....."
     final_video = annotation.annotate_video('drivelog_temp.avi', head_events_list)
-    move_video('drivelog_temp.avi', data_direc)
     move_video(final_video, data_direc)
 
     visualize(df, { "head_turns": head_events_hash, "lane_changes": lane_events_hash })

@@ -54,7 +54,7 @@ class HeadAnnotator(EventAnnotator):
         start_times = 0 
         for i in xrange(threshold-1, len(Y)):
             x = Y[i]
-            lower = max(0, i - (threshold -1))
+            lower = max(0, i - (threshold))
             upper = min(len(Y), i + (threshold))
             if previous_event == 0 and \
                     x == 1 and \
