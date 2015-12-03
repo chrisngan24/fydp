@@ -20,6 +20,8 @@ p0_nose = []
 df = pd.DataFrame.from_csv(events)
 out = cv2.VideoWriter(filename = 'annotated.avi', fourcc = FOURCC, fps = FRAME_RATE, frameSize = FRAME_RESIZE)
 
+event_start_idx = 20
+event_end_idx = 70
 idx = 0
 
 while (cap.isOpened()):
@@ -28,10 +30,12 @@ while (cap.isOpened()):
     if ret==True:
         
         idx += 1
-        if ((idx / FRAME_RATE) % 2 == 1):
+        if (idx > event_start_idx and idx < event_end_idx):
             cv2.rectangle(frame,(20,20),(300,220),(0,255,0), 2)
         
+        cv2.imshow('video', frame)
         out.write(frame)
+        cv2.waitKey(20)
 
     else:
         break
