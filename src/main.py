@@ -21,7 +21,7 @@ GYRO_PORT = '/dev/cu.usbmodem1411'
 
 # For Linux
 #GYRO_PORT = '/dev/ttyACM0'
-VIDEO_PORT = 0
+VIDEO_PORT = 1
 
 data_direc = ''
 model_direc = 'models'
@@ -89,12 +89,19 @@ def run_fusion(sensors):
     df.to_csv('%s/fused.csv' % data_direc)
 
     head_events_hash, head_events_list =  HeadAnnotator().annotate_events(df)
-    lane_events_hash, lane_events_indices = LaneAnnotator().annotate_events(df)
+    lane_events_hash, lane_events_list = LaneAnnotator().annotate_events(df)
 
     # annotate the video
     print "Creating video report....."
-    final_video = annotation.annotate_video('drivelog_temp.avi', head_events_list)
-    move_video(final_video, data_direc)
+    print head_events_list
+    print lane_events_list
+    if (len(head_events_list) > 0):
+        final_head_video = annotation.annotate_video('drivelog_temp.avi', 'annotated_head.avi', head_events_list, {'left_turn': (0,255,0), 'right_turn': (255,0,0)})
+        move_video(final_head_video, data_direc)
+    
+    if (len(lane_events_list) > 0): 
+        final_lane_video = annotation.annotate_video('drivelog_temp.avi', 'annotated_lane.avi', lane_events_list, {'left_lane_change': (0,255,0), 'right_lane_change': (255,0,0)})
+        move_video(final_lane_video, data_direc)
 
     visualize(df, { "head_turns": head_events_hash, "lane_changes": lane_events_hash })
 
