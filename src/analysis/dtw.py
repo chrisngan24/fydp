@@ -65,8 +65,9 @@ def find_centroid(labels, indices):
     return indices_hash.values()
 
 def find_start_end_indices(left_models, right_models, df, index_col = 'timestamp_x'):
-    window_sizes = [45, 60]
-    COST_THRESHOLD = 2000
+    window_sizes = [60]
+    LEFT_THRESHOLD = 2000
+    RIGHT_THRESHOLD = 2000
 
     numbers = []
     left_indices = []
@@ -74,6 +75,7 @@ def find_start_end_indices(left_models, right_models, df, index_col = 'timestamp
     event_indices = []
 
     for index, row in df.iterrows():
+        print index
         curr_theta = row['theta']
         numbers.append(curr_theta)
 
@@ -88,11 +90,10 @@ def find_start_end_indices(left_models, right_models, df, index_col = 'timestamp
             w_size = 0
             for w in window_sizes:
                 left_curr_cost = calculate_cost(l, numbers[-w:])
-                print left_curr_cost
                 if left_curr_cost < min_cost:
                     min_cost = left_curr_cost
                     w_size = w
-            if min_cost < COST_THRESHOLD and w_size > 0:
+            if min_cost < LEFT_THRESHOLD and w_size > 0:
                 left_indices.append([index - w_size, index])
                 break
         for r in right_models:
@@ -103,16 +104,16 @@ def find_start_end_indices(left_models, right_models, df, index_col = 'timestamp
                 if right_curr_cost < min_cost:
                     min_cost = right_curr_cost
                     w_size = w
-            if min_cost < COST_THRESHOLD and w_size > 0:
+            if min_cost < RIGHT_THRESHOLD and w_size > 0:
                 right_indices.append([index - w_size, index])
                 break
 
     if len(left_indices) > 0:
-        left_db = DBSCAN(eps=20).fit(left_indices)
+        left_db = DBSCAN(eps=25).fit(left_indices)
         left_indices = find_centroid(left_db.labels_, left_indices)
 
     if len(right_indices) > 0:
-        right_db = DBSCAN(eps=20).fit(right_indices)
+        right_db = DBSCAN(eps=25).fit(right_indices)
         right_indices = find_centroid(right_db.labels_, right_indices)
 
     for l in left_indices:
