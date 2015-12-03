@@ -25,8 +25,7 @@ profile_model_file = os.path.join(m_dir, 'models/haarcascade_profileface.xml')
 nose_model_file = os.path.join(m_dir, 'models/nariz.xml')
 
 # Define the codec and create VideoWriter object
-# fourcc = cv2.VideoWriter_fourcc(*'XVID')
-fourcc = cv2.cv.CV_FOURCC(*'XVID')
+fourcc = cv2.cv.CV_FOURCC('m', 'p', '4', 'v')
 
 FRAME_RESIZE = (320, 240)
 face_cascade = cv2.CascadeClassifier(face_model_file)
