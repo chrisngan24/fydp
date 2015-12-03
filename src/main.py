@@ -6,6 +6,7 @@ from analysis.head_annotator import HeadAnnotator
 from analysis.lane_annotator import LaneAnnotator
 import fusion
 import visualization
+import annotation
 import time
 import sys
 import pandas as pd
@@ -17,6 +18,8 @@ import os
 logging.basicConfig(stream=sys.stdout, level=logging.DEBUG)
 
 GYRO_PORT = '/dev/cu.usbmodem1411'
+
+# For Linux
 #GYRO_PORT = '/dev/ttyACM0'
 VIDEO_PORT = 0
 
@@ -84,12 +87,15 @@ def run_fusion(sensors):
     if not 'timestamp_x' in df.columns.values.tolist():
         df['timestamp_x'] = df['timestamp']
     df.to_csv('%s/fused.csv' % data_direc)
-    move_video('drivelog_temp.avi', data_direc)
 
     head_events_hash, head_events_list =  HeadAnnotator().annotate_events(df)
-    print head_events_hash
-    print head_events_list
     lane_events_hash, lane_events_indices = LaneAnnotator().annotate_events(df)
+
+    # annotate the video
+    print "Creating video report....."
+    final_video = annotation.annotate_video('drivelog_temp.avi', head_events_list)
+    move_video('drivelog_temp.avi', data_direc)
+    move_video(final_video, data_direc)
 
     visualize(df, { "head_turns": head_events_hash, "lane_changes": lane_events_hash })
 
@@ -112,6 +118,6 @@ if __name__ == '__main__':
                 GYRO_PORT,
                 )
             )
-    
+
     # sample the sensors, and fuse data as a callback
     sensors.sample_sensors(callback=run_fusion)
