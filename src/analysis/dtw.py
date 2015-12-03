@@ -66,7 +66,7 @@ def find_centroid(labels, indices):
 
 def find_start_end_indices(left_models, right_models, df, index_col = 'timestamp_x'):
     window_sizes = [45, 60]
-    COST_THRESHOLD = 300
+    COST_THRESHOLD = 2000
 
     numbers = []
     left_indices = []
@@ -74,7 +74,6 @@ def find_start_end_indices(left_models, right_models, df, index_col = 'timestamp
     event_indices = []
 
     for index, row in df.iterrows():
-        print index
         curr_theta = row['theta']
         numbers.append(curr_theta)
 
@@ -89,17 +88,12 @@ def find_start_end_indices(left_models, right_models, df, index_col = 'timestamp
             w_size = 0
             for w in window_sizes:
                 left_curr_cost = calculate_cost(l, numbers[-w:])
+                print left_curr_cost
                 if left_curr_cost < min_cost:
                     min_cost = left_curr_cost
                     w_size = w
             if min_cost < COST_THRESHOLD and w_size > 0:
                 left_indices.append([index - w_size, index])
-                event = left_indices[len(left_indices)-1]
-                event_indices.append((
-                    df.iloc[event[0]][index_col],
-                    df.iloc[event[1]][index_col],
-                    'left_lane_change'
-                    ))
                 break
         for r in right_models:
             min_cost = float("inf")
@@ -111,13 +105,6 @@ def find_start_end_indices(left_models, right_models, df, index_col = 'timestamp
                     w_size = w
             if min_cost < COST_THRESHOLD and w_size > 0:
                 right_indices.append([index - w_size, index])
-                event = right_indices[len(right_indices)-1]
-                event_indices.append((
-                    df.iloc[event[0]][index_col],
-                    df.iloc[event[1]][index_col],
-                    'right_lane_change'
-                    ))
-
                 break
 
     if len(left_indices) > 0:
@@ -127,6 +114,17 @@ def find_start_end_indices(left_models, right_models, df, index_col = 'timestamp
     if len(right_indices) > 0:
         right_db = DBSCAN(eps=20).fit(right_indices)
         right_indices = find_centroid(right_db.labels_, right_indices)
+
+    for l in left_indices:
+        t = (df.iloc[l[0]][index_col], df.iloc[l[1]][index_col], 'left_lane_change')
+        event_indices.append(t)
+
+    for r in right_indices:
+        t = (df.iloc[r[0]][index_col], df.iloc[r[1]][index_col], 'right_lane_change')
+        event_indices.append(t)
+
+    if len(event_indices) > 0:
+        event_indices = sorted(event_indices, key=lambda x: x[1])
 
     return ({ 
                 "left lane change start": [x[0] for x in left_indices],
