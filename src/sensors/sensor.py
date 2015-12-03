@@ -41,8 +41,8 @@ class SensorMaster:
         Stops the sensor thread
         """
         for sensor in self.sensors:
-            pass
-            # sensor.stop()
+            sensor.stop()
+            
 
     def sample_sensors(self, callback = lambda sensors: None):
         """
@@ -80,6 +80,11 @@ class BaseSensor(threading.Thread):
         self.dir_path = dir_path
         self.sensor_name = sensor_name
         self.file_name = '%s/%s.csv' % (self.dir_path, self.sensor_name)
+
+    def stop(self):
+        #self._Thread__stop()
+        #self.join()
+        print 'trying to stop.. basically failing'
 
     @abc.abstractmethod
     def init_sensor(self):

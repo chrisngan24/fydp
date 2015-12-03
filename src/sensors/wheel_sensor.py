@@ -42,7 +42,7 @@ class WheelSensor(BaseSensor):
         """
         va = self.serial.readline()[:-2]
         time.sleep(0.10)
-        while len(va.split(':')) ==6 and not va.find('gz') == -1: 
+        while len(va.split(':')) ==6 and not va.find('\'gz\'') == -1: 
             # keep reading if va values is no good
             va = self.serial.readline()[:-2]
         row = {
@@ -51,15 +51,11 @@ class WheelSensor(BaseSensor):
                     map(lambda x: x.split(':'), va.split(',')) \
                     if len(k) == 2
                     }
-        # row['gz'] = row['gz'] / self.gyro_coef
         timestamp=time.time()
-        print row['gz']
         row['time_diff'] = timestamp - self.prev_timestamp
         row['timestamp'] = timestamp
-        # calculate theta 
-        # row['theta'] = self.prev_theta + row['time_diff'] * row['gz'] 
-        # self.prev_theta = row['theta']
         self.prev_timestamp = timestamp
+        print row
 
         return row
 
