@@ -1,6 +1,8 @@
 import os
 from sklearn.neighbors import KNeighborsClassifier
 from sklearn.externals import joblib
+from sklearn.ensemble import  RandomForestClassifier
+from sklearn.svm import SVC 
 import pandas as pd
 import sys
 import numpy as np
@@ -46,12 +48,16 @@ if __name__ == '__main__':
     df_cat = load_training_data()
     print 'Data length:', str(len(df_cat))
     knn = KNeighborsClassifier(n_neighbors=10)
+    svm = SVC()
+    rf = RandomForestClassifier()
     active_cols = df_cat.columns.values.tolist()
     
     for c in ignore_cols:
         active_cols.remove(c)
     print 'Training the file...'
     knn.fit(df_cat[active_cols], df_cat['class'])
+    svm.fit(df_cat[active_cols], df_cat['class'])
+    rf.fit(df_cat[active_cols], df_cat['class'])
     base_dir = 'models/%s' % model_name
     if not os.path.exists(base_dir):
         os.makedirs(base_dir)
@@ -64,5 +70,10 @@ if __name__ == '__main__':
     # test the model
     #####
     df_test = load_test_data()
-    Y_test = knn.predict(df_test[active_cols])
-    print np.sum(Y_test == df_test['class']) / float(len(df_test))
+    def print_test_data(m_df, cf, cf_string):
+        Y_test = cf.predict(m_df[active_cols])
+        print cf_string, ' accuracy', \
+                np.sum(Y_test == m_df['class']) / float(len(m_df))
+    print_test_data(df_test, knn, 'knn')
+    print_test_data(df_test, svm, 'svm')
+    print_test_data(df_test, rf, 'Random Forest')
