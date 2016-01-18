@@ -13,8 +13,15 @@ while(True):
 
     # Display the resulting frame
     cv2.imshow('frame',new_frame)
-    if cv2.waitKey(1) & 0xFF == ord('q'):
+    cv2.imshow('frame_without',frame)
+    
+    k = cv2.waitKey(1) & 0xFF
+
+    if k == ord('q'):
         break
+    elif k == ord('s'):
+        cv2.imwrite('retinex_with.jpg', new_frame)
+        cv2.imwrite('retinex_without.jpg', frame)
 
 # When everything done, release the capture
 cap.release()

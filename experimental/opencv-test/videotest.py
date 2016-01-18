@@ -22,9 +22,11 @@ mse = 0
 while (cap.isOpened()):
 
     try:
-        (row, old_frame, p0_nose) = klt.getOneEvent(cap, old_frame, p0_nose)
+        (row, frame_index, old_frame, p0_nose) = klt.getOneEvent(cap, frame_index, old_frame, p0_nose)
         test_row = df.loc[idx,:]     
+        
         idx += 1
+
 
         if (not row.get('isFrontFace') == test_row.isFrontFace):
             detection_errors += 1
