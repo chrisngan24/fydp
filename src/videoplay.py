@@ -10,8 +10,11 @@ while(cap.isOpened()):
     if ret==True:
 
         cv2.imshow('frame',frame)
-        if cv2.waitKey(20) & 0xFF == ord('q'):
+        k = cv2.waitKey(20) & 0xff
+        if k == ord('q'):
             break
+        elif k == ord('s'):
+            cv2.imwrite("snap.jpg",frame)
     else:
         break
 

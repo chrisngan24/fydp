@@ -56,10 +56,10 @@ class SensorMaster:
                 pass
         except KeyboardInterrupt:
             # hack only use the keyboard interrupt
+            self.stop_sensors()
+            time.sleep(1)
             self.save_sensors()
             callback(self)
-        finally:
-            self.stop_sensors()
 
 class BaseSensor(threading.Thread):
     """
@@ -82,9 +82,8 @@ class BaseSensor(threading.Thread):
         self.file_name = '%s/%s.csv' % (self.dir_path, self.sensor_name)
 
     def stop(self):
-        #self._Thread__stop()
-        #self.join()
-        print 'trying to stop.. basically failing'
+        self.is_running = False
+
 
     @abc.abstractmethod
     def init_sensor(self):
@@ -131,9 +130,11 @@ class BaseSensor(threading.Thread):
         """
         print('Starting %s' % self.sensor_name)
         self.init_sensor()
-        while(True):
+        self.is_running = True
+        while(self.is_running):
             data_hash = self.read_sensor()
             self.data_store.append(data_hash)
+        print 'Kill sensor', self.sensor_name
 
     def save(self):
         """

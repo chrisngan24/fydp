@@ -91,6 +91,9 @@ def run_fusion(sensors):
     head_events_hash, head_events_list =  HeadAnnotator().annotate_events(df)
     lane_events_hash, lane_events_list = LaneAnnotator().annotate_events(df)
 
+    print "Plotting...."
+    visualize(df, { "head_turns": head_events_hash, "lane_changes": lane_events_hash })
+
     # annotate the video
     print "Creating video report....."
     print head_events_list
@@ -102,8 +105,7 @@ def run_fusion(sensors):
     if (len(lane_events_list) > 0): 
         final_lane_video = annotation.annotate_video('drivelog_temp.avi', 'annotated_lane.avi', lane_events_list, {'left_lane_change': (0,255,0), 'right_lane_change': (255,0,0)})
         move_video(final_lane_video, data_direc)
-
-    visualize(df, { "head_turns": head_events_hash, "lane_changes": lane_events_hash })
+    
 
 if __name__ == '__main__':
     sensors = sensor.SensorMaster()

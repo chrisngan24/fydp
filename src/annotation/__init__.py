@@ -4,7 +4,7 @@ def annotate_video(input_name, output_name, events_list, colormap):
     
     FRAME_RESIZE = (320,240)
     FOURCC = cv2.cv.CV_FOURCC('m', 'p', '4', 'v')
-    FRAME_RATE = 50
+    FRAME_RATE = 20
 
     num_events = len(events_list)
     if (num_events == 0):

@@ -75,7 +75,7 @@ def find_start_end_indices(left_models, right_models, df, index_col = 'timestamp
     event_indices = []
 
     for index, row in df.iterrows():
-        print index
+        # print index
         curr_theta = row['theta']
         numbers.append(curr_theta)
 

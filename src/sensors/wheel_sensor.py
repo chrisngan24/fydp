@@ -41,7 +41,7 @@ class WheelSensor(BaseSensor):
         read it until something usable is given
         """
         va = self.serial.readline()[:-2]
-        time.sleep(0.10)
+        #time.sleep(0.10)
         while len(va.split(':')) ==6 and not va.find('\'gz\'') == -1: 
             # keep reading if va values is no good
             va = self.serial.readline()[:-2]
@@ -55,7 +55,6 @@ class WheelSensor(BaseSensor):
         row['time_diff'] = timestamp - self.prev_timestamp
         row['timestamp'] = timestamp
         self.prev_timestamp = timestamp
-        print row
 
         return row
 
