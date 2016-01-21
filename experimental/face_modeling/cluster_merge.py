@@ -42,7 +42,8 @@ def generate_windows(df, window=10, ignore_columns = []):
     points = []
     cols = df.columns.values.tolist()
     for ic in ignore_columns:
-        cols.remove(ic)
+        if ic in cols:
+            cols.remove(ic)
     for i, r in df.iterrows():
         w_start = i
         w_end   = min(i + 100, len(df)-1)
@@ -80,11 +81,11 @@ def generate_training_set(director, k=4, window_size=10,ignore_columns = []):
             training_data = pd.concat(
                 [training_data, df_w.loc[0:(len(df_w)-window_size)]]
                 )
-
     df_w = training_data
     active_columns = df.columns.values.tolist()
     for c in ignore_columns:
-        active_columns.remove(c)
+        if c in active_columns:
+            active_columns.remove(c)
 
     Y = cluster_training_signals(
         df_w, 
@@ -109,6 +110,6 @@ if __name__ == '__main__':
     m_dir = '%s/%s' % (base_dir, data_dir)
     output_dir = 'data/merged'
     df = generate_training_set(m_dir, k=k, window_size=window_size,
-            ignore_columns=['time', 'noseX_raw', 'noseY_raw'])
+            ignore_columns=['frameIndex', 'time', 'noseX_raw', 'noseY_raw'])
     df.to_csv('%s/%s.csv' % (output_dir, data_dir), index=False)
 

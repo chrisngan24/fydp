@@ -18,8 +18,10 @@ class FeatureFactor:
         except those that that are listed in ignore_columns
         """
         cols = df.columns.values.tolist()
+        print cols
         for c in ignore_columns:
-            cols.remove(c)
+            if c in cols:
+                cols.remove(c)
         return cols
 
     @abc.abstractmethod
@@ -74,6 +76,7 @@ def apply_feature_engineering(df, ignore_columns = []):
             ))
     df_new = pd.concat(sub_frames, axis=1)
     for c in ignore_columns:
-        df_new[c] = df[c]
+        if c in df.columns.values.tolist():
+            df_new[c] = df[c]
     return df_new
 
