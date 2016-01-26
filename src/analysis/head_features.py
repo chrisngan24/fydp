@@ -18,12 +18,14 @@ class FeatureFactor:
         except those that that are listed in ignore_columns
         """
         cols = df.columns.values.tolist()
+        print cols
         for c in ignore_columns:
-            cols.remove(c)
+            if c in cols:
+                cols.remove(c)
         return cols
 
     @abc.abstractmethod
-    def generate_features(self, df, ignore_columns=[],**kwargs):
+    def generate_features(self, df, relevant_columns, ignore_columns=[],**kwargs):
         """
         Some computation that does 
         feature generation
@@ -40,9 +42,10 @@ def subtract_from_prev_val(df, col, step=1):
 class DeltaFeatureGenerator(FeatureFactor):
     """
     Take features from n steps away to compute 
-    a velocity feature vector
+    a velocity feature vector. Uses the data points from
+    the past.
     """
-    def generate_features(self, df, suffix = '', step=1, ignore_columns=[]):
+    def generate_features(self, df, suffix = '', step=1, relevant_features=[], ignore_columns=[]):
         """
         Generate the features, returns a new data frame of all 
         transformed features (same length as input)
@@ -52,7 +55,8 @@ class DeltaFeatureGenerator(FeatureFactor):
         :param step: - delta from how many index periods away
         :param ignore_columns: - what are the columns to ignore
         """
-        cols = self.get_active_columns(df, ignore_columns)
+        # cols = self.get_active_columns(df, ignore_columns)
+        cols = relevant_features
         deltas = {}
         for c in cols:
             deltas['%s%s'% (c, suffix)] = \
@@ -62,18 +66,23 @@ class DeltaFeatureGenerator(FeatureFactor):
 
 
 
-def apply_feature_engineering(df, ignore_columns = []):
+def apply_feature_engineering(df, relevant_features = []):
     #return df
     df_b = df.copy()
     sub_frames = []
+    # these are all "historic" systems
+    ignore_columns = [c for c in df_b.columns.tolist() if c not in relevant_features]
     sub_frames.append(DeltaFeatureGenerator().generate_features(
-            df, suffix='_6_steps', step=6, ignore_columns=ignore_columns,
+            df, suffix='_6_steps', step=6,relevant_features=relevant_features, # eignore_columns,
             ))
     sub_frames.append(DeltaFeatureGenerator().generate_features(
-            df, suffix='_1_steps', step=1, ignore_columns=ignore_columns,
+            df, suffix='_1_steps', step=1, relevant_features=relevant_features,
+            #ignore_columns=ignore_columns,
             ))
     df_new = pd.concat(sub_frames, axis=1)
+    active_features = df_new.columns.values.tolist()
     for c in ignore_columns:
-        df_new[c] = df[c]
-    return df_new
+        if c in df.columns.values.tolist():
+            df_new[c] = df[c]
+    return df_new, active_features
 

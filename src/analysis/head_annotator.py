@@ -18,13 +18,18 @@ class HeadAnnotator(EventAnnotator):
         config_fi = open('%s/config.json' % base_dir, 'r')
         self.config = json.loads(reduce(lambda x, y: x + y, config_fi))
         self.window_size = self.config['window_size']
+        self.relevant_features = self.config['relevant_features']
         self.active_features = \
                 pd.read_csv('%s/active_features.csv' % base_dir)['columns'].tolist()
 
     def annotate_events(self, df):
         window_size = self.window_size
         active_features = self.active_features
-        df_feat = head_features.apply_feature_engineering(df, []).fillna(0)
+        df_feat, features = head_features.apply_feature_engineering(
+                df,
+                relevant_features=self.relevant_features,
+                )
+        df_feat.fillna(0, inplace=True)
         df_w = generate_windows(
             df_feat, 
             window = window_size,
