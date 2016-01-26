@@ -16,7 +16,7 @@ import json
 import matplotlib.pyplot as plt
 
 
-import features
+import head_features
 from visualize import fit_pca, plot_diagnostics
 
 
@@ -75,9 +75,9 @@ def generate_training_set(director, k=4, window_size=10,relevant_features=[]):
             df['noseX_raw'] = df['noseX']
             df['noseY_raw'] = df['noseY']
             # features
-            df, active_features = features.apply_feature_engineering(df, relevant_features)
+            df, active_features = head_features.apply_feature_engineering(df, relevant_features)
             df.fillna(0,inplace=True)
-            df_w, active_features = features.generate_windows(df, 
+            df_w, active_features = head_features.generate_windows(df, 
                 window = window_size,
                 relevant_features=active_features,
                 )

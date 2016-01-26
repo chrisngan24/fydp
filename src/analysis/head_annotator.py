@@ -38,6 +38,8 @@ class HeadAnnotator(EventAnnotator):
         # Cut off the tail end of the data (lots of null values)
         df_w = df_w.loc[0:(len(df_w)-window_size)]
         Y = self.model.predict(df_w[active_features])
+        df_w['class'] = Y
+        self.df = df_w
         print Y
         # These are the raw events
         return self.find_true_events(df, Y.tolist(), index_col='frameIndex')
