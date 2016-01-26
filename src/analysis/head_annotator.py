@@ -3,7 +3,7 @@ import os
 
 import head_features
 import pandas as pd
-from util import generate_windows
+# from util import generate_windows
 from sklearn.externals import joblib
 from collections import Counter
 import json
@@ -30,9 +30,10 @@ class HeadAnnotator(EventAnnotator):
                 relevant_features=self.relevant_features,
                 )
         df_feat.fillna(0, inplace=True)
-        df_w = generate_windows(
+        df_w, feats = head_features.generate_windows(
             df_feat, 
             window = window_size,
+            relevant_features=features,
             )
         # Cut off the tail end of the data (lots of null values)
         df_w = df_w.loc[0:(len(df_w)-window_size)]

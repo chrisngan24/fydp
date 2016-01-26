@@ -64,6 +64,35 @@ class DeltaFeatureGenerator(FeatureFactor):
         df_new = pd.DataFrame(deltas)
         return df_new
 
+def generate_windows(df, window=10, relevant_features = []):
+    """
+    Take the future points - up to a specific window size -
+    and add it to the current row as a set of features
+    """
+    points = []
+    cols = df.columns.values.tolist()   
+    active_features = set()
+    for i, r in df.iterrows():
+        w_start = i
+        w_end   = min(i + 100, len(df)-1)
+        row = r.to_dict()
+        # drop the tail end of columns
+        df_w = df.loc[w_start:w_end].reset_index(drop=True)
+        for j in xrange(0,window):
+            if j < len(df_w):
+                window_row = df_w.loc[j].to_dict()
+            else:
+                window_row = None
+            for c in cols:
+                if c in relevant_features:
+                    name = '%s_%s' % (c, j)
+                    row[name] = window_row[c] if window_row != None else None
+                    if not name in active_features:
+                        active_features.add(name)
+        points.append(row)
+
+    return pd.DataFrame(points), list(active_features)
+
 
 
 def apply_feature_engineering(df, relevant_features = []):
