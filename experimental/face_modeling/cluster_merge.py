@@ -148,6 +148,9 @@ def plot_diagnostics(df, active_features, output_dir):
         i += 1
     print 'Saving plots to :', output_dir
     plt.savefig('%s-plots.png' % (output_dir))
+    plt.figure()
+    plt.scatter(X[:,0], X[:,1],c=df['class'])
+    plt.savefig('%s-pca-plot.png' % output_dir)
    
             
 
@@ -169,4 +172,7 @@ if __name__ == '__main__':
             relevant_features=relevant_features)
     df.to_csv('%s/%s.csv' % (output_dir, data_dir), index=False)
     plot_diagnostics(df, active_features, '%s/%s' % (output_dir, data_dir))
+    config['active_features'] = active_features
+    with open('config.json', 'w') as outfile:
+        json.dump(config, outfile)
 

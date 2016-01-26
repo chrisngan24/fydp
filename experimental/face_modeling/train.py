@@ -1,4 +1,6 @@
 import os
+import json 
+
 from sklearn.neighbors import KNeighborsClassifier
 from sklearn.externals import joblib
 from sklearn.ensemble import  RandomForestClassifier
@@ -45,15 +47,16 @@ if __name__ == '__main__':
     model_name = sys.argv[1]
     print 'Merging data Files...'
     ignore_cols =['time', 'noseX_raw', 'class', 'noseY_raw']
+    fi = open('config.json', 'r')
+    config = json.loads(reduce(lambda x, y: x + y, fi.readlines()))
+    active_cols = config['active_features']
+
     df_cat = load_training_data()
     print 'Data length:', str(len(df_cat))
     knn = KNeighborsClassifier(n_neighbors=10)
     svm = SVC()
     rf = RandomForestClassifier()
-    active_cols = df_cat.columns.values.tolist()
     
-    for c in ignore_cols:
-        active_cols.remove(c)
     print 'Training the file...'
     knn.fit(df_cat[active_cols], df_cat['class'])
     svm.fit(df_cat[active_cols], df_cat['class'])
@@ -64,7 +67,7 @@ if __name__ == '__main__':
     path = '%s/%s.pkl' % (base_dir, model_name)
     df_cols = pd.DataFrame(dict(columns=active_cols))
     joblib.dump(knn, path)
-    df_cols.to_csv('%s/active_features.csv' % base_dir)
+    df_cols.to_csv('%s/active_features.csv' % base_dir, index=False)
 
     ######
     # test the model
