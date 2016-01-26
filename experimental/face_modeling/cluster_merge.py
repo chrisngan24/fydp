@@ -17,6 +17,7 @@ import matplotlib.pyplot as plt
 
 
 import features
+from visualize import fit_pca, plot_diagnostics
 
 
 def relabel_by_time(y):
@@ -33,11 +34,6 @@ def relabel_by_time(y):
         out.append(mapper[x])
     return np.array(out)
             
-def fit_pca(df, active_features, k = 2):
-    pca = PCA(n_components=k)
-    X = pca.fit_transform(df[active_features])
-    return X
-
 def get_active_features(df, ignore_columns=[]):
     active_columns = df.columns.values.tolist()
     for c in ignore_columns:
@@ -135,23 +131,7 @@ def generate_training_set(director, k=4, window_size=10,relevant_features=[]):
     return df_w, active_features
 
 
-def plot_diagnostics(df, active_features, output_dir):
-    df['date'] = df['time'].apply(lambda x: datetime.datetime.fromtimestamp(x).date())
-    total_days = len(df.groupby('date'))
-    i=1
-    plt.figure(figsize=(20,10))
-    X = fit_pca(df, active_features)
-    for date, df_g in df.groupby('date'):
-        plt.subplot(total_days, 1, i)
-        plt.scatter(list(xrange(len(df_g))), df_g['noseX_raw'], c=df_g['class'])
-        plt.title(date)
-        i += 1
-    print 'Saving plots to :', output_dir
-    plt.savefig('%s-plots.png' % (output_dir))
-    plt.figure()
-    plt.scatter(X[:,0], X[:,1],c=df['class'])
-    plt.savefig('%s-pca-plot.png' % output_dir)
-   
+  
             
 
 if __name__ == '__main__':

@@ -4,11 +4,14 @@ import json
 from sklearn.neighbors import KNeighborsClassifier
 from sklearn.externals import joblib
 from sklearn.ensemble import  RandomForestClassifier
+from sklearn.decomposition import PCA
 from sklearn.svm import SVC 
+
 import pandas as pd
 import sys
 import numpy as np
 
+from visualize import fit_pca, plot_diagnostics
 def load_training_data():
     df_left = pd.read_csv('data/merged/look_left.csv')
     df_right = pd.read_csv('data/merged/look_right.csv')
@@ -41,6 +44,7 @@ def load_test_data():
     df_right['class'] = df_right['class'].apply(lambda x: x + 2 if x > 0 else 0)
     df_cat = pd.concat([df_left, df_right, df_null_test])
     return df_cat
+
 
 
 if __name__ == '__main__':
@@ -77,6 +81,9 @@ if __name__ == '__main__':
         Y_test = cf.predict(m_df[active_cols])
         print cf_string, ' accuracy', \
                 np.sum(Y_test == m_df['class']) / float(len(m_df))
+        df_test['class'] = Y_test
+        plot_diagnostics(df_test, active_cols, '%s/head-turn-test-%s' % (base_dir, cf_string))
+
     print_test_data(df_test, knn, 'knn')
     print_test_data(df_test, svm, 'svm')
     print_test_data(df_test, rf, 'Random Forest')
