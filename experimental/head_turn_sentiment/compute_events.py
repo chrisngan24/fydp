@@ -13,13 +13,15 @@ from analysis.head_annotator import HeadAnnotator
 
 sys.path.append('../face_modeling')
 import head_features
+import visualize 
 
-def compute_events(data_dir, start_key, end_key, output_dir=None):
+def compute_events(data_dir, start_key, end_key, label='', output_dir=None):
     if output_dir != None:
         make_dir(output_dir)
 
     df_merged = pd.DataFrame()
     for csv in os.listdir(data_dir):
+        ha = HeadAnnotator() 
         if not csv.find('.csv') == -1:
             fi_path = '%s/%s' % (data_dir, csv)
             df = pd.read_csv(fi_path)
@@ -28,6 +30,7 @@ def compute_events(data_dir, start_key, end_key, output_dir=None):
             df_p = ha.df
             og_cols = df.columns.tolist()
             fe_cols = df_p.columns.tolist()
+            print event_hash
             for c in og_cols:
                 if not c in fe_cols:
                     df_p[c] = df[c]
@@ -36,16 +39,19 @@ def compute_events(data_dir, start_key, end_key, output_dir=None):
                 make_dir(sub_dir)
                 # assume start key and end key event s have the same
                 for i in xrange(len(event_hash[start_key])):
-                    start = event_hash[start_key][i]
-                    end = event_hash[end_key][i]
-                    df_sub = df_p.loc[start:end]
-                    df_sub['original_index'] = df_sub.index
-                    print csv
-                    df_sub.to_csv('%s/%s-%s.csv' % (sub_dir, csv.split('.')[0], i), index=False)
+                    if len(event_hash[end_key]) > i:
+                        start = event_hash[start_key][i]
+                        end = event_hash[end_key][i]
+                        df_sub = df_p.loc[start:end]
+                        df_sub['original_index'] = df_sub.index
+                        # add a class so the training data is 'labeled'
+                        df_sub['turn_sentiment'] = label
+                        print csv
+                        df_sub.to_csv('%s/%s-%s.csv' % (sub_dir, csv.split('.')[0], i), index=False)
             if output_dir != None:
                 df_p.to_csv('%s/%s' % (output_dir, csv), index=False)
+                visualize.plot_diagnostics(df_p, ha.active_features, '%s/%s' % (output_dir,csv.split('.')[0]), y_col='noseX')
             df_merged = pd.concat([df_merged, df_p])
-            import pdb; pdb.set_trace()
     return df_merged
 
 def make_dir(m_dir):
@@ -71,6 +77,7 @@ if __name__ == '__main__':
                     read_dir,
                     'left_turn_start',
                     'left_turn_end',
+                    label=d,
                     output_dir=write_dir,
                     )
         elif d.find('right') != -1:
@@ -78,9 +85,9 @@ if __name__ == '__main__':
                     read_dir,
                     'right_turn_start',
                     'right_turn_end',
+                    label=d,
                     output_dir=write_dir,
                     )
 
         df.to_csv('%s/%s.csv' % (merged_dir, d), index=False)
-        import pdb; pdb.set_trace()
         
