@@ -1,0 +1,1 @@
+[{'type': 'left_head', 'end': 137, 'start': 110}, {'type': 'left_wheel', 'end': 327, 'start': 135}, {'type': 'right_head', 'end': 358, 'start': 324}, {'type': 'right_wheel', 'end': 510, 'start': 362}]
