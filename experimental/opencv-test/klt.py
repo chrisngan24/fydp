@@ -284,7 +284,7 @@ def run(events = []):
     else:
         print 'Nose model NOT found!'     
 
-    cap = cv2.VideoCapture(0)
+    cap = cv2.VideoCapture(1)
     events = []
     frame_index = 0
     out = cv2.VideoWriter('drivelog.avi',fourcc, 20.0, FRAME_RESIZE)
