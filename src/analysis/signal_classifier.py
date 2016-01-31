@@ -18,7 +18,7 @@ class SignalClassifier:
         self.df = df.copy()
         self.signal_indices = signal_indices
 
-    @abstractmethod
+    @abc.abstractmethod
     def classify_signals(self):
         """
         initiate the classify function

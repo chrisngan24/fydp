@@ -21,10 +21,12 @@ class HeadAnnotator(EventAnnotator):
         self.relevant_features = self.config['relevant_features']
         self.active_features = \
                 pd.read_csv('%s/active_features.csv' % base_dir)['columns'].tolist()
+        self.events=[]
 
     def annotate_events(self, df):
         window_size = self.window_size
         active_features = self.active_features
+        og_cols = df.columns.tolist()
         df_feat, features = head_features.apply_feature_engineering(
                 df,
                 relevant_features=self.relevant_features,
@@ -39,6 +41,10 @@ class HeadAnnotator(EventAnnotator):
         df_w = df_w.loc[0:(len(df_w)-window_size)]
         Y = self.model.predict(df_w[active_features])
         df_w['class'] = Y
+        for c in og_cols:
+            if not c in active_features:
+                df_w[c] = df[c]
+
         self.df = df_w
         print Y
         # These are the raw events
@@ -60,6 +66,7 @@ class HeadAnnotator(EventAnnotator):
 
         timed_events = []
         start_times = 0 
+        start_index = 0
         for i in xrange(threshold-1, len(Y)):
             x = Y[i]
             lower = max(0, i - (threshold))
@@ -71,6 +78,7 @@ class HeadAnnotator(EventAnnotator):
                 previous_event = 1
                 events['left_turn_start'].append(i)
                 start_times = df.iloc[i][index_col]
+                start_index = i
 
             if previous_event == 1 and\
                     x == 2 and\
@@ -83,6 +91,11 @@ class HeadAnnotator(EventAnnotator):
                     df.iloc[i][index_col],
                     'left_turn'
                     ))
+                self.events.append((
+                    start_index,
+                    i,
+                    'left_turn',
+                    ))
             if previous_event == 0 and \
                     x == 3 and \
                     Counter(Y[i:upper])[3] == threshold : # start left 
@@ -90,6 +103,7 @@ class HeadAnnotator(EventAnnotator):
                 previous_event = 3
                 events['right_turn_start'].append(i)
                 start_times = df.iloc[i][index_col]
+                start_index = i 
 
             if previous_event == 3 and\
                     x == 4 and\
@@ -101,6 +115,11 @@ class HeadAnnotator(EventAnnotator):
                     start_times,
                     df.iloc[i][index_col],
                     'right_turn'
+                    ))
+                self.events.append((
+                    start_index,
+                    i,
+                    'right_turn',
                     ))
 
         return events, timed_events
