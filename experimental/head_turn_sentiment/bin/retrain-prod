@@ -1,0 +1,4 @@
+bin/retrain
+cp -r models/head_sentiment/ ../../src/models/head_sentiment
+cp head_signal_sentiment_features.py ../../src/analysis/head_signal_sentiment_features.py
+

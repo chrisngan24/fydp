@@ -1,0 +1,2 @@
+python compute_events.py look_left_bad,look_left_good,look_right_good,look_right_bad
+python train.py head_turns
