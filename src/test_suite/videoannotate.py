@@ -11,7 +11,7 @@ print "#########################################"
 
 video_name = sys.argv[1]
 happy = False
-colormap = {'left_head': (0,255,0), 'right_head': (255,0,0), 'left_wheel': (255,255,0), 'right_wheel': (255,0,255)}
+colormap = {'left_turn': (0,255,0), 'right_turn': (255,0,0), 'left_lane_change': (255,255,0), 'right_lane_change': (255,0,255)}
 
 ############################################
 # Firstly load all the frames into data
@@ -74,13 +74,13 @@ while (not happy):
             c = cv2.waitKey(0)
 
             if (c == ord('1')): 
-                event_type = "left_head"
+                event_type = "left_turn"
             elif (c == ord('2')): 
-                event_type = "right_head"
+                event_type = "right_turn"
             elif (c == ord('3')): 
-                event_type = "left_wheel"
+                event_type = "left_lane_change"
             elif (c == ord('4')): 
-                event_type = "right_wheel"
+                event_type = "right_lane_change"
             else:
                 event_type = "invalid"
                 print "Invalid input, back to main menu."
