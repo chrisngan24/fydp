@@ -107,7 +107,7 @@ class LaneAnnotator(EventAnnotator):
             events_indices.append(t)
 
         for i in xrange(len(events['right_lc_start'])):
-            t = (df.iloc[events['right_lc_start'][i]][index_col], df.iloc[events['right_lc_end'][i]][index_col], 'left_lane_change')
+            t = (df.iloc[events['right_lc_start'][i]][index_col], df.iloc[events['right_lc_end'][i]][index_col], 'right_lane_change')
             events_indices.append(t)
 
         return events, events_indices
