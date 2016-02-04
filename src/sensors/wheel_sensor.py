@@ -40,11 +40,15 @@ class WheelSensor(BaseSensor):
         Reads the sensor. if a bad avlue is given, will keep trying to 
         read it until something usable is given
         """
+        print 'blah    blah'
         va = self.serial.readline()[:-2]
         #time.sleep(0.10)
+        print 'hafewfwe'
         while len(va.split(':')) ==6 and not va.find('\'gz\'') == -1: 
             # keep reading if va values is no good
             va = self.serial.readline()[:-2]
+            print va
+        print 'GOOD TO GO'
         row = {
                 k[0]: float(k[1]) \
                     for k in \
@@ -54,6 +58,7 @@ class WheelSensor(BaseSensor):
         timestamp=time.time()
         row['time_diff'] = timestamp - self.prev_timestamp
         row['timestamp'] = timestamp
+        print row
         self.prev_timestamp = timestamp
 
         return row

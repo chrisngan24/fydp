@@ -28,7 +28,9 @@ class SignalHeadClassifier(SignalClassifier):
             event_name = event[2]
             df_sub = self.df.loc[start_index:end_index]
             events.append(compute_signal_features(df_sub))
-        df_events = pd.DataFrame(events)
-        print self.model.predict(df_events[self.active_features])
+        # only print if there is actual events
+        if len(events) > 0:
+            df_events = pd.DataFrame(events)
+            print self.model.predict(df_events[self.active_features])
 
 
