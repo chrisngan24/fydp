@@ -6,16 +6,19 @@ print "To Use: python videoplay.py <video_file>"
 print "Press l to jump forward a frame"
 print "Press k to jump backward a frame"
 print "Press p to annotate an event start or end"
+print "Press z to undo an annotation once it has been opened"
 print "Press q to quit out"
 print "#########################################"
 
 video_name = sys.argv[1]
+annotator_name = sys.argv[2]
 happy = False
 colormap = {'left_turn': (0,255,0), 'right_turn': (255,0,0), 'left_lane_change': (255,255,0), 'right_lane_change': (255,0,255)}
 
 ############################################
 # Firstly load all the frames into data
 #############################################
+print "Hello " + annotator_name + "!!!"
 
 while (not happy):
     
@@ -63,6 +66,12 @@ while (not happy):
             else:
                 frame_index -= 1
         
+        elif k == ord('z'):
+
+            head_event_start = -1
+            lane_event_start = -1
+            print "Undoing your current annotation"
+
         # Annotate an event
         elif k == ord('p'):
 
@@ -122,6 +131,7 @@ while (not happy):
             print "Press l to jump forward a frame"
             print "Press k to jump backward a frame"
             print "Press p to annotate an event start or end"
+            print "Press z to undo an annotation once it has been opened"
 
     print events_list
     print "Done annotating. Let's see your annotated video."
@@ -163,7 +173,7 @@ while (not happy):
 
     if k == ord('y'):
         happy = True
-        f = open(video_name.split(".")[0] + str(".txt"), 'w')
+        f = open(video_name.split(".")[0] + str("_annotated_") + annotator_name + str(".txt"), 'w')
         f.write(str(events_list))
         print "Bye!"
     else:
