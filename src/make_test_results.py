@@ -39,6 +39,8 @@ if __name__ == "__main__":
             os.mkdir(dir_name)
         print 'Copying data to ' + dir_name
         shutil.copy('test_results.html', dir_name)
+        # so that it renders in github
+        shutil.copy('test_results.html', dir_name + '/' + 'README.md')
         copy_test_plots('test_suite/test_cases/', dir_name)
         
     else:
