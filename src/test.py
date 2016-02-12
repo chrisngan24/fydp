@@ -11,12 +11,13 @@ import os
 
 logging.basicConfig(stream=sys.stdout, level=logging.DEBUG)
 
-def run_single_test(case_name, results_df):
-
+def run_single_test(case_name, results_df, annotation_file = 'annotation_josh.txt', testing_dir='test_suite/test_cases/'):
+    print case_name
+    print annotation_file 
     # Read everything you need
-    df = pd.read_csv('test_suite/test_cases/' + case_name + '/fused.csv')
+    df = pd.read_csv(testing_dir + case_name + '/fused.csv')
     max_index = max(df['frameIndex'])
-    baseline = eval(open('test_suite/test_cases/' + case_name + '/annotation_josh.txt', 'r').read())
+    baseline = eval(open(testing_dir + case_name + '/' + annotation_file, 'r').read())
 
     # Declare storage for annotated frames
     baseline_frames = dict(
@@ -72,13 +73,18 @@ def run_single_test(case_name, results_df):
 if __name__ == '__main__':
     
     print "Running Tests...."
+    testing_dir = 'test_suite/test_cases/'
 
     results_df = pd.DataFrame(columns=['case_name', 'left_turn', 'right_turn', 'left_lane_change', 'right_lane_change'])
 
     output_file = open("test_results.html", 'w')
-    test_case_list = sorted(next(os.walk('test_suite/test_cases/'))[1])
+    test_case_list = sorted(next(os.walk(testing_dir))[1])
+    print test_case_list
     for test in test_case_list:
-        run_single_test(test, results_df)
+        for fi in os.listdir(testing_dir + test):
+            # hacky but yolo
+            if fi.find('drivelog_temp_annotated_') == 0 or fi.find('annotation_') == 0:
+                run_single_test(test, results_df, annotation_file=fi)
 
     output_file.write(results_df.to_html())
 

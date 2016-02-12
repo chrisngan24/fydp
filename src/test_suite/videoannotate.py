@@ -129,7 +129,7 @@ while (not happy):
                     events_list.append(event)
                     wheel_event_start = -1
                     wheel_event_end = -1
-
+            print "\n\n\n"
             print "Press l to jump forward a frame"
             print "Press k to jump backward a frame"
             print "Press p to annotate an event start or end"
