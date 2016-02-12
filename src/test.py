@@ -11,7 +11,7 @@ import os
 
 logging.basicConfig(stream=sys.stdout, level=logging.DEBUG)
 
-def run_single_test(case_name, results_df, annotation_file = 'annotation_josh.txt', testing_dir='test_suite/test_cases/'):
+def run_single_test(case_name, results_list, annotation_file = 'annotation_josh.txt', testing_dir='test_suite/test_cases/'):
     print case_name
     print annotation_file 
     # Read everything you need
@@ -67,14 +67,16 @@ def run_single_test(case_name, results_df, annotation_file = 'annotation_josh.tx
         left_lane_change=round(1 - float(wrong_count_left_lane) / max_index, 3),
         right_lane_change=round(1 - float(wrong_count_right_lane) / max_index, 3)
         )
+    results_list.append(test_results)
 
-    results_df.loc[case_name] = test_results
 
 def main():
     print "Running Tests...."
     testing_dir = 'test_suite/test_cases/'
 
-    results_df = pd.DataFrame(columns=['case_name', 'left_turn', 'right_turn', 'left_lane_change', 'right_lane_change'])
+
+    #results_df = pd.DataFrame(columns=['case_name', 'left_turn', 'right_turn', 'left_lane_change', 'right_lane_change'])
+    results_list = []
 
     output_file = open("test_results.html", 'w')
     test_case_list = sorted(next(os.walk(testing_dir))[1])
@@ -83,8 +85,8 @@ def main():
         for fi in os.listdir(testing_dir + test):
             # hacky but yolo
             if fi.find('drivelog_temp_annotated_') == 0 or fi.find('annotation_') == 0:
-                run_single_test(test, results_df, annotation_file=fi)
-
+                run_single_test(test, results_list, annotation_file=fi)
+    results_df = pd.DataFrame(results_list)
     output_file.write(results_df.to_html())
 
 
