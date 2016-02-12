@@ -2,7 +2,7 @@ Included in this test suite:
 
 - videoannotate.py
 
-The main script, please call this with "python videoannotate.py test_cases/$TEST_NAME/drivelog_temp.avi $YOUR_NAME"
+The main script, please call this with 'python videoannotate.py test_cases/$TEST_NAME/drivelog_temp.avi $YOUR_NAME'
 Please run this script from the MAIN directory ONLY. Thanks!
 You must provide your name so that we know who the annotator is.
 

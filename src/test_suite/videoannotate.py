@@ -13,6 +13,7 @@ print "#########################################"
 video_name = sys.argv[1]
 annotator_name = sys.argv[2]
 happy = False
+reset_events = True
 colormap = {'left_turn': (0,255,0), 'right_turn': (255,0,0), 'left_lane_change': (255,255,0), 'right_lane_change': (255,0,255)}
 
 ############################################
@@ -49,7 +50,8 @@ while (not happy):
     head_event_end = -1
     wheel_event_start = -1
     wheel_event_end = -1
-    events_list = []
+    if reset_events == True:
+        events_list = []
 
     while (frame_index < max_index):
 
@@ -177,7 +179,13 @@ while (not happy):
         f.write(str(events_list))
         print "Bye!"
     else:
-        print "Restarting your session..."
+        print "Would like to append to and keep your previous annotations? (y/n)"
+        k = cv2.waitKey(0)
+        if k == ord('y'):
+            reset_events=False
+        else:
+            reset_events=True
+            print "Restarting your session from scratch..."
 
 # Release everything if job is finished
 cap.release()
