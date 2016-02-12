@@ -70,8 +70,7 @@ def run_single_test(case_name, results_df, annotation_file = 'annotation_josh.tx
 
     results_df.loc[case_name] = test_results
 
-if __name__ == '__main__':
-    
+def main():
     print "Running Tests...."
     testing_dir = 'test_suite/test_cases/'
 
@@ -88,3 +87,8 @@ if __name__ == '__main__':
 
     output_file.write(results_df.to_html())
 
+
+
+if __name__ == '__main__':
+    main() 
+    
