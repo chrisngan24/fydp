@@ -27,33 +27,27 @@ def run_single_test(case_name, results_list, annotation_file = 'annotation_josh.
         right_lane_change=np.zeros(max_index, dtype=np.int8))
     
     # For each event, mark in the baseline
-    i = 0
-    while (i < len(baseline)):
+    for i in xrange(len(baseline)):
         start = baseline[i]['start']
         end = baseline[i]['end']
         event_type = baseline[i]['type']
         baseline_frames[event_type][start:end] += 1
-        i += 1
 
     # Use the annotation code to generate an event list
     head_events_hash, head_events_list = HeadAnnotator().annotate_events(df)
     lane_events_hash, lane_events_list = LaneAnnotator().annotate_events(df)
 
-    i = 0
-    while (i < len(head_events_list)):
+    for i in xrange(len(head_events_list)):
         start = head_events_list[i][0]
         end = head_events_list[i][1]
         event_type = head_events_list[i][2]
         baseline_frames[event_type][start:end] += 1
-        i += 1        
 
-    i = 0
-    while (i < len(lane_events_list)):
+    for i in xrange(len(lane_events_list)):
         start = lane_events_list[i][0]
         end = lane_events_list[i][1]
         event_type = lane_events_list[i][2]
         baseline_frames[event_type][start:end] += 1
-        i += 1     
 
     wrong_count_left = np.shape(np.where(baseline_frames['left_turn'] == 1))[1]
     wrong_count_right = np.shape(np.where(baseline_frames['right_turn'] == 1))[1]
