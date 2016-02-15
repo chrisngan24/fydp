@@ -1,5 +1,6 @@
 import cv2
 import logging
+import copy
 
 from analysis.head_annotator import HeadAnnotator
 from analysis.lane_annotator import LaneAnnotator
@@ -11,7 +12,17 @@ import os
 
 logging.basicConfig(stream=sys.stdout, level=logging.DEBUG)
 
-def run_single_test(case_name, results_list, annotation_file = 'annotation_josh.txt', testing_dir='test_suite/test_cases/'):
+def run_single_test(
+        case_name, 
+        results_list, 
+        event_types = [
+            'left_turn', 
+            'right_turn', 
+            'left_lane_change', 
+            'right_lane_change',
+            ],
+        annotation_file = 'annotation_josh.txt', 
+        testing_dir='test_suite/test_cases/'):
     print case_name
     print annotation_file 
     # Read everything you need
@@ -20,47 +31,77 @@ def run_single_test(case_name, results_list, annotation_file = 'annotation_josh.
     baseline = eval(open(testing_dir + case_name + '/' + annotation_file, 'r').read())
 
     # Declare storage for annotated frames
-    baseline_frames = dict(
-        left_turn=np.zeros(max_index, dtype=np.int8), 
-        right_turn=np.zeros(max_index, dtype=np.int8), 
-        left_lane_change=np.zeros(max_index, dtype=np.int8), 
-        right_lane_change=np.zeros(max_index, dtype=np.int8))
-    
+    zero_frames = { 
+            key : np.zeros(max_index, dtype=np.int8) \
+                    for key in event_types
+                    }
+
+    ####
+    # Frames will have either a 0 or 1 at each index
+    # 0 indicates that no event is either annotated or predicted
+    #   at the index
+    # 1 indicates that an event is predicted or annotated
+    #   at the index
+    event_frames = copy.deepcopy(zero_frames)
+    annotation_frames =  copy.deepcopy(zero_frames)
     # For each event, mark in the baseline
     for i in xrange(len(baseline)):
         start = baseline[i]['start']
         end = baseline[i]['end']
         event_type = baseline[i]['type']
-        baseline_frames[event_type][start:end] += 1
+        annotation_frames[event_type][start:end] += 1
 
     # Use the annotation code to generate an event list
     head_events_hash, head_events_list = HeadAnnotator().annotate_events(df)
     lane_events_hash, lane_events_list = LaneAnnotator().annotate_events(df)
 
-    for i in xrange(len(head_events_list)):
-        start = head_events_list[i][0]
-        end = head_events_list[i][1]
-        event_type = head_events_list[i][2]
-        baseline_frames[event_type][start:end] += 1
+    predicted_events_list = head_events_list + lane_events_list
+    for i in xrange(len(predicted_events_list)):
+        start = predicted_events_list[i][0]
+        end = predicted_events_list[i][1]
+        event_type = predicted_events_list[i][2]
+        event_frames[event_type][start:end] += 1
 
-    for i in xrange(len(lane_events_list)):
-        start = lane_events_list[i][0]
-        end = lane_events_list[i][1]
-        event_type = lane_events_list[i][2]
-        baseline_frames[event_type][start:end] += 1
 
-    wrong_count_left = np.shape(np.where(baseline_frames['left_turn'] == 1))[1]
-    wrong_count_right = np.shape(np.where(baseline_frames['right_turn'] == 1))[1]
-    wrong_count_left_lane = np.shape(np.where(baseline_frames['left_lane_change'] == 1))[1]
-    wrong_count_right_lane = np.shape(np.where(baseline_frames['right_lane_change'] == 1))[1]
+    event_summaries=dict()
+    for event in event_types:
+        # indices where prediction of the event was made
+        predicted_frame_index = np.where(event_frames[event] == 1)[0]
+        # indices where prediction of the event was not made
+        not_predicted_frame_index = np.where(event_frames[event] == 0)[0]
+        
+        annotations = annotation_frames[event]
+        predictions = event_frames[event]
+
+        event_summaries['wrong_count_%s' % event] = \
+            sum((annotations + predictions) == 1) 
+        event_summaries['tp_count_%s' % event] = \
+            sum(annotations[predicted_frame_index] == 1)
+        event_summaries['fp_count_%s' % event] = \
+            sum(annotations[predicted_frame_index] == 0)
+        event_summaries['tn_count_%s' % event] = \
+            sum(annotations[not_predicted_frame_index] == 0)
+        event_summaries['fn_count_%s' % event] = \
+            sum(annotations[not_predicted_frame_index] == 1)
 
     test_results = dict(
         case_name=case_name,
-        left_turn=round(1 - float(wrong_count_left) / max_index, 3),
-        right_turn=round(1 - float(wrong_count_right) / max_index, 3),
-        left_lane_change=round(1 - float(wrong_count_left_lane) / max_index, 3),
-        right_lane_change=round(1 - float(wrong_count_right_lane) / max_index, 3)
         )
+
+    for event in event_types:
+        wrong_count_key = 'wrong_count_%s' % event
+        tp_count_key = 'tp_count_%s' % event
+        fp_count_key = 'fp_count_%s' % event
+        fn_count_key = 'fn_count_%s' % event
+        wrong_count = event_summaries[wrong_count_key]
+        tp_count = event_summaries[tp_count_key]
+        fp_count = event_summaries[fp_count_key]
+        fn_count = event_summaries[fn_count_key]
+        test_results[event] = round(1 - float(wrong_count) / max_index, 3)
+        test_results['%s_precision' % event] = \
+                round(tp_count / float(max(tp_count + fp_count,1)), 3)
+        test_results['%s_recall' % event] = \
+                round(tp_count / float(max(tp_count + fn_count,1)), 3)
     results_list.append(test_results)
 
 
