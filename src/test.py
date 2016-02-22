@@ -123,6 +123,9 @@ def main():
                 run_single_test(test, results_list, annotation_file=fi)
     results_df = pd.DataFrame(results_list)
     output_file.write(results_df.to_html())
+    output_file.write('<br/>\n<br/>\n<br/>')
+    output_file.write('Summary:')
+    output_file.write(results_df.describe().to_html())
 
 
 
