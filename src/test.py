@@ -113,7 +113,7 @@ def main():
     #results_df = pd.DataFrame(columns=['case_name', 'left_turn', 'right_turn', 'left_lane_change', 'right_lane_change'])
     results_list = []
 
-    output_file = open("test_results.html", 'w')
+    output_file = open("test_results/test_results.html", 'w')
     test_case_list = sorted(next(os.walk(testing_dir))[1])
     print test_case_list
     for test in test_case_list:
