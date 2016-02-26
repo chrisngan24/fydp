@@ -103,11 +103,11 @@ class LaneAnnotator(EventAnnotator):
             events[k] = sorted(list(v))
 
         for i in xrange(len(events['left_lc_start'])):
-            t = (df.iloc[events['left_lc_start'][i]][index_col], df.iloc[events['left_lc_end'][i]][index_col], 'left_lane_change')
+            t = (events['left_lc_start'][i], events['left_lc_end'][i], 'left_lane_change')
             events_indices.append(t)
 
         for i in xrange(len(events['right_lc_start'])):
-            t = (df.iloc[events['right_lc_start'][i]][index_col], df.iloc[events['right_lc_end'][i]][index_col], 'right_lane_change')
+            t = (events['right_lc_start'][i], events['right_lc_end'][i], 'right_lane_change')
             events_indices.append(t)
 
         return events, events_indices

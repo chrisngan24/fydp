@@ -31,6 +31,7 @@ class SignalHeadClassifier(SignalClassifier):
         # only print if there is actual events
         if len(events) > 0:
             df_events = pd.DataFrame(events)
-            print self.model.predict(df_events[self.active_features])
+            return self.model.predict(df_events[self.active_features])
+        return []
 
 

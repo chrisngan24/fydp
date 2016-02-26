@@ -87,8 +87,8 @@ class HeadAnnotator(EventAnnotator):
                 events['left_turn_end'].append(i)
                 previous_event = 0
                 timed_events.append((
-                    start_times,
-                    df.iloc[i][index_col],
+                    start_index,
+                    i,
                     'left_turn'
                     ))
                 self.events.append((
@@ -112,8 +112,8 @@ class HeadAnnotator(EventAnnotator):
                 events['right_turn_end'].append(i)
                 previous_event = 0
                 timed_events.append((
-                    start_times,
-                    df.iloc[i][index_col],
+                    start_index,
+                    i,
                     'right_turn'
                     ))
                 self.events.append((

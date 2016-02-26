@@ -80,6 +80,7 @@ def run_fusion(
         has_camera=True, 
         has_wheel=True,
         data_direc='',
+        write_results=True,
         move_video=True,
         ):
     """
@@ -92,7 +93,8 @@ def run_fusion(
     df = fusion.fuse_csv(files)
     if not 'timestamp_x' in df.columns.values.tolist():
         df['timestamp_x'] = df['timestamp']
-    df.to_csv('%s/fused.csv' % data_direc)
+    if write_results:
+        df.to_csv('%s/fused.csv' % data_direc)
     if has_camera:
         ### 
         # All events that are dependent on the camera
@@ -100,7 +102,7 @@ def run_fusion(
         head_ann = HeadAnnotator()
         head_events_hash, head_events_list =  head_ann.annotate_events(df)
         shc = SignalHeadClassifier(head_ann.df, head_ann.events)
-        shc.classify_signals()
+        head_events_sentiment = shc.classify_signals()
 
     if has_wheel:
         ###
@@ -113,7 +115,7 @@ def run_fusion(
     #### Compute sentiment classifications
     
 
-    if (has_camera and has_wheel):
+    if (has_camera and has_wheel and write_results):
         print "Plotting...."
         visualize(
                 df, 
@@ -125,12 +127,16 @@ def run_fusion(
 
     # annotate the video
     print "Creating video report....."
+    video_index = 'frameIndex'
     if (move_video and has_camera and len(head_events_list) > 0):
+        # I MAY HAVE BROKE THIS @chris
         print head_events_list
         final_head_video = annotation.annotate_video(
                 'drivelog_temp.avi', 
                 'annotated_head.avi', 
-                head_events_list, 
+                map(lambda (s, e, t): \
+                        (df.loc[s, video_index], df.loc[e, video_index], t),
+                        head_events_list),
                 {'left_turn': (0,255,0), 'right_turn': (255,0,0)},
                 )
         move_video(final_head_video, data_direc)
@@ -139,7 +145,10 @@ def run_fusion(
         final_lane_video = annotation.annotate_video(
                 'drivelog_temp.avi', 
                 'annotated_lane.avi', 
-                lane_events_list, 
+                map(lambda (s, e, t): \
+                        (df.loc[s, video_index], df.loc[e, video_index], t),
+                        lane_events_list),
+
                 {'left_lane_change': (0,255,0), 'right_lane_change': (255,0,0)},
                 )
         move_video(final_lane_video, data_direc)
@@ -148,6 +157,7 @@ def run_fusion(
             head_events_list=head_events_list,
             lane_events_hash=lane_events_hash,
             lane_events_list=lane_events_list,
+            head_events_sentiment=head_events_sentiment,
             df=df,
             )
     
