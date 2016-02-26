@@ -19,7 +19,7 @@ class SignalClassifier:
         self.signal_indices = signal_indices
 
     @abc.abstractmethod
-    def classify_signals(self):
+    def classify_signals(self, *args):
         """
         initiate the classify function
         """

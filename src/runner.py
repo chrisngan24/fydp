@@ -5,6 +5,7 @@ from sensors import sensor, wheel_sensor, camera_sensor
 from analysis.head_annotator import HeadAnnotator
 from analysis.lane_annotator import LaneAnnotator
 from analysis.signal_head_classifier import SignalHeadClassifier 
+from analysis.signal_lane_classifier import SignalLaneClassifier 
 import fusion
 import visualization
 import annotation
@@ -110,6 +111,10 @@ def run_fusion(
         ###
         lane_events_hash, lane_events_list = LaneAnnotator().annotate_events(df)
 
+    if has_wheel and has_camera:
+        slc = SignalLaneClassifier(df, lane_events_list, head_events_list, head_events_hash, head_events_sentiment)
+        lane_events_sentiment = slc.classify_signals()
+
 
 
     #### Compute sentiment classifications
@@ -158,6 +163,7 @@ def run_fusion(
             lane_events_hash=lane_events_hash,
             lane_events_list=lane_events_list,
             head_events_sentiment=head_events_sentiment,
+            lane_events_sentiment=lane_events_sentiment,
             df=df,
             )
     
