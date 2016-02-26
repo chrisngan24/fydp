@@ -80,6 +80,7 @@ def run_fusion(
         has_camera=True, 
         has_wheel=True,
         data_direc='',
+        move_video=True,
         ):
     """
     Callback function that
@@ -124,7 +125,7 @@ def run_fusion(
 
     # annotate the video
     print "Creating video report....."
-    if (has_camera and len(head_events_list) > 0):
+    if (move_video and has_camera and len(head_events_list) > 0):
         print head_events_list
         final_head_video = annotation.annotate_video(
                 'drivelog_temp.avi', 
@@ -133,7 +134,7 @@ def run_fusion(
                 {'left_turn': (0,255,0), 'right_turn': (255,0,0)},
                 )
         move_video(final_head_video, data_direc)
-    if (has_wheel and len(lane_events_list) > 0): 
+    if (move_video and has_wheel and len(lane_events_list) > 0): 
         print lane_events_list
         final_lane_video = annotation.annotate_video(
                 'drivelog_temp.avi', 
@@ -142,13 +143,13 @@ def run_fusion(
                 {'left_lane_change': (0,255,0), 'right_lane_change': (255,0,0)},
                 )
         move_video(final_lane_video, data_direc)
-    '''
     return dict(
             head_events_hash=head_events_hash,
             head_events_list=head_events_list,
-            lane_eve
+            lane_events_hash=lane_events_hash,
+            lane_events_list=lane_events_list,
+            df=df,
             )
-    '''
     
 if __name__ == '__main__':
 

@@ -4,5 +4,5 @@ fuser -> analytics
 # Running the code:
 Run with: 
 ```
-bin/run
+bin/run -v <video_port> -w <wheel_port>
 ```

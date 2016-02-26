@@ -4,7 +4,11 @@ import copy
 
 from analysis.head_annotator import HeadAnnotator
 from analysis.lane_annotator import LaneAnnotator
+import runner 
 import annotation
+
+
+
 import pandas as pd
 import numpy as np
 import sys
@@ -27,7 +31,18 @@ def run_single_test(
     print annotation_file 
     # Read everything you need
     path_to_test_video = testing_dir + case_name 
-    df = pd.read_csv(path_to_test_video + '/fused.csv')
+    # df = pd.read_csv(path_to_test_video + '/fused.csv')
+    files = [ path_to_test_video + '/WHEEL.csv',
+              path_to_test_video + '/CAMERA.csv',
+              ]
+    analysis_results = runner.run_fusion(
+            files, 
+            has_camera=True,
+            has_wheel=True,
+            data_direc=path_to_test_video,
+            move_video=False,
+            )
+    df = analysis_results['df']
     max_index = max(df['frameIndex'])
     baseline = eval(open(testing_dir + case_name + '/' + annotation_file, 'r').read())
 
@@ -53,8 +68,12 @@ def run_single_test(
         annotation_frames[event_type][start:end] += 1
 
     # Use the annotation code to generate an event list
+    '''
     head_events_hash, head_events_list = HeadAnnotator().annotate_events(df)
     lane_events_hash, lane_events_list = LaneAnnotator().annotate_events(df)
+    '''
+    head_events_list = analysis_results['head_events_list']
+    lane_events_list = analysis_results['lane_events_list']
 
     predicted_events_list = head_events_list + lane_events_list
     for i in xrange(len(predicted_events_list)):
