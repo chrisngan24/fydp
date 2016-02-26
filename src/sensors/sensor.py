@@ -44,7 +44,7 @@ class SensorMaster:
             sensor.stop()
             
 
-    def sample_sensors(self, callback = lambda sensors: None):
+    def sample_sensors(self, callback = lambda sensors: None, **kwargs):
         """
         Start sampling data from the sensors
         callback must take the SEnsorMaster as a parameter
@@ -59,7 +59,8 @@ class SensorMaster:
             self.stop_sensors()
             time.sleep(1)
             self.save_sensors()
-            callback(self)
+            files = map(lambda x: x.file_name, self.sensors)
+            callback(files, **kwargs)
 
 class BaseSensor(threading.Thread):
     """

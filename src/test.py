@@ -26,7 +26,8 @@ def run_single_test(
     print case_name
     print annotation_file 
     # Read everything you need
-    df = pd.read_csv(testing_dir + case_name + '/fused.csv')
+    path_to_test_video = testing_dir + case_name 
+    df = pd.read_csv(path_to_test_video + '/fused.csv')
     max_index = max(df['frameIndex'])
     baseline = eval(open(testing_dir + case_name + '/' + annotation_file, 'r').read())
 

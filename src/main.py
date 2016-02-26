@@ -15,6 +15,8 @@ import matplotlib.pyplot as plt
 from matplotlib import gridspec
 
 import os
+from optparse import OptionParser
+
 
 logging.basicConfig(stream=sys.stdout, level=logging.DEBUG)
 
@@ -24,10 +26,9 @@ GYRO_PORT = '/dev/cu.usbmodem1411'
 #GYRO_PORT = '/dev/ttyACM0'
 VIDEO_PORT = 1
 
-data_direc = ''
 model_direc = 'models'
 
-def visualize(df, events_hash={}):
+def visualize(df, events_hash={}, data_direc=''):
     gs = gridspec.GridSpec(2, 1)
     gs.update(hspace=0.5, right=0.8)
 
@@ -73,42 +74,58 @@ def visualize(df, events_hash={}):
 def move_video(video_name, data_direc):
     os.rename(video_name, '%s/%s' % (data_direc, video_name))
 
-def analyze(df):
-    analysis.Analysis(model_direc, data_direc).run('dtw')
 
-def run_fusion(sensors):
+def run_fusion(
+        files, 
+        has_camera=True, 
+        has_wheel=True,
+        data_direc='',
+        ):
     """
     Callback function that
     runs fusion on the two data
     csv files
     """
-    files = map(lambda x: x.file_name, sensors.sensors)
+    print has_camera, has_wheel
     print files
     df = fusion.fuse_csv(files)
     if not 'timestamp_x' in df.columns.values.tolist():
         df['timestamp_x'] = df['timestamp']
     df.to_csv('%s/fused.csv' % data_direc)
+    if has_camera:
+        ### 
+        # All events that are dependent on the camera
+        ### 
+        head_ann = HeadAnnotator()
+        head_events_hash, head_events_list =  head_ann.annotate_events(df)
+        shc = SignalHeadClassifier(head_ann.df, head_ann.events)
+        shc.classify_signals()
 
-    head_ann = HeadAnnotator()
-    head_events_hash, head_events_list =  head_ann.annotate_events(df)
-    lane_events_hash, lane_events_list = LaneAnnotator().annotate_events(df)
+    if has_wheel:
+        ###
+        # All events that are dependent on the steering wheel
+        ###
+        lane_events_hash, lane_events_list = LaneAnnotator().annotate_events(df)
 
 
 
     #### Compute sentiment classifications
-    shc = SignalHeadClassifier(head_ann.df, head_ann.events)
-    shc.classify_signals()
     
 
-
-    print "Plotting...."
-    visualize(df, { "head_turns": head_events_hash, "lane_changes": lane_events_hash })
+    if (has_camera and has_wheel):
+        print "Plotting...."
+        visualize(
+                df, 
+                {   "head_turns": head_events_hash, 
+                    "lane_changes": lane_events_hash 
+                    },
+                data_direc=data_direc,
+                )
 
     # annotate the video
     print "Creating video report....."
-    print head_events_list
-    print lane_events_list
-    if (len(head_events_list) > 0):
+    if (has_camera and len(head_events_list) > 0):
+        print head_events_list
         final_head_video = annotation.annotate_video(
                 'drivelog_temp.avi', 
                 'annotated_head.avi', 
@@ -116,7 +133,8 @@ def run_fusion(sensors):
                 {'left_turn': (0,255,0), 'right_turn': (255,0,0)},
                 )
         move_video(final_head_video, data_direc)
-    if (len(lane_events_list) > 0): 
+    if (has_wheel and len(lane_events_list) > 0): 
+        print lane_events_list
         final_lane_video = annotation.annotate_video(
                 'drivelog_temp.avi', 
                 'annotated_lane.avi', 
@@ -124,26 +142,59 @@ def run_fusion(sensors):
                 {'left_lane_change': (0,255,0), 'right_lane_change': (255,0,0)},
                 )
         move_video(final_lane_video, data_direc)
+    '''
+    return dict(
+            head_events_hash=head_events_hash,
+            head_events_list=head_events_list,
+            lane_eve
+            )
+    '''
     
 if __name__ == '__main__':
+
+    parser = OptionParser()
+    parser.add_option('-v', '--VideoPort', default=None)
+    parser.add_option('-w', '--WheelPort', default=None)
+    (options, args) = parser.parse_args()
+    
+    ####
+    # Set argument parameters
+    ####
+    print options
+    # flags for controlling if will use camera or wheel
+    has_camera = options.VideoPort != None
+    has_wheel  = options.WheelPort != None
     sensors = sensor.SensorMaster()
     now = time.time()
     data_direc = 'data/%s' % int(now)
-    # need to initiate openCV2 in the main thread
-    camera = cv2.VideoCapture(VIDEO_PORT)
-    sensors.add_sensor(
-            camera_sensor.CameraSensor(
-                data_direc,
-                camera,
+
+
+    if has_camera:
+        video_port = int(options.VideoPort)
+        # need to initiate openCV2 in the main thread
+        camera = cv2.VideoCapture(video_port)
+        sensors.add_sensor(
+                camera_sensor.CameraSensor(
+                    data_direc,
+                    camera,
+                    )
                 )
-            )
-    
-    sensors.add_sensor(
+    if has_wheel:
+        wheel_port = str(options.WheelPort)
+        sensors.add_sensor(
             wheel_sensor.WheelSensor(
                 data_direc,
-                GYRO_PORT,
+                wheel_port,
                 )
             )
 
     # sample the sensors, and fuse data as a callback
-    sensors.sample_sensors(callback=run_fusion)
+    if len(sensors.sensors) > 0:
+        sensors.sample_sensors(
+                callback=run_fusion,
+                has_camera=has_camera,
+                has_wheel=has_wheel,
+                data_direc=data_direc,
+                )
+    else:
+        print 'No sensors... stopping'

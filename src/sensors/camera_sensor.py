@@ -42,8 +42,13 @@ class CameraSensor(BaseSensor):
         """
         Will try and extract a vector from the frame
         """
-        (row, self.frame_index, self.old_frame, self.p0_nose) = klt.getOneEvent(self.camera, self.frame_index, 
-            self.old_frame, self.p0_nose)
+        (row, self.frame_index, self.old_frame, self.p0_nose) = \
+                klt.getOneEvent(
+                        self.camera, 
+                        self.frame_index, 
+                        self.old_frame, 
+                        self.p0_nose,
+                        )
         row['timestamp'] = time.time()
         
         return row
