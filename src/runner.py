@@ -82,7 +82,7 @@ def run_fusion(
         has_wheel=True,
         data_direc='',
         write_results=True,
-        move_video=True,
+        is_move_video=True,
         ):
     """
     Callback function that
@@ -133,7 +133,7 @@ def run_fusion(
     # annotate the video
     print "Creating video report....."
     video_index = 'frameIndex'
-    if (move_video and has_camera and len(head_events_list) > 0):
+    if (is_move_video and has_camera and len(head_events_list) > 0):
         # I MAY HAVE BROKE THIS @chris
         print head_events_list
         final_head_video = annotation.annotate_video(
@@ -145,7 +145,7 @@ def run_fusion(
                 {'left_turn': (0,255,0), 'right_turn': (255,0,0)},
                 )
         move_video(final_head_video, data_direc)
-    if (move_video and has_wheel and len(lane_events_list) > 0): 
+    if (is_move_video and has_wheel and len(lane_events_list) > 0): 
         print lane_events_list
         final_lane_video = annotation.annotate_video(
                 'drivelog_temp.avi', 
@@ -157,15 +157,18 @@ def run_fusion(
                 {'left_lane_change': (0,255,0), 'right_lane_change': (255,0,0)},
                 )
         move_video(final_lane_video, data_direc)
-    return dict(
-            head_events_hash=head_events_hash,
-            head_events_list=head_events_list,
-            lane_events_hash=lane_events_hash,
-            lane_events_list=lane_events_list,
-            head_events_sentiment=head_events_sentiment,
-            lane_events_sentiment=lane_events_sentiment,
-            df=df,
-            )
+    if (has_wheel and has_camera):
+        return dict(
+                head_events_hash=head_events_hash,
+                head_events_list=head_events_list,
+                lane_events_hash=lane_events_hash,
+                lane_events_list=lane_events_list,
+                head_events_sentiment=head_events_sentiment,
+                lane_events_sentiment=lane_events_sentiment,
+                df=df,
+                )
+    else:
+        return None
     
 if __name__ == '__main__':
 

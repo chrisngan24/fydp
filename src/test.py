@@ -40,9 +40,10 @@ def run_single_test(
             has_camera=True,
             has_wheel=True,
             data_direc=path_to_test_video,
-            move_video=False,
+            is_move_video=False,
             )
     df = analysis_results['df']
+    # Use frame index from the test results
     max_index = max(df['frameIndex'])
     baseline = eval(open(testing_dir + case_name + '/' + annotation_file, 'r').read())
 
@@ -77,8 +78,8 @@ def run_single_test(
 
     predicted_events_list = head_events_list + lane_events_list
     for i in xrange(len(predicted_events_list)):
-        start = predicted_events_list[i][0]
-        end = predicted_events_list[i][1]
+        start = int(df.iloc[predicted_events_list[i][0]]['frameIndex'])
+        end = int(df.iloc[predicted_events_list[i][1]]['frameIndex'])
         event_type = predicted_events_list[i][2]
         event_frames[event_type][start:end] += 1
 
