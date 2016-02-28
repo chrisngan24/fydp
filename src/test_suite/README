@@ -1,12 +1,26 @@
 Included in this test suite:
 
+####################################
 - videoannotate.py
 
 The main script, please call this with 'python videoannotate.py test_cases/$TEST_NAME/drivelog_temp.avi $YOUR_NAME'
 Please run this script from the MAIN directory ONLY. Thanks!
 You must provide your name so that we know who the annotator is.
+####################################
 
+####################################
 - videoplay.py
 - videosave.py
 
 These are utility scripts that are just used to quickly save and play videos. Not really needed for testing or annotation.
+####################################
+
+####################################
+- rebuild_camera_csvs.py
+
+To run: 'sudo python rebuild_camera_csvs.py -b $BUILD_NAME'
+
+This script will create a new set of CSV files based on the stored videos in the test suite. 
+The files will be saved as CAMERA-BuildName.csv
+This script is location one level above, in the main src directory.
+####################################

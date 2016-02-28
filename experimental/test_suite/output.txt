@@ -1,1 +1,0 @@
-[{'type': 'right_head', 'end': 95, 'start': 59}, {'type': 'left_head', 'end': 176, 'start': 140}]
