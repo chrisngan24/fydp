@@ -4,10 +4,13 @@ import time
 import threading
 import os
 import logging
+import sys
+sys.path.append('../experimental/opencv-test')
 
 import pandas as pd
 import serial
 
+from klt import NoFramesLeftError
 
  
 class SensorMaster:
@@ -18,6 +21,7 @@ class SensorMaster:
     """
     def __init__(self):
         self.sensors = [] # each sensor inherits threading.Thread
+        self.is_alive = True
 
     def add_sensor(self, sensor_thread):
         """
@@ -26,6 +30,7 @@ class SensorMaster:
         %sensor_thread% - the BaseSensor object that represents the interface to the sensor
         """
         i = len(self.sensors)
+        sensor_thread.master = self
         self.sensors.append(sensor_thread)
         self.sensors[i].daemon = True
 
@@ -42,7 +47,14 @@ class SensorMaster:
         """
         for sensor in self.sensors:
             sensor.stop()
-            
+        self.is_alive = False
+        
+    def process_sensors(self, callback, **kwargs):
+        self.stop_sensors()
+        time.sleep(1)
+        self.save_sensors()
+        files = map(lambda x: x.file_name, self.sensors)
+        callback(files, **kwargs)
 
     def sample_sensors(self, callback = lambda sensors: None, **kwargs):
         """
@@ -52,15 +64,11 @@ class SensorMaster:
         try:
             for sensor in self.sensors:
                 sensor.start()
-            while True:
+            while self.is_alive:
                 pass
+            self.process_sensors(callback, **kwargs)
         except KeyboardInterrupt:
-            # hack only use the keyboard interrupt
-            self.stop_sensors()
-            time.sleep(1)
-            self.save_sensors()
-            files = map(lambda x: x.file_name, self.sensors)
-            callback(files, **kwargs)
+            self.process_sensors(callback, **kwargs)
 
 class BaseSensor(threading.Thread):
     """
@@ -133,8 +141,12 @@ class BaseSensor(threading.Thread):
         self.init_sensor()
         self.is_running = True
         while(self.is_running):
-            data_hash = self.read_sensor()
-            self.data_store.append(data_hash)
+            try:
+                data_hash = self.read_sensor()
+                self.data_store.append(data_hash)
+            except NoFramesLeftError:
+                if self.master != None:
+                    self.master.stop_sensors()
         print 'Kill sensor', self.sensor_name
 
     def save(self):

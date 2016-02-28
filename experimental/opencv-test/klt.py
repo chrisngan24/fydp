@@ -5,6 +5,10 @@ import time
 import colorcorrect.algorithm as cca
 import pandas as pd
 
+class NoFramesLeftError(Exception):
+    def __init__(self):    
+        pass
+
 feature_params = dict( 
         maxCorners = 20,
         qualityLevel = 0.1,
@@ -155,7 +159,7 @@ def getOneEvent(cap, frame_index, old_gray, p0_nose):
 
         if (ret == False):
             print "NO FRAME FOUND"
-            return 
+            raise NoFramesLeftError()
 
         else:
 

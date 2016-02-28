@@ -197,6 +197,7 @@ if __name__ == '__main__':
                 camera_sensor.CameraSensor(
                     data_direc,
                     camera,
+                    'CAMERA'
                     )
                 )
     if has_wheel:

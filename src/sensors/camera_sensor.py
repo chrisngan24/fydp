@@ -14,8 +14,8 @@ from sensor import SensorMaster
 
 class CameraSensor(BaseSensor):
     
-    def __init__(self, dir_path, camera):
-        BaseSensor.__init__(self,dir_path, 'CAMERA')
+    def __init__(self, dir_path, camera, sensor_name):
+        BaseSensor.__init__(self,dir_path, sensor_name)
         # Camera needs to initiated in the main thread
         self.camera = camera
         self.face_model_file = 'models/haarcascade_frontalface_default.xml'
