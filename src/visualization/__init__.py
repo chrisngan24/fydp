@@ -6,35 +6,27 @@ import sys
 import numpy as np
 
 class PointSelector:
-    first = True
+    lines = []
+    axes = set()
     
     def __init__(self, line):
         self.line = line
         line.figure.canvas.mpl_connect('pick_event', self)
+        PointSelector.axes.add(line.axes)
 
     def __call__(self, event):
         thisline = event.artist
         xdata = int(event.mouseevent.xdata)
-        x_index = np.where(thisline.get_xdata()==xdata)[0]
 
-        ydata = thisline.get_ydata()[x_index]
-        ax = thisline.axes
-        
-        if PointSelector.first == True:
-            ax = thisline.axes
-            PointSelector.point, = ax.plot(xdata, ydata, 'ro')
-            self.line.figure.canvas.draw()
-            PointSelector.first = False
-        else:
-            ax = thisline.axes
-            if PointSelector.point.axes == ax:
-                PointSelector.point.set_data(xdata, ydata)
-                PointSelector.point.figure.canvas.draw()
-            else:
-                PointSelector.point.remove()
-                PointSelector.point, = ax.plot(xdata, ydata, 'ro')
-                PointSelector.point.figure.canvas.draw()
+        if len(PointSelector.lines) == 2:
+            PointSelector.lines[0].remove()
+            PointSelector.lines[1].remove()
+            PointSelector.lines = []
 
+        for ax in list(PointSelector.axes):
+            l = ax.axvline(x=xdata, color='red', linewidth=1, linestyle='solid')
+            PointSelector.lines.append(l)
+            l.figure.canvas.draw()
 
 class Visualize(object):
     def __init__(self, df, events_hash, video_name, data_direc):
@@ -107,18 +99,22 @@ class Visualize(object):
             
             cv2.imshow('frame', all_frames[frame_index])
             k = cv2.waitKey(0)
+            hasPlot = len(PointSelector.lines) == 2
             if k == ord('p'):
-                frame_index = PointSelector.point.get_xdata()
-                y_data = PointSelector.point.get_ydata()
+                if hasPlot:
+                    frame_index = PointSelector.lines[0].get_xdata()[0]
             elif k == ord('l'):
-                frame_index += 1
+                frame_index += 2
             elif k == ord('k'):
-                frame_index -= 1
+                frame_index -= 2
             elif k == ord('q'):
                 break
 
-            PointSelector.point.set_data(frame_index, y_data)
-            PointSelector.point.figure.canvas.draw()
+            if hasPlot:
+                PointSelector.lines[0].set_xdata([frame_index, frame_index])
+                PointSelector.lines[1].set_xdata([frame_index, frame_index])
+                PointSelector.lines[0].figure.canvas.draw()
+                PointSelector.lines[1].figure.canvas.draw()
 
         cap.release()
         cv2.destroyAllWindows()
@@ -149,7 +145,7 @@ class Visualize(object):
         for event_name, indices in events.iteritems():
             curr_color = color_sets[color_index]
             for i in indices:
-                ax.axvline(x=i, linewidth=1, color=curr_color, linestyle='dashed', label=event_name)
+                ax.axvline(x=i, linewidth=1, color=curr_color, linestyle='solid', label=event_name)
             color_index += 1
 
         # stop matplotlib from repeating labels in legend for axvline
