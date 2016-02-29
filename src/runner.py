@@ -7,13 +7,11 @@ from analysis.lane_annotator import LaneAnnotator
 from analysis.signal_head_classifier import SignalHeadClassifier 
 from analysis.signal_lane_classifier import SignalLaneClassifier 
 import fusion
-import visualization
+from visualization import Visualize
 import annotation
 import time
 import sys
 import pandas as pd
-import matplotlib.pyplot as plt
-from matplotlib import gridspec
 
 import os
 from optparse import OptionParser
@@ -28,48 +26,6 @@ GYRO_PORT = '/dev/cu.usbmodem1411'
 VIDEO_PORT = 1
 
 model_direc = 'models'
-
-def visualize(df, events_hash={}, data_direc=''):
-    gs = gridspec.GridSpec(2, 1)
-    gs.update(hspace=0.5, right=0.8)
-
-    plt.style.use('ggplot')
-
-    fig = plt.figure()
-    ax1 = fig.add_subplot(gs[0,:])
-    ax2 = fig.add_subplot(gs[1,:])
-
-    visualization.make_line_plot(
-        ax1,
-        df,
-       'timestamp_x',
-       ['noseX'],
-       title='Position of Nose',
-       ylabel='Nose X-coord in the Frame',
-       xlabel='# of Samples',
-       )
-
-    visualization.make_line_plot(
-        ax2,
-        df,
-        'timestamp_x',
-        ['theta'],
-        title='Angle of Wheel',
-        ylabel='Theta (degrees)',
-        xlabel='# of Samples',
-        )
-
-    visualization.mark_event(
-        ax1,
-        events_hash['head_turns'],
-        )
-
-    visualization.mark_event(
-        ax2,
-        events_hash['lane_changes'],
-        )
-
-    plt.savefig('%s/%s.png' % (data_direc, 'fused_plot'))
 
 
 def move_video(video_name, data_direc):
@@ -118,17 +74,6 @@ def run_fusion(
 
 
     #### Compute sentiment classifications
-    
-
-    if (has_camera and has_wheel and write_results):
-        print "Plotting...."
-        visualize(
-                df, 
-                {   "head_turns": head_events_hash, 
-                    "lane_changes": lane_events_hash 
-                    },
-                data_direc=data_direc,
-                )
 
     # annotate the video
     print "Creating video report....."
@@ -157,6 +102,21 @@ def run_fusion(
                 {'left_lane_change': (0,255,0), 'right_lane_change': (255,0,0)},
                 )
         move_video(final_lane_video, data_direc)
+
+    if (has_camera and has_wheel and write_results):
+        video_name = os.path.join(data_direc, 'annotated_lane.avi')
+        print "Plotting...."
+        vis = Visualize(
+                        df,
+                        {
+                            "head_turns": head_events_hash, 
+                            "lane_changes": lane_events_hash 
+                        },
+                        video_name=video_name,
+                        data_direc=data_direc
+            )
+        vis.visualize()
+
     if (has_wheel and has_camera):
         return dict(
                 head_events_hash=head_events_hash,
