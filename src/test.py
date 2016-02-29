@@ -4,10 +4,10 @@ import copy
 
 from analysis.head_annotator import HeadAnnotator
 from analysis.lane_annotator import LaneAnnotator
+from optparse import OptionParser
+
 import runner 
 import annotation
-
-
 
 import pandas as pd
 import numpy as np
@@ -17,7 +17,8 @@ import os
 logging.basicConfig(stream=sys.stdout, level=logging.DEBUG)
 
 def run_single_test(
-        case_name, 
+        case_name,
+        build_name, 
         results_list, 
         event_types = [
             'left_turn', 
@@ -32,9 +33,16 @@ def run_single_test(
     # Read everything you need
     path_to_test_video = testing_dir + case_name 
     # df = pd.read_csv(path_to_test_video + '/fused.csv')
-    files = [ path_to_test_video + '/WHEEL.csv',
-              path_to_test_video + '/CAMERA.csv',
-              ]
+    print build_name
+    if (build_name == None):
+        files = [ path_to_test_video + '/WHEEL.csv',
+                  path_to_test_video + '/CAMERA.csv',
+                  ]
+    else:
+        files = [ path_to_test_video + '/WHEEL.csv',
+                  path_to_test_video + '/CAMERA-' + build_name + '.csv',
+                  ]    
+
     analysis_results = runner.run_fusion(
             files, 
             has_camera=True,
@@ -126,10 +134,9 @@ def run_single_test(
     results_list.append(test_results)
 
 
-def main():
-    print "Running Tests...."
+def main(build_name = None):
+    print "Running tests"
     testing_dir = 'test_suite/test_cases/'
-
 
     #results_df = pd.DataFrame(columns=['case_name', 'left_turn', 'right_turn', 'left_lane_change', 'right_lane_change'])
     results_list = []
@@ -141,15 +148,25 @@ def main():
         for fi in os.listdir(testing_dir + test):
             # hacky but yolo
             if fi.find('drivelog_temp_annotated_') == 0 or fi.find('annotation_') == 0:
-                run_single_test(test, results_list, annotation_file=fi)
+                run_single_test(test, build_name, results_list, annotation_file=fi)
+
     results_df = pd.DataFrame(results_list)
+    
+    # Add the build name to the output
+    if (build_name != None):
+        output_file.write('BuildName: ' + build_name)
+    
     output_file.write(results_df.to_html())
     output_file.write('<br/>\n<br/>\n<br/>')
     output_file.write('Summary:')
     output_file.write(results_df.describe().to_html())
 
 
-
 if __name__ == '__main__':
-    main() 
+
+    parser = OptionParser()
+    parser.add_option('-b', '--BuildName', default=None)
+    (options, args) = parser.parse_args()
+
+    main(options.BuildName) 
     

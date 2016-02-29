@@ -8,7 +8,7 @@ import os
 import datetime
 import shutil
 
-
+from optparse import OptionParser
 
 def make_dir_name(base='test_results'):
     now = datetime.datetime.now()
@@ -28,12 +28,17 @@ def copy_test_plots(testing_dir, output_dir, plot_file='fused_plot.png'):
 
 
 if __name__ == "__main__":
+    
+    parser = OptionParser()
+    parser.add_option('-b', '--BuildName', default=None)
+    (options, args) = parser.parse_args()
+
     print "Are you sure you want to rerun the entire test suite? (y/n)"
     print "You will create a lot of images and it may take a while"
     res = raw_input()
     if res == 'y':
         print "RUNNING ALL TEST CASES AND SAVING IT"
-        test.main() 
+        test.main(options.BuildName) 
         dir_name = make_dir_name()
         if not os.path.exists(dir_name):
             os.mkdir(dir_name)
@@ -44,6 +49,6 @@ if __name__ == "__main__":
         copy_test_plots('test_suite/test_cases/', dir_name)
         
     else:
-        print 'Canelling the process'
+        print 'Cancelling the process'
 
 
