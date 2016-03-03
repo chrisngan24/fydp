@@ -103,6 +103,10 @@ def run_fusion(
                 )
         move_video(final_lane_video, data_direc)
 
+    # Also copy drivelog_temp
+    if (is_move_video and has_camera):
+        move_video('drivelog_temp.avi', data_direc)
+
     if (has_camera and has_wheel and write_results):
         video_name = os.path.join(data_direc, 'annotated_lane.avi')
         print "Plotting...."

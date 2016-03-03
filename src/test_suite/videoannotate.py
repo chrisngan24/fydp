@@ -107,8 +107,16 @@ while (not happy):
                     print "Head turn event start at frame " + str(frame_index)
                 # Closing an event
                 elif head_event_end < 0:
+                    
                     head_event_end = frame_index
-                    event = dict(start = head_event_start, end = head_event_end, type = event_type)
+                    
+                    print "Was this event of proper sentiment? (y/n)"
+                    c = cv2.waitKey(0)
+                    if (c == ord('y')): 
+                        event = dict(start = head_event_start, end = head_event_end, type = event_type, is_good = True)
+                    elif (c == ord('n')): 
+                        event = dict(start = head_event_start, end = head_event_end, type = event_type, is_good = False)
+                    
                     print event
                     events_list.append(event)
                     head_event_start = -1
@@ -123,13 +131,22 @@ while (not happy):
                     print "Wheel turn event start at frame " + str(frame_index)
                 # Closing an event
                 elif wheel_event_end < 0:
+                    
                     wheel_event_end = frame_index
-                    event = dict(start = wheel_event_start, end = wheel_event_end, type = event_type)
+                    
+                    print "Was this event of proper sentiment? (y/n)"
+                    c = cv2.waitKey(0)
+                    if (c == ord('y')): 
+                        event = dict(start = wheel_event_start, end = wheel_event_end, type = event_type, is_good = True)
+                    elif (c == ord('n')): 
+                        event = dict(start = wheel_event_start, end = wheel_event_end, type = event_type, is_good = False)
+
                     print event
                     events_list.append(event)
                     wheel_event_start = -1
                     wheel_event_end = -1
-            print "\n\n\n"
+            
+            print "\n\n"
             print "Press l to jump forward a frame"
             print "Press k to jump backward a frame"
             print "Press p to annotate an event start or end"
