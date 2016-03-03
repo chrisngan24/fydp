@@ -161,33 +161,6 @@ def main(build_name = None):
     output_file.write('Summary:')
     output_file.write(results_df.describe().to_html())
 
-# @clement: This is the function I used to copy all the things over. Committing it once for record. NEVER CALL THIS EVER AGAIN
-def add_sentiment():
-
-    # Adding a death line here
-    exit()
-
-    testing_dir = 'test_suite/test_cases/'
-    test_case_list = sorted(next(os.walk(testing_dir))[1])
-    print test_case_list
-    for test in test_case_list:
-        for fi in os.listdir(testing_dir + test):
-            # hacky but yolo
-            if fi.find('drivelog_temp_annotated_') == 0 or fi.find('annotation_') == 0:
-                filename = testing_dir + test + '/' + fi
-                baseline = eval(open(filename, 'r').read())
-                file_event_list = []
-                
-                for i in xrange(len(baseline)):
-                    start = baseline[i]['start']
-                    end = baseline[i]['end']
-                    event_type = baseline[i]['type']
-                    event = dict(start = start, end = end, type = event_type, is_good = True)
-                    file_event_list.append(event)
-
-                f = open(testing_dir + test + '/modified_' + fi, 'w')
-                f.write(str(file_event_list))
-
 if __name__ == '__main__':
 
     parser = OptionParser()
