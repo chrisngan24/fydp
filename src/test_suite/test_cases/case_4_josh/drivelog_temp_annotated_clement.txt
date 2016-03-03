@@ -1,1 +1,1 @@
-[{'type': 'left_turn', 'end': 94, 'start': 58}, {'type': 'left_lane_change', 'end': 312, 'start': 102}, {'type': 'right_turn', 'end': 342, 'start': 307}, {'type': 'right_lane_change', 'end': 539, 'start': 346}]
+[{'type': 'left_turn', 'is_good': True, 'end': 94, 'start': 58}, {'type': 'left_lane_change', 'is_good': True, 'end': 312, 'start': 102}, {'type': 'right_turn', 'is_good': True, 'end': 342, 'start': 307}, {'type': 'right_lane_change', 'is_good': True, 'end': 539, 'start': 346}]
