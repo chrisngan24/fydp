@@ -16,6 +16,12 @@ import os
 
 logging.basicConfig(stream=sys.stdout, level=logging.DEBUG)
 
+def map_sentiment(col_name, is_good):
+    if is_good:
+        return col_name + '_good'
+    else:
+        return col_name + '_bad'
+
 def run_single_test(
         case_name,
         build_name, 
@@ -28,6 +34,14 @@ def run_single_test(
             ],
         annotation_file = 'annotation_josh.txt', 
         testing_dir='test_suite/test_cases/'):
+    # modify event types to include sentiment:
+    event_types = reduce(
+            lambda x,y: x + y,
+            map(
+                lambda x: [x[0], x[0] + '_bad', x[0] + '_good'], 
+                map(lambda x: [x], event_types)
+                )
+            )
     print case_name
     print annotation_file 
     # Read everything you need
@@ -48,6 +62,7 @@ def run_single_test(
             has_camera=True,
             has_wheel=True,
             data_direc=path_to_test_video,
+            is_interact=False,
             is_move_video=False,
             )
     df = analysis_results['df']
@@ -67,29 +82,38 @@ def run_single_test(
     #   at the index
     # 1 indicates that an event is predicted or annotated
     #   at the index
+
+    # The results from algorithm annotation
     event_frames = copy.deepcopy(zero_frames)
+    # The results from human annotations 
     annotation_frames =  copy.deepcopy(zero_frames)
     # For each event, mark in the baseline
     for i in xrange(len(baseline)):
         start = baseline[i]['start']
         end = baseline[i]['end']
         event_type = baseline[i]['type']
+        is_good = baseline[i]['is_good']
         annotation_frames[event_type][start:end] += 1
+        ## Lets add a new column for just general sentiment
+        annotation_frames[map_sentiment(event_type, is_good)][start:end] += 1
+
+
 
     # Use the annotation code to generate an event list
-    '''
-    head_events_hash, head_events_list = HeadAnnotator().annotate_events(df)
-    lane_events_hash, lane_events_list = LaneAnnotator().annotate_events(df)
-    '''
     head_events_list = analysis_results['head_events_list']
     lane_events_list = analysis_results['lane_events_list']
+    head_event_sentiment_list = analysis_results['head_events_sentiment']
+    lane_event_sentiment_list = analysis_results['lane_events_sentiment']
 
     predicted_events_list = head_events_list + lane_events_list
+    sentiment_events_list = head_event_sentiment_list + lane_event_sentiment_list 
     for i in xrange(len(predicted_events_list)):
         start = int(df.iloc[predicted_events_list[i][0]]['frameIndex'])
         end = int(df.iloc[predicted_events_list[i][1]]['frameIndex'])
         event_type = predicted_events_list[i][2]
+        is_good = sentiment_events_list[i][0]
         event_frames[event_type][start:end] += 1
+        event_frames[map_sentiment(event_type,is_good)][start:end] += 1
 
 
     event_summaries=dict()
@@ -115,6 +139,7 @@ def run_single_test(
 
     test_results = dict(
         case_name=case_name,
+        annotation_file=annotation_file,
         )
 
     for event in event_types:
@@ -137,11 +162,11 @@ def run_single_test(
 def main(build_name = None):
     print "Running tests"
     testing_dir = 'test_suite/test_cases/'
-
+    output_dir = 'test_results/'
     #results_df = pd.DataFrame(columns=['case_name', 'left_turn', 'right_turn', 'left_lane_change', 'right_lane_change'])
     results_list = []
 
-    output_file = open("test_results/test_results.html", 'w')
+    output_file = open(output_dir + "test_results.html", 'w')
     test_case_list = sorted(next(os.walk(testing_dir))[1])
     print test_case_list
     for test in test_case_list:
@@ -155,6 +180,7 @@ def main(build_name = None):
     # Add the build name to the output
     if (build_name != None):
         output_file.write('BuildName: ' + build_name)
+    results_df.to_csv(output_dir + 'test_results.csv', index=False)
     
     output_file.write(results_df.to_html())
     output_file.write('<br/>\n<br/>\n<br/>')

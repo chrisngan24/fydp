@@ -44,7 +44,7 @@ class Visualize(object):
         self.ax1 = self.fig.add_subplot(gs[0,:])
         self.ax2 = self.fig.add_subplot(gs[1,:])
 
-    def visualize(self):
+    def visualize(self, is_interact=True):
         self.make_line_plot(
             self.ax1,
            'timestamp_x',
@@ -74,50 +74,51 @@ class Visualize(object):
             )
 
         plt.savefig('%s/fused_plot.png' %self.data_direc)
+        if is_interact:
 
-        plt.show(block=False)
+            plt.show(block=False)
 
-        cap = cv2.VideoCapture(self.video_name)
+            cap = cv2.VideoCapture(self.video_name)
 
-        all_frames = {}
-        frame_index = 0
-        max_index = 0
-        
-        while(cap.isOpened()):
+            all_frames = {}
+            frame_index = 0
+            max_index = 0
             
-            (ret, frame) = cap.read()
-            if ret==True:
-                all_frames[frame_index] = frame
-            else:
-                max_index = frame_index
-                break
-            frame_index += 1
+            while(cap.isOpened()):
+                
+                (ret, frame) = cap.read()
+                if ret==True:
+                    all_frames[frame_index] = frame
+                else:
+                    max_index = frame_index
+                    break
+                frame_index += 1
 
-        frame_index = 0
+            frame_index = 0
 
-        while (frame_index < max_index):
-            
-            cv2.imshow('frame', all_frames[frame_index])
-            k = cv2.waitKey(0)
-            hasPlot = len(PointSelector.lines) == 2
-            if k == ord('p'):
+            while (frame_index < max_index):
+                
+                cv2.imshow('frame', all_frames[frame_index])
+                k = cv2.waitKey(0)
+                hasPlot = len(PointSelector.lines) == 2
+                if k == ord('p'):
+                    if hasPlot:
+                        frame_index = PointSelector.lines[0].get_xdata()[0]
+                elif k == ord('l'):
+                    frame_index += 2
+                elif k == ord('k'):
+                    frame_index -= 2
+                elif k == ord('q'):
+                    break
+
                 if hasPlot:
-                    frame_index = PointSelector.lines[0].get_xdata()[0]
-            elif k == ord('l'):
-                frame_index += 2
-            elif k == ord('k'):
-                frame_index -= 2
-            elif k == ord('q'):
-                break
+                    PointSelector.lines[0].set_xdata([frame_index, frame_index])
+                    PointSelector.lines[1].set_xdata([frame_index, frame_index])
+                    PointSelector.lines[0].figure.canvas.draw()
+                    PointSelector.lines[1].figure.canvas.draw()
 
-            if hasPlot:
-                PointSelector.lines[0].set_xdata([frame_index, frame_index])
-                PointSelector.lines[1].set_xdata([frame_index, frame_index])
-                PointSelector.lines[0].figure.canvas.draw()
-                PointSelector.lines[1].figure.canvas.draw()
-
-        cap.release()
-        cv2.destroyAllWindows()
+            cap.release()
+            cv2.destroyAllWindows()
 
 
     def make_line_plot(self, ax, x_col, y_col, 
