@@ -39,14 +39,13 @@ def run_fusion(
         data_direc='',
         write_results=True,
         is_move_video=True,
+        is_interact=True,
         ):
     """
     Callback function that
     runs fusion on the two data
     csv files
     """
-    print has_camera, has_wheel
-    print files
     df = fusion.fuse_csv(files)
     if not 'timestamp_x' in df.columns.values.tolist():
         df['timestamp_x'] = df['timestamp']
@@ -119,7 +118,7 @@ def run_fusion(
                         video_name=video_name,
                         data_direc=data_direc
             )
-        vis.visualize()
+        vis.visualize(is_interact=is_interact)
 
     if (has_wheel and has_camera):
         return dict(

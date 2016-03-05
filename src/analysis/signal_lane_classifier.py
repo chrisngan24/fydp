@@ -45,7 +45,8 @@ class SignalLaneClassifier(SignalClassifier):
                                     and event == end_head_turn_event.replace('_end', '')]
 
 
-                if head_events_sentiment[head_event_indice[0]]:
+                print head_events_sentiment
+                if head_events_sentiment[head_event_indice[0]][0] == True:
                     print 'good lane change'
                     lane_events_sentiment.append((True, ''))
                 else:
