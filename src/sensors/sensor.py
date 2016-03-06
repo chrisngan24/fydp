@@ -5,13 +5,11 @@ import threading
 import os
 import logging
 import sys
-sys.path.append('../experimental/opencv-test')
+
+from facedetect import klt
 
 import pandas as pd
 import serial
-
-from klt import NoFramesLeftError
-
  
 class SensorMaster:
     """
@@ -144,7 +142,7 @@ class BaseSensor(threading.Thread):
             try:
                 data_hash = self.read_sensor()
                 self.data_store.append(data_hash)
-            except NoFramesLeftError:
+            except klt.NoFramesLeftError:
                 if self.master != None:
                     self.master.stop_sensors()
         print 'Kill sensor', self.sensor_name

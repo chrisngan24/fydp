@@ -4,9 +4,8 @@ import time
 import numpy as np
 import colorcorrect.algorithm as cca
 import sys
-sys.path.append('../experimental/opencv-test')
 
-import klt
+from facedetect import klt
 
 from sensor import BaseSensor 
 from sensor import SensorMaster
@@ -17,6 +16,8 @@ class CameraSensor(BaseSensor):
     def __init__(self, dir_path, camera, sensor_name):
         BaseSensor.__init__(self,dir_path, sensor_name)
         # Camera needs to initiated in the main thread
+        self.detector = klt.KltDetector()
+
         self.camera = camera
         self.face_model_file = 'models/haarcascade_frontalface_default.xml'
         self.eye_model_file = 'models/haarcascade_eye.xml'
@@ -42,13 +43,13 @@ class CameraSensor(BaseSensor):
         """
         Will try and extract a vector from the frame
         """
-        (row, self.frame_index, self.old_frame, self.p0_nose) = \
-                klt.getOneEvent(
+        (row, self.frame_index, self.old_frame, self.p0_nose) = self.detector.getOneEvent(
                         self.camera, 
                         self.frame_index, 
                         self.old_frame, 
-                        self.p0_nose,
+                        self.p0_nose
                         )
+
         row['timestamp'] = time.time()
         
         return row
