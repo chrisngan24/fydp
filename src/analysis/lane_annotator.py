@@ -22,7 +22,7 @@ class LaneAnnotator(EventAnnotator):
                 model_file = open('%s/%s' % (self.base_dir, f)).read().split('\n')
                 self.right_models.append(np.array([float(i) for i in model_file]))
 
-        self.model = joblib.load('%s/random_forest.pkl' % self.base_dir) 
+        self.model = joblib.load('%s/knn.pkl' % self.base_dir) 
         config_fi = open('%s/config.json' % self.base_dir, 'r')
         self.config = json.loads(reduce(lambda x, y: x + y, config_fi))
         self.window_size = self.config['window_size']
@@ -32,16 +32,15 @@ class LaneAnnotator(EventAnnotator):
         self.events = []
 
     def annotate_events(self, df, index_col='frameIndex'):
-        df_feat = lane_features.prepare_data(df, ignore_columns=self.ignore_columns)
-        df_feat.fillna(0, inplace=True)
 
-        df_w = util.generate_windows(df_feat).dropna()
-        df_w = df_w[self.active_features]
+        df.fillna(0, inplace=True)
+        df_feat = util.generate_windows(df, ignore_columns=self.ignore_columns)
+        df_feat = df_feat.dropna()
+        df_feat = df_feat[self.active_features]
 
-        predicted_labels = self.model.predict(df_w)
+        predicted_labels = self.model.predict(df_feat)
 
-        df_feat = df_feat.loc[0:(len(df)-self.window_size)]
-        df = df.loc[0:(len(df)-self.window_size)]
+        df_feat = df_feat.loc[0:(len(df_feat)-self.window_size)]
         
         null_label = predicted_labels[0]
         curr_label = null_label

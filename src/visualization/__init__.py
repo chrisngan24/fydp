@@ -74,51 +74,64 @@ class Visualize(object):
             )
 
         plt.savefig('%s/fused_plot.png' %self.data_direc)
-        if is_interact:
+        
+        if not is_interact:
+            return
 
-            plt.show(block=False)
+        plt.show(block=False)
 
-            cap = cv2.VideoCapture(self.video_name)
+        cap = cv2.VideoCapture(self.video_name)
 
-            all_frames = {}
-            frame_index = 0
-            max_index = 0
+        all_frames = {}
+        frame_index = 0
+        max_index = 0
+        x_data = 0
+        
+        while(cap.isOpened()):
             
-            while(cap.isOpened()):
-                
-                (ret, frame) = cap.read()
-                if ret==True:
-                    all_frames[frame_index] = frame
-                else:
-                    max_index = frame_index
-                    break
-                frame_index += 1
+            (ret, frame) = cap.read()
+            if ret==True:
+                all_frames[frame_index] = frame
+            else:
+                max_index = frame_index
+                break
+            frame_index += 1
 
-            frame_index = 0
+        frame_index = 0
 
-            while (frame_index < max_index):
-                
-                cv2.imshow('frame', all_frames[frame_index])
-                k = cv2.waitKey(0)
-                hasPlot = len(PointSelector.lines) == 2
-                if k == ord('p'):
-                    if hasPlot:
-                        frame_index = PointSelector.lines[0].get_xdata()[0]
-                elif k == ord('l'):
-                    frame_index += 2
-                elif k == ord('k'):
-                    frame_index -= 2
-                elif k == ord('q'):
-                    break
+        while True:
+            
+            if frame_index < 0:
+                frame_index = 1
 
+            if frame_index >= max_index:
+                frame_index = max_index - 1
+
+            cv2.imshow('frame', all_frames[frame_index])
+
+            k = cv2.waitKey(0)
+            hasPlot = len(PointSelector.lines) == 2
+            if k == ord('p'):
                 if hasPlot:
-                    PointSelector.lines[0].set_xdata([frame_index, frame_index])
-                    PointSelector.lines[1].set_xdata([frame_index, frame_index])
-                    PointSelector.lines[0].figure.canvas.draw()
-                    PointSelector.lines[1].figure.canvas.draw()
+                    x_data = PointSelector.lines[0].get_xdata()[0]                    
+                    frame_index = self.df['frameIndex'][x_data]
+            elif k == ord('l'):
+                x_data += 2
+                frame_index = self.df['frameIndex'][x_data]
+            elif k == ord('k'):
+                x_data += 2
+                frame_index = self.df['frameIndex'][x_data]
+            elif k == ord('q'):
+                break
 
-            cap.release()
-            cv2.destroyAllWindows()
+            if hasPlot:
+                PointSelector.lines[0].set_xdata([x_data, x_data])
+                PointSelector.lines[1].set_xdata([x_data, x_data])
+                PointSelector.lines[0].figure.canvas.draw()
+                PointSelector.lines[1].figure.canvas.draw()
+
+        cap.release()
+        cv2.destroyAllWindows()
 
 
     def make_line_plot(self, ax, x_col, y_col, 
