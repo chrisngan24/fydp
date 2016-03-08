@@ -38,6 +38,9 @@ nose_cascade = cv2.CascadeClassifier(nose_model_file)
 profile_cascade = cv2.CascadeClassifier(profile_model_file)
 out = cv2.VideoWriter(filename = 'drivelog_temp.avi', fourcc = fourcc, fps = 1000.0, frameSize = FRAME_RESIZE)
 
+self.ideal_width = -1
+self.ideal_height = -1
+
 def display_and_wait():
 
     k = cv2.waitKey(1) & 0xff
@@ -105,42 +108,70 @@ def find_new_KLT(cap, frame_index):
             (faces, eyes, noses) = get_features(gray)
             nose_mask = np.zeros(gray.shape)
 
-            for (x,y,w,h) in faces:
+            # Determine best face
             
-                # Detect the face and save to DF
-                cv2.rectangle(frame,(x,y),(x+w,y+h),(255,0,0), 2)
+            # Multiple faces in the frame
+            if len(faces) > 1:
+            
+                largest_w = -1
 
-                for (ex,ey,ew,eh) in eyes:
-                    cv2.rectangle(frame,(x+ex,y+ey),(x+ex+ew,y+ey+eh),(0,255,0),2)
+                #find the largest face
+                for (x,y,w,h) in faces:
+                    
+                    if (w > largest_x):
+                        # Face variables
+                        fx = x
+                        fy = y
+                        fw = w
+                        fh = h
 
-                print "Found face " + str(len(eyes)) + " " + str(len(noses))
+            # Only one, just use it
+            elif len(faces) == 1:
+                    fx = faces[0][0]
+                    fy = faces[0][1]
+                    fw = faces[0][2]
+                    fh = faces[0][3]
 
-                for (nx,ny,nw,nh) in noses:
-                    cv2.rectangle(frame,(x+nx,y+ny),(x+nx+nw,y+ny+nh),(0,0,255),2)
+            else:
+                continue
 
-                if (len(noses) == 1):
+            # Detect the face and save to DF
+            cv2.rectangle(frame,(fx,fy),(fx+fw,fy+fh),(255,0,0), 2)
 
-                    face_found = True
-                    old_frame = frame
+            for (ex,ey,ew,eh) in eyes:
+                cv2.rectangle(frame,(fx+ex,fy+ey),(fx+ex+ew,fy+ey+eh),(0,255,0),2)
 
-                    """
-                    for (ex,ey,ew,eh) in eyes:
-                        
-                        # ex and ey are relative to the face frame, need to shift to entire frame
-                        tx = ex+x
-                        ty = ey+y
-                        eye_mask[ty:ty+eh, tx:tx+ew] = 1.
-                    """
+            print "Found face " + str(len(eyes)) + " " + str(len(noses))
 
-                    for (nx,ny,nw,nh) in noses:
+            for (nx,ny,nw,nh) in noses:
+                cv2.rectangle(frame,(fx+nx,fy+ny),(fx+nx+nw,fy+ny+nh),(0,0,255),2)
 
-                        # ex and ey are relative to the face frame, need to shift to entire frame
-                        tx = nx+x
-                        ty = ny+y+h/3
-                        nose_mask[ty:ty+nh, tx:tx+nw] = 1.
+            if (len(noses) == 1):
 
-                    nose_mask = nose_mask.astype(np.uint8)
-                    break
+                # Not set yet: take first face as the ideal
+                if (self.ideal_width < 0):
+                    self.ideal_width = fw
+                    self.ideal_height = fh
+                    print "ideal w:" + str(self.ideal_width) + " h: " + str(self.ideal_height)
+
+                else:
+                    
+                    if (fw < (0.9 * self.ideal_width) and fh < (0.9 * self.ideal_height)):
+                        print "rejected due to size"
+
+                    else:
+                        face_found = True
+                        old_frame = frame
+
+                        for (nx,ny,nw,nh) in noses:
+
+                            # ex and ey are relative to the face frame, need to shift to entire frame
+                            tx = nx+fx
+                            ty = ny+fy+fh/3
+                            nose_mask[ty:ty+nh, tx:tx+nw] = 1.
+
+                        nose_mask = nose_mask.astype(np.uint8)
+                    
 
     # Take first frame and find corners in it
     old_gray = cv2.cvtColor(old_frame, cv2.COLOR_BGR2GRAY)

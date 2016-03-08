@@ -51,7 +51,8 @@ def generate_windows(df, window=10, ignore_columns = []):
     points = []
     cols = df.columns.values.tolist()
     for ic in ignore_columns:
-        cols.remove(ic)
+        if ic in cols:
+            cols.remove(ic)
     for i, r in df.iterrows():
         w_start = i
         w_end   = min(i + 100, len(df)-1)
