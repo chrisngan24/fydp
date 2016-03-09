@@ -181,11 +181,28 @@ def main(build_name = None):
     if (build_name != None):
         output_file.write('BuildName: ' + build_name)
     results_df.to_csv(output_dir + 'test_results.csv', index=False)
+
+    ## Need panda 0.17.1
+    html = results_df.style.background_gradient(
+            cmap='Spectral',
+            )
     
-    output_file.write(results_df.to_html())
+    output_file.write(html.render())
     output_file.write('<br/>\n<br/>\n<br/>')
     output_file.write('Summary:')
-    output_file.write(results_df.describe().to_html())
+    df_summary = results_df.describe()
+    df_summary = df_summary.append([
+        pd.Series(results_df.median(), name='median'),
+        pd.Series(
+            results_df._get_numeric_data().apply(
+                lambda x: sum(x >= 0.8) / float(len(x)), 
+                axis=0,),
+            name='proportion_geq_0.8',
+            )
+        ])
+    
+    output_file.write(df_summary.to_html())
+
 
 if __name__ == '__main__':
 
