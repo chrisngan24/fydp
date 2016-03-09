@@ -1,8 +1,31 @@
 import numpy as np
 import cv2
+import sys
 import os.path
 import time
 import pandas as pd
+import scipy
+import scipy.ndimage
+
+def apply_retinex(X):
+    
+    # Find luminance and reflectance
+    luminance = scipy.ndimage.filters.gaussian_filter(X, 9)
+    log_luminance = np.log1p(luminance)
+    log_reflectance = np.log1p(X) - log_luminance
+    y = np.exp(0.8*log_reflectance + 0.2*log_luminance)
+    
+    y = np.nan_to_num(y)
+    y = y.astype(float) / y.max() * 255
+    new_frame = y.astype(np.uint8)
+
+    #cv2.imwrite('sample.jpg', y)
+    #new_frame = cv2.imread('sample.jpg')
+    #1/0
+
+    return new_frame
+
+with_retinex = sys.argv[1]
 
 face_model_file = 'models/haarcascade_frontalface_default.xml'
 eye_model_file = 'models/haarcascade_eye.xml'
@@ -28,7 +51,7 @@ nose_cascade = cv2.CascadeClassifier(nose_model_file)
 # Not used 
 profile_cascade = cv2.CascadeClassifier(profile_model_file)
 
-cap = cv2.VideoCapture(0)
+cap = cv2.VideoCapture(1)
 
 roi_hist = 0;
 
@@ -40,15 +63,19 @@ events = []
 
 while(1):
 
-    ret,frame = cap.read()
+    ret,frame_big = cap.read()
     if ret == True:
+
+        frame = cv2.resize(frame_big, (320,240))
+        if (with_retinex == 'r'):
+            frame = apply_retinex(frame)
 
         gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
         faces = face_cascade.detectMultiScale(image = gray, 
             scaleFactor = 1.3, 
-            minNeighbors = 5, 
+            minNeighbors = 3, 
             flags = 0, 
-            minSize=(100,100))
+            minSize=(50,50))
 
         this_event = {}
 
@@ -79,17 +106,16 @@ while(1):
             
             eyes = eye_cascade.detectMultiScale(image = roi_23up, 
                 scaleFactor = 1.1, 
-                minNeighbors = 8, 
+                minNeighbors = 5, 
                 flags = 0)
 
             for (ex,ey,ew,eh) in eyes:
                 cv2.rectangle(roi_color,(ex,ey),(ex+ew,ey+eh),(0,255,0),2)
 
             noses = nose_cascade.detectMultiScale(image = roi_23down, 
-                scaleFactor = 1.15, 
-                minNeighbors = 8, 
-                flags = 0, 
-                minSize=(20,20))
+                scaleFactor = 1.1, 
+                minNeighbors = 3, 
+                flags = 0)
 
             for (nx,ny,nw,nh) in noses:
                 cv2.rectangle(roi_color,(nx,ny+(h/3)),(nx+nw,ny+nh+(h/3)),(0,0,255),2)
