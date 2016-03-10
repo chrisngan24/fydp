@@ -46,7 +46,7 @@ if __name__ == "__main__":
         shutil.copy('test_results/test_results.html', dir_name)
         shutil.copy('test_results/test_results.csv', dir_name)
         # so that it renders in github
-        shutil.copy('test_results/test_results.html', dir_name + '/' + 'README.md')
+        shutil.copy('test_results/test_results_bw.html', dir_name + '/' + 'README.md')
         copy_test_plots('test_suite/test_cases/', dir_name)
         
     else:
