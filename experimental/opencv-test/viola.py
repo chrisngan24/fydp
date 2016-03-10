@@ -10,18 +10,14 @@ import scipy.ndimage
 def apply_retinex(X):
     
     # Find luminance and reflectance
-    luminance = scipy.ndimage.filters.gaussian_filter(X, 9)
+    luminance = scipy.ndimage.filters.gaussian_filter(X, 4)
     log_luminance = np.log1p(luminance)
     log_reflectance = np.log1p(X) - log_luminance
-    y = np.exp(0.8*log_reflectance + 0.2*log_luminance)
+    y = np.exp(log_reflectance + log_luminance)
     
     y = np.nan_to_num(y)
     y = y.astype(float) / y.max() * 255
     new_frame = y.astype(np.uint8)
-
-    #cv2.imwrite('sample.jpg', y)
-    #new_frame = cv2.imread('sample.jpg')
-    #1/0
 
     return new_frame
 
