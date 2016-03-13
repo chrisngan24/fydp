@@ -119,7 +119,7 @@ class Visualize(object):
                 x_data += 2
                 frame_index = self.df['frameIndex'][x_data]
             elif k == ord('k'):
-                x_data += 2
+                x_data -= 2
                 frame_index = self.df['frameIndex'][x_data]
             elif k == ord('q'):
                 break
