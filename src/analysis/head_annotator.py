@@ -63,66 +63,113 @@ class HeadAnnotator(EventAnnotator):
             'right_turn_end'  : [],
             }
         threshold = 2
-        previous_event = 0
-
+        event_thresh = 10 
         timed_events = []
-        start_times = 0 
+
+
+        def end_event(event_key, start_index, end_index):
+            assert(event_key in set([1,3]))
+            if event_key == 1:
+                event_start = 'left_turn_start'
+                event_end   = 'left_turn_end'
+                event = 'left_turn'
+            elif event_key == 3:
+                event_start = 'right_turn_start'
+                event_end   = 'right_turn_end'
+                event = 'right_turn'
+
+
+
+            events[event_start].append(start_index)
+            events[event_end].append(end_index)
+            timed_events.append((
+                start_index,
+                end_index,
+                event,
+                ))
+
+
+
+        previous_event = 0 # 0, 1 or 3
+        potential_end_event = -1
+
+        steps_since_start = 0
+
         start_index = 0
         for i in xrange(threshold-1, len(Y)):
             x = Y[i]
             lower = max(0, i - (threshold))
             upper = min(len(Y), i + (threshold))
-            if previous_event == 0 and \
-                    x == 1 and \
-                    Counter(Y[i:upper])[1] == threshold : # start left 
-                print 'Start left'
-                previous_event = 1
-                events['left_turn_start'].append(i)
-                start_times = df.iloc[i][index_col]
-                start_index = i
 
-            if previous_event == 1 and\
-                    x == 2 and\
-                    Counter(Y[lower:i])[2] == threshold: # end left 
-                print 'End left'
-                events['left_turn_end'].append(i)
-                previous_event = 0
-                timed_events.append((
-                    start_index,
-                    i,
-                    'left_turn'
-                    ))
-                self.events.append((
-                    start_index,
-                    i,
-                    'left_turn',
-                    ))
-            if previous_event == 0 and \
-                    x == 3 and \
-                    Counter(Y[i:upper])[3] == threshold : # start left 
-                print 'Start right'
-                previous_event = 3
-                events['right_turn_start'].append(i)
-                start_times = df.iloc[i][index_col]
-                start_index = i 
+            current_point = Y[i]
+            # starting events are 1 or 3
+            potentially_new_starting_event = \
+                    Counter(Y[i:upper])[1] == threshold or \
+                    Counter(Y[i:upper])[3] == threshold
+            # ending events are 2 or 4
+            potentially_new_ending_event = \
+                    Counter(Y[lower:i])[2] == threshold or \
+                    Counter(Y[lower:i])[4] == threshold
 
-            if previous_event == 3 and\
-                    x == 4 and\
-                    Counter(Y[lower:i])[4] == threshold: # end left 
-                print 'End right'
-                events['right_turn_end'].append(i)
-                previous_event = 0
-                timed_events.append((
-                    start_index,
-                    i,
-                    'right_turn'
-                    ))
-                self.events.append((
-                    start_index,
-                    i,
-                    'right_turn',
-                    ))
 
+            if potentially_new_starting_event:
+                if previous_event == 0:
+                    # true new event
+                    start_index = i
+                    previous_event = current_point
+                    steps_since_start = 0
+                    potential_end_event = -1
+
+                elif steps_since_start > event_thresh:
+                    # the previous found events ending is strange and should be ended
+                    if previous_event != 0:
+                        # end the current event. there's
+                        # probably a bug, but at least
+                        # we can catch the event and not break new
+                        # events
+                        end_event(
+                                previous_event, 
+                                start_index, 
+                                # either end now or a previously 
+                                # found event (if found)
+                                #max(potential_end_event, i-1)
+                                potential_end_event if potential_end_event != -1 \
+                                    else start_index + event_thresh
+                                )
+                        previous_event = current_point
+                        start_index = i
+                        steps_since_start = 0
+                        potential_end_event = -1
+            elif potentially_new_ending_event:
+                if previous_event == (current_point - 1):
+                    end_event(
+                            previous_event,
+                            start_index,
+                            i,
+                            )
+                    previous_event = 0
+                    steps_since_start = 0
+                    potential_end_event = -1
+                
+            else:
+                if previous_event != 0:
+                    steps_since_start += 1
+                    if potential_end_event == -1 and \
+                            previous_event == (current_point-1):
+                        # the event could end here
+                        potential_end_event = i
+        if previous_event != 0:
+            end_event(
+                    previous_event,
+                    start_index,
+                    min(
+                        len(Y),
+                        potential_end_event if potential_end_event != -1 \
+                                else (start_index + event_thresh)
+                    
+                        )
+                    )
+        self.events = timed_events
         return events, timed_events
 
 
