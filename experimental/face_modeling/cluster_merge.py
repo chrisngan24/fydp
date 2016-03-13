@@ -46,7 +46,6 @@ def cluster_training_signals(df, active_features, k):
     """
     Cluster in a lower dimension
     """
-    pca = PCA(n_components=2)
     kmean = KMeans(n_clusters=k)
     # X = pca.fit_transform(df[active_features])
     X = df[active_features]

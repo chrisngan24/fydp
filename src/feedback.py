@@ -36,6 +36,7 @@ def main(session_dir, build_name = None):
             data_direc=session_dir,
             is_interact=True,
             is_move_video=False,
+            interactive_video='drivelog_temp.avi',
             )
    
 if __name__ == '__main__':

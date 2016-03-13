@@ -104,6 +104,7 @@ def apply_feature_engineering(df, relevant_features = []):
     sub_frames.append(DeltaFeatureGenerator().generate_features(
             df, suffix='_6_steps', step=6,relevant_features=relevant_features, # eignore_columns,
             ))
+
     sub_frames.append(DeltaFeatureGenerator().generate_features(
             df, suffix='_1_steps', step=1, relevant_features=relevant_features,
             #ignore_columns=ignore_columns,

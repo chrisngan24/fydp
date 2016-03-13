@@ -15,6 +15,7 @@ class HeadAnnotator(EventAnnotator):
         m_dir = os.path.dirname(__file__)
         base_dir = os.path.join(m_dir, '../models/head_turns/')
         self.model = joblib.load('%s/head_turns.pkl' % base_dir) 
+        print self.model.__class__
         config_fi = open('%s/config.json' % base_dir, 'r')
         self.config = json.loads(reduce(lambda x, y: x + y, config_fi))
         self.window_size = self.config['window_size']
