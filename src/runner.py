@@ -40,6 +40,7 @@ def run_fusion(
         write_results=True,
         is_move_video=True,
         is_interact=True,
+        interactive_video='annotated_head.avi',
         ):
     """
     Callback function that
@@ -107,7 +108,7 @@ def run_fusion(
         move_video('drivelog_temp.avi', data_direc)
 
     if (has_camera and has_wheel and write_results):
-        video_name = os.path.join(data_direc, 'annotated_head.avi')
+        video_name = os.path.join(data_direc, interactive_video)
         print "Plotting...."
         vis = Visualize(
                         df,

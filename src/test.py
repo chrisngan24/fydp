@@ -167,6 +167,7 @@ def main(build_name = None):
     results_list = []
 
     output_file = open(output_dir + "test_results.html", 'w')
+    output_file_bw = open(output_dir + "test_results_bw.html", 'w')
     test_case_list = sorted(next(os.walk(testing_dir))[1])
     print test_case_list
     for test in test_case_list:
@@ -202,6 +203,12 @@ def main(build_name = None):
         ])
     
     output_file.write(df_summary.to_html())
+
+    output_file_bw.write(results_df.to_html())
+
+    output_file_bw.write('<br/>\n<br/>\n<br/>')
+    output_file_bw.write('Summary:')
+    output_file_bw.write(df_summary.to_html())
 
 
 if __name__ == '__main__':
