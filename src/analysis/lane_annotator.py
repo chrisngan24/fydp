@@ -32,10 +32,8 @@ class LaneAnnotator(EventAnnotator):
         self.events = []
 
     def annotate_events(self, df, index_col='frameIndex'):
-
-        df.fillna(0, inplace=True)
-        df_feat = util.generate_windows(df, ignore_columns=self.ignore_columns)
-        df_feat = df_feat.dropna()
+        df_feat = util.generate_windows(df, window=self.window_size, ignore_columns=self.ignore_columns)
+        df_feat = df_feat.fillna(0)
         df_test = df_feat[self.active_features]
 
         predicted_labels_test = self.model.predict(df_test)
@@ -101,6 +99,7 @@ class LaneAnnotator(EventAnnotator):
                 events['right_lc_start'].add(right_lc_start)
                 events['right_lc_end'].add(right_lc_end)
 
+        print events
 
         for k, v in events.iteritems():
             events[k] = sorted(list(v))
