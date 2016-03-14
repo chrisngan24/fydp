@@ -10,18 +10,14 @@ import scipy.ndimage
 def apply_retinex(X):
     
     # Find luminance and reflectance
-    luminance = scipy.ndimage.filters.gaussian_filter(X, 9)
+    luminance = scipy.ndimage.filters.gaussian_filter(X, 4)
     log_luminance = np.log1p(luminance)
     log_reflectance = np.log1p(X) - log_luminance
-    y = np.exp(0.8*log_reflectance + 0.2*log_luminance)
+    y = np.exp(log_reflectance + 0.2*log_luminance)
     
     y = np.nan_to_num(y)
     y = y.astype(float) / y.max() * 255
     new_frame = y.astype(np.uint8)
-
-    #cv2.imwrite('sample.jpg', y)
-    #new_frame = cv2.imread('sample.jpg')
-    #1/0
 
     return new_frame
 
@@ -51,7 +47,7 @@ nose_cascade = cv2.CascadeClassifier(nose_model_file)
 # Not used 
 profile_cascade = cv2.CascadeClassifier(profile_model_file)
 
-cap = cv2.VideoCapture(1)
+cap = cv2.VideoCapture(0)
 
 roi_hist = 0;
 
@@ -68,7 +64,19 @@ while(1):
 
         frame = cv2.resize(frame_big, (320,240))
         if (with_retinex == 'r'):
-            frame = apply_retinex(frame)
+
+            # Convert the frame to LUV
+            luv_frame = cv2.cvtColor(frame, cv2.COLOR_BGR2LUV)
+            
+            # Take ONLY the L channel and apply retinex on it
+            luv_channel = luv_frame[:,:,0]
+            luv_channel_fixed = apply_retinex(luv_channel)
+
+            # Reconstruct the LUV, convert back to BGR
+            luv_frame[:,:,0] = luv_channel_fixed
+            new_frame = cv2.cvtColor(luv_frame, cv2.COLOR_LUV2BGR)
+
+            frame = apply_retinex(new_frame)
 
         gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
         faces = face_cascade.detectMultiScale(image = gray, 

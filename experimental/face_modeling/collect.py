@@ -1,5 +1,5 @@
 import sys
-sys.path.append('../opencv-test')
+sys.path.append('../opencv-test/')
 import os
 import time
 import pandas as pd 

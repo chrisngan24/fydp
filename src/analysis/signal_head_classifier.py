@@ -2,12 +2,14 @@ import os
 
 from sklearn.externals import joblib
 import pandas as pd
+import numpy as np
 
 from signal_classifier import SignalClassifier 
 from head_signal_sentiment_features import compute_signal_features
 
 class SignalHeadClassifier(SignalClassifier):
     def __init__(self, df, signal_indices):
+        # replace infinite values
         SignalClassifier.__init__(self, df, signal_indices)
         m_dir = os.path.dirname(__file__)
         base_dir = os.path.join(m_dir, '../models/head_sentiment/')
@@ -30,9 +32,9 @@ class SignalHeadClassifier(SignalClassifier):
             events.append(compute_signal_features(df_sub))
         # only print if there is actual events
         if len(events) > 0:
-            df_events = pd.DataFrame(events)
+            df_events = pd.DataFrame(events).fillna(0)
             predictions = self.model.predict(df_events[self.active_features])
-            return map(lambda x: (bool(x), 'AH'), predictions)
+            return map(lambda x: (bool(x), 'Is Good Head Turn'), predictions)
         return []
 
 

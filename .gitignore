@@ -67,3 +67,4 @@ target/
 *.jpg
 *.avi
 data/
+.Rhistory

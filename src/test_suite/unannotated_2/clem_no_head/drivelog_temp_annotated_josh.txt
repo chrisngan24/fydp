@@ -1,1 +1,0 @@
-[{'type': 'left_turn', 'is_good': True, 'end': 81, 'start': 61}, {'type': 'left_lane_change', 'is_good': True, 'end': 166, 'start': 83}, {'type': 'right_turn', 'is_good': True, 'end': 210, 'start': 191}, {'type': 'right_lane_change', 'is_good': True, 'end': 352, 'start': 212}]

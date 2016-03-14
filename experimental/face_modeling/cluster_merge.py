@@ -46,7 +46,6 @@ def cluster_training_signals(df, active_features, k):
     """
     Cluster in a lower dimension
     """
-    pca = PCA(n_components=2)
     kmean = KMeans(n_clusters=k)
     # X = pca.fit_transform(df[active_features])
     X = df[active_features]
@@ -81,19 +80,30 @@ def generate_training_set(director, k=4, window_size=10,relevant_features=[]):
                 window = window_size,
                 relevant_features=active_features,
                 )
+            df_trimmed = df_w.loc[0:(len(df_w)-window_size)]
+            # cluster individiaul files
+            Y = cluster_training_signals(
+                    df_trimmed, 
+                    active_features, 
+                    k,
+                    )
+            df_trimmed['class'] = Y
             training_data = pd.concat(
-                [training_data, df_w.loc[0:(len(df_w)-window_size)]]
+                [training_data, df_trimmed]
                 )
     df_w = training_data
     print 'Now clustering the data'
     # active_columns = get_active_features(df, ignore_columns)
-
+    
+    # cluster all together
+    '''
     Y = cluster_training_signals(
         df_w, 
         active_features, 
         k,
         )
     df_w['class'] = Y
+    '''
     print "Number of data points clustered:", len(df_w)
     print "Features used to cluster:\n"
     for c in active_features:
