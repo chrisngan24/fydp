@@ -24,6 +24,14 @@ def integrate_rect_col(fx_col, dx_col, init_val):
         
     return np.array(y)
 
+def movingaverage(interval, window_size):
+    window = np.ones(int(window_size))/float(window_size)
+    return np.convolve(interval, window, "same")
+
+def normalize(arr):
+    min_x = min(arr)
+    range_x = max(arr) - min_x
+    return [ float(x-min_x) / float(range_x) for x in arr ]
 
 def integrate_trapezoid_col(fxdx_col, dx_col, init_val):
     """
