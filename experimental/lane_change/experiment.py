@@ -12,17 +12,14 @@ from sklearn.utils import shuffle
 import matplotlib.pyplot as plt
 import datetime
 from sklearn.externals import joblib
-import utils
-import features
 import fastdtw
 import numpy as np
-from sklearn.semi_supervised import LabelSpreading
 
 from collections import Counter
 
-data_direc = os.path.join(os.path.dirname(os.path.realpath(__file__)), "../data")
-plot_direc = os.path.join(os.path.dirname(os.path.realpath(__file__)), "../plots")
-model_direc = os.path.join(os.path.dirname(os.path.realpath(__file__)), "../models")
+data_direc = os.path.join(os.path.dirname(os.path.realpath(__file__)), "data")
+plot_direc = os.path.join(os.path.dirname(os.path.realpath(__file__)), "plots")
+model_direc = os.path.join(os.path.dirname(os.path.realpath(__file__)), "models")
 lane_change_models_direc = os.path.join(model_direc, "lane_changes")
 
 ignore_columns = ["Unnamed: 0", "time_diff", "faceBottom", "faceLeft", "faceRight", "faceTop", "isFrontFace", "noseX", "noseY", "time", "timestamp_y", "frameIndex", "timestamp_x"]
@@ -39,6 +36,32 @@ active_columns = ["ax", "ax_0", "ax_1", "ax_2", "ax_3", "ax_4", "ax_5", "ax_6",
 
 n_clusters = 3
 window_size = 10
+
+def generate_windows(df, window=10, ignore_columns = []):
+    """
+    Apply the future windows to the dataframe
+    """
+    points = []
+    cols = df.columns.values.tolist()
+    for ic in ignore_columns:
+        if ic in cols:
+            cols.remove(ic)
+    for i, r in df.iterrows():
+        w_start = i
+        w_end   = min(i + 100, len(df)-1)
+        row = r.to_dict()
+        df_w = df.loc[w_start:w_end].reset_index(drop=True)
+        for j in xrange(0,window):
+            if j < len(df_w):
+                window_row = df_w.loc[j].to_dict()
+            else:
+                window_row = None
+            for c in cols:
+                name = '%s_%s' % (c, j)
+                row[name] = window_row[c] if window_row != None else None
+        points.append(row)
+
+    return pd.DataFrame(points)
 
 def movingaverage(interval, window_size):
     window = np.ones(int(window_size))/float(window_size)
@@ -166,13 +189,13 @@ def train():
     neg = pd.concat(neg_dfs, axis=0, join="outer", join_axes=None, ignore_index=True,
        keys=None, levels=None, names=None, verify_integrity=False)
 
-    windowed_left = utils.generate_windows(left, window=window_size, ignore_columns=ignore_columns)
+    windowed_left = generate_windows(left, window=window_size, ignore_columns=ignore_columns)
     windowed_left = windowed_left.fillna(0)
 
-    windowed_right = utils.generate_windows(right, window=window_size, ignore_columns=ignore_columns)
+    windowed_right = generate_windows(right, window=window_size, ignore_columns=ignore_columns)
     windowed_right = windowed_right.fillna(0)
 
-    windowed_neg = utils.generate_windows(neg, window=window_size, ignore_columns=ignore_columns)
+    windowed_neg = generate_windows(neg, window=window_size, ignore_columns=ignore_columns)
     windowed_neg = windowed_neg.fillna(0)
 
     left_clusters = cluster_using_kmeans(windowed_left, "", n_clusters=n_clusters)
