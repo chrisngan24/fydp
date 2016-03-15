@@ -2,8 +2,9 @@ import numpy as np
 import cv2
 import os.path
 import time
-import colorcorrect.algorithm as cca
 import pandas as pd
+import scipy
+import scipy.ndimage
 
 class NoFramesLeftError(Exception):
     def __init__(self):    
@@ -95,6 +96,30 @@ class KltDetector():
 
         return (faces, eyes, noses)
 
+    def apply_retinex(self, frame, luminance_weighting):
+
+        # Convert the frame to LUV
+        luv_frame = cv2.cvtColor(frame, cv2.COLOR_BGR2LUV)
+                
+        # Take ONLY the L channel and apply retinex on it
+        luv_channel = luv_frame[:,:,0]
+        
+        # Find luminance and reflectance
+        luminance = scipy.ndimage.filters.gaussian_filter(luv_channel, 4)
+        log_luminance = np.log1p(luminance)
+        log_reflectance = np.log1p(luv_channel) - log_luminance
+        transformed = np.exp(log_reflectance + luminance_weighting * log_luminance)
+        
+        transformed = np.nan_to_num(transformed)
+        transformed = transformed.astype(float) / transformed.max() * 255
+        luv_channel_fixed = transformed.astype(np.uint8)
+
+        # Reconstruct the LUV, convert back to BGR
+        luv_frame[:,:,0] = luv_channel_fixed
+        new_frame = cv2.cvtColor(luv_frame, cv2.COLOR_LUV2BGR)
+
+        return new_frame
+
     def find_new_KLT(self, cap, frame_index):
 
         face_found = False
@@ -110,14 +135,15 @@ class KltDetector():
                 print "NO FRAME FOUND"
                 raise NoFramesLeftError()
 
-            frame = cca.stretch(cv2.resize(frame, self.FRAME_RESIZE))
-            
+            frame = cv2.resize(frame, self.FRAME_RESIZE)
             cv2.imshow('frame',frame)
+
+            fixed_frame = self.apply_retinex(frame, 0.5)
             frame_index += 1
             self.out.write(frame)
             cv2.waitKey(1)
-            
-            gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
+
+            gray = cv2.cvtColor(fixed_frame, cv2.COLOR_BGR2GRAY)
 
             (faces, eyes, noses) = self.get_features(gray)
             nose_mask = np.zeros(gray.shape)
@@ -214,7 +240,7 @@ class KltDetector():
                 # 1. We have KLT points which are stable and within the Viola-Area
                 # 2. We have no KLT points, but we have a face. Initialize KLT.
 
-                frame = cca.stretch(cv2.resize(frame, self.FRAME_RESIZE))
+                frame = cv2.resize(frame, self.FRAME_RESIZE)
                 frame_index += 1
                 self.out.write(frame)
                 cv2.waitKey(1)
