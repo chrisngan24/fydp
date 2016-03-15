@@ -111,8 +111,8 @@ def apply_feature_engineering(df, relevant_features = []):
             ))
     df_new = pd.concat(sub_frames, axis=1)
     active_features = df_new.columns.values.tolist()
-    for c in ignore_columns:
-        if c in df.columns.values.tolist():
+    for c in df.columns.values.tolist():
+        if not c in df_new.columns.values.tolist():
             df_new[c] = df[c]
     return df_new, active_features
 

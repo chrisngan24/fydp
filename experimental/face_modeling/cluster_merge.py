@@ -55,7 +55,11 @@ def cluster_training_signals(df, active_features, k):
 
          
 
-def generate_training_set(director, k=4, window_size=10,relevant_features=[]):
+def generate_training_set(
+        director, 
+        feature_generator = lambda df,cols: head_features.apply_feature_engineering(df, cols),
+        k=4, window_size=10,relevant_features=[],
+        verbose=True):
     """
     Given the directory of data files,
     cluster the event points and saves the results
@@ -68,13 +72,14 @@ def generate_training_set(director, k=4, window_size=10,relevant_features=[]):
         if not csv.find('.csv') == -1:
             fi_path = '%s/%s' % (director, csv)
             df = pd.read_csv(fi_path)
-            print fi_path
+            if verbose:
+                print fi_path
             # Save to raw so the original data is kept. We are interested in 
             # keeping the original data for these rows
             df['noseX_raw'] = df['noseX']
             df['noseY_raw'] = df['noseY']
             # features
-            df, active_features = head_features.apply_feature_engineering(df, relevant_features)
+            df, active_features = feature_generator(df, relevant_features)
             df.fillna(0,inplace=True)
             df_w, active_features = head_features.generate_windows(df, 
                 window = window_size,
@@ -92,22 +97,15 @@ def generate_training_set(director, k=4, window_size=10,relevant_features=[]):
                 [training_data, df_trimmed]
                 )
     df_w = training_data
-    print 'Now clustering the data'
-    # active_columns = get_active_features(df, ignore_columns)
-    
-    # cluster all together
-    '''
-    Y = cluster_training_signals(
-        df_w, 
-        active_features, 
-        k,
-        )
-    df_w['class'] = Y
-    '''
-    print "Number of data points clustered:", len(df_w)
-    print "Features used to cluster:\n"
-    for c in active_features:
-        print "\t%s" % c
+    if verbose:
+        print 'Now clustering the data'
+        # active_columns = get_active_features(df, ignore_columns)
+        
+        # cluster all together
+        print "Number of data points clustered:", len(df_w)
+        print "Features used to cluster:\n"
+        for c in active_features:
+            print "\t%s" % c
     return df_w, active_features
 
 
@@ -127,7 +125,21 @@ if __name__ == '__main__':
     base_dir = 'data' # dir to read data from
     m_dir = '%s/%s' % (base_dir, data_dir)
     output_dir = 'data/merged'
-    ignore_columns = ['date','frameIndex', 'class', 'time', 'noseX_raw', 'noseY_raw']
+    ignore_columns = [
+            'date',
+            'frameIndex', 
+            'class', 
+            'time', 
+            'noseX_raw', 
+            'noseY_raw',
+            'faceBottom',
+            'faceTop',
+            'faceLeft',
+            'faceRight',
+            'noseX',
+            'noseY',
+            'isFrontFace',
+            ]
     df, active_features = generate_training_set(m_dir, k=k, window_size=window_size,
             relevant_features=relevant_features)
     df.to_csv('%s/%s.csv' % (output_dir, data_dir), index=False)
