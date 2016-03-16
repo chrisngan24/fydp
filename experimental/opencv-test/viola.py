@@ -38,6 +38,8 @@ eye_model_file = 'models/haarcascade_eye.xml'
 profile_model_file = 'models/haarcascade_profileface.xml'
 nose_model_file = 'models/nariz.xml'
 
+RETINEX_LUMINENCE = 0.5
+
 if (os.path.isfile(face_model_file) == True):
     print 'Face model found!' 
 
@@ -76,7 +78,7 @@ while(1):
         frame = cv2.resize(frame_big, (320,240))
         
         if (with_retinex == 'r'):
-            frame = apply_retinex(frame, 0.5)
+            frame = apply_retinex(frame, RETINEX_LUMINENCE)
 
         gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
         faces = face_cascade.detectMultiScale(image = gray, 
