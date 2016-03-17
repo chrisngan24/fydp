@@ -8,15 +8,17 @@ import numpy as np
 class PointSelector:
     lines = []
     axes = set()
-    
-    def __init__(self, line):
+        
+    def __init__(self, parent, line):
         self.line = line
+        self.parent = parent
         line.figure.canvas.mpl_connect('pick_event', self)
         PointSelector.axes.add(line.axes)
 
     def __call__(self, event):
         thisline = event.artist
         xdata = int(event.mouseevent.xdata)
+        self.parent.show_frame(xdata)
 
         if len(PointSelector.lines) == 2:
             PointSelector.lines[0].remove()
@@ -28,12 +30,16 @@ class PointSelector:
             PointSelector.lines.append(l)
             l.figure.canvas.draw()
 
+
 class Visualize(object):
+    
     def __init__(self, df, events_hash, video_name, data_direc):
         self.df = df
         self.events = events_hash
         self.data_direc = data_direc
         self.video_name = video_name
+        self.all_frames = {}
+        self.x_data = 0
 
         gs = gridspec.GridSpec(2, 1)
         gs.update(hspace=0.5, right=0.8)
@@ -44,8 +50,16 @@ class Visualize(object):
         self.ax1 = self.fig.add_subplot(gs[0,:])
         self.ax2 = self.fig.add_subplot(gs[1,:])
 
+    def show_frame(self, x_data):
+        
+        self.x_data = x_data
+        frame_index = self.df['frameIndex'][self.x_data]
+        cv2.imshow("frame", self.all_frames[frame_index])
+        cv2.waitKey(1)
+
     def visualize(self, is_interact=True):
         self.make_line_plot(
+            self,
             self.ax1,
            'timestamp_x',
            ['noseX'],
@@ -55,6 +69,7 @@ class Visualize(object):
            )
 
         self.make_line_plot(
+            self,
             self.ax2,
             'timestamp_x',
             ['theta'],
@@ -82,7 +97,7 @@ class Visualize(object):
 
         cap = cv2.VideoCapture(self.video_name)
 
-        all_frames = {}
+        self.all_frames = {}
         frame_index = 0
         max_index = 0
         x_data = 0
@@ -91,7 +106,7 @@ class Visualize(object):
             
             (ret, frame) = cap.read()
             if ret==True:
-                all_frames[frame_index] = frame
+                self.all_frames[frame_index] = frame
             else:
                 max_index = frame_index
                 break
@@ -107,26 +122,23 @@ class Visualize(object):
             if frame_index >= max_index:
                 frame_index = max_index - 1
 
-            cv2.imshow('frame', all_frames[frame_index])
-
             k = cv2.waitKey(0)
             hasPlot = len(PointSelector.lines) == 2
             if k == ord('p'):
                 if hasPlot:
-                    x_data = PointSelector.lines[0].get_xdata()[0]                    
-                    frame_index = self.df['frameIndex'][x_data]
+                    self.x_data = PointSelector.lines[0].get_xdata()[0]                    
             elif k == ord('l'):
-                x_data += 2
-                frame_index = self.df['frameIndex'][x_data]
+                self.x_data += 2
             elif k == ord('k'):
-                x_data -= 2
-                frame_index = self.df['frameIndex'][x_data]
+                self.x_data -= 2
             elif k == ord('q'):
                 break
 
+            self.show_frame(self.x_data)
+
             if hasPlot:
-                PointSelector.lines[0].set_xdata([x_data, x_data])
-                PointSelector.lines[1].set_xdata([x_data, x_data])
+                PointSelector.lines[0].set_xdata([self.x_data, self.x_data])
+                PointSelector.lines[1].set_xdata([self.x_data, self.x_data])
                 PointSelector.lines[0].figure.canvas.draw()
                 PointSelector.lines[1].figure.canvas.draw()
 
@@ -134,7 +146,7 @@ class Visualize(object):
         cv2.destroyAllWindows()
 
 
-    def make_line_plot(self, ax, x_col, y_col, 
+    def make_line_plot(self, parent, ax, x_col, y_col, 
             title='', 
             ylabel='',
             xlabel='',
@@ -142,7 +154,7 @@ class Visualize(object):
         for col in y_col:
             line, = ax.plot(self.df[col], label=col, picker=50)
 
-        e = PointSelector(line)
+        e = PointSelector(parent, line)
 
         ax.set_title(title)
         ax.set_xlabel(xlabel)

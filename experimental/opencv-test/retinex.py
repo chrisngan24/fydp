@@ -4,38 +4,39 @@ from colorcorrect.util import from_pil, to_pil
 import cv2
 import scipy
 import scipy.ndimage
+import time
 
-def apply_retinex(X):
+def apply_retinex(frame, luminance_weighting):
+    
+    # Convert the frame to LUV
+    luv_frame = cv2.cvtColor(frame, cv2.COLOR_BGR2LUV)
+            
+    # Take ONLY the L channel and apply retinex on it
+    luv_channel = luv_frame[:,:,0]
     
     # Find luminance and reflectance
-    luminance = scipy.ndimage.filters.gaussian_filter(X, 4)
+    luminance = scipy.ndimage.filters.gaussian_filter(luv_channel, 4)
     log_luminance = np.log1p(luminance)
-    log_reflectance = np.log1p(X) - log_luminance
-    y = np.exp(log_reflectance + 0.2*log_luminance)
+    log_reflectance = np.log1p(luv_channel) - log_luminance
+    transformed = np.exp(log_reflectance + luminance_weighting * log_luminance)
     
-    y = np.nan_to_num(y)
-    y = y.astype(float) / y.max() * 255
-    new_frame = y.astype(np.uint8)
+    transformed = np.nan_to_num(transformed)
+    transformed = transformed.astype(float) / transformed.max() * 255
+    luv_channel_fixed = transformed.astype(np.uint8)
+
+    # Reconstruct the LUV, convert back to BGR
+    luv_frame[:,:,0] = luv_channel_fixed
+    new_frame = cv2.cvtColor(luv_frame, cv2.COLOR_LUV2BGR)
 
     return new_frame
 
-cap = cv2.VideoCapture(0)
+cap = cv2.VideoCapture(1)
 
 while(True):
     # Capture frame-by-frame
     ret, frame = cap.read()
     frame = cv2.resize(frame, (320, 240))
-
-    # Convert the frame to LUV
-    luv_frame = cv2.cvtColor(frame, cv2.COLOR_BGR2LUV)
-    
-    # Take ONLY the L channel and apply retinex on it
-    luv_channel = luv_frame[:,:,0]
-    luv_channel_fixed = apply_retinex(luv_channel)
-
-    # Reconstruct the LUV, convert back to BGR
-    luv_frame[:,:,0] = luv_channel_fixed
-    new_frame = cv2.cvtColor(luv_frame, cv2.COLOR_LUV2BGR)
+    new_frame = apply_retinex(frame, 0.5)
 
     # Display the resulting frame
     cv2.imshow('frame',new_frame)

@@ -2,8 +2,9 @@ from event_annotator import EventAnnotator
 import lane_features
 from sklearn.externals import joblib
 import os
+import pandas as pd
 import numpy as np
-import dtw
+from fastdtw import fastdtw
 import json
 import util
 
@@ -11,16 +12,27 @@ class LaneAnnotator(EventAnnotator):
     def __init__(self):
         m_dir = os.path.dirname(__file__)
         self.base_dir = os.path.join(m_dir, '../models/lane_changes/')
-        self.left_models = []
-        self.right_models = []
+        
+        self.left = []
+        self.right = []
+        self.left_turn = []
+        self.right_turn = []
+        self.neg = []
 
-        for f in os.listdir(self.base_dir):
-            if f.startswith("left_"):
-                model_file = open('%s/%s' % (self.base_dir, f)).read().split('\n')
-                self.left_models.append(np.array([float(i) for i in model_file]))
-            if f.startswith("right_"):
-                model_file = open('%s/%s' % (self.base_dir, f)).read().split('\n')
-                self.right_models.append(np.array([float(i) for i in model_file]))
+        dtw_models_direc = os.path.join(self.base_dir, 'lane_changes')
+
+        for subdir, dirs, files in os.walk(dtw_models_direc):
+            for d in dirs:
+                if d.startswith("left_lane"):
+                    self.left.append(pd.read_csv("%s/fused.csv" %os.path.join(dtw_models_direc, d)))
+                elif d.startswith("right_lane"):
+                    self.right.append(pd.read_csv("%s/fused.csv" %os.path.join(dtw_models_direc, d)))
+                elif d.startswith("left_turn"):
+                    self.left_turn.append(pd.read_csv("%s/fused.csv" %os.path.join(dtw_models_direc, d)))
+                elif d.startswith("right_turn"):
+                    self.right_turn.append(pd.read_csv("%s/fused.csv" %os.path.join(dtw_models_direc, d)))
+                else:
+                    self.neg.append(pd.read_csv("%s/fused.csv" %os.path.join(dtw_models_direc, d)))
 
         self.model = joblib.load('%s/knn.pkl' % self.base_dir) 
         config_fi = open('%s/config.json' % self.base_dir, 'r')
@@ -31,8 +43,42 @@ class LaneAnnotator(EventAnnotator):
 
         self.events = []
 
+    def filter_events(self, df, events):
+        left_dtw_model = util.normalize(self.left[0]['theta'].tolist())
+        right_dtw_model = util.normalize(self.right[0]['theta'].tolist())
+        neg_dtw_model = util.normalize(self.neg[1]['theta'].tolist())
+        left_turn_dtw_model = util.normalize(self.left_turn[0]['theta'].tolist())
+        right_turn_dtw_model = util.normalize(self.right_turn[0]['theta'].tolist())
+        
+        left_indices_to_be_removed = []
+        right_indices_to_be_removed = []
+        
+        for i in xrange(len(events['left_lc_start'])):
+            signal = util.normalize(df.iloc[events['left_lc_start'][i]:events['left_lc_end'][i]+1]['theta'].tolist())
+            cost = fastdtw(signal, left_dtw_model)[0]
+            if cost > fastdtw(signal, neg_dtw_model)[0] or cost > fastdtw(signal, left_turn_dtw_model)[0]:
+                left_indices_to_be_removed.append(i)
+
+        for i in xrange(len(events['right_lc_start'])):
+            signal = util.normalize(df.iloc[events['right_lc_start'][i]:events['right_lc_end'][i]+1]['theta'].tolist())
+            cost = fastdtw(signal, right_dtw_model)[0]
+            if cost > fastdtw(signal, neg_dtw_model)[0] or cost > fastdtw(signal, right_turn_dtw_model)[0]:
+                right_indices_to_be_removed.append(i)
+
+        events['left_lc_start'] = [i for j, i in enumerate(events['left_lc_start']) if j not in left_indices_to_be_removed]
+        events['left_lc_end'] = [i for j, i in enumerate(events['left_lc_end']) if j not in left_indices_to_be_removed]
+
+        events['right_lc_start'] = [i for j, i in enumerate(events['right_lc_start']) if j not in right_indices_to_be_removed]
+        events['right_lc_end'] = [i for j, i in enumerate(events['right_lc_end']) if j not in right_indices_to_be_removed]
+
+        return events
+
     def annotate_events(self, df, index_col='frameIndex'):
         df_feat = util.generate_windows(df, window=self.window_size, ignore_columns=self.ignore_columns)
+        
+        # not sure if this does anything yet
+        df_feat['theta'] = util.movingaverage(df_feat['theta'], 5)
+
         df_feat = df_feat.fillna(0)
         df_test = df_feat[self.active_features]
 
@@ -95,14 +141,15 @@ class LaneAnnotator(EventAnnotator):
             if left_lc_start > 0 and left_lc_end > 0 and left_lc_end - left_lc_start > 20:
                 events['left_lc_start'].add(left_lc_start)
                 events['left_lc_end'].add(left_lc_end)
+            
             if right_lc_start > 0 and right_lc_end > 0 and right_lc_end - right_lc_start > 20:
                 events['right_lc_start'].add(right_lc_start)
                 events['right_lc_end'].add(right_lc_end)
 
-        print events
-
         for k, v in events.iteritems():
             events[k] = sorted(list(v))
+
+        events = self.filter_events(df, events)
 
         for i in xrange(len(events['left_lc_start'])):
             t = (events['left_lc_start'][i], events['left_lc_end'][i], 'left_lane_change')
