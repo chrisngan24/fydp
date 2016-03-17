@@ -41,6 +41,7 @@ class KltDetector():
         # Define the codec and create VideoWriter object
         self.fourcc = cv2.cv.CV_FOURCC('m', 'p', '4', 'v')
 
+        self.RETINEX_LUMA_WEIGHTING = 0.5
         self.FACE_TOLERANCE = 0.75
         self.FRAME_RESIZE = (320, 240)
         self.face_cascade = cv2.CascadeClassifier(self.face_model_file)
@@ -138,7 +139,7 @@ class KltDetector():
             frame = cv2.resize(frame, self.FRAME_RESIZE)
             cv2.imshow('frame',frame)
 
-            fixed_frame = self.apply_retinex(frame, 0.5)
+            fixed_frame = self.apply_retinex(frame, self.RETINEX_LUMA_WEIGHTING)
             frame_index += 1
             self.out.write(frame)
             cv2.waitKey(1)

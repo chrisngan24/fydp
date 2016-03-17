@@ -25,7 +25,8 @@ def map_sentiment(col_name, is_good):
 def run_single_test(
         case_name,
         build_name, 
-        results_list, 
+        results_list_frames,
+        results_list_events, 
         event_types = [
             'left_turn', 
             'right_turn', 
@@ -34,6 +35,7 @@ def run_single_test(
             ],
         annotation_file = 'annotation_josh.txt', 
         testing_dir='test_suite/test_cases/'):
+    
     # modify event types to include sentiment:
     event_types = reduce(
             lambda x,y: x + y,
@@ -42,6 +44,7 @@ def run_single_test(
                 map(lambda x: [x], event_types)
                 )
             )
+
     print case_name
     print annotation_file 
     # Read everything you need
@@ -97,8 +100,6 @@ def run_single_test(
         ## Lets add a new column for just general sentiment
         annotation_frames[map_sentiment(event_type, is_good)][start:end] += 1
 
-
-
     # Use the annotation code to generate an event list
     head_events_list = analysis_results['head_events_list']
     lane_events_list = analysis_results['lane_events_list']
@@ -115,7 +116,7 @@ def run_single_test(
         event_frames[event_type][start:end] += 1
         event_frames[map_sentiment(event_type,is_good)][start:end] += 1
 
-
+    # Perform a by-frame calculation
     event_summaries=dict()
     for event in event_types:
         # indices where prediction of the event was made
@@ -137,12 +138,52 @@ def run_single_test(
         event_summaries['fn_count_%s' % event] = \
             sum(annotations[not_predicted_frame_index] == 1)
 
-    test_results = dict(
+    # Perform a by-event calculation
+    event_recall = dict()
+    for i in xrange(len(baseline)):
+        start = baseline[i]['start']
+        end = baseline[i]['end']
+        event_type = baseline[i]['type']
+        is_good = baseline[i]['is_good']
+
+        predictions = event_frames[event_type][start:end]
+        
+        if (len(predictions) == 0):
+            continue
+        
+        coverage = sum(predictions) / float(len(predictions))
+
+        if (event_type not in event_recall):
+            event_recall[event_type] = dict()
+            event_recall[event_type]['given'] = 0
+            event_recall[event_type]['found'] = 0
+
+            event_recall[map_sentiment(event_type, True)] = dict()
+            event_recall[map_sentiment(event_type, True)]['given'] = 0
+            event_recall[map_sentiment(event_type, True)]['found'] = 0
+            
+            event_recall[map_sentiment(event_type, False)] = dict()
+            event_recall[map_sentiment(event_type, False)]['given'] = 0
+            event_recall[map_sentiment(event_type, False)]['found'] = 0
+            
+        event_recall[map_sentiment(event_type, is_good)]['given'] += 1
+        event_recall[map_sentiment(event_type, is_good)]['found'] += round(coverage)
+        event_recall[event_type]['given'] += 1
+        event_recall[event_type]['found'] += round(coverage)
+
+    test_results_events = dict(
+        case_name=case_name,
+        annotation_file=annotation_file,
+        )
+
+    test_results_frames = dict(
         case_name=case_name,
         annotation_file=annotation_file,
         )
 
     for event in event_types:
+        
+        # Frame based metrics
         wrong_count_key = 'wrong_count_%s' % event
         tp_count_key = 'tp_count_%s' % event
         fp_count_key = 'fp_count_%s' % event
@@ -151,65 +192,104 @@ def run_single_test(
         tp_count = event_summaries[tp_count_key]
         fp_count = event_summaries[fp_count_key]
         fn_count = event_summaries[fn_count_key]
-        test_results[event] = round(1 - float(wrong_count) / max_index, 3)
-        test_results['%s_precision' % event] = \
+        test_results_frames[event] = round(1 - float(wrong_count) / max_index, 3)
+        test_results_frames['%s_precision' % event] = \
                 round(tp_count / float(max(tp_count + fp_count,1)), 3)
-        test_results['%s_recall' % event] = \
+        test_results_frames['%s_recall' % event] = \
                 round(tp_count / float(max(tp_count + fn_count,1)), 3)
-    results_list.append(test_results)
+        
+        # Event based metrics
+        if (event_recall[event]['given'] == 0):
+            test_results_events['%s_event_recall' % event] = -1
+        else:
+            test_results_events['%s_event_recall' % event] = \
+                float(event_recall[event]['found']) / float(event_recall[event]['given'])
 
+    results_list_events.append(test_results_events)
+    results_list_frames.append(test_results_frames)
 
 def main(build_name = None):
     print "Running tests"
     testing_dir = 'test_suite/test_cases/'
     output_dir = 'test_results/'
     #results_df = pd.DataFrame(columns=['case_name', 'left_turn', 'right_turn', 'left_lane_change', 'right_lane_change'])
-    results_list = []
+    results_list_frames = []
+    results_list_events = []
 
-    output_file = open(output_dir + "test_results.html", 'w')
-    output_file_bw = open(output_dir + "test_results_bw.html", 'w')
+    output_frames_file = open(output_dir + "test_frame_results.html", 'w')
+    output_events_file = open(output_dir + "test_event_results.html", 'w')
+    output_frames_file_bw = open(output_dir + "test_frame_results_bw.html", 'w')
+    output_events_file_bw = open(output_dir + "test_event_results_bw.html", 'w')
     test_case_list = sorted(next(os.walk(testing_dir))[1])
     print test_case_list
     for test in test_case_list:
         for fi in os.listdir(testing_dir + test):
             # hacky but yolo
             if fi.find('drivelog_temp_annotated_') == 0 or fi.find('annotation_') == 0:
-                run_single_test(test, build_name, results_list, annotation_file=fi)
+                run_single_test(test, build_name, results_list_frames, results_list_events, annotation_file=fi)
 
-    results_df = pd.DataFrame(results_list)
+    results_frames_df = pd.DataFrame(results_list_frames)
+    results_events_df = pd.DataFrame(results_list_events)
     
     # Add the build name to the output
     if (build_name != None):
-        output_file.write('BuildName: ' + build_name)
-    results_df.to_csv(output_dir + 'test_results.csv', index=False)
+        output_frames_file.write('BuildName: ' + build_name)
+    
+    results_frames_df.to_csv(output_dir + 'test_frame_results.csv', index=False)
+    results_events_df.to_csv(output_dir + 'test_event_results.csv', index=False)
 
     ## Need panda 0.17.1
-    html = results_df.style.background_gradient(
+    frames_html = results_frames_df.style.background_gradient(
             cmap='Spectral',
             )
     
-    output_file.write(html.render())
-    output_file.write('<br/>\n<br/>\n<br/>')
-    output_file.write('Summary:')
-    df_summary = results_df.describe()
-    df_summary = df_summary.append([
-        pd.Series(results_df.median(), name='median'),
+    events_html = results_events_df.style.background_gradient(
+            cmap='Spectral',
+            )
+
+    # Output frames
+    output_frames_file.write(frames_html.render())
+    output_frames_file.write('<br/>\n<br/>\n<br/>')
+    output_frames_file.write('Summary:')
+    
+    df_frames_summary = results_frames_df.describe()
+    df_frames_summary = df_frames_summary.append([
+        pd.Series(results_frames_df.median(), name='median'),
         pd.Series(
-            results_df._get_numeric_data().apply(
+            results_frames_df._get_numeric_data().apply(
                 lambda x: sum(x >= 0.8) / float(len(x)), 
                 axis=0,),
             name='proportion_geq_0.8',
             )
         ])
     
-    output_file.write(df_summary.to_html())
+    output_frames_file.write(df_frames_summary.to_html())
+    output_frames_file_bw.write(results_frames_df.to_html())
+    output_frames_file_bw.write('<br/>\n<br/>\n<br/>')
+    output_frames_file_bw.write('Summary:')
+    output_frames_file_bw.write(df_frames_summary.to_html())
 
-    output_file_bw.write(results_df.to_html())
+    # Output events 
+    output_events_file.write(events_html.render())
+    output_events_file.write('<br/>\n<br/>\n<br/>')
+    output_events_file.write('Summary:')
+    
+    df_events_summary = results_events_df.describe()
+    df_events_summary = df_events_summary.append([
+        pd.Series(results_events_df.median(), name='median'),
+        pd.Series(
+            results_events_df._get_numeric_data().apply(
+                lambda x: sum(x >= 0.8) / float(len(x)), 
+                axis=0,),
+            name='proportion_geq_0.8',
+            )
+        ])
 
-    output_file_bw.write('<br/>\n<br/>\n<br/>')
-    output_file_bw.write('Summary:')
-    output_file_bw.write(df_summary.to_html())
-
+    output_events_file.write(df_events_summary.to_html())
+    output_events_file_bw.write(results_events_df.to_html())
+    output_events_file_bw.write('<br/>\n<br/>\n<br/>')
+    output_events_file_bw.write('Summary:')
+    output_events_file_bw.write(df_events_summary.to_html())
 
 if __name__ == '__main__':
 
