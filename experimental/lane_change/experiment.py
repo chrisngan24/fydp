@@ -125,7 +125,6 @@ def cluster_using_kmeans(df, filename, n_components=2, n_clusters=3):
 def get_data(filename):
     df = pd.read_csv("%s/%s.csv" %(data_direc, filename))
     df.fillna(0, inplace=True)
-    # df = df.drop("Unnamed: 0", 1)
     return df
 
 def train_all_models(x_train, y_train, x_test, y_test):
