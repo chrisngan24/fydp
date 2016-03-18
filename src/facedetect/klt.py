@@ -140,6 +140,8 @@ class KltDetector():
             cv2.imshow('frame',frame)
 
             fixed_frame = self.apply_retinex(frame, self.RETINEX_LUMA_WEIGHTING)
+            #cv2.imshow('retinex', fixed_frame)
+
             frame_index += 1
             self.out.write(frame)
             cv2.waitKey(1)

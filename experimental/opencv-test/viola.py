@@ -75,7 +75,7 @@ while(1):
     
     if ret == True:
 
-        frame = cv2.resize(frame_big, (480,360))
+        frame = cv2.resize(frame_big, (320,240))
         
         if (with_retinex == 'r'):
             frame = apply_retinex(frame, RETINEX_LUMINENCE)
