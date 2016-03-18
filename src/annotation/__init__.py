@@ -175,7 +175,6 @@ def annotate_video(input_name, output_name, head_events_list, lane_events_list, 
                     event_type = events_list[event_idx][2]
                     event_sentiment = sentiment_list[event_idx][0]
                     print event_sentiment
-                    event_sentiment = False
 
             out.write(frame)
 
