@@ -61,7 +61,6 @@ def sent_to_colour(sentiment):
 def add_event_note(frame, event_type, sentiment):
 
     default_font = cv2.FONT_HERSHEY_SIMPLEX
-    print event_type
 
     if (event_type == "right_turn"):
 
@@ -168,7 +167,6 @@ def annotate_video(input_name, output_name, head_events_list, lane_events_list, 
             
                 if (event_idx < num_events):
                                                 
-                    print "new event start!"
                     # Find new start and end
                     event_start_idx = events_list[event_idx][0]
                     event_end_idx = events_list[event_idx][1]

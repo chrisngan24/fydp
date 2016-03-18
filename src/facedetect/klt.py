@@ -182,7 +182,7 @@ class KltDetector():
             for (ex,ey,ew,eh) in eyes:
                 cv2.rectangle(frame,(fx+ex,fy+ey),(fx+ex+ew,fy+ey+eh),(0,255,0),2)
 
-            print "Found face " + str(len(eyes)) + " " + str(len(noses))
+            #print "Found face " + str(len(eyes)) + " " + str(len(noses))
 
             for (nx,ny,nw,nh) in noses:
                 cv2.rectangle(frame,(fx+nx,fy+ny),(fx+nx+nw,fy+ny+nh),(0,0,255),2)
