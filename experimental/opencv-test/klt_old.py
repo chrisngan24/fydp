@@ -38,9 +38,6 @@ nose_cascade = cv2.CascadeClassifier(nose_model_file)
 profile_cascade = cv2.CascadeClassifier(profile_model_file)
 out = cv2.VideoWriter(filename = 'drivelog_temp.avi', fourcc = fourcc, fps = 1000.0, frameSize = FRAME_RESIZE)
 
-self.ideal_width = -1
-self.ideal_height = -1
-
 def display_and_wait():
 
     k = cv2.waitKey(1) & 0xff
@@ -79,12 +76,12 @@ def get_features(gray):
 
         noses = nose_cascade.detectMultiScale(image = roi_23down, 
             scaleFactor = 1.1, 
-            minNeighbors = 3, 
+            minNeighbors = 5, 
             flags = 0)
 
     return (faces, eyes, noses)
 
-def find_new_KLT(cap, frame_index):
+def find_new_KLT(cap, frame_index, ideal_width, ideal_height):
 
     face_found = False
     nose_mask = []
@@ -118,7 +115,7 @@ def find_new_KLT(cap, frame_index):
                 #find the largest face
                 for (x,y,w,h) in faces:
                     
-                    if (w > largest_x):
+                    if (w > largest_w):
                         # Face variables
                         fx = x
                         fy = y
@@ -149,14 +146,14 @@ def find_new_KLT(cap, frame_index):
             if (len(noses) == 1):
 
                 # Not set yet: take first face as the ideal
-                if (self.ideal_width < 0):
-                    self.ideal_width = fw
-                    self.ideal_height = fh
-                    print "ideal w:" + str(self.ideal_width) + " h: " + str(self.ideal_height)
+                if (ideal_width < 0):
+                    ideal_width = fw
+                    ideal_height = fh
+                    print "ideal w:" + str(ideal_width) + " h: " + str(ideal_height)
 
                 else:
                     
-                    if (fw < (0.9 * self.ideal_width) and fh < (0.9 * self.ideal_height)):
+                    if (fw < (0.9 * ideal_width) and fh < (0.9 * ideal_height)):
                         print "rejected due to size"
 
                     else:
@@ -178,9 +175,9 @@ def find_new_KLT(cap, frame_index):
     #p0_eyes = cv2.goodFeaturesToTrack(old_gray, mask = eye_mask, **feature_params)
     p0_nose = cv2.goodFeaturesToTrack(old_gray, mask = nose_mask, **feature_params)
 
-    return (old_gray, frame_index, frame, p0_nose)
+    return (old_gray, frame_index, frame, p0_nose, ideal_width, ideal_height)
 
-def getOneEvent(cap, frame_index, old_gray, p0_nose):
+def getOneEvent(cap, frame_index, old_gray, p0_nose, ideal_width, ideal_height):
 
     ERROR_ALLOWANCE = 5
 
@@ -219,7 +216,7 @@ def getOneEvent(cap, frame_index, old_gray, p0_nose):
             # calculate optical flow
 
             while (p0_nose == None or len(p0_nose) < 3):               
-                (old_gray, index, frame, p0_nose) = find_new_KLT(cap, frame_index)
+                (old_gray, index, frame, p0_nose, ideal_width, ideal_height) = find_new_KLT(cap, frame_index, ideal_width, ideal_height)
                 frame_index = index
 
             frame_gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
@@ -289,9 +286,12 @@ def getOneEvent(cap, frame_index, old_gray, p0_nose):
                     cv2.rectangle(frame,(x+nx,y+ny+(h/3)),(x+nx+nw,y+ny+nh+(h/3)),(0,0,255),2)
 
         cv2.imshow('frame',frame)
-        cv2.waitKey(1)
+        k = cv2.waitKey(1) & 0xff
+        if k == ord('s'):
+            cv2.imwrite("klt_old_snap.jpg",frame)
+            print "snapshot taken"
 
-        return (this_event, frame_index, old_gray, p0_nose)
+        return (this_event, frame_index, old_gray, p0_nose, ideal_width, ideal_height)
 
     print "cap is closed"
     return
@@ -319,17 +319,19 @@ def run(events = []):
     else:
         print 'Nose model NOT found!'     
 
-    cap = cv2.VideoCapture(0)
+    cap = cv2.VideoCapture(1)
     events = []
     frame_index = 0
     out = cv2.VideoWriter('drivelog.avi',fourcc, 20.0, FRAME_RESIZE)
+    ideal_width = -1
+    ideal_height = -1
 
-    (old_gray, frame_index, frame, p0_nose) = find_new_KLT(cap, frame_index)
+    (old_gray, frame_index, frame, p0_nose, ideal_width, ideal_height) = find_new_KLT(cap, frame_index, ideal_width, ideal_height)
 
     while(1):
 
         try:
-            (this_event, frame_index, old_gray, p0_nose) = getOneEvent(cap, frame_index, old_gray, p0_nose)
+            (this_event, frame_index, old_gray, p0_nose, ideal_width, ideal_height) = getOneEvent(cap, frame_index, old_gray, p0_nose, ideal_width, ideal_height)
             events.append(this_event)
         except KeyboardInterrupt:
             print 'Writing out to file'
