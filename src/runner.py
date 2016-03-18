@@ -138,8 +138,10 @@ def run_fusion(
         vis = Visualize(
                         df,
                         {
-                            "head_turns": head_events_hash, 
-                            "lane_changes": lane_events_hash 
+                            "head_turns": head_events_list, 
+                            "lane_changes": lane_events_list,
+                            "head_sentiment": head_events_sentiment,
+                            "lane_sentiment": lane_events_sentiment
                         },
                         video_name=video_name,
                         data_direc=data_direc

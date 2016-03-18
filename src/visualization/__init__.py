@@ -82,11 +82,13 @@ class Visualize(object):
         self.mark_event(
             self.ax1,
             self.events['head_turns'],
+            self.events['head_sentiment']
             )
 
         self.mark_event(
             self.ax2,
             self.events['lane_changes'],
+            self.events['lane_sentiment']
             )
 
         plt.savefig('%s/fused_plot.png' %self.data_direc)
@@ -162,16 +164,18 @@ class Visualize(object):
         if len(y_col) > 1:
             ax.legend(bbox_to_anchor=(1.25, 1.05))
 
-    def mark_event(self, ax, events):
+    def mark_event(self, ax, events, sentiments):
 
         color_sets = ['black', 'magenta', 'yellow', 'green']
         color_index = 0
 
-        for event_name, indices in events.iteritems():
-            curr_color = color_sets[color_index]
-            for i in indices:
-                ax.axvline(x=i, linewidth=1, color=curr_color, linestyle='solid', label=event_name)
-            color_index += 1
+        for i in xrange(len(events)):
+            event = events[i]
+            sentiment = sentiments[i][0]
+            if sentiment:
+                ax.axvspan(event[0], event[1], alpha = 0.25, color = 'g')
+            else:
+                ax.axvspan(event[0], event[1], alpha = 0.25, color = 'r')
 
         # stop matplotlib from repeating labels in legend for axvline
         handles, labels = ax.get_legend_handles_labels()
