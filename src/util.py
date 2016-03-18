@@ -52,7 +52,32 @@ def integrate_trapezoid_col(fxdx_col, dx_col, init_val):
         
     return np.array(y)
 
-def generate_windows(df, window=10, ignore_columns = []):
+def subtract_from_prev_val(df, col, step=1):
+    """
+    Subtract column value from the previous
+    column value n steps away
+    """
+    return (df[col] - df.shift(periods=step)[col])
+
+def generate_features(df, suffix = '_diff_', step=1, relevant_features=[], ignore_columns=[]):
+    """
+    Generate the features, returns a new data frame of all 
+    transformed features (same length as input)
+    :param df: - input data frame
+    :param suffix: - the ending of the new column, default is change nothing
+                     to column name
+    :param step: - delta from how many index periods away
+    :param ignore_columns: - what are the columns to ignore
+    """
+    # cols = self.get_active_columns(df, ignore_columns)
+    cols = relevant_features
+    deltas = {}
+    for c in cols:
+        deltas['%s%s'% (c, suffix)] = subtract_from_prev_val(df, c, step=step)
+    df_new = pd.DataFrame(deltas)
+    return df_new
+
+def generate_windows(df, window=10, ignore_columns=[]):
     """
     Apply the future windows to the dataframe
     """
@@ -76,7 +101,7 @@ def generate_windows(df, window=10, ignore_columns = []):
                 row[name] = window_row[c] if window_row != None else None
         points.append(row)
 
-    return pd.DataFrame(points)
 
+    return pd.DataFrame(points).fillna(0)
 
 
