@@ -16,7 +16,9 @@ import os
 
 logging.basicConfig(stream=sys.stdout, level=logging.DEBUG)
 
-def main(session_dir, build_name = None):
+def main(session_dir, 
+         build_name = None,
+         interactive_video = None):
 
     # df = pd.read_csv(path_to_test_video + '/fused.csv')
     print build_name
@@ -36,7 +38,7 @@ def main(session_dir, build_name = None):
             data_direc=session_dir,
             is_interact=True,
             is_move_video=False,
-            interactive_video='annotated_head.avi',
+            interactive_video=interactive_video,
             )
    
 if __name__ == '__main__':
@@ -44,7 +46,8 @@ if __name__ == '__main__':
     parser = OptionParser()
     parser.add_option('-s', '--SessionDirectory', default=None)
     parser.add_option('-b', '--BuildName', default=None)
+    parser.add_option('-a', '--AnnotatedVideo', default='drivelog_temp.avi')
     (options, args) = parser.parse_args()
 
-    main(options.SessionDirectory, options.BuildName) 
+    main(options.SessionDirectory, options.BuildName, options.AnnotatedVideo) 
     

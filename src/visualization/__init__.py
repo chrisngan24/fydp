@@ -54,7 +54,8 @@ class Visualize(object):
         
         self.x_data = x_data
         frame_index = self.df['frameIndex'][self.x_data]
-        cv2.imshow("frame", self.all_frames[frame_index])
+        frame2show = self.all_frames[frame_index]
+        cv2.imshow("frame", frame2show)
         cv2.waitKey(1)
 
     def visualize(self, is_interact=True):
@@ -100,7 +101,6 @@ class Visualize(object):
         self.all_frames = {}
         frame_index = 0
         max_index = 0
-        x_data = 0
         
         while(cap.isOpened()):
             
@@ -122,6 +122,7 @@ class Visualize(object):
             if frame_index >= max_index:
                 frame_index = max_index - 1
 
+            self.show_frame(self.x_data)
             k = cv2.waitKey(0)
             hasPlot = len(PointSelector.lines) == 2
             if k == ord('p'):
@@ -133,8 +134,6 @@ class Visualize(object):
                 self.x_data -= 2
             elif k == ord('q'):
                 break
-
-            self.show_frame(self.x_data)
 
             if hasPlot:
                 PointSelector.lines[0].set_xdata([self.x_data, self.x_data])

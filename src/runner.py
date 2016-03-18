@@ -71,37 +71,62 @@ def run_fusion(
         slc = SignalLaneClassifier(df, lane_events_list, head_events_list, head_events_hash, head_events_sentiment)
         lane_events_sentiment = slc.classify_signals()
 
-
-
     #### Compute sentiment classifications
 
     # annotate the video
     print "Creating video report....."
     video_index = 'frameIndex'
-    if (is_move_video and has_camera and len(head_events_list) > 0):
-        # I MAY HAVE BROKE THIS @chris
+
+    # Created a fused video if possible
+    if (is_move_video and has_camera and has_wheel and len(head_events_list) > 0 and len(lane_events_list) > 0):
         print head_events_list
-        final_head_video = annotation.annotate_video(
-                'drivelog_temp.avi', 
-                'annotated_head.avi', 
+        print lane_events_list
+        final_fused_video = annotation.annotate_video(
+                'drivelog_temp.avi',
+                'annotated_fused.avi',
                 map(lambda (s, e, t): \
                         (df.loc[s, video_index], df.loc[e, video_index], t),
                         head_events_list),
-                {'left_turn': (0,255,0), 'right_turn': (255,0,0)},
-                )
-        move_video(final_head_video, data_direc)
-    if (is_move_video and has_wheel and len(lane_events_list) > 0): 
-        print lane_events_list
-        final_lane_video = annotation.annotate_video(
-                'drivelog_temp.avi', 
-                'annotated_lane.avi', 
                 map(lambda (s, e, t): \
                         (df.loc[s, video_index], df.loc[e, video_index], t),
                         lane_events_list),
-
-                {'left_lane_change': (0,255,0), 'right_lane_change': (255,0,0)},
+                head_events_sentiment,
+                lane_events_sentiment
                 )
-        move_video(final_lane_video, data_direc)
+
+        interactive_video = "annotated_fused.avi"
+        move_video(final_fused_video, data_direc)
+
+    # Otherwise, create the two seperate ones
+    else:
+        if (is_move_video and has_camera and len(head_events_list) > 0):
+            # I MAY HAVE BROKE THIS @chris
+            print head_events_list
+            final_head_video = annotation.annotate_video(
+                    'drivelog_temp.avi', 
+                    'annotated_head.avi', 
+                    map(lambda (s, e, t): \
+                            (df.loc[s, video_index], df.loc[e, video_index], t),
+                            head_events_list),
+                    None,
+                    head_events_sentiment,
+                    None
+                    )
+            move_video(final_head_video, data_direc)
+
+        if (is_move_video and has_wheel and len(lane_events_list) > 0): 
+            print lane_events_list
+            final_lane_video = annotation.annotate_video(
+                    'drivelog_temp.avi', 
+                    'annotated_lane.avi', 
+                    None,
+                    map(lambda (s, e, t): \
+                            (df.loc[s, video_index], df.loc[e, video_index], t),
+                            lane_events_list),
+                    None,
+                    lane_events_sentiment
+                    )
+            move_video(final_lane_video, data_direc)
 
     # Also copy drivelog_temp
     if (is_move_video and has_camera):
