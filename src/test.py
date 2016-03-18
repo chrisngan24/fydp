@@ -200,7 +200,7 @@ def run_single_test(
         
         # Event based metrics
         if (event_recall[event]['given'] == 0):
-            test_results_events['%s_event_recall' % event] = -1
+            test_results_events['%s_event_recall' % event] = None
         else:
             test_results_events['%s_event_recall' % event] = \
                 float(event_recall[event]['found']) / float(event_recall[event]['given'])
