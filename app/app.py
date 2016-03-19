@@ -42,6 +42,9 @@ def flatten_df(df, meta):
         for head_event in meta['head_events']:
             start_frame = df_og.loc[int(head_event[0])]['frameIndex']
             end_frame   = df_og.loc[int(head_event[1])]['frameIndex']
+            #start_frame = int(head_event[0])
+            #end_frame = int(head_event[1])
+
             event = head_event[2]
             sentiment   = head_event[3]
             headEvents.append(dict(
@@ -56,6 +59,8 @@ def flatten_df(df, meta):
         for lane_event in meta['lane_events']:
             start_frame = df_og.loc[int(lane_event[0])]['frameIndex']
             end_frame   = df_og.loc[int(lane_event[1])]['frameIndex']
+            #start_frame = int(lane_event[0])
+            #end_frame = int(lane_event[1])
             event       = lane_event[2]
             sentiment   = lane_event[3]
             laneEvents.append(dict(

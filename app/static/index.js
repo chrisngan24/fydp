@@ -43,7 +43,7 @@ $(document).ready( function(){
     },
   ];
 
-  var width = 50;
+  var width = 20;
   var chartOptions = {
     //tooltipTemplate: "<%if (datasetLabel){%><%=datasetLabel%>: <%}%><%=argLabel%>, <%=valueLabel%>",
     xScaleOverride : true,

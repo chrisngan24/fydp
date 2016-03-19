@@ -248,6 +248,7 @@ if __name__ == '__main__':
                 has_camera=has_camera,
                 has_wheel=has_wheel,
                 data_direc=data_direc,
+                is_interact=False,
                 )
     else:
         print 'No sensors... stopping'
