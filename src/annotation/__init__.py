@@ -7,44 +7,75 @@ def add_side_borders(frame):
     layered = np.concatenate((left_image,black), axis=1)
     return layered
 
-def add_labels(frame):
+def add_labels(layered):
 
     default_font = cv2.FONT_HERSHEY_SIMPLEX
 
-    # Frame is now 240 rows by 560 columns
-    cv2.putText(img = frame, 
-                text = "Head Turn", 
-                org = (10,20), 
+    cv2.putText(img = layered, 
+            text = "Right Head", 
+            org = (10,20), 
+            fontFace = default_font, 
+            fontScale = 0.5, 
+            color = (255,255,255), 
+            thickness = 1)
+
+    cv2.putText(img = layered, 
+                text = "Turn", 
+                org = (25,40), 
                 fontFace = default_font, 
                 fontScale = 0.5, 
                 color = (255,255,255), 
                 thickness = 1)
 
-    cv2.putText(img = frame, 
-                text = "Head Turn", 
-                org = (445,20), 
+    cv2.putText(img = layered, 
+                text = "Left Head", 
+                org = (450,20), 
                 fontFace = default_font, 
                 fontScale = 0.5, 
                 color = (255,255,255), 
                 thickness = 1)
 
-    cv2.putText(img = frame, 
-                text = "Lane Change", 
+    cv2.putText(img = layered, 
+                text = "Turn", 
+                org = (465,40), 
+                fontFace = default_font, 
+                fontScale = 0.5, 
+                color = (255,255,255), 
+                thickness = 1)
+
+    cv2.putText(img = layered, 
+                text = "Right Lane", 
                 org = (10,140), 
                 fontFace = default_font, 
                 fontScale = 0.5, 
                 color = (255,255,255), 
                 thickness = 1)
 
-    cv2.putText(img = frame, 
-                text = "Lane Change", 
-                org = (445,140), 
+    cv2.putText(img = layered, 
+                text = "Change", 
+                org = (25,160), 
                 fontFace = default_font, 
                 fontScale = 0.5, 
                 color = (255,255,255), 
                 thickness = 1)
 
-    return frame
+    cv2.putText(img = layered, 
+                text = "Left Lane", 
+                org = (450,140), 
+                fontFace = default_font, 
+                fontScale = 0.5, 
+                color = (255,255,255), 
+                thickness = 1)
+
+    cv2.putText(img = layered, 
+                text = "Change", 
+                org = (460,160), 
+                fontFace = default_font, 
+                fontScale = 0.5, 
+                color = (255,255,255), 
+                thickness = 1)
+
+    return layered
 
 def sent_to_text(sentiment):
     if (sentiment):
@@ -61,7 +92,6 @@ def sent_to_colour(sentiment):
 def add_event_note(frame, event_type, sentiment):
 
     default_font = cv2.FONT_HERSHEY_SIMPLEX
-    print event_type
 
     if (event_type == "right_turn"):
 
@@ -69,7 +99,7 @@ def add_event_note(frame, event_type, sentiment):
         cv2.rectangle(frame,(120,0),(440,240),sent_to_colour(sentiment),5)
         cv2.putText(img = frame, 
                     text = sent_to_text(sentiment), 
-                    org = (15,60), 
+                    org = (15,80), 
                     fontFace = default_font, 
                     fontScale = 0.75, 
                     color = sent_to_colour(sentiment),
@@ -81,7 +111,7 @@ def add_event_note(frame, event_type, sentiment):
         cv2.rectangle(frame,(120,0),(440,240),sent_to_colour(sentiment),5)
         cv2.putText(img = frame, 
                     text = sent_to_text(sentiment), 
-                    org = (15,180), 
+                    org = (15,200), 
                     fontFace = default_font, 
                     fontScale = 0.75, 
                     color = sent_to_colour(sentiment),
@@ -93,7 +123,7 @@ def add_event_note(frame, event_type, sentiment):
         cv2.rectangle(frame,(120,0),(440,240),sent_to_colour(sentiment),5)
         cv2.putText(img = frame, 
                     text = sent_to_text(sentiment), 
-                    org = (450,60), 
+                    org = (450,80), 
                     fontFace = default_font, 
                     fontScale = 0.75, 
                     color = sent_to_colour(sentiment),
@@ -105,7 +135,7 @@ def add_event_note(frame, event_type, sentiment):
         cv2.rectangle(frame,(120,0),(440,240),sent_to_colour(sentiment),5)
         cv2.putText(img = frame, 
                     text = sent_to_text(sentiment), 
-                    org = (450,180), 
+                    org = (450,200), 
                     fontFace = default_font, 
                     fontScale = 0.75, 
                     color = sent_to_colour(sentiment),
@@ -168,14 +198,12 @@ def annotate_video(input_name, output_name, head_events_list, lane_events_list, 
             
                 if (event_idx < num_events):
                                                 
-                    print "new event start!"
                     # Find new start and end
                     event_start_idx = events_list[event_idx][0]
                     event_end_idx = events_list[event_idx][1]
                     event_type = events_list[event_idx][2]
                     event_sentiment = sentiment_list[event_idx][0]
                     print event_sentiment
-                    event_sentiment = False
 
             out.write(frame)
 

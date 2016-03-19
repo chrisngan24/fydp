@@ -10,7 +10,7 @@ default_font = cv2.FONT_HERSHEY_SIMPLEX
 
 # Frame is now 240 rows by 560 columns
 cv2.putText(img = layered, 
-            text = "Head Turn", 
+            text = "Right Head", 
             org = (10,20), 
             fontFace = default_font, 
             fontScale = 0.5, 
@@ -18,15 +18,31 @@ cv2.putText(img = layered,
             thickness = 1)
 
 cv2.putText(img = layered, 
-            text = "Head Turn", 
-            org = (445,20), 
+            text = "Turn", 
+            org = (25,40), 
             fontFace = default_font, 
             fontScale = 0.5, 
             color = (255,255,255), 
             thickness = 1)
 
 cv2.putText(img = layered, 
-            text = "Lane Change", 
+            text = "Left Head", 
+            org = (450,20), 
+            fontFace = default_font, 
+            fontScale = 0.5, 
+            color = (255,255,255), 
+            thickness = 1)
+
+cv2.putText(img = layered, 
+            text = "Turn", 
+            org = (465,40), 
+            fontFace = default_font, 
+            fontScale = 0.5, 
+            color = (255,255,255), 
+            thickness = 1)
+
+cv2.putText(img = layered, 
+            text = "Right Lane", 
             org = (10,140), 
             fontFace = default_font, 
             fontScale = 0.5, 
@@ -34,8 +50,24 @@ cv2.putText(img = layered,
             thickness = 1)
 
 cv2.putText(img = layered, 
-            text = "Lane Change", 
-            org = (445,140), 
+            text = "Change", 
+            org = (25,160), 
+            fontFace = default_font, 
+            fontScale = 0.5, 
+            color = (255,255,255), 
+            thickness = 1)
+
+cv2.putText(img = layered, 
+            text = "Left Lane", 
+            org = (450,140), 
+            fontFace = default_font, 
+            fontScale = 0.5, 
+            color = (255,255,255), 
+            thickness = 1)
+
+cv2.putText(img = layered, 
+            text = "Change", 
+            org = (460,160), 
             fontFace = default_font, 
             fontScale = 0.5, 
             color = (255,255,255), 
@@ -44,7 +76,7 @@ cv2.putText(img = layered,
 # Add sentiments
 cv2.putText(img = layered, 
             text = "Good!", 
-            org = (15,60), 
+            org = (15,80), 
             fontFace = default_font, 
             fontScale = 0.75, 
             color = (1,255,1), 
@@ -52,7 +84,7 @@ cv2.putText(img = layered,
 
 cv2.putText(img = layered, 
             text = "Good!", 
-            org = (15,180), 
+            org = (15,200), 
             fontFace = default_font, 
             fontScale = 0.75, 
             color = (1,255,1), 
@@ -60,7 +92,7 @@ cv2.putText(img = layered,
 
 cv2.putText(img = layered, 
             text = "Bad!", 
-            org = (450,60), 
+            org = (450,80), 
             fontFace = default_font, 
             fontScale = 0.75, 
             color = (1,1,255), 
@@ -68,7 +100,7 @@ cv2.putText(img = layered,
 
 cv2.putText(img = layered, 
             text = "Bad!", 
-            org = (450,180), 
+            org = (450,200), 
             fontFace = default_font, 
             fontScale = 0.75, 
             color = (1,1,255), 

@@ -140,6 +140,8 @@ class KltDetector():
             cv2.imshow('frame',frame)
 
             fixed_frame = self.apply_retinex(frame, self.RETINEX_LUMA_WEIGHTING)
+            #cv2.imshow('retinex', fixed_frame)
+
             frame_index += 1
             self.out.write(frame)
             cv2.waitKey(1)
@@ -182,7 +184,7 @@ class KltDetector():
             for (ex,ey,ew,eh) in eyes:
                 cv2.rectangle(frame,(fx+ex,fy+ey),(fx+ex+ew,fy+ey+eh),(0,255,0),2)
 
-            print "Found face " + str(len(eyes)) + " " + str(len(noses))
+            #print "Found face " + str(len(eyes)) + " " + str(len(noses))
 
             for (nx,ny,nw,nh) in noses:
                 cv2.rectangle(frame,(fx+nx,fy+ny),(fx+nx+nw,fy+ny+nh),(0,0,255),2)

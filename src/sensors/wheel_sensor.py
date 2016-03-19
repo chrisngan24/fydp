@@ -37,30 +37,39 @@ class WheelSensor(BaseSensor):
 
     def read_sensor(self):
         """
-        Reads the sensor. if a bad avlue is given, will keep trying to 
+        Reads the sensor. if a bad value is given, will keep trying to 
         read it until something usable is given
         """
-        print 'blah    blah'
-        va = self.serial.readline()[:-2]
-        #time.sleep(0.10)
-        print 'hafewfwe'
-        while len(va.split(':')) ==6 and not va.find('\'gz\'') == -1: 
-            # keep reading if va values is no good
+        good_row_found = False
+
+        row = {}
+        while (not good_row_found):
+            
             va = self.serial.readline()[:-2]
-            print va
-        print 'GOOD TO GO'
-        row = {
-                k[0]: float(k[1]) \
-                    for k in \
-                    map(lambda x: x.split(':'), va.split(',')) \
-                    if len(k) == 2
-                    }
+            while len(va.split(':')) ==6 and not va.find('\'gz\'') == -1: 
+                # keep reading if va values is no good
+                # @clement: this almost never happens
+                va = self.serial.readline()[:-2]
+
+            try:
+                row = {
+                        k[0]: float(k[1]) \
+                            for k in \
+                            map(lambda x: x.split(':'), va.split(',')) \
+                            if len(k) == 2
+                            }
+            except ValueError:
+                print "FOUND ILLEGAL ROW"
+                print va
+                continue
+
+            good_row_found = True
+
         timestamp=time.time()
         row['time_diff'] = timestamp - self.prev_timestamp
         row['timestamp'] = timestamp
-        print row
         self.prev_timestamp = timestamp
-
+    
         return row
 
     def filter(self,df):
