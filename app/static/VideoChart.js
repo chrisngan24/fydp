@@ -1,14 +1,19 @@
-var CHART_PADDING = 30;
+// THe horizontal padding for the axis
+var CHART_PADDING = 0;
 
 Chart.types.Scatter.extend({
   name: "VideoChart",
   initialize: function(data){
     console.log('My Line chart extension');
     Chart.types.Scatter.prototype.initialize.apply(this, arguments);
-
-    var padding = 10;
+    
+    var canvasWidth = $('#' +  this.chart.ctx.canvas.id).width();
+    var canvasHeight = $('#' +  this.chart.ctx.canvas.id).height();
+    this.yLabelWidth = 0;
+    CHART_PADDING = Chart.defaults.global.scaleFontSize*3;
+    var horPadding = CHART_PADDING/3*2;
     this.horX = 0;
-    this.yL = this.chart.ctx.canvas.height - 22*padding
+    this.yL = canvasHeight - horPadding;
     this.sentimentEvents = [];
     this.dataLength = data[0]['data'].length;
   },

@@ -1,6 +1,8 @@
 .driven-vid{
-  width:660px;
-  height : 500px;
+   width: 100%    !important;
+   height: auto   !important
+   object-fit: initial;
+   min-height: 50em;
 }
 
 .video-chart{

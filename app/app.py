@@ -84,6 +84,7 @@ def render_interactive(data_dir = 'default'):
             frames=meta['frames'],
             video_file = m_dir + '/annotated_fused.mp4',
             video_time=frames/frame_per_second,
+            session_name=data_dir,
             )
     return render_template('index.html', fused=fused_meta, video=video_meta)
 
@@ -94,11 +95,15 @@ def render_home():
     urls = []
     for path in paths:
         if not path.startswith('.'):
-            print path
-            urls.append(dict(
+            url = dict(
                 path=m_dir + path,
                 url=path,
-                ))
+                )
+            # so that recent is always at the top
+            if path == 'recent':
+                urls = [url] + urls
+            else:
+                urls.append(url)
     return render_template('home.html', urls=urls)
 
 
@@ -106,7 +111,7 @@ def render_home():
 # App Routing
 ###
 @app.route("/")
-def root():
+def route_home():
     return render_home()
     
 

@@ -19,6 +19,7 @@ var video = videojs("annotated_vid", {
       }
     }
 });
+var videoID = video.id() + '_html5_api';
 
 
 var headData = [
@@ -61,6 +62,14 @@ var wheelCtx = document.getElementById(wheelChartID).getContext("2d");
 var wheelChart = new Chart(wheelCtx).VideoChart(wheelData,chartOptions);
 wheelChart.setSentimentEvents(fusedData['laneEvents']);
 
+function updateCharts() {
+  var canvasWidth = $('#' + headChartID).width();
+  var x = video.currentTime()/videoData['video_time'] * (canvasWidth - CHART_PADDING) + CHART_PADDING;
+  headChart.updateLine(x);
+  wheelChart.updateLine(x);
+  console.log('OOGAF');
+}
+updateCharts();
 var onVideoClick = function(e){
   var totalOffsetX = 0;
   var canvasX = 0;
@@ -85,18 +94,23 @@ $('#' + headChartID).on('click', onVideoClick);
 $('#' + wheelChartID).on('click', onVideoClick);
 
 
-function updateCharts() {
-  var canvasWidth = $('#' + headChartID).width();
-  var x = video.currentTime()/videoData['video_time'] * (canvasWidth - CHART_PADDING) + CHART_PADDING;
-  headChart.updateLine(x);
-  wheelChart.updateLine(x);
-}
-
 var repeater;
 
-function doWork() {
+
+$('#' + videoID).on('play', function(){
+  function doWork() {
     updateCharts();
     repeater = setTimeout(doWork, 100);
-}
-doWork();
+  }
+  doWork();
+});
 
+$('#' + videoID).on('pause', function(){
+  console.log('stop');
+  updateCharts();
+  clearTimeout(repeater);
+})
+
+video.controlBar.on('click', function() { 
+  updateCharts();
+});
