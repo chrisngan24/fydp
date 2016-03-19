@@ -25,9 +25,9 @@ class LaneAnnotator(EventAnnotator):
 
         for subdir, dirs, files in os.walk(dtw_models_direc):
             for d in dirs:
-                if d.startswith("left_lane"):
+                if d.startswith("left_") and not d.startswith("left_turn"):
                     self.left.append(pd.read_csv("%s/fused.csv" %os.path.join(dtw_models_direc, d)))
-                elif d.startswith("right_lane"):
+                elif d.startswith("right_") and not d.startswith("right_turn"):
                     self.right.append(pd.read_csv("%s/fused.csv" %os.path.join(dtw_models_direc, d)))
                 elif d.startswith("left_turn"):
                     self.left_turn.append(pd.read_csv("%s/fused.csv" %os.path.join(dtw_models_direc, d)))
@@ -46,20 +46,17 @@ class LaneAnnotator(EventAnnotator):
 
         self.events = []
 
-    def is_valid_lane(self, signal, lane_type):
-        signal = util.normalize(signal)
-        left_dtw_model = util.normalize(self.left[0]['gz'].tolist())
-        right_dtw_model = util.normalize(self.right[0]['gz'].tolist())
-        neg_dtw_model = util.normalize(self.neg[0]['gz'].tolist())
-        left_turn_dtw_model = util.normalize(self.left_turn[0]['gz'].tolist())
-        right_turn_dtw_model = util.normalize(self.right_turn[0]['gz'].tolist())
+    def event_type(self, signal):
+        left_cost = min([fastdtw(signal, x['theta'].tolist())[0] for x in self.left])
+        right_cost = min([fastdtw(signal, x['theta'].tolist())[0] for x in self.right])
+        neg_cost = min([fastdtw(signal, x['theta'].tolist())[0] for x in self.neg])
 
-        if lane_type == 'left':
-            cost = fastdtw(signal, left_dtw_model)[0]
-            return cost < fastdtw(signal, neg_dtw_model)[0] and cost < fastdtw(signal, left_turn_dtw_model)[0]
+        if left_cost < right_cost and left_cost < neg_cost:
+            return 'left'
+        elif right_cost < left_cost and right_cost < neg_cost:
+            return 'right'
         else:
-            cost = fastdtw(signal, right_dtw_model)[0]
-            return cost < fastdtw(signal, neg_dtw_model)[0] and cost < fastdtw(signal, right_turn_dtw_model)[0] 
+            return 'neg'
 
 
     def annotate_events(self, df, index_col='frameIndex'):
@@ -97,11 +94,11 @@ class LaneAnnotator(EventAnnotator):
         right_index = 0
 
         i = 0
-        while i < len(predicted_labels_test):
-            if predicted_labels_test[i] == left_lane_sequence[left_index]:
+        while i < len(predicted_labels_test)-3:
+            if len(set(predicted_labels_test[i:i+3])) == 1 and predicted_labels_test[i] == left_lane_sequence[left_index]:
                 left_index = (left_index + 1) % len(left_lane_sequence)
 
-            if predicted_labels_test[i] == right_lane_sequence[right_index]:
+            if len(set(predicted_labels_test[i:i+3])) == 1 and predicted_labels_test[i] == right_lane_sequence[right_index]:
                 right_index = (right_index + 1) % len(right_lane_sequence)
 
             if left_index == 1:
@@ -121,10 +118,16 @@ class LaneAnnotator(EventAnnotator):
                 right_lc_end = i
 
             if left_lc_start > 0 and left_lc_end > 0 and left_lc_end - left_lc_start > 40:
-                signal = df.iloc[left_lc_start:left_lc_end]['gz'].tolist()
-                if self.is_valid_lane(signal, 'left'):
+                signal = df.iloc[left_lc_start:left_lc_end]['theta'].tolist()
+                event_type = self.event_type(signal)
+
+                if event_type == 'left':
                     events["left_lc_start"].add(left_lc_start)
                     events["left_lc_end"].add(left_lc_end)
+                elif event_type == 'right':
+                    right_lc_start = left_lc_start
+                    right_lc_end = left_lc_end
+                    left_lc_end = 0
                 else:
                     i = left_lc_start
                     left_lc_start += 5
@@ -132,10 +135,16 @@ class LaneAnnotator(EventAnnotator):
                     left_lc_end = 0
 
             if right_lc_start > 0 and right_lc_end > 0 and right_lc_end - right_lc_start > 40:
-                signal = df.iloc[right_lc_start:right_lc_end]['gz'].tolist()
-                if self.is_valid_lane(signal, 'right'):
+                signal = df.iloc[right_lc_start:right_lc_end]['theta'].tolist()
+                event_type = self.event_type(signal)
+
+                if event_type == 'right':
                     events["right_lc_start"].add(right_lc_start)
                     events["right_lc_end"].add(right_lc_end)
+                elif event_type == 'left':
+                    left_lc_start = right_lc_start
+                    left_lc_end = right_lc_end
+                    right_lc_end = 0
                 else:
                     i = right_lc_start
                     right_lc_start += 5
@@ -144,11 +153,8 @@ class LaneAnnotator(EventAnnotator):
 
             i += 1
 
-
         for k, v in events.iteritems():
             events[k] = sorted(list(v))
-
-        # events = self.filter_events(df, events)
 
         events_indices = []
         for i in xrange(len(events['left_lc_start'])):
