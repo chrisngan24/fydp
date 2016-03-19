@@ -143,8 +143,8 @@ def run_fusion(
     if (is_move_video and has_camera):
         move_video('drivelog_temp.avi', data_direc)
 
+    video_name = os.path.join(data_direc, interactive_video)
     if (has_camera and has_wheel and write_results):
-        video_name = os.path.join(data_direc, interactive_video)
         print "Plotting...."
         vis = Visualize(
                         df,
@@ -158,6 +158,18 @@ def run_fusion(
                         data_direc=data_direc
             )
         vis.visualize(is_interact=is_interact)
+
+    # Convert video 
+    convert_command = 'ffmpeg -i ' + video_name + ' ' + data_direc + '/annotated_fused.mp4'
+    os.system(convert_command)
+    time.sleep(1)
+
+    # Replace most recent, and add to data dir
+    shutil.rmtree('../app/static/data/recent', ignore_errors = True)
+    time.sleep(1)
+    shutil.copytree(data_direc, '../app/static/data/recent')
+    time.sleep(1)
+    shutil.move(data_direc, '../app/static/data/')
 
     if (has_wheel and has_camera):
         return dict(
