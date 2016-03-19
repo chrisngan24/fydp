@@ -154,97 +154,37 @@ def annotate_video(input_name, output_name, head_events_list, lane_events_list, 
     out = cv2.VideoWriter(filename = output_name, fourcc = FOURCC, fps = FRAME_RATE, frameSize = FRAME_RESIZE)
     idx = 0
 
-    if (lane_events_list == None and head_events_list == None):
-        return input_name
+    while (cap.isOpened()):
 
-    # For creating a single typed video
-    elif (lane_events_list == None or head_events_list == None):
-
-        # Figure out whether head or lane is the video
-        if (head_events_list is not None):
-            events_list = head_events_list
-        elif (lane_events_list is not None):
-            events_list = lane_events_list
-
-        num_events = len(events_list)
-        if (num_events == 0):
-            return input_name
-
-        # SO UGLY
-        event_start_idx = events_list[0][0]
-        event_end_idx = events_list[0][1]
-        event_type = events_list[0][2]
-        event_sentiment = events_list[0][3]
-
-        event_idx = 0
-
-        print events_list
-        print event_sentiment
-
-        while (cap.isOpened()):
-
-            (ret, frame) = cap.read()
+        (ret, frame) = cap.read()
+        
+        if ret==False:
+            break
             
-            if ret==False:
-                break
-                
-            frame = add_side_borders(frame)
-            frame = add_labels(frame)
-            idx += 1
+        frame = add_side_borders(frame)
+        frame = add_labels(frame)
+        idx += 1
 
-            if (idx > event_start_idx and idx < event_end_idx):
+        for event in head_events_list:
+            start_idx = event[0]
+            end_idx = event[1]
+            event_type = event[2]
+            event_sentiment = event[3]
+
+            if (idx > start_idx and idx < end_idx):
                 frame = add_event_note(frame, event_type, event_sentiment)
 
-            if (idx > event_end_idx):    
-                event_idx += 1
+        for event in lane_events_list:
+            start_idx = event[0]
+            end_idx = event[1]
+            event_type = event[2]
+            event_sentiment = event[3]
+
+            if (idx > start_idx and idx < end_idx):
+                frame = add_event_note(frame, event_type, event_sentiment)
             
-                if (event_idx < num_events):
-                                                
-                    # Find new start and end
-                    event_start_idx = events_list[event_idx][0]
-                    event_end_idx = events_list[event_idx][1]
-                    event_type = events_list[event_idx][2]
-                    event_sentiment = events_list[event_idx][3]
-
-            out.write(frame)
-
-    # Making a fused video
-    else:
-        
-        num_events = len(head_events_list) + len(lane_events_list)
-        if (num_events == 0):
-            return input_name
-
-        while (cap.isOpened()):
-
-            (ret, frame) = cap.read()
-            
-            if ret==False:
-                break
-                
-            frame = add_side_borders(frame)
-            frame = add_labels(frame)
-            idx += 1
-
-            for event in head_events_list:
-                start_idx = event[0]
-                end_idx = event[1]
-                event_type = event[2]
-                event_sentiment = event[3]
-
-                if (idx > start_idx and idx < end_idx):
-                    frame = add_event_note(frame, event_type, event_sentiment)
-
-            for event in lane_events_list:
-                start_idx = event[0]
-                end_idx = event[1]
-                event_type = event[2]
-                event_sentiment = event[3]
-
-                if (idx > start_idx and idx < end_idx):
-                    frame = add_event_note(frame, event_type, event_sentiment)
-                
-            out.write(frame)
+        out.write(frame)
+  
     video_metadata = dict()
     video_metadata['frames'] = idx
     video_metadata['fps'] = FRAME_RATE
