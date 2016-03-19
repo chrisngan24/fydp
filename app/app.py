@@ -3,6 +3,7 @@ app = Flask(__name__, static_url_path='')
 
 import json
 import pandas as pd
+import os
 
 FPS = 20
 
@@ -65,6 +66,7 @@ def flatten_df(df, meta):
         laneEvents=laneEvents,
         )
 
+
 def render_interactive(data_dir = 'default'):
     base_dir = 'static'
     m_dir = 'data/%s' % data_dir
@@ -86,9 +88,32 @@ def render_interactive(data_dir = 'default'):
     return render_template('index.html', fused=fused_meta, video=video_meta)
 
 
+def render_home():
+    m_dir = 'data/'
+    paths = os.listdir('static/' + m_dir)
+    urls = []
+    for path in paths:
+        if not path.startswith('.'):
+            print path
+            urls.append(dict(
+                path=m_dir + path,
+                url=path,
+                ))
+    return render_template('home.html', urls=urls)
+
+
+###
+# App Routing
+###
 @app.route("/")
 def root():
-    return render_interactive()
+    return render_home()
     
+
+@app.route("/report/<data_dir>")
+def route_report(data_dir):
+    print data_dir
+    return render_interactive(data_dir=data_dir)
+
 if __name__ == "__main__":
     app.run(debug=True)

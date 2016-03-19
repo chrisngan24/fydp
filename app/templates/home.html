@@ -1,0 +1,20 @@
+{% extends "layout.html" %}
+{% block body %}
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <table class="table table-bordered">
+          <tbody>
+          <thead>
+            <th>Session</th>
+          </thead>
+          {% for entry in urls %}
+          <tr>
+            <td class="info"><a href="{{ url_for('route_report', data_dir=entry['url']) }}">{{ entry['url'] }}</a></tr>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+{% endblock %}

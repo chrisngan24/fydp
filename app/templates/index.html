@@ -32,6 +32,9 @@
    var fusedData = {{ fused|tojson }};
    var videoData = {{ video|tojson }};
 </script>
+<script src="{{ url_for('static', filename='VideoChart.js') }}"></script>
+<script src="{{ url_for('static', filename='index.js') }}"></script>
+
 
 
 {% endblock %}
