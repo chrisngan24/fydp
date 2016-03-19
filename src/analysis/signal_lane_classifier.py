@@ -39,7 +39,7 @@ class SignalLaneClassifier(SignalClassifier):
                 # hacky
                 # match the index values that have 
                 # the same ending index and the right event
-                head_event_indice= [i for i, (s, e, event) \
+                head_event_indice= [i for i, (s, e, event, sentiment) \
                                     in enumerate(head_events_list) \
                                     if int(e) == relevant_end_index \
                                     and event == end_head_turn_event.replace('_end', '')]

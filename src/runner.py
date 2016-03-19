@@ -60,6 +60,9 @@ def run_fusion(
         shc = SignalHeadClassifier(head_ann.df, head_ann.events)
         head_events_sentiment = shc.classify_signals()
 
+        for i in xrange(len(head_events_list)):
+            head_events_list[i] = head_events_list[i] + (head_events_sentiment[i][0],)
+
     if has_wheel:
         ###
         # All events that are dependent on the steering wheel
@@ -69,6 +72,9 @@ def run_fusion(
     if has_wheel and has_camera:
         slc = SignalLaneClassifier(df, lane_events_list, head_events_list, head_events_hash, head_events_sentiment)
         lane_events_sentiment = slc.classify_signals()
+
+        for i in xrange(len(lane_events_list)):
+            lane_events_list[i] = lane_events_list[i] + (lane_events_sentiment[i][0],)
 
     #### Compute sentiment classifications
 
@@ -84,14 +90,12 @@ def run_fusion(
         final_fused_video = annotation.annotate_video(
                 'drivelog_temp.avi',
                 'annotated_fused.avi',
-                map(lambda (s, e, t): \
-                        (df.loc[s, video_index], df.loc[e, video_index], t),
+                map(lambda (s, e, t, sent): \
+                        (df.loc[s, video_index], df.loc[e, video_index], t, sent),
                         head_events_list),
-                map(lambda (s, e, t): \
-                        (df.loc[s, video_index], df.loc[e, video_index], t),
+                map(lambda (s, e, t, sent): \
+                        (df.loc[s, video_index], df.loc[e, video_index], t, sent),
                         lane_events_list),
-                head_events_sentiment,
-                lane_events_sentiment,
                 metadata_file
                 )
 
@@ -108,11 +112,9 @@ def run_fusion(
             final_head_video = annotation.annotate_video(
                     'drivelog_temp.avi', 
                     'annotated_head.avi', 
-                    map(lambda (s, e, t): \
-                            (df.loc[s, video_index], df.loc[e, video_index], t),
+                    map(lambda (s, e, t, sent): \
+                            (df.loc[s, video_index], df.loc[e, video_index], t, sent),
                             head_events_list),
-                    None,
-                    head_events_sentiment,
                     None,
                     metadata_file
                     )
@@ -126,11 +128,9 @@ def run_fusion(
                     'drivelog_temp.avi', 
                     'annotated_lane.avi', 
                     None,
-                    map(lambda (s, e, t): \
-                            (df.loc[s, video_index], df.loc[e, video_index], t),
+                    map(lambda (s, e, t, sent): \
+                            (df.loc[s, video_index], df.loc[e, video_index], t, sent),
                             lane_events_list),
-                    None,
-                    lane_events_sentiment,
                     metadata_file
                     )
             move_video(final_lane_video, data_direc)

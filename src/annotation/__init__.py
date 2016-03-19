@@ -144,7 +144,7 @@ def add_event_note(frame, event_type, sentiment):
 
     return frame
 
-def annotate_video(input_name, output_name, head_events_list, lane_events_list, head_sentiment_list, lane_sentiment_list, video_metadata_file):
+def annotate_video(input_name, output_name, head_events_list, lane_events_list, video_metadata_file):
     
     FRAME_RESIZE = (560,240)
     FOURCC = cv2.cv.CV_FOURCC('m', 'p', '4', 'v')
@@ -160,10 +160,8 @@ def annotate_video(input_name, output_name, head_events_list, lane_events_list, 
         # Figure out whether head or lane is the video
         if (head_events_list is not None):
             events_list = head_events_list
-            sentiment_list = head_sentiment_list
         elif (lane_events_list is not None):
             events_list = lane_events_list
-            sentiment_list = lane_sentiment_list
 
         num_events = len(events_list)
         if (num_events == 0):
@@ -173,11 +171,11 @@ def annotate_video(input_name, output_name, head_events_list, lane_events_list, 
         event_start_idx = events_list[0][0]
         event_end_idx = events_list[0][1]
         event_type = events_list[0][2]
-        event_sentiment = sentiment_list[0][0]
+        event_sentiment = events_list[0][3]
+
         event_idx = 0
 
         print events_list
-        print sentiment_list
         print event_sentiment
 
         while (cap.isOpened()):
@@ -203,8 +201,7 @@ def annotate_video(input_name, output_name, head_events_list, lane_events_list, 
                     event_start_idx = events_list[event_idx][0]
                     event_end_idx = events_list[event_idx][1]
                     event_type = events_list[event_idx][2]
-                    event_sentiment = sentiment_list[event_idx][0]
-                    print event_sentiment
+                    event_sentiment = events_list[event_idx][3]
 
             out.write(frame)
 
@@ -230,7 +227,7 @@ def annotate_video(input_name, output_name, head_events_list, lane_events_list, 
                 start_idx = event[0]
                 end_idx = event[1]
                 event_type = event[2]
-                event_sentiment = head_sentiment_list[0]
+                event_sentiment = event[3]
 
                 if (idx > start_idx and idx < end_idx):
                     frame = add_event_note(frame, event_type, event_sentiment)
@@ -239,7 +236,7 @@ def annotate_video(input_name, output_name, head_events_list, lane_events_list, 
                 start_idx = event[0]
                 end_idx = event[1]
                 event_type = event[2]
-                event_sentiment = lane_sentiment_list[0]
+                event_sentiment = event[3]
 
                 if (idx > start_idx and idx < end_idx):
                     frame = add_event_note(frame, event_type, event_sentiment)
@@ -249,6 +246,8 @@ def annotate_video(input_name, output_name, head_events_list, lane_events_list, 
     video_metadata = dict()
     video_metadata['frames'] = idx
     video_metadata['fps'] = FRAME_RATE
+    video_metadata['head_events'] = head_events_list
+    video_metadata['lane_events'] = lane_events_list
 
     video_metadata_out = open(video_metadata_file, 'w')
     json.dump(video_metadata, video_metadata_out)
