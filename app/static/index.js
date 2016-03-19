@@ -111,6 +111,8 @@ $('#' + videoID).on('pause', function(){
   clearTimeout(repeater);
 })
 
-video.controlBar.on('click', function() { 
+
+$('#' + videoID).on('seeking', function(){
+  // events including moving video time and skipping frames
   updateCharts();
 });
