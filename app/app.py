@@ -19,8 +19,12 @@ def flatten_df(df, meta):
     df = df.reindex(index=list(xrange(0,meta['frames'])), method='nearest')
     vid_length = meta['frames']/float(meta['fps'])
     frames = list(xrange(0, meta['frames']))
-    noseX = df['noseX'].tolist()
-    theta = df['theta'].tolist()
+    noseX = []
+    if 'noseX' in df.columns.tolist():
+        noseX = df['noseX'].tolist()
+    theta = []
+    if 'theta' in df.columns.tolist():
+        theta = df['theta'].tolist()
     headData = []
     for i in xrange(meta['frames']):
        headData.append(dict(
@@ -34,27 +38,29 @@ def flatten_df(df, meta):
            y = theta[i],
            ))
     headEvents = []
-    for head_event in meta['head_events']:
-        start_frame = df_og.loc[int(head_event[0])]['frameIndex']
-        end_frame   = df_og.loc[int(head_event[1])]['frameIndex']
-        sentiment   = head_event[2]
-        headEvents.append(dict(
-            startFrame=start_frame,
-            endFrame=end_frame,
-            sentimentGood=sentiment,
-            ))
+    if meta['head_events'] != None:
+        for head_event in meta['head_events']:
+            start_frame = df_og.loc[int(head_event[0])]['frameIndex']
+            end_frame   = df_og.loc[int(head_event[1])]['frameIndex']
+            sentiment   = head_event[2]
+            headEvents.append(dict(
+                startFrame=start_frame,
+                endFrame=end_frame,
+                sentimentGood=sentiment,
+                ))
 
     ## COuld be function, but SHIP IT
     laneEvents = []
-    for lane_event in meta['lane_events']:
-        start_frame = df_og.loc[int(lane_event[0])]['frameIndex']
-        end_frame   = df_og.loc[int(lane_event[1])]['frameIndex']
-        sentiment   = lane_event[2]
-        laneEvents.append(dict(
-            startFrame=start_frame,
-            endFrame=end_frame,
-            sentimentGood=sentiment,
-            ))
+    if meta['lane_events'] != None:
+        for lane_event in meta['lane_events']:
+            start_frame = df_og.loc[int(lane_event[0])]['frameIndex']
+            end_frame   = df_og.loc[int(lane_event[1])]['frameIndex']
+            sentiment   = lane_event[2]
+            laneEvents.append(dict(
+                startFrame=start_frame,
+                endFrame=end_frame,
+                sentimentGood=sentiment,
+                ))
 
 
     return dict(
