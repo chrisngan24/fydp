@@ -245,7 +245,6 @@ def annotate_video(input_name, output_name, head_events_list, lane_events_list, 
                     frame = add_event_note(frame, event_type, event_sentiment)
                 
             out.write(frame)
-      
     video_metadata = dict()
     video_metadata['frames'] = idx
     video_metadata['fps'] = FRAME_RATE

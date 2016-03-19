@@ -21,10 +21,10 @@ def flatten_df(df, meta):
     frames = list(xrange(0, meta['frames']))
     noseX = []
     if 'noseX' in df.columns.tolist():
-        noseX = df['noseX'].tolist()
+        noseX = df['noseX'].fillna(0).tolist()
     theta = []
     if 'theta' in df.columns.tolist():
-        theta = df['theta'].tolist()
+        theta = df['theta'].fillna(0).tolist()
     headData = []
     for i in xrange(meta['frames']):
        headData.append(dict(
@@ -42,7 +42,8 @@ def flatten_df(df, meta):
         for head_event in meta['head_events']:
             start_frame = df_og.loc[int(head_event[0])]['frameIndex']
             end_frame   = df_og.loc[int(head_event[1])]['frameIndex']
-            sentiment   = head_event[2]
+            event = head_event[2]
+            sentiment   = head_event[3]
             headEvents.append(dict(
                 startFrame=start_frame,
                 endFrame=end_frame,
@@ -55,7 +56,8 @@ def flatten_df(df, meta):
         for lane_event in meta['lane_events']:
             start_frame = df_og.loc[int(lane_event[0])]['frameIndex']
             end_frame   = df_og.loc[int(lane_event[1])]['frameIndex']
-            sentiment   = lane_event[2]
+            event       = lane_event[2]
+            sentiment   = lane_event[3]
             laneEvents.append(dict(
                 startFrame=start_frame,
                 endFrame=end_frame,
@@ -107,7 +109,7 @@ def render_home():
                 )
             # so that recent is always at the top
             if path == 'recent':
-                urls = [url] + urls
+                pass
             else:
                 urls.append(url)
     return render_template('home.html', urls=urls)
