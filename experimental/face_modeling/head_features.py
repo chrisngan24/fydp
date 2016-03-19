@@ -90,8 +90,8 @@ def generate_windows(df, window=10, relevant_features = []):
                     if not name in active_features:
                         active_features.add(name)
         points.append(row)
-
-    return pd.DataFrame(points), list(active_features)
+    df = pd.DataFrame(points).fillna(0)
+    return df, list(active_features)
 
 
 
