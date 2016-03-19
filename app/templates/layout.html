@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Title of the document</title>
+    <link href="{{ url_for('static', filename='bower_components/bootstrap/dist/css/bootstrap.min.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='bower_components/video.js/dist/video-js.min.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='main.css') }}" rel="stylesheet">
+  </head>
+
+  <body>
+    {% block body %}{% endblock %}
+    
+    <script src="{{ url_for('static', filename='bower_components/jquery/dist/jquery.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='bower_components/bootstrap/dist/js/bootstrap.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='bower_components/video.js/dist/video.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='bower_components/videojs-framebyframe/dist/videojs.framebyframe.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='bower_components/Chart.js/Chart.js') }}"></script>
+    <script src="{{ url_for('static', filename='bower_components/jquery-csv/src/jquery.csv.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='bower_components/Chart.Scatter.js/Chart.Scatter.min.js') }}"></script>
+    
+    <script src="{{ url_for('static', filename='VideoChart.js') }}"></script>
+    <script src="{{ url_for('static', filename='index.js') }}"></script>
+  </body>
+</html>

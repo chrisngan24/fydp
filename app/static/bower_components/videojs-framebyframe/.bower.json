@@ -1,0 +1,34 @@
+{
+  "name": "videojs-framebyframe",
+  "version": "1.0.1",
+  "homepage": "https://github.com/erasche/videojs-framebyframe",
+  "description": "video.js plugin that allows users to step frame-by-frame through a video.",
+  "main": "videojs.framebyframe.js",
+  "keywords": [
+    "video",
+    "videojs",
+    "videojs-plugin"
+  ],
+  "license": "MIT",
+  "ignore": [
+    ".gitignore",
+    "node_modules",
+    "bower_components",
+    "README.md",
+    "CHANGELOG.md",
+    "examples"
+  ],
+  "dependencies": {
+    "video.js": ">=5.3.0"
+  },
+  "_release": "1.0.1",
+  "_resolution": {
+    "type": "version",
+    "tag": "v1.0.1",
+    "commit": "fab5a6f63e548a7c7da6bac3de616643e8db2431"
+  },
+  "_source": "git://github.com/erasche/videojs-framebyframe.git",
+  "_target": "~1.0.1",
+  "_originalSource": "videojs-framebyframe",
+  "_direct": true
+}
