@@ -82,15 +82,16 @@ def run_fusion(
     # annotate the video
     print "Creating video report....."
     video_index = 'frameIndex'
+    metadata_file = 'annotated_metadata.json'
+    interactive_video = "annotated_fused.avi"    
 
     # Created a fused video if possible
     if (is_move_video and has_camera and has_wheel and len(head_events_list) > 0 and len(lane_events_list) > 0):
         print head_events_list
         print lane_events_list
-        metadata_file = 'annotated_metadata.json'
         final_fused_video = annotation.annotate_video(
                 'drivelog_temp.avi',
-                'annotated_fused.avi',
+                interactive_video,
                 map(lambda (s, e, t, sent): \
                         (df.loc[s, video_index], df.loc[e, video_index], t, sent),
                         head_events_list),
@@ -100,7 +101,6 @@ def run_fusion(
                 metadata_file
                 )
 
-        interactive_video = "annotated_fused.avi"
         move_video(final_fused_video, data_direc)
         move_video(metadata_file, data_direc)
 
@@ -109,41 +109,58 @@ def run_fusion(
         if (is_move_video and has_camera and len(head_events_list) > 0):
             # I MAY HAVE BROKE THIS @chris
             print head_events_list
-            metadata_file = 'annotated_head_metadata.json'
+            
             final_head_video = annotation.annotate_video(
                     'drivelog_temp.avi', 
-                    'annotated_head.avi', 
+                    interactive_video, 
                     map(lambda (s, e, t, sent): \
                             (df.loc[s, video_index], df.loc[e, video_index], t, sent),
                             head_events_list),
                     None,
                     metadata_file
                     )
-            interactive_video = "annotated_head.avi"
+
             move_video(final_head_video, data_direc)
             move_video(metadata_file, data_direc)
 
-        if (is_move_video and has_wheel and len(lane_events_list) > 0): 
+        elif (is_move_video and has_wheel and len(lane_events_list) > 0): 
+            
             print lane_events_list
-            metadata_file = 'annotated_lane_metadata.json'
             final_lane_video = annotation.annotate_video(
                     'drivelog_temp.avi', 
-                    'annotated_lane.avi', 
+                    interactive_video, 
                     None,
                     map(lambda (s, e, t, sent): \
                             (df.loc[s, video_index], df.loc[e, video_index], t, sent),
                             lane_events_list),
                     metadata_file
                     )
-            interactive_video = "annotated_lane.avi"
+
             move_video(final_lane_video, data_direc)
             move_video(metadata_file, data_direc)
+
+        else:
+            # No annotated_fused exists
+            interactive_video = 'drivelog_temp.avi'
 
     # Also copy drivelog_temp
     if (is_move_video and has_camera):
         move_video('drivelog_temp.avi', data_direc)
 
     video_name = os.path.join(data_direc, interactive_video)
+
+    # Convert video 
+    convert_command = 'ffmpeg -i ' + video_name + ' ' + data_direc + '/annotated_fused.mp4'
+    os.system(convert_command)
+    time.sleep(1)
+
+    # Replace most recent, and add to data dir
+    shutil.rmtree('../app/static/data/recent', ignore_errors = True)
+    time.sleep(1)
+    shutil.copytree(data_direc, '../app/static/data/recent')
+    time.sleep(1)
+    shutil.move(data_direc, '../app/static/data/')
+
     if (has_camera and has_wheel and write_results):
         print "Plotting...."
         vis = Visualize(
@@ -158,18 +175,6 @@ def run_fusion(
                         data_direc=data_direc
             )
         vis.visualize(is_interact=is_interact)
-
-    # Convert video 
-    convert_command = 'ffmpeg -i ' + video_name + ' ' + data_direc + '/annotated_fused.mp4'
-    os.system(convert_command)
-    time.sleep(1)
-
-    # Replace most recent, and add to data dir
-    shutil.rmtree('../app/static/data/recent', ignore_errors = True)
-    time.sleep(1)
-    shutil.copytree(data_direc, '../app/static/data/recent')
-    time.sleep(1)
-    shutil.move(data_direc, '../app/static/data/')
 
     if (has_wheel and has_camera):
         return dict(
