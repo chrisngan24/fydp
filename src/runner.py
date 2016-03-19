@@ -1,5 +1,6 @@
 import cv2
 import logging
+import shutil
 
 from sensors import sensor, wheel_sensor, camera_sensor
 from analysis.head_annotator import HeadAnnotator
@@ -39,7 +40,7 @@ def run_fusion(
         write_results=True,
         is_move_video=True,
         is_interact=True,
-        interactive_video='annotated_head.avi',
+        interactive_video='drivelog_temp.avi',
         ):
     """
     Callback function that
@@ -118,6 +119,7 @@ def run_fusion(
                     None,
                     metadata_file
                     )
+            interactive_video = "annotated_head.avi"
             move_video(final_head_video, data_direc)
             move_video(metadata_file, data_direc)
 
@@ -133,6 +135,7 @@ def run_fusion(
                             lane_events_list),
                     metadata_file
                     )
+            interactive_video = "annotated_lane.avi"
             move_video(final_lane_video, data_direc)
             move_video(metadata_file, data_direc)
 

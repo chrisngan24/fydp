@@ -154,8 +154,11 @@ def annotate_video(input_name, output_name, head_events_list, lane_events_list, 
     out = cv2.VideoWriter(filename = output_name, fourcc = FOURCC, fps = FRAME_RATE, frameSize = FRAME_RESIZE)
     idx = 0
 
+    if (lane_events_list == None and head_events_list == None):
+        return input_name
+
     # For creating a single typed video
-    if (lane_events_list == None or head_events_list == None):
+    elif (lane_events_list == None or head_events_list == None):
 
         # Figure out whether head or lane is the video
         if (head_events_list is not None):
