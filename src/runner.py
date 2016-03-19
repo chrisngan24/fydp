@@ -31,7 +31,6 @@ model_direc = 'models'
 def move_video(video_name, data_direc):
     os.rename(video_name, '%s/%s' % (data_direc, video_name))
 
-
 def run_fusion(
         files, 
         has_camera=True, 
@@ -81,6 +80,7 @@ def run_fusion(
     if (is_move_video and has_camera and has_wheel and len(head_events_list) > 0 and len(lane_events_list) > 0):
         print head_events_list
         print lane_events_list
+        metadata_file = 'annotated_metadata.json'
         final_fused_video = annotation.annotate_video(
                 'drivelog_temp.avi',
                 'annotated_fused.avi',
@@ -91,17 +91,20 @@ def run_fusion(
                         (df.loc[s, video_index], df.loc[e, video_index], t),
                         lane_events_list),
                 head_events_sentiment,
-                lane_events_sentiment
+                lane_events_sentiment,
+                metadata_file
                 )
 
         interactive_video = "annotated_fused.avi"
         move_video(final_fused_video, data_direc)
+        move_video(metadata_file, data_direc)
 
     # Otherwise, create the two seperate ones
     else:
         if (is_move_video and has_camera and len(head_events_list) > 0):
             # I MAY HAVE BROKE THIS @chris
             print head_events_list
+            metadata_file = 'annotated_head_metadata.json'
             final_head_video = annotation.annotate_video(
                     'drivelog_temp.avi', 
                     'annotated_head.avi', 
@@ -110,12 +113,15 @@ def run_fusion(
                             head_events_list),
                     None,
                     head_events_sentiment,
-                    None
+                    None,
+                    metadata_file
                     )
             move_video(final_head_video, data_direc)
+            move_video(metadata_file, data_direc)
 
         if (is_move_video and has_wheel and len(lane_events_list) > 0): 
             print lane_events_list
+            metadata_file = 'annotated_lane_metadata.json'
             final_lane_video = annotation.annotate_video(
                     'drivelog_temp.avi', 
                     'annotated_lane.avi', 
@@ -124,9 +130,11 @@ def run_fusion(
                             (df.loc[s, video_index], df.loc[e, video_index], t),
                             lane_events_list),
                     None,
-                    lane_events_sentiment
+                    lane_events_sentiment,
+                    metadata_file
                     )
             move_video(final_lane_video, data_direc)
+            move_video(metadata_file, data_direc)
 
     # Also copy drivelog_temp
     if (is_move_video and has_camera):

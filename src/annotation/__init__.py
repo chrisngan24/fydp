@@ -1,5 +1,6 @@
 import cv2
 import numpy as np
+import json
 
 def add_side_borders(frame):
     black = np.zeros((240,120,3), dtype=np.uint8)
@@ -143,7 +144,7 @@ def add_event_note(frame, event_type, sentiment):
 
     return frame
 
-def annotate_video(input_name, output_name, head_events_list, lane_events_list, head_sentiment_list, lane_sentiment_list):
+def annotate_video(input_name, output_name, head_events_list, lane_events_list, head_sentiment_list, lane_sentiment_list, video_metadata_file):
     
     FRAME_RESIZE = (560,240)
     FOURCC = cv2.cv.CV_FOURCC('m', 'p', '4', 'v')
@@ -151,6 +152,7 @@ def annotate_video(input_name, output_name, head_events_list, lane_events_list, 
 
     cap = cv2.VideoCapture(input_name)
     out = cv2.VideoWriter(filename = output_name, fourcc = FOURCC, fps = FRAME_RATE, frameSize = FRAME_RESIZE)
+    idx = 0
 
     # For creating a single typed video
     if (lane_events_list == None or head_events_list == None):
@@ -173,7 +175,6 @@ def annotate_video(input_name, output_name, head_events_list, lane_events_list, 
         event_type = events_list[0][2]
         event_sentiment = sentiment_list[0][0]
         event_idx = 0
-        idx = 0
 
         print events_list
         print sentiment_list
@@ -210,7 +211,6 @@ def annotate_video(input_name, output_name, head_events_list, lane_events_list, 
     # Making a fused video
     else:
         
-        idx = 0
         num_events = len(head_events_list) + len(lane_events_list)
         if (num_events == 0):
             return input_name
@@ -245,7 +245,14 @@ def annotate_video(input_name, output_name, head_events_list, lane_events_list, 
                     frame = add_event_note(frame, event_type, event_sentiment)
                 
             out.write(frame)
-            
+      
+    video_metadata = dict()
+    video_metadata['frames'] = idx
+    video_metadata['fps'] = FRAME_RATE
+
+    video_metadata_out = open(video_metadata_file, 'w')
+    json.dump(video_metadata, video_metadata_out)
+
     out.release()
     cap.release()
     cv2.destroyAllWindows()
