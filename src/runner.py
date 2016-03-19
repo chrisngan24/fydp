@@ -86,7 +86,7 @@ def run_fusion(
     interactive_video = "annotated_fused.avi"    
 
     # Created a fused video if possible
-    if (is_move_video and has_camera and has_wheel and len(head_events_list) > 0 and len(lane_events_list) > 0):
+    if (is_move_video and has_camera and has_wheel):
         print head_events_list
         print lane_events_list
         final_fused_video = annotation.annotate_video(
@@ -106,7 +106,7 @@ def run_fusion(
 
     # Otherwise, create the two seperate ones
     else:
-        if (is_move_video and has_camera and len(head_events_list) > 0):
+        if (is_move_video and has_camera):
             # I MAY HAVE BROKE THIS @chris
             print head_events_list
             
@@ -116,7 +116,7 @@ def run_fusion(
                     map(lambda (s, e, t, sent): \
                             (df.loc[s, video_index], df.loc[e, video_index], t, sent),
                             head_events_list),
-                    None,
+                    [],
                     metadata_file
                     )
 
@@ -129,7 +129,7 @@ def run_fusion(
             final_lane_video = annotation.annotate_video(
                     'drivelog_temp.avi', 
                     interactive_video, 
-                    None,
+                    [],
                     map(lambda (s, e, t, sent): \
                             (df.loc[s, video_index], df.loc[e, video_index], t, sent),
                             lane_events_list),
@@ -140,8 +140,14 @@ def run_fusion(
             move_video(metadata_file, data_direc)
 
         else:
-            # No annotated_fused exists
-            interactive_video = 'drivelog_temp.avi'
+            
+            final_plain_video = annotation.annotate_video(
+                'drivelog_temp.avi',
+                interactive_video,
+                [],
+                [],
+                metadata_file
+                )
 
     # Also copy drivelog_temp
     if (is_move_video and has_camera):
@@ -159,7 +165,8 @@ def run_fusion(
     time.sleep(1)
     shutil.copytree(data_direc, '../app/static/data/recent')
     time.sleep(1)
-    shutil.move(data_direc, '../app/static/data/')
+    dir_name = data_direc.split('/')[-1]
+    shutil.copytree(data_direc, '../app/static/data/' + dir_name)
 
     if (has_camera and has_wheel and write_results):
         print "Plotting...."
@@ -194,6 +201,7 @@ if __name__ == '__main__':
     parser = OptionParser()
     parser.add_option('-v', '--VideoPort', default=None)
     parser.add_option('-w', '--WheelPort', default=None)
+    parser.add_option('-n', '--SessionName', default=None)
     (options, args) = parser.parse_args()
     
     ####
@@ -203,10 +211,15 @@ if __name__ == '__main__':
     # flags for controlling if will use camera or wheel
     has_camera = options.VideoPort != None
     has_wheel  = options.WheelPort != None
-    sensors = sensor.SensorMaster()
-    now = time.time()
-    data_direc = 'data/%s' % int(now)
+    
+    data_direc = ''
+    if options.SessionName != None:
+        data_direc = 'data/%s' % options.SessionName
+    else:
+        now = time.time()
+        data_direc = 'data/%s' % int(now)
 
+    sensors = sensor.SensorMaster()
 
     if has_camera:
         video_port = int(options.VideoPort)
