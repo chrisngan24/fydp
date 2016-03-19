@@ -245,7 +245,6 @@ def main(build_name = None):
     output_frames_file_bw = open(output_dir + "test_frame_results_bw.html", 'w')
     output_events_file_bw = open(output_dir + "test_event_results_bw.html", 'w')
     test_case_list = sorted(next(os.walk(testing_dir))[1])
-    test_case_list = test_case_list[len(test_case_list)-6:len(test_case_list)]
     print test_case_list
     for test in test_case_list:
         for fi in os.listdir(testing_dir + test):

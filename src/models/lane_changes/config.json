@@ -1,6 +1,6 @@
-{	"window_size": 6, 
-       "moving_average_size": 5,
-       "active_features": ["gz", "gz_5"],
+{      "window_size": 7, 
+       "moving_average_size": 8,
+       "active_features": ["gz", "gz_6"],
        "ignore_columns": ["Unnamed: 0", "az", "gx", "gz_raw", "gy","ax", "ay", "theta", "time_diff", "faceBottom", "faceLeft", "faceRight", "faceTop", "isFrontFace", "noseX", "noseY", "time", "timestamp_y", "frameIndex", "timestamp_x"]
 
 }
