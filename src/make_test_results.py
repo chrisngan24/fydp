@@ -43,10 +43,15 @@ if __name__ == "__main__":
         if not os.path.exists(dir_name):
             os.mkdir(dir_name)
         print 'Copying data to ' + dir_name
-        shutil.copy('test_results/test_results.html', dir_name)
-        shutil.copy('test_results/test_results.csv', dir_name)
+        shutil.copy('test_results/test_event_results.html', dir_name)
+        shutil.copy('test_results/test_event_results.csv', dir_name)
+        shutil.copy('test_results/test_frame_results.html', dir_name)
+        shutil.copy('test_results/test_frame_results.csv', dir_name)
+
+
         # so that it renders in github
-        shutil.copy('test_results/test_results_bw.html', dir_name + '/' + 'README.md')
+        shutil.copy('test_results/test_event_results_bw.html', dir_name + '/' + 'README.md')
+        shutil.copy('test_results/test_frame_results_bw.html', dir_name + '/' + 'README.md')
         copy_test_plots('test_suite/test_cases/', dir_name)
         
     else:

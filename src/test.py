@@ -29,15 +29,6 @@ def create_event_dict(event_types, numerator, denominator):
         event_dict[event_type] = dict()
         event_dict[event_type][numerator] = 0
         event_dict[event_type][denominator] = 0
-
-        event_dict[map_sentiment(event_type, True)] = dict()
-        event_dict[map_sentiment(event_type, True)][numerator] = 0
-        event_dict[map_sentiment(event_type, True)][denominator] = 0
-        
-        event_dict[map_sentiment(event_type, False)] = dict()
-        event_dict[map_sentiment(event_type, False)][numerator] = 0
-        event_dict[map_sentiment(event_type, False)][denominator] = 0
-
     return event_dict
 
 def run_single_test(
@@ -115,9 +106,9 @@ def run_single_test(
         end = baseline[i]['end']
         event_type = baseline[i]['type']
         is_good = baseline[i]['is_good']
-        annotation_frames[event_type][start:end] += 1
+        annotation_frames[event_type][start:end] = 1
         ## Lets add a new column for just general sentiment
-        annotation_frames[map_sentiment(event_type, is_good)][start:end] += 1
+        annotation_frames[map_sentiment(event_type, is_good)][start:end] = 1
 
     # Use the annotation code to generate an event list
     head_events_list = analysis_results['head_events_list']
@@ -254,6 +245,7 @@ def main(build_name = None):
     output_frames_file_bw = open(output_dir + "test_frame_results_bw.html", 'w')
     output_events_file_bw = open(output_dir + "test_event_results_bw.html", 'w')
     test_case_list = sorted(next(os.walk(testing_dir))[1])
+    test_case_list = test_case_list[len(test_case_list)-6:len(test_case_list)]
     print test_case_list
     for test in test_case_list:
         for fi in os.listdir(testing_dir + test):
