@@ -111,9 +111,10 @@ class LaneAnnotator(EventAnnotator):
                         if self.is_valid_event(signal, 'left'):
                             if (len(events['right_lc_end']) > 0 and k > max(events['right_lc_end']) or len(events['right_lc_end']) == 0) \
                             and (len(events['left_lc_end']) > 0 and k > max(events['left_lc_end']) or len(events['left_lc_end']) == 0):
-                                events['left_lc_start'].add(k)
-                                events['left_lc_end'].add(i)
-                                found = True
+                                if (i - k) > 60:
+                                    events['left_lc_start'].add(k)
+                                    events['left_lc_end'].add(i)
+                                    found = True
 
             # ends with <<
             if predicted_labels_test[i] == neg_label and predicted_labels_test[i+1] == neg_label \
@@ -128,9 +129,10 @@ class LaneAnnotator(EventAnnotator):
                         if self.is_valid_event(signal, 'right'):
                             if (len(events['right_lc_end']) > 0 and k > max(events['right_lc_end']) or len(events['right_lc_end']) == 0) \
                             and (len(events['left_lc_end']) > 0 and k > max(events['left_lc_end']) or len(events['left_lc_end']) == 0):
-                                events['right_lc_start'].add(k)
-                                events['right_lc_end'].add(i)
-                                found = True
+                                if (i - k) > 60:
+                                    events['right_lc_start'].add(k)
+                                    events['right_lc_end'].add(i)
+                                    found = True
 
         for k, v in events.iteritems():
             events[k] = sorted(list(v))
