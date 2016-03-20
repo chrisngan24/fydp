@@ -13,8 +13,8 @@ class SignalHeadClassifier(SignalClassifier):
         SignalClassifier.__init__(self, df, signal_indices)
         m_dir = os.path.dirname(__file__)
         base_dir = os.path.join(m_dir, '../models/head_sentiment/')
-        model_dir = os.path.join(base_dir, 'head_sentiment_v0')
-        self.model = joblib.load('%s/head_sentiment_v0.pkl' % model_dir) 
+        model_dir = os.path.join(base_dir, 'head_turns')
+        self.model = joblib.load('%s/head_turns.pkl' % model_dir) 
 
         self.active_features = \
                 pd.read_csv('%s/active_features.csv' % model_dir)['columns'].tolist()
@@ -30,11 +30,15 @@ class SignalHeadClassifier(SignalClassifier):
             event_name = event[2]
             df_sub = self.df.loc[start_index:end_index]
             events.append(compute_signal_features(df_sub))
-        # only print if there is actual events
+        # only if there is actual events
         if len(events) > 0:
             df_events = pd.DataFrame(events).fillna(0)
             predictions = self.model.predict(df_events[self.active_features])
-            return map(lambda x: (bool(x), 'Is Good Head Turn'), predictions)
+            results = map(
+                    lambda x: (eval(x), 'Is Good Head Turn' if bool(x) else 'BAD'), 
+                    predictions,
+                    )
+            return results
         return []
 
 

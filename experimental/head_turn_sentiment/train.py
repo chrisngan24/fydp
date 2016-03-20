@@ -36,7 +36,7 @@ def load_training_data():
         row = compute_signal_features(df)
         events.append(row)
     
-    return pd.DataFrame(events)
+    return pd.DataFrame(events).fillna(0)
 
 
 

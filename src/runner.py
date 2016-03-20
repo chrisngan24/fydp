@@ -64,6 +64,7 @@ def run_fusion(
 
         for i in xrange(len(head_events_list)):
             head_events_list[i] = head_events_list[i] + (head_events_sentiment[i][0],)
+            print head_events_list
 
     if has_wheel:
         ###

@@ -35,6 +35,9 @@ def compute_signal_features(df):
         # for training the model
         event_features['good_turn'] = \
             str(df['turn_sentiment'].max().find('good') != -1)
+    for k in event_features.keys():
+        if event_features[k] == None:
+            event_features[k] = 0
     return event_features
 
 

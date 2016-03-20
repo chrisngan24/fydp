@@ -16,7 +16,8 @@ def flatten_df(df, meta):
     """
     df_og = df.copy()
     df.index = df['frameIndex']
-    df = df.reindex(index=list(xrange(0,meta['frames'])), method='nearest')
+    df = df.groupby('frameIndex', as_index=False).first().reindex(
+            index=list(xrange(0,meta['frames'])), method='nearest')
     vid_length = meta['frames']/float(meta['fps'])
     frames = list(xrange(0, meta['frames']))
     noseX = []
@@ -40,10 +41,10 @@ def flatten_df(df, meta):
     headEvents = []
     if meta['head_events'] != None:
         for head_event in meta['head_events']:
-            start_frame = df_og.loc[int(head_event[0])]['frameIndex']
-            end_frame   = df_og.loc[int(head_event[1])]['frameIndex']
-            #start_frame = int(head_event[0])
-            #end_frame = int(head_event[1])
+            #start_frame = df_og.loc[int(head_event[0])]['frameIndex']
+            #end_frame   = df_og.loc[int(head_event[1])]['frameIndex']
+            start_frame = int(head_event[0])
+            end_frame = int(head_event[1])
 
             event = head_event[2]
             sentiment   = head_event[3]
@@ -57,10 +58,10 @@ def flatten_df(df, meta):
     laneEvents = []
     if meta['lane_events'] != None:
         for lane_event in meta['lane_events']:
-            start_frame = df_og.loc[int(lane_event[0])]['frameIndex']
-            end_frame   = df_og.loc[int(lane_event[1])]['frameIndex']
-            #start_frame = int(lane_event[0])
-            #end_frame = int(lane_event[1])
+            #start_frame = df_og.loc[int(lane_event[0])]['frameIndex']
+            #end_frame   = df_og.loc[int(lane_event[1])]['frameIndex']
+            start_frame = int(lane_event[0])
+            end_frame = int(lane_event[1])
             event       = lane_event[2]
             sentiment   = lane_event[3]
             laneEvents.append(dict(
