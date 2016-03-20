@@ -228,7 +228,7 @@ def train():
     print x_train.columns
 
 def predict(direc):
-    df = get_data("%s/fused.csv" %direc)
+    df = get_data("%s/model.csv" %direc)
     df['gz'] = movingaverage(df['gz'], moving_average_size)
     # df['gz'] = scaler.fit_transform(df['gz'])
     windowed_df_test = generate_windows(df, window=window_size)
@@ -331,13 +331,13 @@ def detect_events(df, predicted_labels_test):
 if __name__ == "__main__":
     # train()
     
-    # left_dfs = []
-    # right_dfs = []
-    # neg_dfs = []
+    left_dfs = []
+    right_dfs = []
+    neg_dfs = []
 
-    # for subdir, dirs, files in os.walk(data_direc):
-    #     for d in dirs:
-    #         predict(os.path.join(data_direc, d))
+    for subdir, dirs, files in os.walk(data_direc):
+        for d in dirs:
+            predict(os.path.join(data_direc, d))
 
     predict(os.path.join(data_direc))
 

@@ -1,0 +1,1 @@
+[(125, 220, 'left_lane_change'), (254, 330, 'left_lane_change')]

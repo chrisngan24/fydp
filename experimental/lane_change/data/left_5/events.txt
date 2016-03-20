@@ -1,0 +1,1 @@
+[(50, 170, 'left_lane_change')]
