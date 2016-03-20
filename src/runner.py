@@ -40,6 +40,7 @@ def run_fusion(
         write_results=True,
         is_move_video=True,
         is_interact=True,
+        move_to_app=False,
         interactive_video='drivelog_temp.avi',
         ):
     """
@@ -83,7 +84,7 @@ def run_fusion(
     print "Creating video report....."
     video_index = 'frameIndex'
     metadata_file = 'annotated_metadata.json'
-    interactive_video = "annotated_fused.avi"    
+    #interactive_video = "annotated_fused.avi"    
 
     # Created a fused video if possible
     if (is_move_video and has_camera and has_wheel):
@@ -154,19 +155,20 @@ def run_fusion(
         move_video('drivelog_temp.avi', data_direc)
 
     video_name = os.path.join(data_direc, interactive_video)
+    if (move_to_app):
 
-    # Convert video 
-    convert_command = 'ffmpeg -i ' + video_name + ' ' + data_direc + '/annotated_fused.mp4'
-    os.system(convert_command)
-    time.sleep(1)
+        # Convert video 
+        convert_command = 'ffmpeg -i ' + video_name + ' ' + data_direc + '/annotated_fused.mp4'
+        os.system(convert_command)
+        time.sleep(1)
 
-    # Replace most recent, and add to data dir
-    shutil.rmtree('../app/static/data/recent', ignore_errors = True)
-    time.sleep(1)
-    shutil.copytree(data_direc, '../app/static/data/recent')
-    time.sleep(1)
-    dir_name = data_direc.split('/')[-1]
-    shutil.copytree(data_direc, '../app/static/data/' + dir_name)
+        # Replace most recent, and add to data dir
+        shutil.rmtree('../app/static/data/recent', ignore_errors = True)
+        time.sleep(1)
+        shutil.copytree(data_direc, '../app/static/data/recent')
+        time.sleep(1)
+        dir_name = data_direc.split('/')[-1]
+        shutil.copytree(data_direc, '../app/static/data/' + dir_name)
 
     if (has_camera and has_wheel and write_results):
         print "Plotting...."
@@ -249,6 +251,8 @@ if __name__ == '__main__':
                 has_wheel=has_wheel,
                 data_direc=data_direc,
                 is_interact=False,
+                move_to_app=True,
+                interactive_video='annotated_fused.avi',
                 )
     else:
         print 'No sensors... stopping'
