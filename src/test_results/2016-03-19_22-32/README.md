@@ -47,15 +47,15 @@
       <th>0</th>
       <td>drivelog_temp_annotated_josh.txt</td>
       <td>ang_long</td>
-      <td>0.822</td>
-      <td>0.934</td>
-      <td>0.728</td>
-      <td>0.819</td>
+      <td>0.800</td>
+      <td>0.912</td>
+      <td>0.681</td>
+      <td>0.653</td>
       <td>0.888</td>
       <td>0.000</td>
       <td>0.000</td>
-      <td>0.728</td>
-      <td>0.447</td>
+      <td>0.681</td>
+      <td>0.356</td>
       <td>0.906</td>
       <td>0.927</td>
       <td>0</td>
@@ -65,15 +65,15 @@
       <td>0.727</td>
       <td>0.500</td>
       <td>0.160</td>
-      <td>0.809</td>
-      <td>0.721</td>
+      <td>0.880</td>
+      <td>0.899</td>
       <td>0.000</td>
       <td>0.000</td>
-      <td>0.830</td>
-      <td>0.000</td>
-      <td>0.000</td>
-      <td>0.552</td>
-      <td>0.600</td>
+      <td>0.981</td>
+      <td>0.981</td>
+      <td>0.852</td>
+      <td>0.981</td>
+      <td>0.452</td>
       <td>0.968</td>
       <td>0.959</td>
       <td>0</td>
@@ -87,57 +87,16 @@
     <tr>
       <th>1</th>
       <td>drivelog_temp_annotated_josh.txt</td>
-      <td>ang_neg</td>
-      <td>0.667</td>
-      <td>0.784</td>
-      <td>0.000</td>
-      <td>0.000</td>
-      <td>0.883</td>
-      <td>0.000</td>
-      <td>0.000</td>
-      <td>0.000</td>
-      <td>0.000</td>
-      <td>0.989</td>
-      <td>1.000</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0.989</td>
-      <td>0.000</td>
-      <td>0.000</td>
-      <td>0.000</td>
-      <td>0.000</td>
-      <td>0.906</td>
-      <td>0.906</td>
-      <td>0.000</td>
-      <td>0.000</td>
-      <td>1.000</td>
-      <td>0.000</td>
-      <td>0.000</td>
-      <td>0.000</td>
-      <td>0.000</td>
-      <td>0.973</td>
-      <td>1.000</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0.973</td>
-      <td>0.000</td>
-      <td>0.000</td>
-      <td>0.000</td>
-      <td>0.000</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>drivelog_temp_annotated_josh.txt</td>
       <td>ang_no_head</td>
-      <td>0.813</td>
-      <td>0.813</td>
-      <td>0.800</td>
-      <td>0.667</td>
+      <td>0.712</td>
+      <td>0.712</td>
+      <td>0.814</td>
+      <td>0.296</td>
       <td>1.000</td>
       <td>0.000</td>
       <td>0.000</td>
-      <td>0.800</td>
-      <td>0.667</td>
+      <td>0.814</td>
+      <td>0.296</td>
       <td>0.986</td>
       <td>0.965</td>
       <td>0</td>
@@ -147,15 +106,15 @@
       <td>0.000</td>
       <td>1.000</td>
       <td>0.600</td>
-      <td>0.846</td>
-      <td>0.846</td>
-      <td>0.564</td>
-      <td>0.765</td>
+      <td>0.816</td>
+      <td>0.922</td>
       <td>1.000</td>
+      <td>0.580</td>
+      <td>0.894</td>
       <td>0.000</td>
       <td>0.000</td>
-      <td>0.564</td>
-      <td>0.765</td>
+      <td>0.505</td>
+      <td>0.580</td>
       <td>0.986</td>
       <td>1.000</td>
       <td>0</td>
@@ -167,18 +126,18 @@
       <td>0.571</td>
     </tr>
     <tr>
-      <th>3</th>
+      <th>2</th>
       <td>drivelog_temp_annotated_josh.txt</td>
       <td>ang_passenger_1</td>
-      <td>0.610</td>
-      <td>0.969</td>
+      <td>0.879</td>
+      <td>0.903</td>
       <td>0.000</td>
       <td>0.000</td>
-      <td>0.640</td>
-      <td>0.252</td>
-      <td>0.469</td>
-      <td>0.252</td>
-      <td>0.402</td>
+      <td>0.867</td>
+      <td>0.828</td>
+      <td>0.366</td>
+      <td>0.826</td>
+      <td>0.562</td>
       <td>0.764</td>
       <td>1.000</td>
       <td>0</td>
@@ -188,15 +147,15 @@
       <td>0.688</td>
       <td>0.113</td>
       <td>0.688</td>
-      <td>0.728</td>
-      <td>0.880</td>
+      <td>0.715</td>
+      <td>0.671</td>
       <td>0.000</td>
       <td>0.000</td>
       <td>0.670</td>
       <td>0.000</td>
       <td>0.000</td>
-      <td>0.742</td>
-      <td>0.270</td>
+      <td>0.569</td>
+      <td>0.566</td>
       <td>0.957</td>
       <td>1.000</td>
       <td>0</td>
@@ -208,18 +167,18 @@
       <td>0.233</td>
     </tr>
     <tr>
-      <th>4</th>
+      <th>3</th>
       <td>drivelog_temp_annotated_josh.txt</td>
       <td>ang_rapid</td>
-      <td>0.642</td>
-      <td>0.489</td>
-      <td>0.043</td>
-      <td>0.101</td>
+      <td>0.819</td>
+      <td>0.764</td>
+      <td>0.345</td>
+      <td>0.519</td>
       <td>0.827</td>
       <td>0.000</td>
       <td>0.000</td>
-      <td>0.468</td>
-      <td>0.537</td>
+      <td>0.815</td>
+      <td>0.591</td>
       <td>0.984</td>
       <td>0.974</td>
       <td>0</td>
@@ -229,15 +188,15 @@
       <td>0.667</td>
       <td>0.955</td>
       <td>0.750</td>
-      <td>0.823</td>
+      <td>0.807</td>
       <td>0.870</td>
       <td>0.000</td>
       <td>0.000</td>
-      <td>0.697</td>
-      <td>0.000</td>
-      <td>0.000</td>
-      <td>0.851</td>
-      <td>0.453</td>
+      <td>0.937</td>
+      <td>0.923</td>
+      <td>0.640</td>
+      <td>0.923</td>
+      <td>0.345</td>
       <td>0.982</td>
       <td>0.974</td>
       <td>0</td>
@@ -249,18 +208,18 @@
       <td>0.719</td>
     </tr>
     <tr>
-      <th>5</th>
+      <th>4</th>
       <td>drivelog_temp_annotated_josh.txt</td>
       <td>ang_while</td>
-      <td>0.681</td>
-      <td>0.810</td>
-      <td>0.474</td>
-      <td>0.723</td>
+      <td>0.711</td>
+      <td>0.840</td>
+      <td>0.533</td>
+      <td>0.713</td>
       <td>0.871</td>
       <td>0.000</td>
       <td>0.000</td>
-      <td>0.474</td>
-      <td>0.417</td>
+      <td>0.533</td>
+      <td>0.411</td>
       <td>0.970</td>
       <td>0.934</td>
       <td>0</td>
@@ -270,15 +229,15 @@
       <td>0.706</td>
       <td>1.000</td>
       <td>0.691</td>
-      <td>0.697</td>
-      <td>0.815</td>
+      <td>0.671</td>
+      <td>0.720</td>
       <td>0.000</td>
       <td>0.000</td>
-      <td>0.882</td>
-      <td>0.000</td>
-      <td>0.000</td>
-      <td>0.000</td>
-      <td>0.000</td>
+      <td>0.951</td>
+      <td>0.976</td>
+      <td>0.603</td>
+      <td>0.423</td>
+      <td>0.236</td>
       <td>0.976</td>
       <td>0.944</td>
       <td>0</td>
@@ -290,18 +249,18 @@
       <td>0.689</td>
     </tr>
     <tr>
-      <th>6</th>
+      <th>5</th>
       <td>drivelog_temp_annotated_clement.txt</td>
       <td>bright_case_1_josh</td>
-      <td>0.918</td>
-      <td>0.638</td>
+      <td>0.891</td>
+      <td>0.665</td>
       <td>0.000</td>
       <td>0.000</td>
       <td>0.687</td>
       <td>0.000</td>
       <td>0.000</td>
-      <td>0.818</td>
-      <td>0.947</td>
+      <td>0.804</td>
+      <td>0.861</td>
       <td>0.988</td>
       <td>1.000</td>
       <td>0</td>
@@ -311,15 +270,15 @@
       <td>0.771</td>
       <td>1.000</td>
       <td>0.771</td>
-      <td>0.897</td>
-      <td>0.762</td>
+      <td>0.889</td>
+      <td>0.769</td>
       <td>0.000</td>
       <td>0.000</td>
       <td>0.766</td>
       <td>0.000</td>
       <td>0.000</td>
-      <td>0.774</td>
-      <td>0.788</td>
+      <td>0.766</td>
+      <td>0.756</td>
       <td>0.993</td>
       <td>1.000</td>
       <td>0</td>
@@ -331,18 +290,18 @@
       <td>0.886</td>
     </tr>
     <tr>
-      <th>7</th>
+      <th>6</th>
       <td>drivelog_temp_annotated_josh.txt</td>
       <td>bright_case_1_josh</td>
-      <td>0.919</td>
-      <td>0.638</td>
+      <td>0.892</td>
+      <td>0.665</td>
       <td>0.000</td>
       <td>0.000</td>
       <td>0.662</td>
       <td>0.000</td>
       <td>0.000</td>
-      <td>0.855</td>
-      <td>0.916</td>
+      <td>0.844</td>
+      <td>0.836</td>
       <td>0.993</td>
       <td>1.000</td>
       <td>0</td>
@@ -352,15 +311,15 @@
       <td>0.844</td>
       <td>1.000</td>
       <td>0.844</td>
-      <td>0.858</td>
-      <td>0.762</td>
+      <td>0.850</td>
+      <td>0.769</td>
       <td>0.000</td>
       <td>0.000</td>
       <td>0.722</td>
       <td>0.000</td>
       <td>0.000</td>
-      <td>0.786</td>
-      <td>0.672</td>
+      <td>0.779</td>
+      <td>0.645</td>
       <td>0.994</td>
       <td>1.000</td>
       <td>0</td>
@@ -372,18 +331,18 @@
       <td>0.907</td>
     </tr>
     <tr>
-      <th>8</th>
+      <th>7</th>
       <td>drivelog_temp_annotated_angela.txt</td>
       <td>case_10_ang</td>
-      <td>0.754</td>
-      <td>0.838</td>
+      <td>0.646</td>
+      <td>1.000</td>
       <td>0.000</td>
       <td>0.000</td>
       <td>0.646</td>
       <td>0.000</td>
       <td>0.000</td>
-      <td>0.833</td>
-      <td>0.381</td>
+      <td>0.000</td>
+      <td>0.000</td>
       <td>0.934</td>
       <td>1.000</td>
       <td>0</td>
@@ -413,18 +372,18 @@
       <td>0.436</td>
     </tr>
     <tr>
-      <th>9</th>
+      <th>8</th>
       <td>drivelog_temp_annotated_josh.txt</td>
       <td>case_10_ang</td>
-      <td>0.673</td>
-      <td>0.838</td>
+      <td>0.625</td>
+      <td>1.000</td>
       <td>0.000</td>
       <td>0.000</td>
       <td>0.625</td>
       <td>0.000</td>
       <td>0.000</td>
-      <td>0.648</td>
-      <td>0.280</td>
+      <td>0.000</td>
+      <td>0.000</td>
       <td>0.952</td>
       <td>1.000</td>
       <td>0</td>
@@ -452,255 +411,255 @@
       <td>0.654</td>
       <td>1.000</td>
       <td>0.654</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>drivelog_temp_annotated_chris.txt</td>
+      <td>case_10_chris</td>
+      <td>0.892</td>
+      <td>1.000</td>
+      <td>0.000</td>
+      <td>0.000</td>
+      <td>0.892</td>
+      <td>0.885</td>
+      <td>0.642</td>
+      <td>0.885</td>
+      <td>0.642</td>
+      <td>0.980</td>
+      <td>1.000</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0.980</td>
+      <td>1.000</td>
+      <td>0.667</td>
+      <td>1.000</td>
+      <td>0.667</td>
+      <td>0.879</td>
+      <td>1.000</td>
+      <td>0.000</td>
+      <td>0.000</td>
+      <td>0.879</td>
+      <td>0.980</td>
+      <td>0.463</td>
+      <td>0.980</td>
+      <td>0.463</td>
+      <td>0.975</td>
+      <td>1.000</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0.975</td>
+      <td>1.000</td>
+      <td>0.613</td>
+      <td>1.000</td>
+      <td>0.613</td>
     </tr>
     <tr>
       <th>10</th>
-      <td>drivelog_temp_annotated_chris.txt</td>
+      <td>drivelog_temp_annotated_clement.txt</td>
       <td>case_10_chris</td>
-      <td>0.867</td>
+      <td>0.800</td>
       <td>1.000</td>
       <td>0.000</td>
       <td>0.000</td>
-      <td>0.867</td>
-      <td>0.778</td>
-      <td>0.642</td>
-      <td>0.778</td>
-      <td>0.642</td>
-      <td>0.980</td>
+      <td>0.800</td>
+      <td>0.897</td>
+      <td>0.467</td>
+      <td>0.897</td>
+      <td>0.467</td>
+      <td>0.990</td>
       <td>1.000</td>
       <td>0</td>
       <td>0</td>
-      <td>0.980</td>
+      <td>0.990</td>
+      <td>0.900</td>
+      <td>0.857</td>
+      <td>0.900</td>
+      <td>0.857</td>
+      <td>0.843</td>
       <td>1.000</td>
-      <td>0.667</td>
-      <td>1.000</td>
-      <td>0.667</td>
-      <td>0.703</td>
-      <td>0.816</td>
       <td>0.000</td>
       <td>0.000</td>
-      <td>0.888</td>
-      <td>0.908</td>
-      <td>0.546</td>
-      <td>0.381</td>
-      <td>0.546</td>
-      <td>0.975</td>
+      <td>0.843</td>
+      <td>0.843</td>
+      <td>0.384</td>
+      <td>0.843</td>
+      <td>0.384</td>
+      <td>0.986</td>
       <td>1.000</td>
       <td>0</td>
       <td>0</td>
-      <td>0.975</td>
-      <td>1.000</td>
-      <td>0.613</td>
-      <td>1.000</td>
-      <td>0.613</td>
+      <td>0.986</td>
+      <td>0.895</td>
+      <td>0.773</td>
+      <td>0.895</td>
+      <td>0.773</td>
     </tr>
     <tr>
       <th>11</th>
-      <td>drivelog_temp_annotated_clement.txt</td>
-      <td>case_10_chris</td>
-      <td>0.824</td>
+      <td>drivelog_temp_annotated_chris.txt</td>
+      <td>case_10_clem</td>
+      <td>0.850</td>
       <td>1.000</td>
       <td>0.000</td>
       <td>0.000</td>
-      <td>0.824</td>
-      <td>0.909</td>
-      <td>0.539</td>
-      <td>0.909</td>
-      <td>0.539</td>
-      <td>0.990</td>
-      <td>1.000</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0.990</td>
-      <td>0.900</td>
-      <td>0.857</td>
-      <td>0.900</td>
-      <td>0.857</td>
-      <td>0.667</td>
-      <td>0.816</td>
-      <td>0.000</td>
-      <td>0.000</td>
-      <td>0.851</td>
-      <td>0.800</td>
+      <td>0.850</td>
+      <td>0.911</td>
       <td>0.464</td>
-      <td>0.335</td>
+      <td>0.911</td>
       <td>0.464</td>
-      <td>0.986</td>
+      <td>0.948</td>
       <td>1.000</td>
       <td>0</td>
       <td>0</td>
-      <td>0.986</td>
-      <td>0.895</td>
-      <td>0.773</td>
-      <td>0.895</td>
-      <td>0.773</td>
+      <td>0.948</td>
+      <td>0.683</td>
+      <td>0.757</td>
+      <td>0.683</td>
+      <td>0.757</td>
+      <td>0.815</td>
+      <td>1.000</td>
+      <td>0.000</td>
+      <td>0.000</td>
+      <td>0.815</td>
+      <td>0.000</td>
+      <td>0.000</td>
+      <td>0.000</td>
+      <td>0.000</td>
+      <td>0.969</td>
+      <td>1.000</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0.969</td>
+      <td>0.846</td>
+      <td>0.710</td>
+      <td>0.846</td>
+      <td>0.710</td>
     </tr>
     <tr>
       <th>12</th>
-      <td>drivelog_temp_annotated_chris.txt</td>
+      <td>drivelog_temp_annotated_clement.txt</td>
       <td>case_10_clem</td>
-      <td>0.852</td>
+      <td>0.822</td>
       <td>1.000</td>
       <td>0.000</td>
       <td>0.000</td>
-      <td>0.852</td>
-      <td>0.912</td>
-      <td>0.473</td>
-      <td>0.912</td>
-      <td>0.473</td>
-      <td>0.948</td>
+      <td>0.822</td>
+      <td>0.839</td>
+      <td>0.412</td>
+      <td>0.839</td>
+      <td>0.412</td>
+      <td>0.965</td>
       <td>1.000</td>
       <td>0</td>
       <td>0</td>
-      <td>0.948</td>
-      <td>0.683</td>
-      <td>0.757</td>
-      <td>0.683</td>
-      <td>0.757</td>
-      <td>0.815</td>
+      <td>0.965</td>
+      <td>0.707</td>
+      <td>0.906</td>
+      <td>0.707</td>
+      <td>0.906</td>
+      <td>0.850</td>
       <td>1.000</td>
       <td>0.000</td>
       <td>0.000</td>
-      <td>0.815</td>
+      <td>0.850</td>
       <td>0.000</td>
       <td>0.000</td>
       <td>0.000</td>
       <td>0.000</td>
-      <td>0.969</td>
+      <td>0.984</td>
       <td>1.000</td>
       <td>0</td>
       <td>0</td>
-      <td>0.969</td>
-      <td>0.846</td>
-      <td>0.710</td>
-      <td>0.846</td>
-      <td>0.710</td>
+      <td>0.984</td>
+      <td>0.808</td>
+      <td>0.913</td>
+      <td>0.808</td>
+      <td>0.913</td>
     </tr>
     <tr>
       <th>13</th>
-      <td>drivelog_temp_annotated_clement.txt</td>
-      <td>case_10_clem</td>
-      <td>0.824</td>
+      <td>drivelog_temp_annotated_angela.txt</td>
+      <td>case_10_josh</td>
+      <td>0.832</td>
       <td>1.000</td>
       <td>0.000</td>
       <td>0.000</td>
-      <td>0.824</td>
-      <td>0.842</td>
-      <td>0.421</td>
-      <td>0.842</td>
-      <td>0.421</td>
-      <td>0.965</td>
+      <td>0.832</td>
+      <td>0.896</td>
+      <td>0.562</td>
+      <td>0.896</td>
+      <td>0.562</td>
+      <td>0.944</td>
       <td>1.000</td>
       <td>0</td>
       <td>0</td>
-      <td>0.965</td>
-      <td>0.707</td>
-      <td>0.906</td>
-      <td>0.707</td>
-      <td>0.906</td>
-      <td>0.850</td>
+      <td>0.944</td>
+      <td>0.667</td>
+      <td>0.508</td>
+      <td>0.667</td>
+      <td>0.508</td>
+      <td>0.770</td>
       <td>1.000</td>
       <td>0.000</td>
       <td>0.000</td>
-      <td>0.850</td>
-      <td>0.000</td>
-      <td>0.000</td>
-      <td>0.000</td>
-      <td>0.000</td>
-      <td>0.984</td>
+      <td>0.770</td>
+      <td>0.818</td>
+      <td>0.174</td>
+      <td>0.818</td>
+      <td>0.174</td>
+      <td>0.956</td>
       <td>1.000</td>
       <td>0</td>
       <td>0</td>
-      <td>0.984</td>
-      <td>0.808</td>
-      <td>0.913</td>
-      <td>0.808</td>
-      <td>0.913</td>
+      <td>0.956</td>
+      <td>0.804</td>
+      <td>0.597</td>
+      <td>0.804</td>
+      <td>0.597</td>
     </tr>
     <tr>
       <th>14</th>
-      <td>drivelog_temp_annotated_angela.txt</td>
+      <td>drivelog_temp_annotated_josh.txt</td>
       <td>case_10_josh</td>
-      <td>0.760</td>
+      <td>0.814</td>
       <td>1.000</td>
       <td>0.000</td>
       <td>0.000</td>
-      <td>0.760</td>
-      <td>0.910</td>
-      <td>0.312</td>
-      <td>0.910</td>
-      <td>0.312</td>
-      <td>0.944</td>
+      <td>0.814</td>
+      <td>0.896</td>
+      <td>0.533</td>
+      <td>0.896</td>
+      <td>0.533</td>
+      <td>0.960</td>
       <td>1.000</td>
       <td>0</td>
       <td>0</td>
-      <td>0.944</td>
-      <td>0.667</td>
-      <td>0.508</td>
-      <td>0.667</td>
-      <td>0.508</td>
-      <td>0.791</td>
-      <td>0.917</td>
+      <td>0.960</td>
+      <td>0.711</td>
+      <td>0.640</td>
+      <td>0.711</td>
+      <td>0.640</td>
+      <td>0.739</td>
+      <td>1.000</td>
       <td>0.000</td>
       <td>0.000</td>
-      <td>0.856</td>
-      <td>0.880</td>
-      <td>0.531</td>
-      <td>0.616</td>
-      <td>0.565</td>
-      <td>0.956</td>
+      <td>0.739</td>
+      <td>0.886</td>
+      <td>0.165</td>
+      <td>0.886</td>
+      <td>0.165</td>
+      <td>0.973</td>
       <td>1.000</td>
       <td>0</td>
       <td>0</td>
-      <td>0.956</td>
-      <td>0.804</td>
-      <td>0.597</td>
-      <td>0.804</td>
-      <td>0.597</td>
+      <td>0.973</td>
+      <td>0.761</td>
+      <td>0.778</td>
+      <td>0.761</td>
+      <td>0.778</td>
     </tr>
     <tr>
       <th>15</th>
-      <td>drivelog_temp_annotated_josh.txt</td>
-      <td>case_10_josh</td>
-      <td>0.742</td>
-      <td>1.000</td>
-      <td>0.000</td>
-      <td>0.000</td>
-      <td>0.742</td>
-      <td>0.910</td>
-      <td>0.296</td>
-      <td>0.910</td>
-      <td>0.296</td>
-      <td>0.960</td>
-      <td>1.000</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0.960</td>
-      <td>0.711</td>
-      <td>0.640</td>
-      <td>0.711</td>
-      <td>0.640</td>
-      <td>0.763</td>
-      <td>0.917</td>
-      <td>0.000</td>
-      <td>0.000</td>
-      <td>0.825</td>
-      <td>0.904</td>
-      <td>0.477</td>
-      <td>0.637</td>
-      <td>0.511</td>
-      <td>0.973</td>
-      <td>1.000</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0.973</td>
-      <td>0.761</td>
-      <td>0.778</td>
-      <td>0.761</td>
-      <td>0.778</td>
-    </tr>
-    <tr>
-      <th>16</th>
       <td>drivelog_temp_annotated_angela.txt</td>
       <td>case_1_ang</td>
       <td>0.772</td>
@@ -721,20 +680,61 @@
       <td>0.000</td>
       <td>0.000</td>
       <td>0.000</td>
-      <td>0.821</td>
-      <td>0.907</td>
+      <td>0.758</td>
+      <td>1.000</td>
       <td>0.000</td>
       <td>0.000</td>
       <td>0.758</td>
       <td>0.000</td>
       <td>0.000</td>
-      <td>0.841</td>
-      <td>0.323</td>
+      <td>0.000</td>
+      <td>0.000</td>
       <td>0.929</td>
       <td>1.000</td>
       <td>0</td>
       <td>0</td>
       <td>0.929</td>
+      <td>0.000</td>
+      <td>0.000</td>
+      <td>0.000</td>
+      <td>0.000</td>
+    </tr>
+    <tr>
+      <th>16</th>
+      <td>drivelog_temp_annotated_josh.txt</td>
+      <td>case_1_ang</td>
+      <td>0.849</td>
+      <td>1.000</td>
+      <td>0.000</td>
+      <td>0.000</td>
+      <td>0.849</td>
+      <td>0.000</td>
+      <td>0.000</td>
+      <td>0.000</td>
+      <td>0.000</td>
+      <td>0.957</td>
+      <td>1.000</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0.957</td>
+      <td>0.000</td>
+      <td>0.000</td>
+      <td>0.000</td>
+      <td>0.000</td>
+      <td>0.851</td>
+      <td>1.000</td>
+      <td>0.000</td>
+      <td>0.000</td>
+      <td>0.851</td>
+      <td>0.000</td>
+      <td>0.000</td>
+      <td>0.000</td>
+      <td>0.000</td>
+      <td>0.960</td>
+      <td>1.000</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0.960</td>
       <td>0.000</td>
       <td>0.000</td>
       <td>0.000</td>
@@ -742,129 +742,88 @@
     </tr>
     <tr>
       <th>17</th>
-      <td>drivelog_temp_annotated_josh.txt</td>
-      <td>case_1_ang</td>
-      <td>0.849</td>
+      <td>drivelog_temp_annotated_chris.txt</td>
+      <td>case_1_chris</td>
+      <td>0.865</td>
       <td>1.000</td>
       <td>0.000</td>
       <td>0.000</td>
-      <td>0.849</td>
-      <td>0.000</td>
-      <td>0.000</td>
-      <td>0.000</td>
-      <td>0.000</td>
-      <td>0.957</td>
+      <td>0.865</td>
+      <td>0.921</td>
+      <td>0.543</td>
+      <td>0.921</td>
+      <td>0.543</td>
+      <td>0.979</td>
       <td>1.000</td>
       <td>0</td>
       <td>0</td>
-      <td>0.957</td>
+      <td>0.979</td>
+      <td>0.950</td>
+      <td>0.679</td>
+      <td>0.950</td>
+      <td>0.679</td>
+      <td>0.894</td>
+      <td>1.000</td>
       <td>0.000</td>
       <td>0.000</td>
-      <td>0.000</td>
-      <td>0.000</td>
-      <td>0.785</td>
-      <td>0.907</td>
-      <td>0.000</td>
-      <td>0.000</td>
-      <td>0.851</td>
-      <td>0.000</td>
-      <td>0.000</td>
-      <td>0.145</td>
-      <td>0.090</td>
-      <td>0.960</td>
+      <td>0.894</td>
+      <td>1.000</td>
+      <td>0.457</td>
+      <td>1.000</td>
+      <td>0.457</td>
+      <td>0.975</td>
       <td>1.000</td>
       <td>0</td>
       <td>0</td>
-      <td>0.960</td>
-      <td>0.000</td>
-      <td>0.000</td>
-      <td>0.000</td>
-      <td>0.000</td>
+      <td>0.975</td>
+      <td>0.826</td>
+      <td>0.704</td>
+      <td>0.826</td>
+      <td>0.704</td>
     </tr>
     <tr>
       <th>18</th>
-      <td>drivelog_temp_annotated_chris.txt</td>
+      <td>drivelog_temp_annotated_clement.txt</td>
       <td>case_1_chris</td>
-      <td>0.867</td>
+      <td>0.775</td>
       <td>1.000</td>
       <td>0.000</td>
       <td>0.000</td>
-      <td>0.867</td>
-      <td>0.922</td>
-      <td>0.550</td>
-      <td>0.922</td>
-      <td>0.550</td>
-      <td>0.979</td>
+      <td>0.775</td>
+      <td>0.842</td>
+      <td>0.400</td>
+      <td>0.842</td>
+      <td>0.400</td>
+      <td>0.992</td>
       <td>1.000</td>
       <td>0</td>
       <td>0</td>
-      <td>0.979</td>
+      <td>0.992</td>
       <td>0.950</td>
-      <td>0.679</td>
+      <td>0.864</td>
       <td>0.950</td>
-      <td>0.679</td>
-      <td>0.871</td>
+      <td>0.864</td>
+      <td>0.821</td>
       <td>1.000</td>
       <td>0.000</td>
       <td>0.000</td>
-      <td>0.871</td>
-      <td>0.833</td>
-      <td>0.426</td>
-      <td>0.833</td>
-      <td>0.426</td>
-      <td>0.975</td>
+      <td>0.821</td>
+      <td>0.953</td>
+      <td>0.328</td>
+      <td>0.953</td>
+      <td>0.328</td>
+      <td>0.994</td>
       <td>1.000</td>
       <td>0</td>
       <td>0</td>
-      <td>0.975</td>
-      <td>0.826</td>
-      <td>0.704</td>
-      <td>0.826</td>
-      <td>0.704</td>
+      <td>0.994</td>
+      <td>0.913</td>
+      <td>0.955</td>
+      <td>0.913</td>
+      <td>0.955</td>
     </tr>
     <tr>
       <th>19</th>
-      <td>drivelog_temp_annotated_clement.txt</td>
-      <td>case_1_chris</td>
-      <td>0.777</td>
-      <td>1.000</td>
-      <td>0.000</td>
-      <td>0.000</td>
-      <td>0.777</td>
-      <td>0.844</td>
-      <td>0.406</td>
-      <td>0.844</td>
-      <td>0.406</td>
-      <td>0.992</td>
-      <td>1.000</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0.992</td>
-      <td>0.950</td>
-      <td>0.864</td>
-      <td>0.950</td>
-      <td>0.864</td>
-      <td>0.798</td>
-      <td>1.000</td>
-      <td>0.000</td>
-      <td>0.000</td>
-      <td>0.798</td>
-      <td>0.792</td>
-      <td>0.304</td>
-      <td>0.792</td>
-      <td>0.304</td>
-      <td>0.994</td>
-      <td>1.000</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0.994</td>
-      <td>0.913</td>
-      <td>0.955</td>
-      <td>0.913</td>
-      <td>0.955</td>
-    </tr>
-    <tr>
-      <th>20</th>
       <td>drivelog_temp_annotated_angela.txt</td>
       <td>case_1_clem</td>
       <td>0.754</td>
@@ -885,15 +844,15 @@
       <td>0.620</td>
       <td>0.861</td>
       <td>0.620</td>
-      <td>0.865</td>
-      <td>1.000</td>
+      <td>0.619</td>
+      <td>0.609</td>
       <td>0.000</td>
       <td>0.000</td>
-      <td>0.865</td>
-      <td>0.935</td>
-      <td>0.509</td>
-      <td>0.935</td>
-      <td>0.509</td>
+      <td>0.743</td>
+      <td>0.000</td>
+      <td>0.000</td>
+      <td>0.341</td>
+      <td>0.518</td>
       <td>0.957</td>
       <td>1.000</td>
       <td>0</td>
@@ -905,7 +864,7 @@
       <td>0.587</td>
     </tr>
     <tr>
-      <th>21</th>
+      <th>20</th>
       <td>drivelog_temp_annotated_chris.txt</td>
       <td>case_1_clem</td>
       <td>0.928</td>
@@ -926,15 +885,15 @@
       <td>0.694</td>
       <td>0.694</td>
       <td>0.694</td>
-      <td>0.930</td>
-      <td>1.000</td>
+      <td>0.684</td>
+      <td>0.609</td>
       <td>0.000</td>
       <td>0.000</td>
-      <td>0.930</td>
-      <td>0.855</td>
-      <td>0.707</td>
-      <td>0.855</td>
-      <td>0.707</td>
+      <td>0.831</td>
+      <td>0.000</td>
+      <td>0.000</td>
+      <td>0.312</td>
+      <td>0.720</td>
       <td>0.980</td>
       <td>1.000</td>
       <td>0</td>
@@ -944,102 +903,102 @@
       <td>0.765</td>
       <td>0.963</td>
       <td>0.765</td>
+    </tr>
+    <tr>
+      <th>21</th>
+      <td>drivelog_temp_annotated_clement.txt</td>
+      <td>case_1_josh</td>
+      <td>0.925</td>
+      <td>1.000</td>
+      <td>0.000</td>
+      <td>0.000</td>
+      <td>0.925</td>
+      <td>0.909</td>
+      <td>0.841</td>
+      <td>0.909</td>
+      <td>0.841</td>
+      <td>0.997</td>
+      <td>1.000</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0.997</td>
+      <td>0.964</td>
+      <td>0.964</td>
+      <td>0.964</td>
+      <td>0.964</td>
+      <td>0.934</td>
+      <td>1.000</td>
+      <td>0.000</td>
+      <td>0.000</td>
+      <td>0.934</td>
+      <td>0.919</td>
+      <td>0.815</td>
+      <td>0.919</td>
+      <td>0.815</td>
+      <td>0.991</td>
+      <td>1.000</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0.991</td>
+      <td>1.000</td>
+      <td>0.778</td>
+      <td>1.000</td>
+      <td>0.778</td>
     </tr>
     <tr>
       <th>22</th>
-      <td>drivelog_temp_annotated_clement.txt</td>
+      <td>drivelog_temp_annotated_josh.txt</td>
       <td>case_1_josh</td>
-      <td>0.951</td>
+      <td>0.963</td>
       <td>1.000</td>
       <td>0.000</td>
       <td>0.000</td>
-      <td>0.951</td>
-      <td>0.916</td>
-      <td>0.925</td>
-      <td>0.916</td>
-      <td>0.925</td>
-      <td>0.997</td>
+      <td>0.963</td>
+      <td>0.973</td>
+      <td>0.905</td>
+      <td>0.973</td>
+      <td>0.905</td>
+      <td>0.992</td>
       <td>1.000</td>
       <td>0</td>
       <td>0</td>
-      <td>0.997</td>
-      <td>0.964</td>
-      <td>0.964</td>
-      <td>0.964</td>
-      <td>0.964</td>
+      <td>0.992</td>
+      <td>1.000</td>
+      <td>0.848</td>
+      <td>1.000</td>
+      <td>0.848</td>
       <td>0.960</td>
       <td>1.000</td>
       <td>0.000</td>
       <td>0.000</td>
       <td>0.960</td>
-      <td>0.928</td>
-      <td>0.917</td>
-      <td>0.928</td>
-      <td>0.917</td>
-      <td>0.991</td>
+      <td>0.980</td>
+      <td>0.864</td>
+      <td>0.980</td>
+      <td>0.864</td>
+      <td>0.986</td>
       <td>1.000</td>
       <td>0</td>
       <td>0</td>
-      <td>0.991</td>
+      <td>0.986</td>
       <td>1.000</td>
-      <td>0.778</td>
+      <td>0.700</td>
       <td>1.000</td>
-      <td>0.778</td>
+      <td>0.700</td>
     </tr>
     <tr>
       <th>23</th>
-      <td>drivelog_temp_annotated_josh.txt</td>
-      <td>case_1_josh</td>
-      <td>0.989</td>
-      <td>1.000</td>
-      <td>0.000</td>
-      <td>0.000</td>
-      <td>0.989</td>
-      <td>0.975</td>
-      <td>0.990</td>
-      <td>0.975</td>
-      <td>0.990</td>
-      <td>0.992</td>
-      <td>1.000</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0.992</td>
-      <td>1.000</td>
-      <td>0.848</td>
-      <td>1.000</td>
-      <td>0.848</td>
-      <td>0.986</td>
-      <td>1.000</td>
-      <td>0.000</td>
-      <td>0.000</td>
-      <td>0.986</td>
-      <td>0.982</td>
-      <td>0.964</td>
-      <td>0.982</td>
-      <td>0.964</td>
-      <td>0.986</td>
-      <td>1.000</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0.986</td>
-      <td>1.000</td>
-      <td>0.700</td>
-      <td>1.000</td>
-      <td>0.700</td>
-    </tr>
-    <tr>
-      <th>24</th>
       <td>drivelog_temp_annotated_angela.txt</td>
       <td>case_2_ang</td>
-      <td>0.778</td>
-      <td>0.785</td>
+      <td>0.743</td>
+      <td>0.886</td>
       <td>0.000</td>
       <td>0.000</td>
-      <td>0.603</td>
-      <td>0.342</td>
+      <td>0.668</td>
+      <td>0.531</td>
       <td>0.186</td>
-      <td>0.647</td>
-      <td>0.763</td>
+      <td>0.676</td>
+      <td>0.464</td>
       <td>0.967</td>
       <td>1.000</td>
       <td>0</td>
@@ -1049,15 +1008,15 @@
       <td>0.767</td>
       <td>0.848</td>
       <td>0.767</td>
-      <td>0.705</td>
-      <td>0.832</td>
+      <td>0.547</td>
+      <td>1.000</td>
       <td>0.000</td>
       <td>0.000</td>
       <td>0.547</td>
       <td>0.000</td>
       <td>0.000</td>
-      <td>0.971</td>
-      <td>0.361</td>
+      <td>0.000</td>
+      <td>0.000</td>
       <td>0.901</td>
       <td>1.000</td>
       <td>0</td>
@@ -1069,18 +1028,18 @@
       <td>0.747</td>
     </tr>
     <tr>
-      <th>25</th>
+      <th>24</th>
       <td>drivelog_temp_annotated_josh.txt</td>
       <td>case_2_ang</td>
-      <td>0.739</td>
-      <td>0.785</td>
+      <td>0.718</td>
+      <td>0.886</td>
       <td>0.000</td>
       <td>0.000</td>
-      <td>0.571</td>
-      <td>0.349</td>
+      <td>0.636</td>
+      <td>0.542</td>
       <td>0.172</td>
-      <td>0.641</td>
-      <td>0.685</td>
+      <td>0.697</td>
+      <td>0.434</td>
       <td>0.979</td>
       <td>1.000</td>
       <td>0</td>
@@ -1090,15 +1049,15 @@
       <td>0.855</td>
       <td>0.894</td>
       <td>0.855</td>
-      <td>0.668</td>
-      <td>0.832</td>
+      <td>0.535</td>
+      <td>1.000</td>
       <td>0.000</td>
       <td>0.000</td>
       <td>0.535</td>
       <td>0.000</td>
       <td>0.000</td>
-      <td>0.897</td>
-      <td>0.324</td>
+      <td>0.000</td>
+      <td>0.000</td>
       <td>0.916</td>
       <td>1.000</td>
       <td>0</td>
@@ -1108,91 +1067,91 @@
       <td>0.902</td>
       <td>0.470</td>
       <td>0.902</td>
+    </tr>
+    <tr>
+      <th>25</th>
+      <td>drivelog_temp_annotated_chris.txt</td>
+      <td>case_2_chris</td>
+      <td>0.806</td>
+      <td>1.000</td>
+      <td>0.000</td>
+      <td>0.000</td>
+      <td>0.806</td>
+      <td>0.891</td>
+      <td>0.399</td>
+      <td>0.891</td>
+      <td>0.399</td>
+      <td>0.981</td>
+      <td>1.000</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0.981</td>
+      <td>0.905</td>
+      <td>0.731</td>
+      <td>0.905</td>
+      <td>0.731</td>
+      <td>0.772</td>
+      <td>1.000</td>
+      <td>0.000</td>
+      <td>0.000</td>
+      <td>0.772</td>
+      <td>0.000</td>
+      <td>0.000</td>
+      <td>0.000</td>
+      <td>0.000</td>
+      <td>0.975</td>
+      <td>1.000</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0.975</td>
+      <td>0.833</td>
+      <td>0.714</td>
+      <td>0.833</td>
+      <td>0.714</td>
     </tr>
     <tr>
       <th>26</th>
-      <td>drivelog_temp_annotated_chris.txt</td>
+      <td>drivelog_temp_annotated_clement.txt</td>
       <td>case_2_chris</td>
-      <td>0.833</td>
-      <td>1.000</td>
-      <td>0.000</td>
-      <td>0.000</td>
-      <td>0.833</td>
-      <td>0.909</td>
-      <td>0.490</td>
-      <td>0.909</td>
-      <td>0.490</td>
-      <td>0.981</td>
-      <td>1.000</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0.981</td>
-      <td>0.905</td>
-      <td>0.731</td>
-      <td>0.905</td>
-      <td>0.731</td>
       <td>0.772</td>
       <td>1.000</td>
       <td>0.000</td>
       <td>0.000</td>
       <td>0.772</td>
-      <td>0.000</td>
-      <td>0.000</td>
-      <td>0.000</td>
-      <td>0.000</td>
-      <td>0.975</td>
+      <td>0.797</td>
+      <td>0.347</td>
+      <td>0.797</td>
+      <td>0.347</td>
+      <td>0.998</td>
       <td>1.000</td>
       <td>0</td>
       <td>0</td>
-      <td>0.975</td>
+      <td>0.998</td>
+      <td>0.952</td>
+      <td>1.000</td>
+      <td>0.952</td>
+      <td>1.000</td>
+      <td>0.741</td>
+      <td>1.000</td>
+      <td>0.000</td>
+      <td>0.000</td>
+      <td>0.741</td>
+      <td>0.000</td>
+      <td>0.000</td>
+      <td>0.000</td>
+      <td>0.000</td>
+      <td>0.992</td>
+      <td>1.000</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0.992</td>
       <td>0.833</td>
-      <td>0.714</td>
+      <td>1.000</td>
       <td>0.833</td>
-      <td>0.714</td>
+      <td>1.000</td>
     </tr>
     <tr>
       <th>27</th>
-      <td>drivelog_temp_annotated_clement.txt</td>
-      <td>case_2_chris</td>
-      <td>0.800</td>
-      <td>1.000</td>
-      <td>0.000</td>
-      <td>0.000</td>
-      <td>0.800</td>
-      <td>0.831</td>
-      <td>0.435</td>
-      <td>0.831</td>
-      <td>0.435</td>
-      <td>0.998</td>
-      <td>1.000</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0.998</td>
-      <td>0.952</td>
-      <td>1.000</td>
-      <td>0.952</td>
-      <td>1.000</td>
-      <td>0.741</td>
-      <td>1.000</td>
-      <td>0.000</td>
-      <td>0.000</td>
-      <td>0.741</td>
-      <td>0.000</td>
-      <td>0.000</td>
-      <td>0.000</td>
-      <td>0.000</td>
-      <td>0.992</td>
-      <td>1.000</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0.992</td>
-      <td>0.833</td>
-      <td>1.000</td>
-      <td>0.833</td>
-      <td>1.000</td>
-    </tr>
-    <tr>
-      <th>28</th>
       <td>drivelog_temp_annotated_angela.txt</td>
       <td>case_2_clem</td>
       <td>0.767</td>
@@ -1213,15 +1172,15 @@
       <td>0.655</td>
       <td>0.857</td>
       <td>0.655</td>
-      <td>0.794</td>
+      <td>0.895</td>
       <td>1.000</td>
       <td>0.000</td>
       <td>0.000</td>
-      <td>0.794</td>
-      <td>0.000</td>
-      <td>0.000</td>
-      <td>0.000</td>
-      <td>0.000</td>
+      <td>0.895</td>
+      <td>1.000</td>
+      <td>0.489</td>
+      <td>1.000</td>
+      <td>0.489</td>
       <td>0.962</td>
       <td>1.000</td>
       <td>0</td>
@@ -1233,7 +1192,7 @@
       <td>0.595</td>
     </tr>
     <tr>
-      <th>29</th>
+      <th>28</th>
       <td>drivelog_temp_annotated_chris.txt</td>
       <td>case_2_clem</td>
       <td>0.841</td>
@@ -1254,15 +1213,15 @@
       <td>0.765</td>
       <td>0.310</td>
       <td>0.765</td>
-      <td>0.892</td>
+      <td>0.877</td>
       <td>1.000</td>
       <td>0.000</td>
       <td>0.000</td>
-      <td>0.892</td>
-      <td>0.000</td>
-      <td>0.000</td>
-      <td>0.000</td>
-      <td>0.000</td>
+      <td>0.877</td>
+      <td>0.422</td>
+      <td>0.396</td>
+      <td>0.422</td>
+      <td>0.396</td>
       <td>0.978</td>
       <td>1.000</td>
       <td>0</td>
@@ -1274,18 +1233,18 @@
       <td>0.759</td>
     </tr>
     <tr>
-      <th>30</th>
+      <th>29</th>
       <td>drivelog_temp_annotated_clement.txt</td>
       <td>case_2_josh</td>
-      <td>0.926</td>
+      <td>0.900</td>
       <td>1.000</td>
       <td>0.000</td>
       <td>0.000</td>
-      <td>0.926</td>
-      <td>0.917</td>
-      <td>0.873</td>
-      <td>0.917</td>
-      <td>0.873</td>
+      <td>0.900</td>
+      <td>0.910</td>
+      <td>0.799</td>
+      <td>0.910</td>
+      <td>0.799</td>
       <td>0.994</td>
       <td>1.000</td>
       <td>0</td>
@@ -1295,15 +1254,15 @@
       <td>0.900</td>
       <td>0.982</td>
       <td>0.900</td>
-      <td>0.866</td>
-      <td>0.656</td>
+      <td>0.806</td>
+      <td>0.717</td>
       <td>0.000</td>
       <td>0.000</td>
       <td>0.699</td>
       <td>0.000</td>
       <td>0.000</td>
-      <td>0.744</td>
-      <td>0.849</td>
+      <td>0.689</td>
+      <td>0.648</td>
       <td>0.962</td>
       <td>1.000</td>
       <td>0</td>
@@ -1315,18 +1274,18 @@
       <td>0.368</td>
     </tr>
     <tr>
-      <th>31</th>
+      <th>30</th>
       <td>drivelog_temp_annotated_josh.txt</td>
       <td>case_2_josh</td>
-      <td>0.822</td>
+      <td>0.823</td>
       <td>1.000</td>
       <td>0.000</td>
       <td>0.000</td>
-      <td>0.822</td>
-      <td>0.594</td>
-      <td>0.834</td>
-      <td>0.594</td>
-      <td>0.834</td>
+      <td>0.823</td>
+      <td>0.604</td>
+      <td>0.781</td>
+      <td>0.604</td>
+      <td>0.781</td>
       <td>0.970</td>
       <td>1.000</td>
       <td>0</td>
@@ -1336,14 +1295,14 @@
       <td>0.794</td>
       <td>0.491</td>
       <td>0.794</td>
-      <td>0.618</td>
-      <td>0.656</td>
+      <td>0.679</td>
+      <td>0.717</td>
       <td>0.000</td>
       <td>0.000</td>
       <td>0.885</td>
       <td>0.000</td>
       <td>0.000</td>
-      <td>0.112</td>
+      <td>0.136</td>
       <td>0.336</td>
       <td>0.916</td>
       <td>1.000</td>
@@ -1356,18 +1315,18 @@
       <td>0.000</td>
     </tr>
     <tr>
-      <th>32</th>
+      <th>31</th>
       <td>drivelog_temp_annotated_angela.txt</td>
       <td>case_3_ang</td>
-      <td>0.832</td>
+      <td>0.824</td>
       <td>1.000</td>
       <td>0.000</td>
       <td>0.000</td>
-      <td>0.832</td>
-      <td>0.816</td>
-      <td>0.435</td>
-      <td>0.816</td>
-      <td>0.435</td>
+      <td>0.824</td>
+      <td>0.804</td>
+      <td>0.402</td>
+      <td>0.804</td>
+      <td>0.402</td>
       <td>0.926</td>
       <td>1.000</td>
       <td>0</td>
@@ -1395,61 +1354,61 @@
       <td>0.647</td>
       <td>0.629</td>
       <td>0.647</td>
+    </tr>
+    <tr>
+      <th>32</th>
+      <td>drivelog_temp_annotated_josh.txt</td>
+      <td>case_3_ang</td>
+      <td>0.689</td>
+      <td>1.000</td>
+      <td>0.000</td>
+      <td>0.000</td>
+      <td>0.689</td>
+      <td>0.804</td>
+      <td>0.262</td>
+      <td>0.804</td>
+      <td>0.262</td>
+      <td>0.970</td>
+      <td>1.000</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0.970</td>
+      <td>1.000</td>
+      <td>0.645</td>
+      <td>1.000</td>
+      <td>0.645</td>
+      <td>0.840</td>
+      <td>1.000</td>
+      <td>0.000</td>
+      <td>0.000</td>
+      <td>0.840</td>
+      <td>0.000</td>
+      <td>0.000</td>
+      <td>0.000</td>
+      <td>0.000</td>
+      <td>0.939</td>
+      <td>1.000</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0.939</td>
+      <td>0.629</td>
+      <td>0.710</td>
+      <td>0.629</td>
+      <td>0.710</td>
     </tr>
     <tr>
       <th>33</th>
-      <td>drivelog_temp_annotated_josh.txt</td>
-      <td>case_3_ang</td>
-      <td>0.702</td>
-      <td>1.000</td>
-      <td>0.000</td>
-      <td>0.000</td>
-      <td>0.702</td>
-      <td>0.837</td>
-      <td>0.291</td>
-      <td>0.837</td>
-      <td>0.291</td>
-      <td>0.970</td>
-      <td>1.000</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0.970</td>
-      <td>1.000</td>
-      <td>0.645</td>
-      <td>1.000</td>
-      <td>0.645</td>
-      <td>0.840</td>
-      <td>1.000</td>
-      <td>0.000</td>
-      <td>0.000</td>
-      <td>0.840</td>
-      <td>0.000</td>
-      <td>0.000</td>
-      <td>0.000</td>
-      <td>0.000</td>
-      <td>0.939</td>
-      <td>1.000</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0.939</td>
-      <td>0.629</td>
-      <td>0.710</td>
-      <td>0.629</td>
-      <td>0.710</td>
-    </tr>
-    <tr>
-      <th>34</th>
       <td>drivelog_temp_annotated_chris.txt</td>
       <td>case_3_chris</td>
-      <td>0.843</td>
+      <td>0.829</td>
       <td>1.000</td>
       <td>0.000</td>
       <td>0.000</td>
-      <td>0.843</td>
-      <td>0.930</td>
-      <td>0.485</td>
-      <td>0.930</td>
-      <td>0.485</td>
+      <td>0.829</td>
+      <td>0.922</td>
+      <td>0.434</td>
+      <td>0.922</td>
+      <td>0.434</td>
       <td>0.914</td>
       <td>1.000</td>
       <td>0</td>
@@ -1459,20 +1418,61 @@
       <td>0.710</td>
       <td>0.407</td>
       <td>0.710</td>
-      <td>0.854</td>
-      <td>0.595</td>
+      <td>0.808</td>
+      <td>0.653</td>
       <td>0.000</td>
       <td>0.000</td>
       <td>0.720</td>
       <td>0.000</td>
       <td>0.000</td>
-      <td>0.665</td>
-      <td>0.963</td>
+      <td>0.627</td>
+      <td>0.776</td>
       <td>0.929</td>
       <td>1.000</td>
       <td>0</td>
       <td>0</td>
       <td>0.929</td>
+      <td>0.000</td>
+      <td>0.000</td>
+      <td>0.000</td>
+      <td>0.000</td>
+    </tr>
+    <tr>
+      <th>34</th>
+      <td>drivelog_temp_annotated_clement.txt</td>
+      <td>case_3_chris</td>
+      <td>0.837</td>
+      <td>1.000</td>
+      <td>0.000</td>
+      <td>0.000</td>
+      <td>0.837</td>
+      <td>0.859</td>
+      <td>0.444</td>
+      <td>0.859</td>
+      <td>0.444</td>
+      <td>0.923</td>
+      <td>1.000</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0.923</td>
+      <td>0.352</td>
+      <td>0.905</td>
+      <td>0.352</td>
+      <td>0.905</td>
+      <td>0.781</td>
+      <td>0.653</td>
+      <td>0.000</td>
+      <td>0.000</td>
+      <td>0.714</td>
+      <td>0.000</td>
+      <td>0.000</td>
+      <td>0.596</td>
+      <td>0.723</td>
+      <td>0.948</td>
+      <td>1.000</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0.948</td>
       <td>0.000</td>
       <td>0.000</td>
       <td>0.000</td>
@@ -1480,163 +1480,163 @@
     </tr>
     <tr>
       <th>35</th>
-      <td>drivelog_temp_annotated_clement.txt</td>
-      <td>case_3_chris</td>
-      <td>0.843</td>
+      <td>drivelog_temp_annotated_angela.txt</td>
+      <td>case_3_clem</td>
+      <td>0.868</td>
       <td>1.000</td>
       <td>0.000</td>
       <td>0.000</td>
-      <td>0.843</td>
-      <td>0.845</td>
-      <td>0.484</td>
-      <td>0.845</td>
-      <td>0.484</td>
-      <td>0.923</td>
+      <td>0.868</td>
+      <td>0.900</td>
+      <td>0.553</td>
+      <td>0.900</td>
+      <td>0.553</td>
+      <td>0.907</td>
       <td>1.000</td>
       <td>0</td>
       <td>0</td>
-      <td>0.923</td>
-      <td>0.352</td>
-      <td>0.905</td>
-      <td>0.352</td>
-      <td>0.905</td>
-      <td>0.827</td>
-      <td>0.595</td>
+      <td>0.907</td>
+      <td>0.640</td>
+      <td>0.582</td>
+      <td>0.640</td>
+      <td>0.582</td>
+      <td>0.697</td>
+      <td>1.000</td>
       <td>0.000</td>
       <td>0.000</td>
-      <td>0.714</td>
+      <td>0.697</td>
       <td>0.000</td>
       <td>0.000</td>
-      <td>0.639</td>
-      <td>0.905</td>
-      <td>0.948</td>
+      <td>0.000</td>
+      <td>0.000</td>
+      <td>0.970</td>
       <td>1.000</td>
       <td>0</td>
       <td>0</td>
-      <td>0.948</td>
-      <td>0.000</td>
-      <td>0.000</td>
-      <td>0.000</td>
-      <td>0.000</td>
+      <td>0.970</td>
+      <td>1.000</td>
+      <td>0.690</td>
+      <td>1.000</td>
+      <td>0.690</td>
     </tr>
     <tr>
       <th>36</th>
-      <td>drivelog_temp_annotated_angela.txt</td>
+      <td>drivelog_temp_annotated_chris.txt</td>
       <td>case_3_clem</td>
-      <td>0.872</td>
+      <td>0.891</td>
       <td>1.000</td>
       <td>0.000</td>
       <td>0.000</td>
-      <td>0.872</td>
-      <td>0.903</td>
-      <td>0.570</td>
-      <td>0.903</td>
-      <td>0.570</td>
-      <td>0.907</td>
-      <td>1.000</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0.907</td>
-      <td>0.640</td>
-      <td>0.582</td>
-      <td>0.640</td>
-      <td>0.582</td>
-      <td>0.697</td>
-      <td>1.000</td>
-      <td>0.000</td>
-      <td>0.000</td>
-      <td>0.697</td>
-      <td>0.000</td>
-      <td>0.000</td>
-      <td>0.000</td>
-      <td>0.000</td>
-      <td>0.970</td>
+      <td>0.891</td>
+      <td>0.900</td>
+      <td>0.606</td>
+      <td>0.900</td>
+      <td>0.606</td>
+      <td>0.927</td>
       <td>1.000</td>
       <td>0</td>
       <td>0</td>
-      <td>0.970</td>
+      <td>0.927</td>
+      <td>0.540</td>
+      <td>0.750</td>
+      <td>0.540</td>
+      <td>0.750</td>
+      <td>0.838</td>
       <td>1.000</td>
-      <td>0.690</td>
+      <td>0.000</td>
+      <td>0.000</td>
+      <td>0.838</td>
+      <td>0.000</td>
+      <td>0.000</td>
+      <td>0.000</td>
+      <td>0.000</td>
+      <td>0.979</td>
       <td>1.000</td>
-      <td>0.690</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0.979</td>
+      <td>0.897</td>
+      <td>0.813</td>
+      <td>0.897</td>
+      <td>0.813</td>
     </tr>
     <tr>
       <th>37</th>
-      <td>drivelog_temp_annotated_chris.txt</td>
-      <td>case_3_clem</td>
-      <td>0.895</td>
+      <td>drivelog_temp_annotated_clement.txt</td>
+      <td>case_3_josh</td>
+      <td>0.854</td>
       <td>1.000</td>
       <td>0.000</td>
       <td>0.000</td>
-      <td>0.895</td>
-      <td>0.903</td>
-      <td>0.625</td>
-      <td>0.903</td>
-      <td>0.625</td>
-      <td>0.927</td>
+      <td>0.854</td>
+      <td>0.911</td>
+      <td>0.679</td>
+      <td>0.911</td>
+      <td>0.679</td>
+      <td>0.970</td>
       <td>1.000</td>
       <td>0</td>
       <td>0</td>
-      <td>0.927</td>
-      <td>0.540</td>
-      <td>0.750</td>
-      <td>0.540</td>
-      <td>0.750</td>
-      <td>0.838</td>
+      <td>0.970</td>
+      <td>0.634</td>
+      <td>0.929</td>
+      <td>0.634</td>
+      <td>0.929</td>
+      <td>0.740</td>
       <td>1.000</td>
       <td>0.000</td>
       <td>0.000</td>
-      <td>0.838</td>
+      <td>0.740</td>
       <td>0.000</td>
       <td>0.000</td>
       <td>0.000</td>
       <td>0.000</td>
-      <td>0.979</td>
+      <td>0.941</td>
       <td>1.000</td>
       <td>0</td>
       <td>0</td>
-      <td>0.979</td>
-      <td>0.897</td>
-      <td>0.813</td>
-      <td>0.897</td>
-      <td>0.813</td>
+      <td>0.941</td>
+      <td>0.000</td>
+      <td>0.000</td>
+      <td>0.000</td>
+      <td>0.000</td>
     </tr>
     <tr>
       <th>38</th>
-      <td>drivelog_temp_annotated_clement.txt</td>
+      <td>drivelog_temp_annotated_josh.txt</td>
       <td>case_3_josh</td>
-      <td>0.856</td>
+      <td>0.904</td>
       <td>1.000</td>
       <td>0.000</td>
       <td>0.000</td>
-      <td>0.856</td>
-      <td>0.912</td>
-      <td>0.684</td>
-      <td>0.912</td>
-      <td>0.684</td>
-      <td>0.970</td>
+      <td>0.904</td>
+      <td>0.962</td>
+      <td>0.760</td>
+      <td>0.962</td>
+      <td>0.760</td>
+      <td>0.964</td>
       <td>1.000</td>
       <td>0</td>
       <td>0</td>
-      <td>0.970</td>
+      <td>0.964</td>
       <td>0.634</td>
-      <td>0.929</td>
+      <td>0.839</td>
       <td>0.634</td>
-      <td>0.929</td>
-      <td>0.740</td>
+      <td>0.839</td>
+      <td>0.715</td>
       <td>1.000</td>
       <td>0.000</td>
       <td>0.000</td>
-      <td>0.740</td>
+      <td>0.715</td>
       <td>0.000</td>
       <td>0.000</td>
       <td>0.000</td>
       <td>0.000</td>
-      <td>0.941</td>
+      <td>0.940</td>
       <td>1.000</td>
       <td>0</td>
       <td>0</td>
-      <td>0.941</td>
+      <td>0.940</td>
       <td>0.000</td>
       <td>0.000</td>
       <td>0.000</td>
@@ -1644,58 +1644,17 @@
     </tr>
     <tr>
       <th>39</th>
-      <td>drivelog_temp_annotated_josh.txt</td>
-      <td>case_3_josh</td>
-      <td>0.906</td>
-      <td>1.000</td>
-      <td>0.000</td>
-      <td>0.000</td>
-      <td>0.906</td>
-      <td>0.962</td>
-      <td>0.765</td>
-      <td>0.962</td>
-      <td>0.765</td>
-      <td>0.964</td>
-      <td>1.000</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0.964</td>
-      <td>0.634</td>
-      <td>0.839</td>
-      <td>0.634</td>
-      <td>0.839</td>
-      <td>0.715</td>
-      <td>1.000</td>
-      <td>0.000</td>
-      <td>0.000</td>
-      <td>0.715</td>
-      <td>0.000</td>
-      <td>0.000</td>
-      <td>0.000</td>
-      <td>0.000</td>
-      <td>0.940</td>
-      <td>1.000</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0.940</td>
-      <td>0.000</td>
-      <td>0.000</td>
-      <td>0.000</td>
-      <td>0.000</td>
-    </tr>
-    <tr>
-      <th>40</th>
       <td>drivelog_temp_annotated_angela.txt</td>
       <td>case_4_ang</td>
-      <td>0.779</td>
-      <td>0.737</td>
+      <td>0.771</td>
+      <td>0.771</td>
       <td>0.000</td>
       <td>0.000</td>
       <td>0.697</td>
       <td>0.000</td>
       <td>0.000</td>
-      <td>0.656</td>
-      <td>0.569</td>
+      <td>0.661</td>
+      <td>0.500</td>
       <td>0.954</td>
       <td>1.000</td>
       <td>0</td>
@@ -1705,15 +1664,15 @@
       <td>0.511</td>
       <td>1.000</td>
       <td>0.511</td>
-      <td>0.855</td>
+      <td>0.733</td>
       <td>1.000</td>
       <td>0.000</td>
       <td>0.000</td>
-      <td>0.855</td>
-      <td>1.000</td>
-      <td>0.457</td>
-      <td>1.000</td>
-      <td>0.457</td>
+      <td>0.733</td>
+      <td>0.000</td>
+      <td>0.000</td>
+      <td>0.000</td>
+      <td>0.000</td>
       <td>0.960</td>
       <td>1.000</td>
       <td>0</td>
@@ -1725,18 +1684,18 @@
       <td>0.537</td>
     </tr>
     <tr>
-      <th>41</th>
+      <th>40</th>
       <td>drivelog_temp_annotated_josh.txt</td>
       <td>case_4_ang</td>
-      <td>0.805</td>
-      <td>0.737</td>
+      <td>0.796</td>
+      <td>0.771</td>
       <td>0.000</td>
       <td>0.000</td>
       <td>0.630</td>
       <td>0.000</td>
       <td>0.000</td>
-      <td>0.832</td>
-      <td>0.591</td>
+      <td>0.862</td>
+      <td>0.534</td>
       <td>0.973</td>
       <td>1.000</td>
       <td>0</td>
@@ -1746,15 +1705,15 @@
       <td>0.639</td>
       <td>1.000</td>
       <td>0.639</td>
-      <td>0.779</td>
+      <td>0.674</td>
       <td>1.000</td>
       <td>0.000</td>
       <td>0.000</td>
-      <td>0.779</td>
-      <td>0.931</td>
-      <td>0.348</td>
-      <td>0.931</td>
-      <td>0.348</td>
+      <td>0.674</td>
+      <td>0.000</td>
+      <td>0.000</td>
+      <td>0.000</td>
+      <td>0.000</td>
       <td>0.979</td>
       <td>1.000</td>
       <td>0</td>
@@ -1764,142 +1723,142 @@
       <td>0.688</td>
       <td>1.000</td>
       <td>0.688</td>
+    </tr>
+    <tr>
+      <th>41</th>
+      <td>drivelog_temp_annotated_chris.txt</td>
+      <td>case_4_chris</td>
+      <td>0.735</td>
+      <td>1.000</td>
+      <td>0.000</td>
+      <td>0.000</td>
+      <td>0.735</td>
+      <td>0.000</td>
+      <td>0.000</td>
+      <td>0.000</td>
+      <td>0.000</td>
+      <td>0.977</td>
+      <td>1.000</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0.977</td>
+      <td>1.000</td>
+      <td>0.621</td>
+      <td>1.000</td>
+      <td>0.621</td>
+      <td>0.850</td>
+      <td>1.000</td>
+      <td>0.000</td>
+      <td>0.000</td>
+      <td>0.850</td>
+      <td>0.981</td>
+      <td>0.421</td>
+      <td>0.981</td>
+      <td>0.421</td>
+      <td>0.949</td>
+      <td>1.000</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0.949</td>
+      <td>0.688</td>
+      <td>0.611</td>
+      <td>0.688</td>
+      <td>0.611</td>
     </tr>
     <tr>
       <th>42</th>
-      <td>drivelog_temp_annotated_chris.txt</td>
+      <td>drivelog_temp_annotated_clement.txt</td>
       <td>case_4_chris</td>
-      <td>0.816</td>
+      <td>0.733</td>
       <td>1.000</td>
       <td>0.000</td>
       <td>0.000</td>
-      <td>0.816</td>
-      <td>0.880</td>
-      <td>0.352</td>
-      <td>0.880</td>
-      <td>0.352</td>
-      <td>0.977</td>
-      <td>1.000</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0.977</td>
-      <td>1.000</td>
-      <td>0.621</td>
-      <td>1.000</td>
-      <td>0.621</td>
-      <td>0.547</td>
-      <td>0.782</td>
+      <td>0.733</td>
       <td>0.000</td>
       <td>0.000</td>
-      <td>0.744</td>
       <td>0.000</td>
       <td>0.000</td>
-      <td>0.049</td>
-      <td>0.041</td>
-      <td>0.949</td>
+      <td>0.992</td>
       <td>1.000</td>
       <td>0</td>
       <td>0</td>
-      <td>0.949</td>
+      <td>0.992</td>
+      <td>0.944</td>
+      <td>0.850</td>
+      <td>0.944</td>
+      <td>0.850</td>
+      <td>0.839</td>
+      <td>1.000</td>
+      <td>0.000</td>
+      <td>0.000</td>
+      <td>0.839</td>
+      <td>0.865</td>
+      <td>0.395</td>
+      <td>0.865</td>
+      <td>0.395</td>
+      <td>0.972</td>
+      <td>1.000</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0.972</td>
       <td>0.688</td>
-      <td>0.611</td>
+      <td>0.880</td>
       <td>0.688</td>
-      <td>0.611</td>
+      <td>0.880</td>
     </tr>
     <tr>
       <th>43</th>
-      <td>drivelog_temp_annotated_clement.txt</td>
-      <td>case_4_chris</td>
-      <td>0.788</td>
-      <td>1.000</td>
+      <td>drivelog_temp_annotated_angela.txt</td>
+      <td>case_4_clem</td>
+      <td>0.671</td>
+      <td>0.722</td>
       <td>0.000</td>
       <td>0.000</td>
-      <td>0.788</td>
-      <td>0.760</td>
-      <td>0.302</td>
-      <td>0.760</td>
-      <td>0.302</td>
-      <td>0.992</td>
-      <td>1.000</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0.992</td>
-      <td>0.944</td>
-      <td>0.850</td>
-      <td>0.944</td>
-      <td>0.850</td>
-      <td>0.544</td>
-      <td>0.782</td>
+      <td>0.652</td>
       <td>0.000</td>
       <td>0.000</td>
-      <td>0.758</td>
-      <td>0.000</td>
-      <td>0.000</td>
-      <td>0.010</td>
-      <td>0.009</td>
-      <td>0.972</td>
+      <td>0.535</td>
+      <td>0.427</td>
+      <td>0.879</td>
       <td>1.000</td>
       <td>0</td>
       <td>0</td>
-      <td>0.972</td>
-      <td>0.688</td>
-      <td>0.880</td>
-      <td>0.688</td>
-      <td>0.880</td>
+      <td>0.879</td>
+      <td>0.870</td>
+      <td>0.333</td>
+      <td>0.870</td>
+      <td>0.333</td>
+      <td>0.635</td>
+      <td>1.000</td>
+      <td>0.000</td>
+      <td>0.000</td>
+      <td>0.635</td>
+      <td>0.000</td>
+      <td>0.000</td>
+      <td>0.000</td>
+      <td>0.000</td>
+      <td>0.921</td>
+      <td>1.000</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0.921</td>
+      <td>0.676</td>
+      <td>0.610</td>
+      <td>0.676</td>
+      <td>0.610</td>
     </tr>
     <tr>
       <th>44</th>
-      <td>drivelog_temp_annotated_angela.txt</td>
-      <td>case_4_clem</td>
-      <td>0.694</td>
-      <td>0.699</td>
-      <td>0.000</td>
-      <td>0.000</td>
-      <td>0.652</td>
-      <td>0.000</td>
-      <td>0.000</td>
-      <td>0.570</td>
-      <td>0.492</td>
-      <td>0.879</td>
-      <td>1.000</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0.879</td>
-      <td>0.870</td>
-      <td>0.333</td>
-      <td>0.870</td>
-      <td>0.333</td>
-      <td>0.635</td>
-      <td>1.000</td>
-      <td>0.000</td>
-      <td>0.000</td>
-      <td>0.635</td>
-      <td>0.000</td>
-      <td>0.000</td>
-      <td>0.000</td>
-      <td>0.000</td>
-      <td>0.921</td>
-      <td>1.000</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0.921</td>
-      <td>0.676</td>
-      <td>0.610</td>
-      <td>0.676</td>
-      <td>0.610</td>
-    </tr>
-    <tr>
-      <th>45</th>
       <td>drivelog_temp_annotated_chris.txt</td>
       <td>case_4_clem</td>
-      <td>0.652</td>
-      <td>0.699</td>
+      <td>0.674</td>
+      <td>0.722</td>
       <td>0.000</td>
       <td>0.000</td>
       <td>0.874</td>
       <td>0.000</td>
       <td>0.000</td>
-      <td>0.131</td>
+      <td>0.141</td>
       <td>0.311</td>
       <td>0.902</td>
       <td>1.000</td>
@@ -1930,18 +1889,18 @@
       <td>0.714</td>
     </tr>
     <tr>
-      <th>46</th>
+      <th>45</th>
       <td>drivelog_temp_annotated_clement.txt</td>
       <td>case_4_josh</td>
-      <td>0.911</td>
+      <td>0.877</td>
       <td>1.000</td>
       <td>0.000</td>
       <td>0.000</td>
-      <td>0.911</td>
-      <td>0.939</td>
-      <td>0.810</td>
-      <td>0.939</td>
-      <td>0.810</td>
+      <td>0.877</td>
+      <td>0.932</td>
+      <td>0.714</td>
+      <td>0.932</td>
+      <td>0.714</td>
       <td>0.990</td>
       <td>1.000</td>
       <td>0</td>
@@ -1951,15 +1910,15 @@
       <td>0.833</td>
       <td>1.000</td>
       <td>0.833</td>
-      <td>0.882</td>
+      <td>0.856</td>
       <td>1.000</td>
       <td>0.000</td>
       <td>0.000</td>
-      <td>0.882</td>
-      <td>0.914</td>
-      <td>0.715</td>
-      <td>0.914</td>
-      <td>0.715</td>
+      <td>0.856</td>
+      <td>0.904</td>
+      <td>0.637</td>
+      <td>0.904</td>
+      <td>0.637</td>
       <td>0.986</td>
       <td>1.000</td>
       <td>0</td>
@@ -1969,61 +1928,61 @@
       <td>0.771</td>
       <td>1.000</td>
       <td>0.771</td>
+    </tr>
+    <tr>
+      <th>46</th>
+      <td>drivelog_temp_annotated_josh.txt</td>
+      <td>case_4_josh</td>
+      <td>0.929</td>
+      <td>1.000</td>
+      <td>0.000</td>
+      <td>0.000</td>
+      <td>0.929</td>
+      <td>0.950</td>
+      <td>0.823</td>
+      <td>0.950</td>
+      <td>0.823</td>
+      <td>0.983</td>
+      <td>1.000</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0.983</td>
+      <td>1.000</td>
+      <td>0.750</td>
+      <td>1.000</td>
+      <td>0.750</td>
+      <td>0.854</td>
+      <td>1.000</td>
+      <td>0.000</td>
+      <td>0.000</td>
+      <td>0.854</td>
+      <td>0.934</td>
+      <td>0.629</td>
+      <td>0.934</td>
+      <td>0.629</td>
+      <td>0.972</td>
+      <td>1.000</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0.972</td>
+      <td>1.000</td>
+      <td>0.628</td>
+      <td>1.000</td>
+      <td>0.628</td>
     </tr>
     <tr>
       <th>47</th>
-      <td>drivelog_temp_annotated_josh.txt</td>
-      <td>case_4_josh</td>
-      <td>0.963</td>
-      <td>1.000</td>
-      <td>0.000</td>
-      <td>0.000</td>
-      <td>0.963</td>
-      <td>0.956</td>
-      <td>0.930</td>
-      <td>0.956</td>
-      <td>0.930</td>
-      <td>0.983</td>
-      <td>1.000</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0.983</td>
-      <td>1.000</td>
-      <td>0.750</td>
-      <td>1.000</td>
-      <td>0.750</td>
-      <td>0.880</td>
-      <td>1.000</td>
-      <td>0.000</td>
-      <td>0.000</td>
-      <td>0.880</td>
-      <td>0.940</td>
-      <td>0.703</td>
-      <td>0.940</td>
-      <td>0.703</td>
-      <td>0.972</td>
-      <td>1.000</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0.972</td>
-      <td>1.000</td>
-      <td>0.628</td>
-      <td>1.000</td>
-      <td>0.628</td>
-    </tr>
-    <tr>
-      <th>48</th>
       <td>drivelog_temp_annotated_angela.txt</td>
       <td>case_5_ang</td>
-      <td>0.955</td>
-      <td>0.532</td>
+      <td>0.750</td>
+      <td>0.772</td>
       <td>0.000</td>
       <td>0.000</td>
       <td>0.552</td>
       <td>0.000</td>
       <td>0.000</td>
-      <td>0.931</td>
-      <td>0.972</td>
+      <td>0.935</td>
+      <td>0.475</td>
       <td>0.938</td>
       <td>1.000</td>
       <td>0</td>
@@ -2033,15 +1992,15 @@
       <td>0.306</td>
       <td>1.000</td>
       <td>0.306</td>
-      <td>0.767</td>
-      <td>0.847</td>
+      <td>0.750</td>
+      <td>0.889</td>
       <td>0.000</td>
       <td>0.000</td>
       <td>0.718</td>
       <td>0.000</td>
       <td>0.000</td>
-      <td>0.661</td>
-      <td>0.360</td>
+      <td>0.644</td>
+      <td>0.254</td>
       <td>0.916</td>
       <td>1.000</td>
       <td>0</td>
@@ -2053,18 +2012,18 @@
       <td>0.190</td>
     </tr>
     <tr>
-      <th>49</th>
+      <th>48</th>
       <td>drivelog_temp_annotated_josh.txt</td>
       <td>case_5_ang</td>
-      <td>0.913</td>
-      <td>0.532</td>
+      <td>0.698</td>
+      <td>0.772</td>
       <td>0.000</td>
       <td>0.000</td>
       <td>0.505</td>
       <td>0.000</td>
       <td>0.000</td>
-      <td>0.937</td>
-      <td>0.885</td>
+      <td>0.924</td>
+      <td>0.425</td>
       <td>0.946</td>
       <td>1.000</td>
       <td>0</td>
@@ -2074,15 +2033,15 @@
       <td>0.310</td>
       <td>0.818</td>
       <td>0.310</td>
-      <td>0.782</td>
-      <td>0.847</td>
+      <td>0.765</td>
+      <td>0.889</td>
       <td>0.000</td>
       <td>0.000</td>
       <td>0.723</td>
       <td>0.000</td>
       <td>0.000</td>
-      <td>0.694</td>
-      <td>0.384</td>
+      <td>0.689</td>
+      <td>0.277</td>
       <td>0.938</td>
       <td>1.000</td>
       <td>0</td>
@@ -2092,91 +2051,91 @@
       <td>0.242</td>
       <td>1.000</td>
       <td>0.242</td>
+    </tr>
+    <tr>
+      <th>49</th>
+      <td>drivelog_temp_annotated_chris.txt</td>
+      <td>case_5_chris</td>
+      <td>0.866</td>
+      <td>1.000</td>
+      <td>0.000</td>
+      <td>0.000</td>
+      <td>0.866</td>
+      <td>0.897</td>
+      <td>0.448</td>
+      <td>0.897</td>
+      <td>0.448</td>
+      <td>0.968</td>
+      <td>1.000</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0.968</td>
+      <td>0.682</td>
+      <td>0.600</td>
+      <td>0.682</td>
+      <td>0.600</td>
+      <td>0.876</td>
+      <td>1.000</td>
+      <td>0.000</td>
+      <td>0.000</td>
+      <td>0.876</td>
+      <td>0.864</td>
+      <td>0.392</td>
+      <td>0.864</td>
+      <td>0.392</td>
+      <td>0.981</td>
+      <td>1.000</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0.981</td>
+      <td>1.000</td>
+      <td>0.677</td>
+      <td>1.000</td>
+      <td>0.677</td>
     </tr>
     <tr>
       <th>50</th>
-      <td>drivelog_temp_annotated_chris.txt</td>
+      <td>drivelog_temp_annotated_clement.txt</td>
       <td>case_5_chris</td>
-      <td>0.889</td>
+      <td>0.826</td>
       <td>1.000</td>
       <td>0.000</td>
       <td>0.000</td>
-      <td>0.889</td>
-      <td>0.914</td>
-      <td>0.552</td>
-      <td>0.914</td>
-      <td>0.552</td>
-      <td>0.968</td>
+      <td>0.826</td>
+      <td>0.828</td>
+      <td>0.372</td>
+      <td>0.828</td>
+      <td>0.372</td>
+      <td>0.983</td>
       <td>1.000</td>
       <td>0</td>
       <td>0</td>
-      <td>0.968</td>
+      <td>0.983</td>
       <td>0.682</td>
-      <td>0.600</td>
+      <td>0.882</td>
       <td>0.682</td>
-      <td>0.600</td>
-      <td>0.975</td>
+      <td>0.882</td>
+      <td>0.807</td>
       <td>1.000</td>
       <td>0.000</td>
       <td>0.000</td>
-      <td>0.975</td>
-      <td>0.896</td>
-      <td>0.979</td>
-      <td>0.896</td>
-      <td>0.979</td>
-      <td>0.981</td>
+      <td>0.807</td>
+      <td>0.750</td>
+      <td>0.268</td>
+      <td>0.750</td>
+      <td>0.268</td>
+      <td>0.994</td>
       <td>1.000</td>
       <td>0</td>
       <td>0</td>
-      <td>0.981</td>
-      <td>1.000</td>
-      <td>0.677</td>
-      <td>1.000</td>
-      <td>0.677</td>
+      <td>0.994</td>
+      <td>0.905</td>
+      <td>0.950</td>
+      <td>0.905</td>
+      <td>0.950</td>
     </tr>
     <tr>
       <th>51</th>
-      <td>drivelog_temp_annotated_clement.txt</td>
-      <td>case_5_chris</td>
-      <td>0.849</td>
-      <td>1.000</td>
-      <td>0.000</td>
-      <td>0.000</td>
-      <td>0.849</td>
-      <td>0.857</td>
-      <td>0.465</td>
-      <td>0.857</td>
-      <td>0.465</td>
-      <td>0.983</td>
-      <td>1.000</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0.983</td>
-      <td>0.682</td>
-      <td>0.882</td>
-      <td>0.682</td>
-      <td>0.882</td>
-      <td>0.887</td>
-      <td>1.000</td>
-      <td>0.000</td>
-      <td>0.000</td>
-      <td>0.887</td>
-      <td>0.802</td>
-      <td>0.691</td>
-      <td>0.802</td>
-      <td>0.691</td>
-      <td>0.994</td>
-      <td>1.000</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0.994</td>
-      <td>0.905</td>
-      <td>0.950</td>
-      <td>0.905</td>
-      <td>0.950</td>
-    </tr>
-    <tr>
-      <th>52</th>
       <td>drivelog_temp_annotated_angela.txt</td>
       <td>case_5_clem</td>
       <td>0.715</td>
@@ -2217,7 +2176,7 @@
       <td>0.575</td>
     </tr>
     <tr>
-      <th>53</th>
+      <th>52</th>
       <td>drivelog_temp_annotated_chris.txt</td>
       <td>case_5_clem</td>
       <td>0.805</td>
@@ -2258,7 +2217,7 @@
       <td>0.759</td>
     </tr>
     <tr>
-      <th>54</th>
+      <th>53</th>
       <td>drivelog_temp_annotated_clement.txt</td>
       <td>case_5_josh</td>
       <td>0.722</td>
@@ -2299,7 +2258,7 @@
       <td>1.000</td>
     </tr>
     <tr>
-      <th>55</th>
+      <th>54</th>
       <td>drivelog_temp_annotated_josh.txt</td>
       <td>case_5_josh</td>
       <td>0.709</td>
@@ -2340,18 +2299,18 @@
       <td>0.625</td>
     </tr>
     <tr>
-      <th>56</th>
+      <th>55</th>
       <td>drivelog_temp_annotated_angela.txt</td>
       <td>case_6_ang</td>
-      <td>0.876</td>
-      <td>0.685</td>
+      <td>0.823</td>
+      <td>0.737</td>
       <td>0.000</td>
       <td>0.000</td>
       <td>0.637</td>
       <td>0.000</td>
       <td>0.000</td>
-      <td>0.879</td>
-      <td>0.763</td>
+      <td>0.855</td>
+      <td>0.618</td>
       <td>0.959</td>
       <td>1.000</td>
       <td>0</td>
@@ -2361,15 +2320,15 @@
       <td>0.541</td>
       <td>1.000</td>
       <td>0.541</td>
-      <td>0.854</td>
-      <td>0.792</td>
+      <td>0.702</td>
+      <td>1.000</td>
       <td>0.000</td>
       <td>0.000</td>
-      <td>0.785</td>
-      <td>0.872</td>
-      <td>0.328</td>
-      <td>0.739</td>
-      <td>0.792</td>
+      <td>0.702</td>
+      <td>0.000</td>
+      <td>0.000</td>
+      <td>0.000</td>
+      <td>0.000</td>
       <td>0.952</td>
       <td>1.000</td>
       <td>0</td>
@@ -2381,305 +2340,305 @@
       <td>0.487</td>
     </tr>
     <tr>
-      <th>57</th>
+      <th>56</th>
       <td>drivelog_temp_annotated_josh.txt</td>
       <td>case_6_ang</td>
-      <td>0.890</td>
-      <td>0.685</td>
+      <td>0.838</td>
+      <td>0.737</td>
       <td>0.000</td>
       <td>0.000</td>
       <td>0.647</td>
       <td>0.000</td>
       <td>0.000</td>
+      <td>0.864</td>
+      <td>0.642</td>
+      <td>0.981</td>
+      <td>1.000</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0.981</td>
+      <td>1.000</td>
+      <td>0.714</td>
+      <td>1.000</td>
+      <td>0.714</td>
+      <td>0.828</td>
+      <td>1.000</td>
+      <td>0.000</td>
+      <td>0.000</td>
+      <td>0.828</td>
+      <td>0.000</td>
+      <td>0.000</td>
+      <td>0.000</td>
+      <td>0.000</td>
+      <td>0.986</td>
+      <td>1.000</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0.986</td>
+      <td>1.000</td>
+      <td>0.760</td>
+      <td>1.000</td>
+      <td>0.760</td>
+    </tr>
+    <tr>
+      <th>57</th>
+      <td>drivelog_temp_annotated_chris.txt</td>
+      <td>case_6_chris</td>
       <td>0.886</td>
-      <td>0.791</td>
-      <td>0.981</td>
-      <td>1.000</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0.981</td>
-      <td>1.000</td>
-      <td>0.714</td>
-      <td>1.000</td>
-      <td>0.714</td>
-      <td>0.709</td>
-      <td>0.792</td>
+      <td>0.860</td>
       <td>0.000</td>
       <td>0.000</td>
+      <td>0.826</td>
       <td>0.916</td>
-      <td>0.894</td>
-      <td>0.583</td>
-      <td>0.313</td>
-      <td>0.583</td>
-      <td>0.986</td>
+      <td>0.447</td>
+      <td>0.817</td>
+      <td>0.788</td>
+      <td>0.981</td>
       <td>1.000</td>
       <td>0</td>
       <td>0</td>
-      <td>0.986</td>
+      <td>0.981</td>
+      <td>0.824</td>
+      <td>0.636</td>
+      <td>0.824</td>
+      <td>0.636</td>
+      <td>0.929</td>
       <td>1.000</td>
-      <td>0.760</td>
+      <td>0.000</td>
+      <td>0.000</td>
+      <td>0.929</td>
+      <td>0.900</td>
+      <td>0.788</td>
+      <td>0.900</td>
+      <td>0.788</td>
+      <td>0.984</td>
       <td>1.000</td>
-      <td>0.760</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0.984</td>
+      <td>1.000</td>
+      <td>0.710</td>
+      <td>1.000</td>
+      <td>0.710</td>
     </tr>
     <tr>
       <th>58</th>
-      <td>drivelog_temp_annotated_chris.txt</td>
+      <td>drivelog_temp_annotated_clement.txt</td>
       <td>case_6_chris</td>
-      <td>0.922</td>
-      <td>0.803</td>
+      <td>0.848</td>
+      <td>0.860</td>
       <td>0.000</td>
       <td>0.000</td>
-      <td>0.839</td>
-      <td>0.923</td>
-      <td>0.494</td>
-      <td>0.805</td>
-      <td>0.971</td>
-      <td>0.981</td>
+      <td>0.798</td>
+      <td>0.867</td>
+      <td>0.404</td>
+      <td>0.774</td>
+      <td>0.713</td>
+      <td>0.993</td>
       <td>1.000</td>
       <td>0</td>
       <td>0</td>
-      <td>0.981</td>
-      <td>0.824</td>
-      <td>0.636</td>
-      <td>0.824</td>
-      <td>0.636</td>
-      <td>0.858</td>
+      <td>0.993</td>
+      <td>0.882</td>
+      <td>0.882</td>
+      <td>0.882</td>
+      <td>0.882</td>
+      <td>0.891</td>
       <td>1.000</td>
       <td>0.000</td>
       <td>0.000</td>
-      <td>0.858</td>
-      <td>0.937</td>
-      <td>0.431</td>
-      <td>0.937</td>
-      <td>0.431</td>
-      <td>0.984</td>
+      <td>0.891</td>
+      <td>0.808</td>
+      <td>0.708</td>
+      <td>0.808</td>
+      <td>0.708</td>
+      <td>0.995</td>
       <td>1.000</td>
       <td>0</td>
       <td>0</td>
-      <td>0.984</td>
+      <td>0.995</td>
       <td>1.000</td>
-      <td>0.710</td>
+      <td>0.880</td>
       <td>1.000</td>
-      <td>0.710</td>
+      <td>0.880</td>
     </tr>
     <tr>
       <th>59</th>
-      <td>drivelog_temp_annotated_clement.txt</td>
-      <td>case_6_chris</td>
-      <td>0.884</td>
-      <td>0.803</td>
-      <td>0.000</td>
-      <td>0.000</td>
-      <td>0.812</td>
-      <td>0.879</td>
-      <td>0.449</td>
-      <td>0.771</td>
-      <td>0.888</td>
-      <td>0.993</td>
-      <td>1.000</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0.993</td>
-      <td>0.882</td>
-      <td>0.882</td>
-      <td>0.882</td>
-      <td>0.882</td>
-      <td>0.841</td>
+      <td>drivelog_temp_annotated_chris.txt</td>
+      <td>case_6_clem</td>
+      <td>0.894</td>
       <td>1.000</td>
       <td>0.000</td>
       <td>0.000</td>
-      <td>0.841</td>
-      <td>0.857</td>
-      <td>0.394</td>
-      <td>0.857</td>
-      <td>0.394</td>
-      <td>0.995</td>
+      <td>0.894</td>
+      <td>0.871</td>
+      <td>0.629</td>
+      <td>0.871</td>
+      <td>0.629</td>
+      <td>0.925</td>
       <td>1.000</td>
       <td>0</td>
       <td>0</td>
-      <td>0.995</td>
+      <td>0.925</td>
+      <td>0.950</td>
+      <td>0.380</td>
+      <td>0.950</td>
+      <td>0.380</td>
+      <td>0.755</td>
       <td>1.000</td>
-      <td>0.880</td>
+      <td>0.000</td>
+      <td>0.000</td>
+      <td>0.755</td>
+      <td>0.000</td>
+      <td>0.000</td>
+      <td>0.000</td>
+      <td>0.000</td>
+      <td>0.969</td>
       <td>1.000</td>
-      <td>0.880</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0.969</td>
+      <td>1.000</td>
+      <td>0.649</td>
+      <td>1.000</td>
+      <td>0.649</td>
     </tr>
     <tr>
       <th>60</th>
-      <td>drivelog_temp_annotated_chris.txt</td>
+      <td>drivelog_temp_annotated_clement.txt</td>
       <td>case_6_clem</td>
-      <td>0.920</td>
+      <td>0.835</td>
       <td>1.000</td>
       <td>0.000</td>
       <td>0.000</td>
-      <td>0.920</td>
-      <td>0.880</td>
-      <td>0.753</td>
-      <td>0.880</td>
-      <td>0.753</td>
-      <td>0.925</td>
+      <td>0.835</td>
+      <td>0.814</td>
+      <td>0.500</td>
+      <td>0.814</td>
+      <td>0.500</td>
+      <td>0.943</td>
       <td>1.000</td>
       <td>0</td>
       <td>0</td>
-      <td>0.925</td>
-      <td>0.950</td>
-      <td>0.380</td>
-      <td>0.950</td>
-      <td>0.380</td>
-      <td>0.856</td>
+      <td>0.943</td>
+      <td>1.000</td>
+      <td>0.455</td>
+      <td>1.000</td>
+      <td>0.455</td>
+      <td>0.752</td>
       <td>1.000</td>
       <td>0.000</td>
       <td>0.000</td>
-      <td>0.856</td>
-      <td>0.922</td>
-      <td>0.452</td>
-      <td>0.922</td>
-      <td>0.452</td>
-      <td>0.969</td>
+      <td>0.752</td>
+      <td>0.000</td>
+      <td>0.000</td>
+      <td>0.000</td>
+      <td>0.000</td>
+      <td>0.979</td>
       <td>1.000</td>
       <td>0</td>
       <td>0</td>
-      <td>0.969</td>
+      <td>0.979</td>
       <td>1.000</td>
-      <td>0.649</td>
+      <td>0.727</td>
       <td>1.000</td>
-      <td>0.649</td>
+      <td>0.727</td>
     </tr>
     <tr>
       <th>61</th>
-      <td>drivelog_temp_annotated_clement.txt</td>
-      <td>case_6_clem</td>
-      <td>0.856</td>
-      <td>1.000</td>
+      <td>drivelog_temp_annotated_angela.txt</td>
+      <td>case_6_josh</td>
+      <td>0.721</td>
+      <td>0.742</td>
       <td>0.000</td>
       <td>0.000</td>
-      <td>0.856</td>
-      <td>0.819</td>
-      <td>0.596</td>
-      <td>0.819</td>
-      <td>0.596</td>
-      <td>0.943</td>
+      <td>0.846</td>
+      <td>0.924</td>
+      <td>0.511</td>
+      <td>0.513</td>
+      <td>0.740</td>
+      <td>0.983</td>
       <td>1.000</td>
       <td>0</td>
       <td>0</td>
-      <td>0.943</td>
+      <td>0.983</td>
       <td>1.000</td>
-      <td>0.455</td>
+      <td>0.706</td>
       <td>1.000</td>
-      <td>0.455</td>
-      <td>0.830</td>
+      <td>0.706</td>
+      <td>0.690</td>
       <td>1.000</td>
       <td>0.000</td>
       <td>0.000</td>
-      <td>0.830</td>
-      <td>0.824</td>
-      <td>0.400</td>
-      <td>0.824</td>
-      <td>0.400</td>
-      <td>0.979</td>
+      <td>0.690</td>
+      <td>0.000</td>
+      <td>0.000</td>
+      <td>0.000</td>
+      <td>0.000</td>
+      <td>0.980</td>
       <td>1.000</td>
       <td>0</td>
       <td>0</td>
-      <td>0.979</td>
-      <td>1.000</td>
-      <td>0.727</td>
-      <td>1.000</td>
-      <td>0.727</td>
+      <td>0.980</td>
+      <td>0.971</td>
+      <td>0.660</td>
+      <td>0.971</td>
+      <td>0.660</td>
     </tr>
     <tr>
       <th>62</th>
-      <td>drivelog_temp_annotated_angela.txt</td>
+      <td>drivelog_temp_annotated_josh.txt</td>
       <td>case_6_josh</td>
-      <td>0.925</td>
-      <td>0.881</td>
+      <td>0.701</td>
+      <td>0.742</td>
       <td>0.000</td>
       <td>0.000</td>
-      <td>0.879</td>
-      <td>0.937</td>
-      <td>0.626</td>
-      <td>0.844</td>
-      <td>0.908</td>
-      <td>0.983</td>
+      <td>0.755</td>
+      <td>0.917</td>
+      <td>0.389</td>
+      <td>0.595</td>
+      <td>0.658</td>
+      <td>0.984</td>
       <td>1.000</td>
       <td>0</td>
       <td>0</td>
-      <td>0.983</td>
+      <td>0.984</td>
       <td>1.000</td>
-      <td>0.706</td>
+      <td>0.720</td>
       <td>1.000</td>
-      <td>0.706</td>
-      <td>0.926</td>
-      <td>0.875</td>
+      <td>0.720</td>
+      <td>0.637</td>
+      <td>1.000</td>
       <td>0.000</td>
       <td>0.000</td>
-      <td>0.878</td>
-      <td>0.913</td>
-      <td>0.671</td>
-      <td>0.834</td>
-      <td>0.950</td>
-      <td>0.980</td>
+      <td>0.637</td>
+      <td>0.000</td>
+      <td>0.000</td>
+      <td>0.000</td>
+      <td>0.000</td>
+      <td>0.977</td>
       <td>1.000</td>
       <td>0</td>
       <td>0</td>
-      <td>0.980</td>
+      <td>0.977</td>
       <td>0.971</td>
-      <td>0.660</td>
+      <td>0.623</td>
       <td>0.971</td>
-      <td>0.660</td>
+      <td>0.623</td>
     </tr>
     <tr>
       <th>63</th>
-      <td>drivelog_temp_annotated_josh.txt</td>
-      <td>case_6_josh</td>
-      <td>0.840</td>
-      <td>0.881</td>
-      <td>0.000</td>
-      <td>0.000</td>
-      <td>0.788</td>
-      <td>0.931</td>
-      <td>0.477</td>
-      <td>0.851</td>
-      <td>0.702</td>
-      <td>0.984</td>
-      <td>1.000</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0.984</td>
-      <td>1.000</td>
-      <td>0.720</td>
-      <td>1.000</td>
-      <td>0.720</td>
-      <td>0.882</td>
-      <td>0.875</td>
-      <td>0.000</td>
-      <td>0.000</td>
-      <td>0.826</td>
-      <td>0.913</td>
-      <td>0.575</td>
-      <td>0.846</td>
-      <td>0.826</td>
-      <td>0.977</td>
-      <td>1.000</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0.977</td>
-      <td>0.971</td>
-      <td>0.623</td>
-      <td>0.971</td>
-      <td>0.623</td>
-    </tr>
-    <tr>
-      <th>64</th>
       <td>drivelog_temp_annotated_angela.txt</td>
       <td>case_7_ang</td>
-      <td>0.887</td>
-      <td>0.525</td>
+      <td>0.753</td>
+      <td>0.742</td>
       <td>0.000</td>
       <td>0.000</td>
       <td>0.621</td>
       <td>0.000</td>
       <td>0.000</td>
-      <td>0.780</td>
-      <td>0.978</td>
+      <td>0.755</td>
+      <td>0.514</td>
       <td>0.942</td>
       <td>1.000</td>
       <td>0</td>
@@ -2709,18 +2668,18 @@
       <td>0.455</td>
     </tr>
     <tr>
-      <th>65</th>
+      <th>64</th>
       <td>drivelog_temp_annotated_josh.txt</td>
       <td>case_7_ang</td>
-      <td>0.838</td>
-      <td>0.525</td>
+      <td>0.676</td>
+      <td>0.742</td>
       <td>0.000</td>
       <td>0.000</td>
       <td>0.560</td>
       <td>0.000</td>
       <td>0.000</td>
-      <td>0.792</td>
-      <td>0.856</td>
+      <td>0.723</td>
+      <td>0.425</td>
       <td>0.973</td>
       <td>1.000</td>
       <td>0</td>
@@ -2750,18 +2709,18 @@
       <td>0.708</td>
     </tr>
     <tr>
-      <th>66</th>
+      <th>65</th>
       <td>drivelog_temp_annotated_chris.txt</td>
       <td>case_7_chris</td>
-      <td>0.758</td>
-      <td>0.737</td>
+      <td>0.611</td>
+      <td>0.594</td>
       <td>0.000</td>
       <td>0.000</td>
       <td>0.739</td>
       <td>0.000</td>
       <td>0.000</td>
-      <td>0.536</td>
-      <td>0.540</td>
+      <td>0.342</td>
+      <td>0.532</td>
       <td>0.943</td>
       <td>1.000</td>
       <td>0</td>
@@ -2791,18 +2750,18 @@
       <td>0.308</td>
     </tr>
     <tr>
-      <th>67</th>
+      <th>66</th>
       <td>drivelog_temp_annotated_clement.txt</td>
       <td>case_7_chris</td>
-      <td>0.726</td>
-      <td>0.737</td>
+      <td>0.579</td>
+      <td>0.594</td>
       <td>0.000</td>
       <td>0.000</td>
       <td>0.716</td>
       <td>0.000</td>
       <td>0.000</td>
-      <td>0.520</td>
-      <td>0.481</td>
+      <td>0.332</td>
+      <td>0.474</td>
       <td>0.962</td>
       <td>1.000</td>
       <td>0</td>
@@ -2832,7 +2791,7 @@
       <td>0.500</td>
     </tr>
     <tr>
-      <th>68</th>
+      <th>67</th>
       <td>drivelog_temp_annotated_chris.txt</td>
       <td>case_7_clem</td>
       <td>0.876</td>
@@ -2853,15 +2812,15 @@
       <td>0.783</td>
       <td>1.000</td>
       <td>0.783</td>
-      <td>0.862</td>
+      <td>0.813</td>
       <td>1.000</td>
       <td>0.000</td>
       <td>0.000</td>
-      <td>0.862</td>
-      <td>0.653</td>
-      <td>0.560</td>
-      <td>0.653</td>
-      <td>0.560</td>
+      <td>0.813</td>
+      <td>0.000</td>
+      <td>0.000</td>
+      <td>0.000</td>
+      <td>0.000</td>
       <td>0.978</td>
       <td>1.000</td>
       <td>0</td>
@@ -2873,7 +2832,7 @@
       <td>0.730</td>
     </tr>
     <tr>
-      <th>69</th>
+      <th>68</th>
       <td>drivelog_temp_annotated_clement.txt</td>
       <td>case_7_clem</td>
       <td>0.653</td>
@@ -2894,15 +2853,15 @@
       <td>0.857</td>
       <td>1.000</td>
       <td>0.857</td>
-      <td>0.796</td>
+      <td>0.711</td>
       <td>1.000</td>
       <td>0.000</td>
       <td>0.000</td>
-      <td>0.796</td>
-      <td>0.764</td>
-      <td>0.423</td>
-      <td>0.764</td>
-      <td>0.423</td>
+      <td>0.711</td>
+      <td>0.000</td>
+      <td>0.000</td>
+      <td>0.000</td>
+      <td>0.000</td>
       <td>0.991</td>
       <td>1.000</td>
       <td>0</td>
@@ -2912,102 +2871,102 @@
       <td>0.871</td>
       <td>1.000</td>
       <td>0.871</td>
+    </tr>
+    <tr>
+      <th>69</th>
+      <td>drivelog_temp_annotated_angela.txt</td>
+      <td>case_7_josh</td>
+      <td>0.894</td>
+      <td>0.936</td>
+      <td>0.000</td>
+      <td>0.000</td>
+      <td>0.846</td>
+      <td>0.907</td>
+      <td>0.585</td>
+      <td>0.899</td>
+      <td>0.758</td>
+      <td>0.957</td>
+      <td>1.000</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0.957</td>
+      <td>0.804</td>
+      <td>0.592</td>
+      <td>0.804</td>
+      <td>0.592</td>
+      <td>0.892</td>
+      <td>0.927</td>
+      <td>0.000</td>
+      <td>0.000</td>
+      <td>0.862</td>
+      <td>0.866</td>
+      <td>0.617</td>
+      <td>0.824</td>
+      <td>0.794</td>
+      <td>0.967</td>
+      <td>1.000</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0.967</td>
+      <td>0.969</td>
+      <td>0.500</td>
+      <td>0.969</td>
+      <td>0.500</td>
     </tr>
     <tr>
       <th>70</th>
-      <td>drivelog_temp_annotated_angela.txt</td>
+      <td>drivelog_temp_annotated_josh.txt</td>
       <td>case_7_josh</td>
-      <td>0.790</td>
-      <td>0.896</td>
+      <td>0.861</td>
+      <td>0.936</td>
       <td>0.000</td>
       <td>0.000</td>
-      <td>0.751</td>
-      <td>0.902</td>
-      <td>0.261</td>
-      <td>0.789</td>
-      <td>0.481</td>
-      <td>0.957</td>
+      <td>0.807</td>
+      <td>0.932</td>
+      <td>0.522</td>
+      <td>0.929</td>
+      <td>0.680</td>
+      <td>0.959</td>
       <td>1.000</td>
       <td>0</td>
       <td>0</td>
-      <td>0.957</td>
-      <td>0.804</td>
-      <td>0.592</td>
-      <td>0.804</td>
-      <td>0.592</td>
-      <td>0.612</td>
-      <td>0.581</td>
+      <td>0.959</td>
+      <td>0.821</td>
+      <td>0.605</td>
+      <td>0.821</td>
+      <td>0.605</td>
+      <td>0.875</td>
+      <td>0.927</td>
       <td>0.000</td>
       <td>0.000</td>
-      <td>0.712</td>
-      <td>0.000</td>
-      <td>0.000</td>
-      <td>0.380</td>
-      <td>0.553</td>
-      <td>0.967</td>
+      <td>0.829</td>
+      <td>0.910</td>
+      <td>0.551</td>
+      <td>0.886</td>
+      <td>0.726</td>
+      <td>0.972</td>
       <td>1.000</td>
       <td>0</td>
       <td>0</td>
-      <td>0.967</td>
-      <td>0.969</td>
-      <td>0.500</td>
-      <td>0.969</td>
-      <td>0.500</td>
+      <td>0.972</td>
+      <td>1.000</td>
+      <td>0.542</td>
+      <td>1.000</td>
+      <td>0.542</td>
     </tr>
     <tr>
       <th>71</th>
-      <td>drivelog_temp_annotated_josh.txt</td>
-      <td>case_7_josh</td>
-      <td>0.759</td>
-      <td>0.896</td>
-      <td>0.000</td>
-      <td>0.000</td>
-      <td>0.708</td>
-      <td>0.935</td>
-      <td>0.235</td>
-      <td>0.835</td>
-      <td>0.443</td>
-      <td>0.959</td>
-      <td>1.000</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0.959</td>
-      <td>0.821</td>
-      <td>0.605</td>
-      <td>0.821</td>
-      <td>0.605</td>
-      <td>0.608</td>
-      <td>0.581</td>
-      <td>0.000</td>
-      <td>0.000</td>
-      <td>0.661</td>
-      <td>0.000</td>
-      <td>0.000</td>
-      <td>0.437</td>
-      <td>0.539</td>
-      <td>0.972</td>
-      <td>1.000</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0.972</td>
-      <td>1.000</td>
-      <td>0.542</td>
-      <td>1.000</td>
-      <td>0.542</td>
-    </tr>
-    <tr>
-      <th>72</th>
       <td>drivelog_temp_annotated_angela.txt</td>
       <td>case_8_ang</td>
-      <td>0.585</td>
-      <td>0.520</td>
+      <td>0.825</td>
+      <td>0.649</td>
       <td>0.000</td>
       <td>0.000</td>
       <td>0.632</td>
       <td>0.000</td>
       <td>0.000</td>
-      <td>0.451</td>
-      <td>0.587</td>
+      <td>0.775</td>
+      <td>0.738</td>
       <td>0.950</td>
       <td>1.000</td>
       <td>0</td>
@@ -3017,15 +2976,15 @@
       <td>0.581</td>
       <td>0.818</td>
       <td>0.581</td>
-      <td>0.819</td>
-      <td>0.845</td>
+      <td>0.807</td>
+      <td>1.000</td>
       <td>0.000</td>
       <td>0.000</td>
-      <td>0.699</td>
-      <td>0.000</td>
-      <td>0.000</td>
-      <td>0.887</td>
-      <td>0.456</td>
+      <td>0.807</td>
+      <td>0.951</td>
+      <td>0.379</td>
+      <td>0.951</td>
+      <td>0.379</td>
       <td>0.947</td>
       <td>1.000</td>
       <td>0</td>
@@ -3037,18 +2996,18 @@
       <td>0.514</td>
     </tr>
     <tr>
-      <th>73</th>
+      <th>72</th>
       <td>drivelog_temp_annotated_josh.txt</td>
       <td>case_8_ang</td>
-      <td>0.523</td>
-      <td>0.520</td>
+      <td>0.763</td>
+      <td>0.649</td>
       <td>0.000</td>
       <td>0.000</td>
       <td>0.635</td>
       <td>0.000</td>
       <td>0.000</td>
-      <td>0.384</td>
-      <td>0.504</td>
+      <td>0.683</td>
+      <td>0.656</td>
       <td>0.980</td>
       <td>1.000</td>
       <td>0</td>
@@ -3058,15 +3017,15 @@
       <td>0.778</td>
       <td>0.955</td>
       <td>0.778</td>
-      <td>0.681</td>
-      <td>0.845</td>
+      <td>0.927</td>
+      <td>1.000</td>
       <td>0.000</td>
       <td>0.000</td>
-      <td>0.836</td>
-      <td>0.000</td>
-      <td>0.000</td>
-      <td>0.000</td>
-      <td>0.000</td>
+      <td>0.927</td>
+      <td>0.878</td>
+      <td>0.643</td>
+      <td>0.878</td>
+      <td>0.643</td>
       <td>0.980</td>
       <td>1.000</td>
       <td>0</td>
@@ -3076,16 +3035,75 @@
       <td>0.731</td>
       <td>1.000</td>
       <td>0.731</td>
+    </tr>
+    <tr>
+      <th>73</th>
+      <td>drivelog_temp_annotated_chris.txt</td>
+      <td>case_8_chris</td>
+      <td>0.643</td>
+      <td>0.655</td>
+      <td>0.000</td>
+      <td>0.000</td>
+      <td>0.796</td>
+      <td>0.000</td>
+      <td>0.000</td>
+      <td>0.279</td>
+      <td>0.471</td>
+      <td>0.985</td>
+      <td>1.000</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0.985</td>
+      <td>1.000</td>
+      <td>0.667</td>
+      <td>1.000</td>
+      <td>0.667</td>
+      <td>0.773</td>
+      <td>1.000</td>
+      <td>0.000</td>
+      <td>0.000</td>
+      <td>0.773</td>
+      <td>0.000</td>
+      <td>0.000</td>
+      <td>0.000</td>
+      <td>0.000</td>
+      <td>0.971</td>
+      <td>1.000</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0.971</td>
+      <td>1.000</td>
+      <td>0.393</td>
+      <td>1.000</td>
+      <td>0.393</td>
     </tr>
     <tr>
       <th>74</th>
-      <td>drivelog_temp_annotated_chris.txt</td>
+      <td>drivelog_temp_annotated_clement.txt</td>
       <td>case_8_chris</td>
-      <td>0.796</td>
+      <td>0.643</td>
+      <td>0.655</td>
+      <td>0.000</td>
+      <td>0.000</td>
+      <td>0.734</td>
+      <td>0.000</td>
+      <td>0.000</td>
+      <td>0.368</td>
+      <td>0.477</td>
+      <td>0.997</td>
+      <td>1.000</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0.997</td>
+      <td>0.944</td>
+      <td>0.944</td>
+      <td>0.944</td>
+      <td>0.944</td>
+      <td>0.758</td>
       <td>1.000</td>
       <td>0.000</td>
       <td>0.000</td>
-      <td>0.796</td>
+      <td>0.758</td>
       <td>0.000</td>
       <td>0.000</td>
       <td>0.000</td>
@@ -3096,82 +3114,23 @@
       <td>0</td>
       <td>0.985</td>
       <td>1.000</td>
-      <td>0.667</td>
+      <td>0.550</td>
       <td>1.000</td>
-      <td>0.667</td>
-      <td>0.773</td>
-      <td>1.000</td>
-      <td>0.000</td>
-      <td>0.000</td>
-      <td>0.773</td>
-      <td>0.000</td>
-      <td>0.000</td>
-      <td>0.000</td>
-      <td>0.000</td>
-      <td>0.971</td>
-      <td>1.000</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0.971</td>
-      <td>1.000</td>
-      <td>0.393</td>
-      <td>1.000</td>
-      <td>0.393</td>
+      <td>0.550</td>
     </tr>
     <tr>
       <th>75</th>
-      <td>drivelog_temp_annotated_clement.txt</td>
-      <td>case_8_chris</td>
-      <td>0.734</td>
-      <td>1.000</td>
-      <td>0.000</td>
-      <td>0.000</td>
-      <td>0.734</td>
-      <td>0.000</td>
-      <td>0.000</td>
-      <td>0.000</td>
-      <td>0.000</td>
-      <td>0.997</td>
-      <td>1.000</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0.997</td>
-      <td>0.944</td>
-      <td>0.944</td>
-      <td>0.944</td>
-      <td>0.944</td>
-      <td>0.758</td>
-      <td>1.000</td>
-      <td>0.000</td>
-      <td>0.000</td>
-      <td>0.758</td>
-      <td>0.000</td>
-      <td>0.000</td>
-      <td>0.000</td>
-      <td>0.000</td>
-      <td>0.985</td>
-      <td>1.000</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0.985</td>
-      <td>1.000</td>
-      <td>0.550</td>
-      <td>1.000</td>
-      <td>0.550</td>
-    </tr>
-    <tr>
-      <th>76</th>
       <td>drivelog_temp_annotated_chris.txt</td>
       <td>case_8_clem</td>
-      <td>0.842</td>
+      <td>0.825</td>
       <td>1.000</td>
       <td>0.000</td>
       <td>0.000</td>
-      <td>0.842</td>
-      <td>0.875</td>
-      <td>0.554</td>
-      <td>0.875</td>
-      <td>0.554</td>
+      <td>0.825</td>
+      <td>0.863</td>
+      <td>0.496</td>
+      <td>0.863</td>
+      <td>0.496</td>
       <td>0.890</td>
       <td>1.000</td>
       <td>0</td>
@@ -3181,14 +3140,14 @@
       <td>0.795</td>
       <td>0.455</td>
       <td>0.795</td>
-      <td>0.537</td>
-      <td>0.532</td>
+      <td>0.556</td>
+      <td>0.552</td>
       <td>0.000</td>
       <td>0.000</td>
       <td>0.818</td>
       <td>0.000</td>
       <td>0.000</td>
-      <td>0.199</td>
+      <td>0.208</td>
       <td>0.512</td>
       <td>0.978</td>
       <td>1.000</td>
@@ -3201,18 +3160,18 @@
       <td>0.737</td>
     </tr>
     <tr>
-      <th>77</th>
+      <th>76</th>
       <td>drivelog_temp_annotated_clement.txt</td>
       <td>case_8_clem</td>
-      <td>0.794</td>
+      <td>0.777</td>
       <td>1.000</td>
       <td>0.000</td>
       <td>0.000</td>
-      <td>0.794</td>
-      <td>0.841</td>
-      <td>0.477</td>
-      <td>0.841</td>
-      <td>0.477</td>
+      <td>0.777</td>
+      <td>0.825</td>
+      <td>0.426</td>
+      <td>0.825</td>
+      <td>0.426</td>
       <td>0.900</td>
       <td>1.000</td>
       <td>0</td>
@@ -3222,15 +3181,15 @@
       <td>0.943</td>
       <td>0.429</td>
       <td>0.943</td>
-      <td>0.680</td>
-      <td>0.532</td>
+      <td>0.660</td>
+      <td>0.552</td>
       <td>0.000</td>
       <td>0.000</td>
       <td>0.792</td>
       <td>0.000</td>
       <td>0.000</td>
-      <td>0.380</td>
-      <td>0.854</td>
+      <td>0.353</td>
+      <td>0.760</td>
       <td>0.989</td>
       <td>1.000</td>
       <td>0</td>
@@ -3242,18 +3201,18 @@
       <td>0.848</td>
     </tr>
     <tr>
-      <th>78</th>
+      <th>77</th>
       <td>drivelog_temp_annotated_angela.txt</td>
       <td>case_8_josh</td>
-      <td>0.708</td>
-      <td>0.865</td>
+      <td>0.692</td>
+      <td>0.883</td>
       <td>0.000</td>
       <td>0.000</td>
       <td>0.617</td>
       <td>0.000</td>
       <td>0.000</td>
-      <td>0.839</td>
-      <td>0.296</td>
+      <td>0.824</td>
+      <td>0.251</td>
       <td>0.962</td>
       <td>1.000</td>
       <td>0</td>
@@ -3283,18 +3242,18 @@
       <td>0.441</td>
     </tr>
     <tr>
-      <th>79</th>
+      <th>78</th>
       <td>drivelog_temp_annotated_josh.txt</td>
       <td>case_8_josh</td>
-      <td>0.666</td>
-      <td>0.865</td>
+      <td>0.648</td>
+      <td>0.883</td>
       <td>0.000</td>
       <td>0.000</td>
       <td>0.567</td>
       <td>0.000</td>
       <td>0.000</td>
-      <td>0.864</td>
-      <td>0.271</td>
+      <td>0.843</td>
+      <td>0.228</td>
       <td>0.956</td>
       <td>1.000</td>
       <td>0</td>
@@ -3324,18 +3283,18 @@
       <td>0.491</td>
     </tr>
     <tr>
-      <th>80</th>
+      <th>79</th>
       <td>drivelog_temp_annotated_angela.txt</td>
       <td>case_9_ang</td>
-      <td>0.886</td>
-      <td>0.658</td>
+      <td>0.835</td>
+      <td>0.709</td>
       <td>0.000</td>
       <td>0.000</td>
       <td>0.597</td>
       <td>0.000</td>
       <td>0.000</td>
-      <td>0.922</td>
-      <td>0.783</td>
+      <td>0.908</td>
+      <td>0.657</td>
       <td>0.949</td>
       <td>1.000</td>
       <td>0</td>
@@ -3345,15 +3304,15 @@
       <td>0.447</td>
       <td>1.000</td>
       <td>0.447</td>
-      <td>0.949</td>
-      <td>0.675</td>
+      <td>0.777</td>
+      <td>0.886</td>
       <td>0.000</td>
       <td>0.000</td>
       <td>0.663</td>
       <td>0.000</td>
       <td>0.000</td>
-      <td>0.940</td>
-      <td>0.906</td>
+      <td>1.000</td>
+      <td>0.338</td>
       <td>0.934</td>
       <td>1.000</td>
       <td>0</td>
@@ -3365,18 +3324,18 @@
       <td>0.250</td>
     </tr>
     <tr>
-      <th>81</th>
+      <th>80</th>
       <td>drivelog_temp_annotated_josh.txt</td>
       <td>case_9_ang</td>
-      <td>0.874</td>
-      <td>0.658</td>
+      <td>0.823</td>
+      <td>0.709</td>
       <td>0.000</td>
       <td>0.000</td>
       <td>0.595</td>
       <td>0.000</td>
       <td>0.000</td>
-      <td>0.908</td>
-      <td>0.766</td>
+      <td>0.892</td>
+      <td>0.641</td>
       <td>0.964</td>
       <td>1.000</td>
       <td>0</td>
@@ -3386,15 +3345,15 @@
       <td>0.531</td>
       <td>1.000</td>
       <td>0.531</td>
-      <td>0.908</td>
-      <td>0.675</td>
+      <td>0.755</td>
+      <td>0.886</td>
       <td>0.000</td>
       <td>0.000</td>
       <td>0.655</td>
       <td>0.000</td>
       <td>0.000</td>
-      <td>0.888</td>
-      <td>0.838</td>
+      <td>0.936</td>
+      <td>0.310</td>
       <td>0.951</td>
       <td>1.000</td>
       <td>0</td>
@@ -3404,91 +3363,91 @@
       <td>0.296</td>
       <td>0.889</td>
       <td>0.296</td>
+    </tr>
+    <tr>
+      <th>81</th>
+      <td>drivelog_temp_annotated_chris.txt</td>
+      <td>case_9_chris</td>
+      <td>0.852</td>
+      <td>1.000</td>
+      <td>0.000</td>
+      <td>0.000</td>
+      <td>0.852</td>
+      <td>0.865</td>
+      <td>0.417</td>
+      <td>0.865</td>
+      <td>0.417</td>
+      <td>0.979</td>
+      <td>1.000</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0.979</td>
+      <td>1.000</td>
+      <td>0.655</td>
+      <td>1.000</td>
+      <td>0.655</td>
+      <td>0.786</td>
+      <td>1.000</td>
+      <td>0.000</td>
+      <td>0.000</td>
+      <td>0.786</td>
+      <td>0.000</td>
+      <td>0.000</td>
+      <td>0.000</td>
+      <td>0.000</td>
+      <td>0.981</td>
+      <td>1.000</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0.981</td>
+      <td>0.962</td>
+      <td>0.758</td>
+      <td>0.962</td>
+      <td>0.758</td>
     </tr>
     <tr>
       <th>82</th>
-      <td>drivelog_temp_annotated_chris.txt</td>
+      <td>drivelog_temp_annotated_clement.txt</td>
       <td>case_9_chris</td>
-      <td>0.856</td>
+      <td>0.751</td>
       <td>1.000</td>
       <td>0.000</td>
       <td>0.000</td>
-      <td>0.856</td>
-      <td>0.845</td>
-      <td>0.454</td>
-      <td>0.845</td>
-      <td>0.454</td>
-      <td>0.979</td>
-      <td>1.000</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0.979</td>
-      <td>1.000</td>
-      <td>0.655</td>
-      <td>1.000</td>
-      <td>0.655</td>
-      <td>0.786</td>
-      <td>1.000</td>
-      <td>0.000</td>
-      <td>0.000</td>
-      <td>0.786</td>
-      <td>0.000</td>
-      <td>0.000</td>
-      <td>0.000</td>
-      <td>0.000</td>
-      <td>0.981</td>
+      <td>0.751</td>
+      <td>0.808</td>
+      <td>0.280</td>
+      <td>0.808</td>
+      <td>0.280</td>
+      <td>0.994</td>
       <td>1.000</td>
       <td>0</td>
       <td>0</td>
-      <td>0.981</td>
-      <td>0.962</td>
-      <td>0.758</td>
-      <td>0.962</td>
-      <td>0.758</td>
+      <td>0.994</td>
+      <td>0.895</td>
+      <td>0.944</td>
+      <td>0.895</td>
+      <td>0.944</td>
+      <td>0.765</td>
+      <td>1.000</td>
+      <td>0.000</td>
+      <td>0.000</td>
+      <td>0.765</td>
+      <td>0.000</td>
+      <td>0.000</td>
+      <td>0.000</td>
+      <td>0.000</td>
+      <td>0.992</td>
+      <td>1.000</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0.992</td>
+      <td>0.885</td>
+      <td>0.958</td>
+      <td>0.885</td>
+      <td>0.958</td>
     </tr>
     <tr>
       <th>83</th>
-      <td>drivelog_temp_annotated_clement.txt</td>
-      <td>case_9_chris</td>
-      <td>0.763</td>
-      <td>1.000</td>
-      <td>0.000</td>
-      <td>0.000</td>
-      <td>0.763</td>
-      <td>0.828</td>
-      <td>0.320</td>
-      <td>0.828</td>
-      <td>0.320</td>
-      <td>0.994</td>
-      <td>1.000</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0.994</td>
-      <td>0.895</td>
-      <td>0.944</td>
-      <td>0.895</td>
-      <td>0.944</td>
-      <td>0.765</td>
-      <td>1.000</td>
-      <td>0.000</td>
-      <td>0.000</td>
-      <td>0.765</td>
-      <td>0.000</td>
-      <td>0.000</td>
-      <td>0.000</td>
-      <td>0.000</td>
-      <td>0.992</td>
-      <td>1.000</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0.992</td>
-      <td>0.885</td>
-      <td>0.958</td>
-      <td>0.885</td>
-      <td>0.958</td>
-    </tr>
-    <tr>
-      <th>84</th>
       <td>drivelog_temp_annotated_chris.txt</td>
       <td>case_9_clem</td>
       <td>0.799</td>
@@ -3529,7 +3488,7 @@
       <td>0.735</td>
     </tr>
     <tr>
-      <th>85</th>
+      <th>84</th>
       <td>drivelog_temp_annotated_clement.txt</td>
       <td>case_9_clem</td>
       <td>0.728</td>
@@ -3570,18 +3529,18 @@
       <td>0.758</td>
     </tr>
     <tr>
-      <th>86</th>
+      <th>85</th>
       <td>drivelog_temp_annotated_angela.txt</td>
       <td>case_9_josh</td>
-      <td>0.807</td>
-      <td>0.891</td>
+      <td>0.758</td>
+      <td>1.000</td>
       <td>0.000</td>
       <td>0.000</td>
-      <td>0.735</td>
-      <td>0.902</td>
-      <td>0.310</td>
-      <td>0.869</td>
-      <td>0.556</td>
+      <td>0.758</td>
+      <td>0.852</td>
+      <td>0.410</td>
+      <td>0.852</td>
+      <td>0.410</td>
       <td>0.943</td>
       <td>1.000</td>
       <td>0</td>
@@ -3591,15 +3550,15 @@
       <td>0.563</td>
       <td>0.628</td>
       <td>0.563</td>
-      <td>0.919</td>
-      <td>0.786</td>
+      <td>0.639</td>
+      <td>1.000</td>
       <td>0.000</td>
       <td>0.000</td>
-      <td>0.797</td>
-      <td>0.881</td>
-      <td>0.504</td>
-      <td>0.833</td>
-      <td>0.970</td>
+      <td>0.639</td>
+      <td>0.000</td>
+      <td>0.000</td>
+      <td>0.000</td>
+      <td>0.000</td>
       <td>0.950</td>
       <td>1.000</td>
       <td>0</td>
@@ -3609,61 +3568,61 @@
       <td>0.518</td>
       <td>0.829</td>
       <td>0.518</td>
+    </tr>
+    <tr>
+      <th>86</th>
+      <td>drivelog_temp_annotated_josh.txt</td>
+      <td>case_9_josh</td>
+      <td>0.719</td>
+      <td>1.000</td>
+      <td>0.000</td>
+      <td>0.000</td>
+      <td>0.719</td>
+      <td>0.861</td>
+      <td>0.371</td>
+      <td>0.861</td>
+      <td>0.371</td>
+      <td>0.956</td>
+      <td>1.000</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0.956</td>
+      <td>0.628</td>
+      <td>0.675</td>
+      <td>0.628</td>
+      <td>0.675</td>
+      <td>0.601</td>
+      <td>1.000</td>
+      <td>0.000</td>
+      <td>0.000</td>
+      <td>0.601</td>
+      <td>0.000</td>
+      <td>0.000</td>
+      <td>0.000</td>
+      <td>0.000</td>
+      <td>0.962</td>
+      <td>1.000</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0.962</td>
+      <td>0.857</td>
+      <td>0.600</td>
+      <td>0.857</td>
+      <td>0.600</td>
     </tr>
     <tr>
       <th>87</th>
       <td>drivelog_temp_annotated_josh.txt</td>
-      <td>case_9_josh</td>
-      <td>0.777</td>
-      <td>0.891</td>
-      <td>0.000</td>
-      <td>0.000</td>
-      <td>0.690</td>
-      <td>0.890</td>
-      <td>0.273</td>
-      <td>0.895</td>
-      <td>0.513</td>
-      <td>0.956</td>
-      <td>1.000</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0.956</td>
-      <td>0.628</td>
-      <td>0.675</td>
-      <td>0.628</td>
-      <td>0.675</td>
-      <td>0.902</td>
-      <td>0.786</td>
-      <td>0.000</td>
-      <td>0.000</td>
-      <td>0.768</td>
-      <td>0.904</td>
-      <td>0.467</td>
-      <td>0.858</td>
-      <td>0.904</td>
-      <td>0.962</td>
-      <td>1.000</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0.962</td>
-      <td>0.857</td>
-      <td>0.600</td>
-      <td>0.857</td>
-      <td>0.600</td>
-    </tr>
-    <tr>
-      <th>88</th>
-      <td>drivelog_temp_annotated_josh.txt</td>
       <td>clem_long</td>
-      <td>0.894</td>
-      <td>0.707</td>
-      <td>0.881</td>
-      <td>0.220</td>
-      <td>0.769</td>
+      <td>0.810</td>
+      <td>0.638</td>
       <td>0.000</td>
       <td>0.000</td>
-      <td>0.899</td>
-      <td>0.798</td>
+      <td>0.784</td>
+      <td>0.000</td>
+      <td>0.000</td>
+      <td>0.900</td>
+      <td>0.536</td>
       <td>0.985</td>
       <td>0.890</td>
       <td>0</td>
@@ -3673,11 +3632,11 @@
       <td>0.000</td>
       <td>1.000</td>
       <td>0.863</td>
-      <td>0.884</td>
+      <td>0.815</td>
       <td>0.884</td>
       <td>0.000</td>
       <td>0.000</td>
-      <td>1.000</td>
+      <td>0.931</td>
       <td>0.000</td>
       <td>0.000</td>
       <td>0.000</td>
@@ -3693,18 +3652,18 @@
       <td>0.714</td>
     </tr>
     <tr>
-      <th>89</th>
+      <th>88</th>
       <td>drivelog_temp_annotated_josh.txt</td>
       <td>clem_no_head</td>
-      <td>0.952</td>
+      <td>0.947</td>
       <td>1.000</td>
       <td>0.000</td>
       <td>0.000</td>
-      <td>0.952</td>
-      <td>0.887</td>
-      <td>0.855</td>
-      <td>0.887</td>
-      <td>0.855</td>
+      <td>0.947</td>
+      <td>0.885</td>
+      <td>0.831</td>
+      <td>0.885</td>
+      <td>0.831</td>
       <td>0.963</td>
       <td>1.000</td>
       <td>0</td>
@@ -3734,18 +3693,18 @@
       <td>0.000</td>
     </tr>
     <tr>
-      <th>90</th>
+      <th>89</th>
       <td>drivelog_temp_annotated_josh.txt</td>
       <td>clem_rapid</td>
-      <td>0.838</td>
+      <td>0.799</td>
       <td>0.855</td>
       <td>0.000</td>
       <td>0.000</td>
-      <td>0.982</td>
-      <td>0.901</td>
-      <td>1.000</td>
-      <td>0.901</td>
-      <td>0.526</td>
+      <td>0.944</td>
+      <td>0.873</td>
+      <td>0.758</td>
+      <td>0.873</td>
+      <td>0.399</td>
       <td>0.966</td>
       <td>0.988</td>
       <td>0</td>
@@ -3755,15 +3714,15 @@
       <td>0.667</td>
       <td>0.667</td>
       <td>0.480</td>
-      <td>0.686</td>
-      <td>0.834</td>
-      <td>0.000</td>
-      <td>0.000</td>
+      <td>0.780</td>
+      <td>0.928</td>
+      <td>1.000</td>
+      <td>0.564</td>
       <td>0.852</td>
       <td>0.000</td>
       <td>0.000</td>
-      <td>0.000</td>
-      <td>0.000</td>
+      <td>1.000</td>
+      <td>0.298</td>
       <td>0.972</td>
       <td>0.986</td>
       <td>0</td>
@@ -3775,18 +3734,18 @@
       <td>0.407</td>
     </tr>
     <tr>
-      <th>91</th>
+      <th>90</th>
       <td>drivelog_temp_annotated_josh.txt</td>
       <td>clem_while</td>
-      <td>0.944</td>
-      <td>0.975</td>
-      <td>0.896</td>
-      <td>0.896</td>
-      <td>0.969</td>
-      <td>0.883</td>
-      <td>0.895</td>
-      <td>0.889</td>
-      <td>0.895</td>
+      <td>0.886</td>
+      <td>0.951</td>
+      <td>0.870</td>
+      <td>0.701</td>
+      <td>0.935</td>
+      <td>0.845</td>
+      <td>0.645</td>
+      <td>0.857</td>
+      <td>0.671</td>
       <td>0.975</td>
       <td>0.939</td>
       <td>0</td>
@@ -3796,15 +3755,15 @@
       <td>0.773</td>
       <td>1.000</td>
       <td>0.750</td>
-      <td>0.955</td>
-      <td>0.993</td>
-      <td>0.980</td>
-      <td>0.980</td>
-      <td>0.962</td>
-      <td>0.833</td>
-      <td>0.846</td>
-      <td>0.922</td>
-      <td>0.927</td>
+      <td>0.908</td>
+      <td>0.966</td>
+      <td>0.976</td>
+      <td>0.830</td>
+      <td>0.942</td>
+      <td>0.800</td>
+      <td>0.677</td>
+      <td>0.907</td>
+      <td>0.770</td>
       <td>0.960</td>
       <td>0.926</td>
       <td>0</td>
@@ -3816,18 +3775,18 @@
       <td>0.645</td>
     </tr>
     <tr>
-      <th>92</th>
+      <th>91</th>
       <td>drivelog_temp_annotated_clement.txt</td>
       <td>dark_1_josh</td>
-      <td>0.770</td>
-      <td>0.578</td>
+      <td>0.739</td>
+      <td>0.608</td>
       <td>0.000</td>
       <td>0.000</td>
       <td>0.688</td>
       <td>0.000</td>
       <td>0.000</td>
-      <td>0.597</td>
-      <td>0.807</td>
+      <td>0.566</td>
+      <td>0.710</td>
       <td>0.947</td>
       <td>1.000</td>
       <td>0</td>
@@ -3837,15 +3796,15 @@
       <td>0.000</td>
       <td>0.000</td>
       <td>0.000</td>
-      <td>0.975</td>
+      <td>0.949</td>
       <td>1.000</td>
       <td>0.000</td>
       <td>0.000</td>
-      <td>0.975</td>
-      <td>0.930</td>
-      <td>0.971</td>
-      <td>0.930</td>
-      <td>0.971</td>
+      <td>0.949</td>
+      <td>0.921</td>
+      <td>0.860</td>
+      <td>0.921</td>
+      <td>0.860</td>
       <td>0.989</td>
       <td>1.000</td>
       <td>0</td>
@@ -3857,18 +3816,18 @@
       <td>0.778</td>
     </tr>
     <tr>
-      <th>93</th>
+      <th>92</th>
       <td>drivelog_temp_annotated_josh.txt</td>
       <td>dark_1_josh</td>
-      <td>0.766</td>
-      <td>0.578</td>
+      <td>0.736</td>
+      <td>0.608</td>
       <td>0.000</td>
       <td>0.000</td>
       <td>0.660</td>
       <td>0.000</td>
       <td>0.000</td>
-      <td>0.626</td>
-      <td>0.776</td>
+      <td>0.597</td>
+      <td>0.688</td>
       <td>0.952</td>
       <td>1.000</td>
       <td>0</td>
@@ -3878,15 +3837,15 @@
       <td>0.000</td>
       <td>0.000</td>
       <td>0.000</td>
-      <td>0.972</td>
+      <td>0.945</td>
       <td>1.000</td>
       <td>0.000</td>
       <td>0.000</td>
-      <td>0.972</td>
-      <td>0.965</td>
-      <td>0.926</td>
-      <td>0.965</td>
-      <td>0.926</td>
+      <td>0.945</td>
+      <td>0.961</td>
+      <td>0.824</td>
+      <td>0.961</td>
+      <td>0.824</td>
       <td>0.977</td>
       <td>1.000</td>
       <td>0</td>
@@ -3898,18 +3857,18 @@
       <td>0.618</td>
     </tr>
     <tr>
-      <th>94</th>
+      <th>93</th>
       <td>drivelog_temp_annotated_clement.txt</td>
       <td>dark_2_josh</td>
-      <td>0.928</td>
+      <td>0.896</td>
       <td>1.000</td>
       <td>0.000</td>
       <td>0.000</td>
-      <td>0.928</td>
-      <td>0.961</td>
-      <td>0.864</td>
-      <td>0.961</td>
-      <td>0.864</td>
+      <td>0.896</td>
+      <td>0.957</td>
+      <td>0.789</td>
+      <td>0.957</td>
+      <td>0.789</td>
       <td>0.994</td>
       <td>1.000</td>
       <td>0</td>
@@ -3919,15 +3878,15 @@
       <td>0.950</td>
       <td>0.905</td>
       <td>0.950</td>
-      <td>0.981</td>
+      <td>0.932</td>
       <td>1.000</td>
       <td>0.000</td>
       <td>0.000</td>
-      <td>0.981</td>
-      <td>0.944</td>
-      <td>0.993</td>
-      <td>0.944</td>
-      <td>0.993</td>
+      <td>0.932</td>
+      <td>0.933</td>
+      <td>0.822</td>
+      <td>0.933</td>
+      <td>0.822</td>
       <td>0.989</td>
       <td>1.000</td>
       <td>0</td>
@@ -3937,61 +3896,61 @@
       <td>0.762</td>
       <td>1.000</td>
       <td>0.762</td>
+    </tr>
+    <tr>
+      <th>94</th>
+      <td>drivelog_temp_annotated_josh.txt</td>
+      <td>dark_2_josh</td>
+      <td>0.945</td>
+      <td>1.000</td>
+      <td>0.000</td>
+      <td>0.000</td>
+      <td>0.945</td>
+      <td>0.970</td>
+      <td>0.883</td>
+      <td>0.970</td>
+      <td>0.883</td>
+      <td>0.985</td>
+      <td>1.000</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0.985</td>
+      <td>1.000</td>
+      <td>0.750</td>
+      <td>1.000</td>
+      <td>0.750</td>
+      <td>0.917</td>
+      <td>1.000</td>
+      <td>0.000</td>
+      <td>0.000</td>
+      <td>0.917</td>
+      <td>0.916</td>
+      <td>0.790</td>
+      <td>0.916</td>
+      <td>0.790</td>
+      <td>0.975</td>
+      <td>1.000</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0.975</td>
+      <td>1.000</td>
+      <td>0.571</td>
+      <td>1.000</td>
+      <td>0.571</td>
     </tr>
     <tr>
       <th>95</th>
       <td>drivelog_temp_annotated_josh.txt</td>
-      <td>dark_2_josh</td>
-      <td>0.977</td>
-      <td>1.000</td>
-      <td>0.000</td>
-      <td>0.000</td>
-      <td>0.977</td>
-      <td>0.972</td>
-      <td>0.967</td>
-      <td>0.972</td>
-      <td>0.967</td>
-      <td>0.985</td>
-      <td>1.000</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0.985</td>
-      <td>1.000</td>
-      <td>0.750</td>
-      <td>1.000</td>
-      <td>0.750</td>
-      <td>0.966</td>
-      <td>1.000</td>
-      <td>0.000</td>
-      <td>0.000</td>
-      <td>0.966</td>
-      <td>0.930</td>
-      <td>0.957</td>
-      <td>0.930</td>
-      <td>0.957</td>
-      <td>0.975</td>
-      <td>1.000</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0.975</td>
-      <td>1.000</td>
-      <td>0.571</td>
-      <td>1.000</td>
-      <td>0.571</td>
-    </tr>
-    <tr>
-      <th>96</th>
-      <td>drivelog_temp_annotated_josh.txt</td>
       <td>josh_bad_head_turn</td>
-      <td>0.971</td>
+      <td>0.956</td>
       <td>1.000</td>
       <td>0.000</td>
       <td>0.000</td>
-      <td>0.971</td>
-      <td>0.879</td>
-      <td>0.952</td>
-      <td>0.879</td>
-      <td>0.952</td>
+      <td>0.956</td>
+      <td>0.867</td>
+      <td>0.857</td>
+      <td>0.867</td>
+      <td>0.857</td>
       <td>0.939</td>
       <td>0.975</td>
       <td>0</td>
@@ -4001,15 +3960,15 @@
       <td>0.850</td>
       <td>0.511</td>
       <td>0.727</td>
-      <td>0.765</td>
-      <td>0.860</td>
+      <td>0.774</td>
+      <td>0.901</td>
       <td>0.000</td>
       <td>0.000</td>
-      <td>0.675</td>
+      <td>0.725</td>
       <td>0.000</td>
       <td>0.000</td>
-      <td>0.337</td>
-      <td>0.923</td>
+      <td>0.298</td>
+      <td>0.600</td>
       <td>0.985</td>
       <td>1.000</td>
       <td>0</td>
@@ -4021,18 +3980,18 @@
       <td>0.771</td>
     </tr>
     <tr>
-      <th>97</th>
+      <th>96</th>
       <td>drivelog_temp_annotated_josh.txt</td>
       <td>josh_long</td>
-      <td>0.825</td>
+      <td>0.857</td>
       <td>0.848</td>
       <td>0.000</td>
       <td>0.000</td>
-      <td>0.977</td>
-      <td>0.891</td>
-      <td>0.905</td>
-      <td>0.891</td>
-      <td>0.385</td>
+      <td>0.863</td>
+      <td>0.430</td>
+      <td>0.683</td>
+      <td>0.840</td>
+      <td>0.568</td>
       <td>0.982</td>
       <td>0.916</td>
       <td>0</td>
@@ -4042,15 +4001,15 @@
       <td>0.714</td>
       <td>1.000</td>
       <td>0.853</td>
-      <td>0.875</td>
-      <td>0.880</td>
+      <td>0.891</td>
+      <td>0.787</td>
       <td>0.000</td>
       <td>0.000</td>
-      <td>0.777</td>
+      <td>0.807</td>
       <td>0.000</td>
       <td>0.000</td>
-      <td>0.884</td>
-      <td>0.496</td>
+      <td>0.798</td>
+      <td>0.675</td>
       <td>0.982</td>
       <td>0.896</td>
       <td>0</td>
@@ -4062,18 +4021,18 @@
       <td>0.867</td>
     </tr>
     <tr>
-      <th>98</th>
+      <th>97</th>
       <td>drivelog_temp_annotated_josh.txt</td>
       <td>josh_no_head</td>
-      <td>0.794</td>
-      <td>0.967</td>
-      <td>0.905</td>
-      <td>0.893</td>
-      <td>0.827</td>
-      <td>0.447</td>
+      <td>0.723</td>
+      <td>0.834</td>
+      <td>0.000</td>
+      <td>0.000</td>
+      <td>0.889</td>
+      <td>0.558</td>
       <td>1.000</td>
-      <td>0.605</td>
-      <td>0.942</td>
+      <td>0.558</td>
+      <td>0.457</td>
       <td>0.987</td>
       <td>1.000</td>
       <td>0</td>
@@ -4083,15 +4042,15 @@
       <td>0.750</td>
       <td>1.000</td>
       <td>0.750</td>
-      <td>0.825</td>
-      <td>0.985</td>
-      <td>0.905</td>
-      <td>1.000</td>
+      <td>0.781</td>
+      <td>0.940</td>
+      <td>0.870</td>
+      <td>0.701</td>
       <td>0.841</td>
       <td>0.000</td>
       <td>0.000</td>
-      <td>0.905</td>
-      <td>0.482</td>
+      <td>0.870</td>
+      <td>0.338</td>
       <td>0.967</td>
       <td>1.000</td>
       <td>0</td>
@@ -4101,61 +4060,61 @@
       <td>0.750</td>
       <td>0.600</td>
       <td>0.750</td>
+    </tr>
+    <tr>
+      <th>98</th>
+      <td>drivelog_temp_annotated_josh.txt</td>
+      <td>josh_passenger_2</td>
+      <td>0.741</td>
+      <td>1.000</td>
+      <td>0.000</td>
+      <td>0.000</td>
+      <td>0.741</td>
+      <td>0.767</td>
+      <td>0.336</td>
+      <td>0.767</td>
+      <td>0.336</td>
+      <td>0.892</td>
+      <td>1.000</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0.892</td>
+      <td>0.305</td>
+      <td>0.857</td>
+      <td>0.305</td>
+      <td>0.857</td>
+      <td>0.900</td>
+      <td>0.931</td>
+      <td>0.000</td>
+      <td>0.000</td>
+      <td>0.969</td>
+      <td>0.865</td>
+      <td>0.810</td>
+      <td>0.492</td>
+      <td>0.810</td>
+      <td>0.953</td>
+      <td>1.000</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0.953</td>
+      <td>0.492</td>
+      <td>0.838</td>
+      <td>0.492</td>
+      <td>0.838</td>
     </tr>
     <tr>
       <th>99</th>
       <td>drivelog_temp_annotated_josh.txt</td>
-      <td>josh_passenger_2</td>
-      <td>0.718</td>
-      <td>0.921</td>
-      <td>0.000</td>
-      <td>0.000</td>
-      <td>0.780</td>
-      <td>0.815</td>
-      <td>0.449</td>
-      <td>0.605</td>
-      <td>0.474</td>
-      <td>0.892</td>
-      <td>1.000</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0.892</td>
-      <td>0.305</td>
-      <td>0.857</td>
-      <td>0.305</td>
-      <td>0.857</td>
-      <td>0.814</td>
-      <td>0.911</td>
-      <td>0.000</td>
-      <td>0.000</td>
-      <td>0.903</td>
-      <td>0.000</td>
-      <td>0.000</td>
-      <td>0.000</td>
-      <td>0.000</td>
-      <td>0.953</td>
-      <td>1.000</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0.953</td>
-      <td>0.492</td>
-      <td>0.838</td>
-      <td>0.492</td>
-      <td>0.838</td>
-    </tr>
-    <tr>
-      <th>100</th>
-      <td>drivelog_temp_annotated_josh.txt</td>
       <td>josh_rapid_head_turn</td>
-      <td>0.949</td>
+      <td>0.899</td>
       <td>0.886</td>
       <td>0.000</td>
       <td>0.000</td>
-      <td>0.835</td>
-      <td>0.554</td>
-      <td>0.916</td>
-      <td>0.898</td>
-      <td>0.946</td>
+      <td>0.827</td>
+      <td>0.550</td>
+      <td>0.747</td>
+      <td>0.891</td>
+      <td>0.772</td>
       <td>0.970</td>
       <td>0.977</td>
       <td>0</td>
@@ -4165,15 +4124,15 @@
       <td>0.591</td>
       <td>1.000</td>
       <td>0.576</td>
-      <td>0.852</td>
+      <td>0.821</td>
       <td>0.859</td>
       <td>0.000</td>
       <td>0.000</td>
-      <td>0.732</td>
-      <td>0.000</td>
-      <td>0.000</td>
-      <td>0.873</td>
-      <td>0.504</td>
+      <td>0.962</td>
+      <td>0.913</td>
+      <td>0.750</td>
+      <td>0.913</td>
+      <td>0.341</td>
       <td>0.979</td>
       <td>0.981</td>
       <td>0</td>
@@ -4185,18 +4144,18 @@
       <td>0.733</td>
     </tr>
     <tr>
-      <th>101</th>
+      <th>100</th>
       <td>drivelog_temp_annotated_josh.txt</td>
       <td>josh_while</td>
-      <td>0.869</td>
-      <td>0.910</td>
-      <td>0.463</td>
+      <td>0.888</td>
+      <td>0.955</td>
+      <td>0.633</td>
       <td>1.000</td>
-      <td>0.959</td>
-      <td>0.896</td>
-      <td>0.852</td>
-      <td>0.673</td>
-      <td>0.899</td>
+      <td>0.933</td>
+      <td>0.875</td>
+      <td>0.691</td>
+      <td>0.758</td>
+      <td>0.790</td>
       <td>0.869</td>
       <td>0.832</td>
       <td>0</td>
@@ -4206,15 +4165,15 @@
       <td>0.783</td>
       <td>1.000</td>
       <td>0.390</td>
-      <td>0.881</td>
-      <td>0.740</td>
-      <td>0.371</td>
-      <td>0.961</td>
-      <td>0.838</td>
-      <td>0.000</td>
-      <td>0.000</td>
-      <td>0.746</td>
-      <td>0.948</td>
+      <td>0.904</td>
+      <td>0.957</td>
+      <td>0.937</td>
+      <td>0.776</td>
+      <td>0.947</td>
+      <td>0.863</td>
+      <td>0.797</td>
+      <td>0.897</td>
+      <td>0.787</td>
       <td>0.963</td>
       <td>0.935</td>
       <td>0</td>
@@ -4226,7 +4185,7 @@
       <td>0.660</td>
     </tr>
     <tr>
-      <th>102</th>
+      <th>101</th>
       <td>drivelog_temp_annotated_clement.txt</td>
       <td>shaking_1_josh</td>
       <td>0.755</td>
@@ -4267,7 +4226,7 @@
       <td>0.828</td>
     </tr>
     <tr>
-      <th>103</th>
+      <th>102</th>
       <td>drivelog_temp_annotated_josh.txt</td>
       <td>shaking_1_josh</td>
       <td>0.723</td>
@@ -4355,125 +4314,125 @@
   <tbody>
     <tr>
       <th>count</th>
-      <td>104.000000</td>
-      <td>104.000000</td>
-      <td>104.000000</td>
-      <td>104.000000</td>
-      <td>104.000000</td>
-      <td>104.000000</td>
-      <td>104.000000</td>
-      <td>104.000000</td>
-      <td>104.000000</td>
-      <td>104.000000</td>
-      <td>104.000000</td>
-      <td>104</td>
-      <td>104</td>
-      <td>104.000000</td>
-      <td>104.000000</td>
-      <td>104.000000</td>
-      <td>104.000000</td>
-      <td>104.000000</td>
-      <td>104.000000</td>
-      <td>104.000000</td>
-      <td>104.000000</td>
-      <td>104.000000</td>
-      <td>104.000000</td>
-      <td>104.000000</td>
-      <td>104.000000</td>
-      <td>104.000000</td>
-      <td>104.000000</td>
-      <td>104.000000</td>
-      <td>104.000000</td>
-      <td>104</td>
-      <td>104</td>
-      <td>104.000000</td>
-      <td>104.000000</td>
-      <td>104.000000</td>
-      <td>104.000000</td>
-      <td>104.000000</td>
+      <td>103.000000</td>
+      <td>103.000000</td>
+      <td>103.000000</td>
+      <td>103.000000</td>
+      <td>103.000000</td>
+      <td>103.000000</td>
+      <td>103.000000</td>
+      <td>103.000000</td>
+      <td>103.000000</td>
+      <td>103.000000</td>
+      <td>103.000000</td>
+      <td>103</td>
+      <td>103</td>
+      <td>103.000000</td>
+      <td>103.000000</td>
+      <td>103.000000</td>
+      <td>103.000000</td>
+      <td>103.000000</td>
+      <td>103.000000</td>
+      <td>103.000000</td>
+      <td>103.000000</td>
+      <td>103.000000</td>
+      <td>103.000000</td>
+      <td>103.000000</td>
+      <td>103.000000</td>
+      <td>103.000000</td>
+      <td>103.000000</td>
+      <td>103.000000</td>
+      <td>103.000000</td>
+      <td>103</td>
+      <td>103</td>
+      <td>103.000000</td>
+      <td>103.000000</td>
+      <td>103.000000</td>
+      <td>103.000000</td>
+      <td>103.000000</td>
     </tr>
     <tr>
       <th>mean</th>
-      <td>0.814288</td>
-      <td>0.888500</td>
-      <td>0.049904</td>
-      <td>0.051144</td>
-      <td>0.784692</td>
-      <td>0.451913</td>
-      <td>0.314394</td>
-      <td>0.649952</td>
-      <td>0.514577</td>
-      <td>0.959692</td>
-      <td>0.993433</td>
+      <td>0.796010</td>
+      <td>0.902524</td>
+      <td>0.037631</td>
+      <td>0.037689</td>
+      <td>0.782272</td>
+      <td>0.442136</td>
+      <td>0.290515</td>
+      <td>0.636922</td>
+      <td>0.451961</td>
+      <td>0.959408</td>
+      <td>0.993369</td>
       <td>0</td>
       <td>0</td>
-      <td>0.958990</td>
-      <td>0.742654</td>
-      <td>0.653202</td>
-      <td>0.795981</td>
-      <td>0.656683</td>
-      <td>0.797846</td>
-      <td>0.907538</td>
-      <td>0.027115</td>
-      <td>0.035635</td>
-      <td>0.800058</td>
-      <td>0.281115</td>
-      <td>0.194413</td>
-      <td>0.436548</td>
-      <td>0.372779</td>
-      <td>0.967471</td>
-      <td>0.995587</td>
+      <td>0.958699</td>
+      <td>0.749864</td>
+      <td>0.659544</td>
+      <td>0.803709</td>
+      <td>0.663058</td>
+      <td>0.783650</td>
+      <td>0.944068</td>
+      <td>0.046437</td>
+      <td>0.033505</td>
+      <td>0.792777</td>
+      <td>0.286058</td>
+      <td>0.188233</td>
+      <td>0.395427</td>
+      <td>0.281379</td>
+      <td>0.967417</td>
+      <td>0.995544</td>
       <td>0</td>
       <td>0</td>
-      <td>0.965385</td>
-      <td>0.787712</td>
-      <td>0.605269</td>
-      <td>0.834663</td>
-      <td>0.611913</td>
+      <td>0.965311</td>
+      <td>0.795359</td>
+      <td>0.611146</td>
+      <td>0.842767</td>
+      <td>0.617854</td>
     </tr>
     <tr>
       <th>std</th>
-      <td>0.093283</td>
-      <td>0.153963</td>
-      <td>0.190805</td>
-      <td>0.197686</td>
-      <td>0.117498</td>
-      <td>0.435914</td>
-      <td>0.342490</td>
-      <td>0.342882</td>
-      <td>0.314262</td>
-      <td>0.034426</td>
-      <td>0.024035</td>
+      <td>0.086334</td>
+      <td>0.133098</td>
+      <td>0.157841</td>
+      <td>0.160784</td>
+      <td>0.108530</td>
+      <td>0.431999</td>
+      <td>0.312126</td>
+      <td>0.348552</td>
+      <td>0.271585</td>
+      <td>0.034471</td>
+      <td>0.024143</td>
       <td>0</td>
       <td>0</td>
-      <td>0.033447</td>
-      <td>0.301011</td>
-      <td>0.238005</td>
-      <td>0.272401</td>
-      <td>0.228008</td>
-      <td>0.099991</td>
-      <td>0.128110</td>
-      <td>0.144770</td>
-      <td>0.179997</td>
-      <td>0.096744</td>
-      <td>0.416164</td>
-      <td>0.311317</td>
-      <td>0.406079</td>
-      <td>0.363231</td>
-      <td>0.020698</td>
-      <td>0.016529</td>
+      <td>0.033478</td>
+      <td>0.293319</td>
+      <td>0.230169</td>
+      <td>0.262026</td>
+      <td>0.219610</td>
+      <td>0.092265</td>
+      <td>0.111972</td>
+      <td>0.206875</td>
+      <td>0.150859</td>
+      <td>0.097511</td>
+      <td>0.422737</td>
+      <td>0.299449</td>
+      <td>0.420589</td>
+      <td>0.312568</td>
+      <td>0.020792</td>
+      <td>0.016604</td>
       <td>0</td>
       <td>0</td>
-      <td>0.022209</td>
-      <td>0.318398</td>
-      <td>0.258692</td>
-      <td>0.288871</td>
-      <td>0.253891</td>
+      <td>0.022305</td>
+      <td>0.310208</td>
+      <td>0.252886</td>
+      <td>0.278151</td>
+      <td>0.247762</td>
     </tr>
     <tr>
       <th>min</th>
-      <td>0.523000</td>
-      <td>0.489000</td>
+      <td>0.579000</td>
+      <td>0.594000</td>
       <td>0.000000</td>
       <td>0.000000</td>
       <td>0.505000</td>
@@ -4490,8 +4449,8 @@
       <td>0.000000</td>
       <td>0.000000</td>
       <td>0.000000</td>
-      <td>0.537000</td>
-      <td>0.532000</td>
+      <td>0.535000</td>
+      <td>0.552000</td>
       <td>0.000000</td>
       <td>0.000000</td>
       <td>0.535000</td>
@@ -4511,29 +4470,29 @@
     </tr>
     <tr>
       <th>25%</th>
-      <td>0.757250</td>
-      <td>0.803000</td>
+      <td>0.730500</td>
+      <td>0.772000</td>
       <td>0.000000</td>
       <td>0.000000</td>
-      <td>0.700750</td>
+      <td>0.712000</td>
       <td>0.000000</td>
       <td>0.000000</td>
-      <td>0.532000</td>
-      <td>0.311750</td>
+      <td>0.523000</td>
+      <td>0.323500</td>
       <td>0.946000</td>
       <td>1.000000</td>
       <td>0</td>
       <td>0</td>
-      <td>0.945500</td>
-      <td>0.572250</td>
-      <td>0.576500</td>
-      <td>0.667000</td>
-      <td>0.557500</td>
-      <td>0.736250</td>
-      <td>0.842250</td>
+      <td>0.945000</td>
+      <td>0.605500</td>
+      <td>0.581500</td>
+      <td>0.674500</td>
+      <td>0.569500</td>
+      <td>0.725000</td>
+      <td>0.929500</td>
       <td>0.000000</td>
       <td>0.000000</td>
-      <td>0.729750</td>
+      <td>0.721000</td>
       <td>0.000000</td>
       <td>0.000000</td>
       <td>0.000000</td>
@@ -4542,81 +4501,81 @@
       <td>1.000000</td>
       <td>0</td>
       <td>0</td>
-      <td>0.951750</td>
-      <td>0.676000</td>
-      <td>0.517000</td>
-      <td>0.821500</td>
-      <td>0.517000</td>
+      <td>0.951500</td>
+      <td>0.682000</td>
+      <td>0.527500</td>
+      <td>0.827500</td>
+      <td>0.527500</td>
     </tr>
     <tr>
       <th>50%</th>
-      <td>0.823000</td>
+      <td>0.806000</td>
       <td>1.000000</td>
       <td>0.000000</td>
       <td>0.000000</td>
-      <td>0.797500</td>
-      <td>0.500500</td>
-      <td>0.267000</td>
-      <td>0.831500</td>
-      <td>0.519500</td>
+      <td>0.800000</td>
+      <td>0.542000</td>
+      <td>0.262000</td>
+      <td>0.815000</td>
+      <td>0.471000</td>
       <td>0.967000</td>
       <td>1.000000</td>
       <td>0</td>
       <td>0</td>
-      <td>0.964500</td>
-      <td>0.865500</td>
-      <td>0.699000</td>
-      <td>0.924500</td>
-      <td>0.696000</td>
-      <td>0.797000</td>
+      <td>0.964000</td>
+      <td>0.870000</td>
+      <td>0.700000</td>
+      <td>0.944000</td>
+      <td>0.698000</td>
+      <td>0.780000</td>
       <td>1.000000</td>
       <td>0.000000</td>
       <td>0.000000</td>
-      <td>0.792000</td>
+      <td>0.786000</td>
       <td>0.000000</td>
       <td>0.000000</td>
-      <td>0.409000</td>
-      <td>0.372500</td>
+      <td>0.208000</td>
+      <td>0.174000</td>
       <td>0.973000</td>
       <td>1.000000</td>
       <td>0</td>
       <td>0</td>
       <td>0.972000</td>
-      <td>0.962500</td>
-      <td>0.672000</td>
+      <td>0.963000</td>
+      <td>0.677000</td>
       <td>1.000000</td>
-      <td>0.682500</td>
+      <td>0.688000</td>
     </tr>
     <tr>
       <th>75%</th>
-      <td>0.884500</td>
+      <td>0.863000</td>
       <td>1.000000</td>
       <td>0.000000</td>
       <td>0.000000</td>
-      <td>0.868000</td>
-      <td>0.897250</td>
-      <td>0.550500</td>
-      <td>0.895750</td>
-      <td>0.785000</td>
-      <td>0.984000</td>
+      <td>0.865500</td>
+      <td>0.880000</td>
+      <td>0.527500</td>
+      <td>0.891000</td>
+      <td>0.657500</td>
+      <td>0.983500</td>
       <td>1.000000</td>
       <td>0</td>
       <td>0</td>
-      <td>0.983000</td>
+      <td>0.982000</td>
       <td>1.000000</td>
-      <td>0.834500</td>
+      <td>0.836000</td>
       <td>1.000000</td>
-      <td>0.840250</td>
-      <td>0.865250</td>
+      <td>0.841500</td>
+      <td>0.850000</td>
       <td>1.000000</td>
       <td>0.000000</td>
       <td>0.000000</td>
-      <td>0.856500</td>
-      <td>0.833000</td>
-      <td>0.427250</td>
-      <td>0.852000</td>
-      <td>0.694000</td>
-      <td>0.981250</td>
+      <td>0.855000</td>
+      <td>0.863500</td>
+      <td>0.393500</td>
+      <td>0.874000</td>
+      <td>0.573000</td>
+      <td>0.981500</td>
       <td>1.000000</td>
       <td>0</td>
       <td>0</td>
@@ -4624,19 +4583,19 @@
       <td>1.000000</td>
       <td>0.762000</td>
       <td>1.000000</td>
-      <td>0.760500</td>
+      <td>0.761000</td>
     </tr>
     <tr>
       <th>max</th>
-      <td>0.989000</td>
+      <td>0.963000</td>
       <td>1.000000</td>
+      <td>0.870000</td>
+      <td>1.000000</td>
+      <td>1.000000</td>
+      <td>0.973000</td>
+      <td>1.000000</td>
+      <td>0.973000</td>
       <td>0.905000</td>
-      <td>1.000000</td>
-      <td>1.000000</td>
-      <td>0.975000</td>
-      <td>1.000000</td>
-      <td>0.975000</td>
-      <td>0.990000</td>
       <td>0.998000</td>
       <td>1.000000</td>
       <td>0</td>
@@ -4646,15 +4605,15 @@
       <td>1.000000</td>
       <td>1.000000</td>
       <td>1.000000</td>
-      <td>0.986000</td>
-      <td>1.000000</td>
-      <td>0.980000</td>
+      <td>0.960000</td>
       <td>1.000000</td>
       <td>1.000000</td>
+      <td>0.830000</td>
+      <td>0.981000</td>
       <td>1.000000</td>
-      <td>0.993000</td>
+      <td>0.864000</td>
       <td>1.000000</td>
-      <td>0.993000</td>
+      <td>0.864000</td>
       <td>1.000000</td>
       <td>1.000000</td>
       <td>0</td>
@@ -4667,81 +4626,81 @@
     </tr>
     <tr>
       <th>median</th>
-      <td>0.823000</td>
+      <td>0.806000</td>
       <td>1.000000</td>
       <td>0.000000</td>
       <td>0.000000</td>
-      <td>0.797500</td>
-      <td>0.500500</td>
-      <td>0.267000</td>
-      <td>0.831500</td>
-      <td>0.519500</td>
+      <td>0.800000</td>
+      <td>0.542000</td>
+      <td>0.262000</td>
+      <td>0.815000</td>
+      <td>0.471000</td>
       <td>0.967000</td>
       <td>1.000000</td>
       <td>0</td>
       <td>0</td>
-      <td>0.964500</td>
-      <td>0.865500</td>
-      <td>0.699000</td>
-      <td>0.924500</td>
-      <td>0.696000</td>
-      <td>0.797000</td>
+      <td>0.964000</td>
+      <td>0.870000</td>
+      <td>0.700000</td>
+      <td>0.944000</td>
+      <td>0.698000</td>
+      <td>0.780000</td>
       <td>1.000000</td>
       <td>0.000000</td>
       <td>0.000000</td>
-      <td>0.792000</td>
+      <td>0.786000</td>
       <td>0.000000</td>
       <td>0.000000</td>
-      <td>0.409000</td>
-      <td>0.372500</td>
+      <td>0.208000</td>
+      <td>0.174000</td>
       <td>0.973000</td>
       <td>1.000000</td>
       <td>0</td>
       <td>0</td>
       <td>0.972000</td>
-      <td>0.962500</td>
-      <td>0.672000</td>
+      <td>0.963000</td>
+      <td>0.677000</td>
       <td>1.000000</td>
-      <td>0.682500</td>
+      <td>0.688000</td>
     </tr>
     <tr>
       <th>proportion_geq_0.8</th>
-      <td>0.576923</td>
-      <td>0.759615</td>
-      <td>0.038462</td>
-      <td>0.038462</td>
-      <td>0.490385</td>
-      <td>0.461538</td>
-      <td>0.153846</td>
-      <td>0.567308</td>
-      <td>0.230769</td>
-      <td>0.990385</td>
+      <td>0.533981</td>
+      <td>0.737864</td>
+      <td>0.019417</td>
+      <td>0.009709</td>
+      <td>0.504854</td>
+      <td>0.446602</td>
+      <td>0.067961</td>
+      <td>0.563107</td>
+      <td>0.077670</td>
+      <td>0.990291</td>
       <td>1.000000</td>
       <td>0</td>
       <td>0</td>
-      <td>0.990385</td>
-      <td>0.586538</td>
-      <td>0.259615</td>
-      <td>0.663462</td>
-      <td>0.269231</td>
-      <td>0.490385</td>
-      <td>0.807692</td>
-      <td>0.019231</td>
-      <td>0.028846</td>
-      <td>0.451923</td>
-      <td>0.288462</td>
-      <td>0.076923</td>
-      <td>0.326923</td>
-      <td>0.192308</td>
+      <td>0.990291</td>
+      <td>0.592233</td>
+      <td>0.262136</td>
+      <td>0.669903</td>
+      <td>0.271845</td>
+      <td>0.446602</td>
+      <td>0.873786</td>
+      <td>0.048544</td>
+      <td>0.009709</td>
+      <td>0.466019</td>
+      <td>0.300971</td>
+      <td>0.067961</td>
+      <td>0.320388</td>
+      <td>0.058252</td>
       <td>1.000000</td>
       <td>1.000000</td>
       <td>0</td>
       <td>0</td>
       <td>1.000000</td>
-      <td>0.701923</td>
-      <td>0.163462</td>
-      <td>0.769231</td>
-      <td>0.173077</td>
+      <td>0.708738</td>
+      <td>0.165049</td>
+      <td>0.776699</td>
+      <td>0.174757</td>
     </tr>
   </tbody>
 </table>
