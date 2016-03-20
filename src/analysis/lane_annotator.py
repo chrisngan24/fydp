@@ -10,6 +10,8 @@ import util
 from scipy import signal
 from sklearn import preprocessing
 
+from collections import OrderedDict
+
 class LaneAnnotator(EventAnnotator):
     def __init__(self):
         m_dir = os.path.dirname(__file__)
@@ -46,17 +48,15 @@ class LaneAnnotator(EventAnnotator):
 
         self.events = []
 
-    def event_type(self, signal):
+    def is_valid_event(self, signal, e_type):
         left_cost = min([fastdtw(signal, x['theta'].tolist())[0] for x in self.left])
         right_cost = min([fastdtw(signal, x['theta'].tolist())[0] for x in self.right])
         neg_cost = min([fastdtw(signal, x['theta'].tolist())[0] for x in self.neg])
 
-        if left_cost < right_cost and left_cost < neg_cost:
-            return 'left'
-        elif right_cost < left_cost and right_cost < neg_cost:
-            return 'right'
+        if e_type == 'left':
+            return left_cost < right_cost and left_cost < neg_cost
         else:
-            return 'neg'
+            return right_cost < left_cost and right_cost < neg_cost
 
 
     def annotate_events(self, df, index_col='frameIndex'):
@@ -87,71 +87,55 @@ class LaneAnnotator(EventAnnotator):
         neg_label = 1
         null_label = 0
 
-        left_lane_sequence = [null_label, pos_label, neg_label, pos_label, null_label]
-        right_lane_sequence = [null_label, neg_label, pos_label, neg_label, null_label]
+        l_start = OrderedDict()
+        r_start = OrderedDict()
 
-        left_index = 0
-        right_index = 0
+        for i in xrange(len(predicted_labels_test) - 2):
+            # starts with OO
+            if predicted_labels_test[i+1] == pos_label and predicted_labels_test[i+2] == pos_label \
+            and (predicted_labels_test[i] == null_label or predicted_labels_test[i] == neg_label or i == 0):
+                l_start[i] = 0
+                for k in r_start.keys():
+                    r_start[k] += 1
+            # starts with <<
+            if predicted_labels_test[i+1] == neg_label and predicted_labels_test[i+2] == neg_label \
+            and (predicted_labels_test[i] == null_label or predicted_labels_test[i] == pos_label or i == 0):
+                r_start[i] = 0
+                for k in l_start.keys():
+                    l_start[k] += 1
+            # ends with OO
+            if predicted_labels_test[i] == pos_label and predicted_labels_test[i+1] == pos_label \
+            and (predicted_labels_test[i+2] == null_label or predicted_labels_test[i+2] == neg_label):
+                found = False
+                for k, v in l_start.items():
+                    if v >= 1:
+                        del l_start[k]
+                        if found:
+                            continue
+                        signal = df.iloc[k:i]['theta'].tolist()
+                        if self.is_valid_event(signal, 'left'):
+                            if (len(events['right_lc_end']) > 0 and k > max(events['right_lc_end']) or len(events['right_lc_end']) == 0) \
+                            and (len(events['left_lc_end']) > 0 and k > max(events['left_lc_end']) or len(events['left_lc_end']) == 0):
+                                events['left_lc_start'].add(k)
+                                events['left_lc_end'].add(i)
+                                found = True
 
-        i = 0
-        while i < len(predicted_labels_test)-3:
-            if len(set(predicted_labels_test[i:i+3])) == 1 and predicted_labels_test[i] == left_lane_sequence[left_index]:
-                left_index = (left_index + 1) % len(left_lane_sequence)
-
-            if len(set(predicted_labels_test[i:i+3])) == 1 and predicted_labels_test[i] == right_lane_sequence[right_index]:
-                right_index = (right_index + 1) % len(right_lane_sequence)
-
-            if left_index == 1:
-                left_lc_start = i
-
-            if right_index == 1:
-                right_lc_start = i
-
-            if left_index == len(left_lane_sequence) - 1:
-                left_index = 0
-                right_index = 0
-                left_lc_end = i
-
-            if right_index == len(right_lane_sequence) - 1:
-                left_index = 0
-                right_index = 0
-                right_lc_end = i
-
-            if left_lc_start > 0 and left_lc_end > 0 and left_lc_end - left_lc_start > 40:
-                signal = df.iloc[left_lc_start:left_lc_end]['theta'].tolist()
-                event_type = self.event_type(signal)
-
-                if event_type == 'left':
-                    events["left_lc_start"].add(left_lc_start)
-                    events["left_lc_end"].add(left_lc_end)
-                elif event_type == 'right':
-                    right_lc_start = left_lc_start
-                    right_lc_end = left_lc_end
-                    left_lc_end = 0
-                else:
-                    i = left_lc_start
-                    left_lc_start += 5
-                    left_index = 1
-                    left_lc_end = 0
-
-            if right_lc_start > 0 and right_lc_end > 0 and right_lc_end - right_lc_start > 40:
-                signal = df.iloc[right_lc_start:right_lc_end]['theta'].tolist()
-                event_type = self.event_type(signal)
-
-                if event_type == 'right':
-                    events["right_lc_start"].add(right_lc_start)
-                    events["right_lc_end"].add(right_lc_end)
-                elif event_type == 'left':
-                    left_lc_start = right_lc_start
-                    left_lc_end = right_lc_end
-                    right_lc_end = 0
-                else:
-                    i = right_lc_start
-                    right_lc_start += 5
-                    right_index = 1
-                    right_lc_end = 0
-
-            i += 1
+            # ends with <<
+            if predicted_labels_test[i] == neg_label and predicted_labels_test[i+1] == neg_label \
+            and (predicted_labels_test[i+2] == null_label or predicted_labels_test[i+2] == pos_label):
+                found = False
+                for k, v in r_start.items():
+                    if v >= 1:
+                        del r_start[k]
+                        if found:
+                            continue
+                        signal = df.iloc[k:i]['theta'].tolist()
+                        if self.is_valid_event(signal, 'right'):
+                            if (len(events['right_lc_end']) > 0 and k > max(events['right_lc_end']) or len(events['right_lc_end']) == 0) \
+                            and (len(events['left_lc_end']) > 0 and k > max(events['left_lc_end']) or len(events['left_lc_end']) == 0):
+                                events['right_lc_start'].add(k)
+                                events['right_lc_end'].add(i)
+                                found = True
 
         for k, v in events.iteritems():
             events[k] = sorted(list(v))
