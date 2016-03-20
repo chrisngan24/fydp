@@ -97,6 +97,7 @@ $(document).ready( function(){
   var repeater;
 
 
+
   $('#' + videoID).on('play', function(){
     function doWork() {
       updateCharts();
