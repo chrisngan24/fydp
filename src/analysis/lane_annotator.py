@@ -65,11 +65,6 @@ class LaneAnnotator(EventAnnotator):
         windowed_df_test = windowed_df_test[self.active_features]
 
         predicted_labels_test = self.model.predict(windowed_df_test)
-        windowed_df_test['theta'] = df['theta']
-
-        null_label = predicted_labels_test[0]
-
-        state = 0
 
         events = {
                 "left_lc_start": set(),
