@@ -37,12 +37,6 @@
       </div>
     </div>
     <div class="col-md-5 center-block">
-      <div class="row">
-        <div class="col-md-offset-2 col-md-8 gradeScore">
-          <h1 class="text-center text-padless">Grade: {{ fused['grade'] }}</h1>
-        </div>
-      </div>
-
       <div clas="row">
         <h2 class="text-center">Video Review</h2>
         <div class="driven-vid video-js vjs-default-skin  vjs-controls-enabled vjs-has-started vjs-user-active vjs-paused">
@@ -51,7 +45,38 @@
           </video>
         </div>
       </div>
-          </div>
+      <div class="row">
+        {% if fused['overall'] == 'bad' %}
+        <div class="col-md-offset-2 col-md-8 gradeScore bg-danger">
+        {% elif fused['overall'] == 'good' %}
+        <div class="col-md-offset-2 col-md-8 gradeScore bg-success">
+        {% else %}
+        <div class="col-md-offset-2 col-md-8 gradeScore">
+        {% endif %}
+            <h1 class="text-center text-padless">Grade: {{ fused['grade'] }}</h1>
+        </div>
+      </div>
+      <div class="row">
+        <h3 class="text-center">Lane Change Analysis</h3>
+        <table class="table table-bordered table-hover">
+          <tbody>
+            <thead class="text-center">
+              <th>Lane Event ID</th>
+              <th>Feedback</th>
+            </thead>
+            {% for laneEvent in fused['laneEvents'] %}
+              {% if laneEvent['sentimentGood'] %}
+              <tr class="success">
+              {% else %}
+              <tr class="danger">
+              {% endif %}
+                <td>{{ laneEvent['eventID'] }}</td>
+                <td>{{ laneEvent['sentimentReason'] }}</td>
+              </tr>
+            {% endfor %}
+        </table>
+      </div>
+    </div>
   </div>
 </div>
 <script>

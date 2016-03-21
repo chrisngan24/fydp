@@ -2,13 +2,13 @@
    width: 100%    !important;
    height: auto   !important
    object-fit: initial;
-   min-height: 300px;
+   min-height: 250px;
    background-color: white;
 }
 
 .video-chart{
   width: 100%;
-  height : 200px;
+  height : 16em;
 }
 
 
@@ -28,7 +28,7 @@ html,body{
     -webkit-transform: rotate(-90deg);
     -webkit-transform-origin:right, top;
     position: relative; 
-  width : 200px;
+  width : 150px;
   text-align: center;
 
   height:1em;
@@ -39,6 +39,8 @@ html,body{
 .gradeScore {
   border-style : solid;
   padding : 1em;
+  margin-top : 2em;
+  margin-bottom : 2em;
 }
 
 .text-padless { 

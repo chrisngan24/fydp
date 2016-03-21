@@ -60,6 +60,7 @@ def flatten_df(df, meta):
     ## COuld be function, but SHIP IT
     laneEvents = []
     lane_sentiment_count = 0.
+    counter = 0
     if meta['lane_events'] != None:
         for lane_event in meta['lane_events']:
             #start_frame = df_og.loc[int(lane_event[0])]['frameIndex']
@@ -68,22 +69,32 @@ def flatten_df(df, meta):
             end_frame = int(lane_event[1])
             event       = lane_event[2]
             sentiment   = lane_event[3]
+            sentiment_reason = 'no'
+            if len(lane_event) == 5:
+                sentiment_reason = lane_event[4]
+
             lane_sentiment_count += sentiment
             laneEvents.append(dict(
+                eventID=counter,
                 startFrame=start_frame,
                 endFrame=end_frame,
                 sentimentGood=sentiment,
+                sentimentReason=sentiment_reason
                 ))
+            counter += 1
 
     grade = '--'
+    overall = ''
     if len(laneEvents) > 0:
         score = lane_sentiment_count / len(laneEvents)
+        overall = 'good'
         if score > 0.8:
             grade = 'A'
         elif score > 0.7:
             grade = 'B'
         else:
             grade = 'F'
+            overall = 'bad'
 
 
     return dict(
@@ -94,6 +105,7 @@ def flatten_df(df, meta):
         headEvents=headEvents,
         laneEvents=laneEvents,
         grade=grade,
+        overall=overall,
         )
 
 

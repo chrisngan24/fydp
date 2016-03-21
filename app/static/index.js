@@ -60,11 +60,11 @@ $(document).ready( function(){
 
   var headCtx = document.getElementById(headChartID).getContext("2d");
   var headChart = new Chart(headCtx).VideoChart(headData, chartOptions);
-  headChart.setSentimentEvents(fusedData['headEvents']);
+  headChart.setSentimentEvents(fusedData['headEvents'], false);
 
   var wheelCtx = document.getElementById(wheelChartID).getContext("2d");
   var wheelChart = new Chart(wheelCtx).VideoChart(wheelData,chartOptions);
-  wheelChart.setSentimentEvents(fusedData['laneEvents']);
+  wheelChart.setSentimentEvents(fusedData['laneEvents'], true);
 
   function updateCharts() {
     var canvasWidth = $('#' + headChartID).width();

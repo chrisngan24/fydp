@@ -46,6 +46,10 @@ Chart.types.Scatter.extend({
       var canvasWidth = $('#' +  ctx.canvas.id).width();
       var xL = startF / that.dataLength * (canvasWidth - CHART_PADDING) + CHART_PADDING - 10;
       var xR = endF / that.dataLength * (canvasWidth - CHART_PADDING) + CHART_PADDING - 10;
+      ctx.fillStyle = "black";
+      if (that.textOnBox == true){
+        ctx.fillText(sEvent['eventID'], xL + 10, yU + 20);
+      }
       if (sentiment){
         ctx.fillStyle = "rgba(102, 204, 0, 0.2)";
       } else{
@@ -55,8 +59,10 @@ Chart.types.Scatter.extend({
 
     });
   },
-  setSentimentEvents : function(sentimentEvents) {
+  setSentimentEvents : function(sentimentEvents, textOnBox) {
     this.sentimentEvents = sentimentEvents;
+    console.log(textOnBox);
+    this.textOnBox = textOnBox;
   }
 
 });
