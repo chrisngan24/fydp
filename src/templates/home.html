@@ -1,0 +1,45 @@
+{% extends "layout.html" %}
+{% block body %}
+<div class="container">
+  <div class="row">
+    <h1 class="text-center">Welcome to Driven</h1>
+  </div>
+  <form class="form-horizontal">
+    <div class="row">
+      <div class="form-group">
+        <label for="videoPort" class="col-md-2 col-md-offset-2 control-label">Video Port</label>
+        <div class="col-md-4">
+          <input type="text" class="form-control" id="videoPort" placeholder="0">
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="form-group">
+        <label for="wheelPort" class="col-md-2 col-md-offset-2 control-label">Wheel Port</label>
+        <div class="col-md-4">
+          <input type="text" class="form-control" id="wheelPort" placeholder="0">
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="form-group">
+        <label for="sessionName" class="col-md-2 col-md-offset-2 control-label">Session Name</label>
+        <div class="col-md-4">
+          <input type="text" class="form-control" id="sessionName" placeholder="0">
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-4 col-md-offset-4">
+        <button type="submit" id="runRunnerButton" class="btn btn-primary btn-lg btn-block">Submit</button>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-4 col-md-offset-4">
+        <button type="submit" id="stopRunnerButton" class="btn-danger btn btn-primary btn-lg btn-block">Submit</button>
+      </div>
+    </div>
+  </form>
+<script src="{{ url_for('static', filename='home.js') }}"></script>
+<script
+{% endblock %}

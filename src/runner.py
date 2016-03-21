@@ -199,35 +199,23 @@ def run_fusion(
     else:
         return None
     
-if __name__ == '__main__':
 
-    parser = OptionParser()
-    parser.add_option('-v', '--VideoPort', default=None)
-    parser.add_option('-w', '--WheelPort', default=None)
-    parser.add_option('-n', '--SessionName', default=None)
-    (options, args) = parser.parse_args()
-    
+def run_runner(camera, wheel_port, session_name):
     ####
     # Set argument parameters
     ####
-    print options
     # flags for controlling if will use camera or wheel
-    has_camera = options.VideoPort != None
-    has_wheel  = options.WheelPort != None
+    has_camera = camera != None
+    has_wheel  = wheel_port != None
     
-    data_direc = ''
-    if options.SessionName != None:
-        data_direc = 'data/%s' % options.SessionName
-    else:
-        now = time.time()
-        data_direc = 'data/%s' % int(now)
+    print 'running runner'
+    data_direc = 'data/%s' % session_name
 
     sensors = sensor.SensorMaster()
 
     if has_camera:
-        video_port = int(options.VideoPort)
         # need to initiate openCV2 in the main thread
-        camera = cv2.VideoCapture(video_port)
+        print 'adding camera'
         sensors.add_sensor(
                 camera_sensor.CameraSensor(
                     data_direc,
@@ -236,7 +224,7 @@ if __name__ == '__main__':
                     )
                 )
     if has_wheel:
-        wheel_port = str(options.WheelPort)
+        wheel_port = str(wheel_port)
         sensors.add_sensor(
             wheel_sensor.WheelSensor(
                 data_direc,
@@ -246,7 +234,7 @@ if __name__ == '__main__':
 
     # sample the sensors, and fuse data as a callback
     if len(sensors.sensors) > 0:
-        sensors.sample_sensors(
+        return sensors, dict(
                 callback=run_fusion,
                 has_camera=has_camera,
                 has_wheel=has_wheel,
@@ -255,5 +243,33 @@ if __name__ == '__main__':
                 move_to_app=True,
                 interactive_video='annotated_fused.avi',
                 )
+
+        print "STARRTOF"
+        #sensors.sample_sensors(
+        #                        )
     else:
         print 'No sensors... stopping'
+        return None, dict()
+
+if __name__ == '__main__':
+
+    parser = OptionParser()
+    parser.add_option('-v', '--VideoPort', default=None)
+    parser.add_option('-w', '--WheelPort', default=None)
+    parser.add_option('-n', '--SessionName', default=None)
+    (options, args) = parser.parse_args()
+
+    video_port = options.VideoPort if options.VideoPort != None \
+            else None
+    camera = cv2.VideoCapture(int(video_port)) if video_port != None else None
+    print options
+    sensor, kwargs = run_runner(
+            camera, 
+            options.WheelPort, 
+            options.SessionName if options.SessionName != None \
+                    else int(time.time())
+            )
+    if sensor != None:
+        sensor.sample_sensors(**kwargs)
+    
+    

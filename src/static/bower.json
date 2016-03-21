@@ -1,0 +1,21 @@
+{
+  "name": "app",
+  "version": "0.0.0",
+  "homepage": "https://github.com/chrisngan24/fydp",
+  "authors": [
+    "Chris Ngan <chris.ngan24@gmail.com>"
+  ],
+  "description": "FYDP - DRiven",
+  "main": "main.js",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "Chart.js": "~1.0.2"
+  }
+}
