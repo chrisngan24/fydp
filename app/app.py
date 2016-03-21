@@ -105,15 +105,22 @@ def render_interactive(data_dir = 'default'):
 
 def render_home():
     m_dir = 'data/'
-    paths = os.listdir('static/' + m_dir)
+    full_dir = 'static/' + m_dir
+    paths = os.listdir(full_dir)
     urls = []
     for path in paths:
         if not path.startswith('.'):
+            meta = json.loads(
+                    ''.join(open(full_dir + path + '/annotated_metadata.json', 'r').readlines())
+                    )
+            video_time= '%.2f (s)' % (meta['frames']/ float(meta['fps']))
             url = dict(
                 path=m_dir + path,
                 url=path,
+                title=path,
+                video_time=video_time,
                 )
-            # so that recent is always at the top
+                        # so that recent is always at the top
             if path == 'recent':
                 pass
             else:

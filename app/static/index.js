@@ -21,12 +21,13 @@ $(document).ready( function(){
   });
   var videoID = video.id() + '_html5_api';
 
-
+  var pointColor = '#808080';
+  var textColor = 'rgba(128, 128, 128,0)';
   var headData = [
     {
       label: 'Head',
-      strokeColor: '#F16220',
-      pointColor: '#F16220',
+      strokeColor: pointColor,
+      pointColor: pointColor,
       pointStrokeColor: '#fff',
       data: fusedData.headData,
     },
@@ -36,14 +37,14 @@ $(document).ready( function(){
   var wheelData = [
     {
       label: 'Wheel',
-      strokeColor: '#F16220',
-      pointColor: '#F16220',
+      strokeColor: pointColor,
+      pointColor: pointColor,
       pointStrokeColor: '#fff',
       data: fusedData.wheelData,
     },
   ];
 
-  var width = 20;
+  var width = 10;
   var chartOptions = {
     //tooltipTemplate: "<%if (datasetLabel){%><%=datasetLabel%>: <%}%><%=argLabel%>, <%=valueLabel%>",
     xScaleOverride : true,
@@ -52,6 +53,8 @@ $(document).ready( function(){
     xScaleStartValue: 0,
     pointDotRadius:0.5, 
     datasetStrokeWidth: 4,
+    showYAxisValues: 0,
+    scaleFontColor: textColor,
 
   };
 
