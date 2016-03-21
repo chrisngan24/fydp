@@ -1,17 +1,20 @@
 {% extends "layout.html" %}
 {% block body %}
 <div class="container">
+  <br/>
   <div class="row">
     <div class="col-md-12 center-block">
-      <h1 class="text-center">Session Report -- {{ video['session_name'] }}</h1>
+      <h1 class="text-center" style="font-size: 3em">Session Report -- {{ video['session_name'] }}</h1>
     </div>
   </div>
+  <br/>
   <div class="row">
     <ol class="breadcrumb">
       <li><a href="{{ url_for('route_home') }}">Home</a></li>
       <li class="active">Report</li>
     </ol>
   </div>
+  <br/>
   <div class="row">
     <div class="col-md-7 center-block">
       <div class="row">
@@ -61,8 +64,9 @@
         <table class="table table-bordered table-hover">
           <tbody>
             <thead class="text-center">
-              <th>Lane Event ID</th>
-              <th>Feedback</th>
+              <th class="text-center">Event No.</th>
+              <th class="text-center">Video Time</th>
+              <th class="text-center">Feedback</th>
             </thead>
             {% for laneEvent in fused['laneEvents'] %}
               {% if laneEvent['sentimentGood'] %}
@@ -71,6 +75,7 @@
               <tr class="danger">
               {% endif %}
                 <td>{{ laneEvent['eventID'] }}</td>
+                <td>{{ laneEvent['videoTime'] }}</td>
                 <td>{{ laneEvent['sentimentReason'] }}</td>
               </tr>
             {% endfor %}

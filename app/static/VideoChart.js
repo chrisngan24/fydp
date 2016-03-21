@@ -47,8 +47,9 @@ Chart.types.Scatter.extend({
       var xL = startF / that.dataLength * (canvasWidth - CHART_PADDING) + CHART_PADDING - 10;
       var xR = endF / that.dataLength * (canvasWidth - CHART_PADDING) + CHART_PADDING - 10;
       ctx.fillStyle = "black";
+      ctx.font = "20px Arial";
       if (that.textOnBox == true){
-        ctx.fillText(sEvent['eventID'], xL + 10, yU + 20);
+        ctx.fillText(sEvent['eventID'], xL + 10, that.yL + 10) ;
       }
       if (sentiment){
         ctx.fillStyle = "rgba(102, 204, 0, 0.2)";
