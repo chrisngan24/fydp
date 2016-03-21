@@ -28,15 +28,11 @@ class LaneAnnotator(EventAnnotator):
         for subdir, dirs, files in os.walk(dtw_models_direc):
             for d in dirs:
                 if d.startswith("left_") and not d.startswith("left_turn"):
-                    self.left.append(pd.read_csv("%s/fused.csv" %os.path.join(dtw_models_direc, d)))
+                    self.left.append(pd.read_csv("%s/model.csv" %os.path.join(dtw_models_direc, d)))
                 elif d.startswith("right_") and not d.startswith("right_turn"):
-                    self.right.append(pd.read_csv("%s/fused.csv" %os.path.join(dtw_models_direc, d)))
-                elif d.startswith("left_turn"):
-                    self.left_turn.append(pd.read_csv("%s/fused.csv" %os.path.join(dtw_models_direc, d)))
-                elif d.startswith("right_turn"):
-                    self.right_turn.append(pd.read_csv("%s/fused.csv" %os.path.join(dtw_models_direc, d)))
-                else:
-                    self.neg.append(pd.read_csv("%s/fused.csv" %os.path.join(dtw_models_direc, d)))
+                    self.right.append(pd.read_csv("%s/model.csv" %os.path.join(dtw_models_direc, d)))
+                elif d.startswith("left_turn") or d.startswith("right_turn"):
+                    self.neg.append(pd.read_csv("%s/model.csv" %os.path.join(dtw_models_direc, d)))
 
         self.model = joblib.load('%s/knn.pkl' % self.base_dir) 
         config_fi = open('%s/config.json' % self.base_dir, 'r')
@@ -111,9 +107,10 @@ class LaneAnnotator(EventAnnotator):
                         if self.is_valid_event(signal, 'left'):
                             if (len(events['right_lc_end']) > 0 and k > max(events['right_lc_end']) or len(events['right_lc_end']) == 0) \
                             and (len(events['left_lc_end']) > 0 and k > max(events['left_lc_end']) or len(events['left_lc_end']) == 0):
-                                events['left_lc_start'].add(k)
-                                events['left_lc_end'].add(i)
-                                found = True
+                                if (i - k) > 40:
+                                    events['left_lc_start'].add(k)
+                                    events['left_lc_end'].add(i)
+                                    found = True
 
             # ends with <<
             if predicted_labels_test[i] == neg_label and predicted_labels_test[i+1] == neg_label \
@@ -128,9 +125,10 @@ class LaneAnnotator(EventAnnotator):
                         if self.is_valid_event(signal, 'right'):
                             if (len(events['right_lc_end']) > 0 and k > max(events['right_lc_end']) or len(events['right_lc_end']) == 0) \
                             and (len(events['left_lc_end']) > 0 and k > max(events['left_lc_end']) or len(events['left_lc_end']) == 0):
-                                events['right_lc_start'].add(k)
-                                events['right_lc_end'].add(i)
-                                found = True
+                                if (i - k) > 40:
+                                    events['right_lc_start'].add(k)
+                                    events['right_lc_end'].add(i)
+                                    found = True
 
         for k, v in events.iteritems():
             events[k] = sorted(list(v))
