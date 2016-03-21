@@ -105,7 +105,7 @@ def add_event_note(frame, event_type, sentiment):
                     text = sent_to_text(sentiment), 
                     org = (20,120), 
                     fontFace = default_font, 
-                    fontScale = 0.75, 
+                    fontScale = 1.5, 
                     color = sent_to_colour(sentiment),
                     thickness = 2)
 
@@ -117,7 +117,7 @@ def add_event_note(frame, event_type, sentiment):
                     text = sent_to_text(sentiment), 
                     org = (20,290), 
                     fontFace = default_font, 
-                    fontScale = 0.75, 
+                    fontScale = 1.5, 
                     color = sent_to_colour(sentiment),
                     thickness = 2)
 
@@ -129,7 +129,7 @@ def add_event_note(frame, event_type, sentiment):
                     text = sent_to_text(sentiment), 
                     org = (700,120), 
                     fontFace = default_font, 
-                    fontScale = 0.75, 
+                    fontScale = 1.5, 
                     color = sent_to_colour(sentiment),
                     thickness = 2)
 
@@ -141,7 +141,7 @@ def add_event_note(frame, event_type, sentiment):
                     text = sent_to_text(sentiment), 
                     org = (700,290), 
                     fontFace = default_font, 
-                    fontScale = 0.75, 
+                    fontScale = 1.5, 
                     color = sent_to_colour(sentiment),
                     thickness = 2)
 
