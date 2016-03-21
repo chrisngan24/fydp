@@ -103,17 +103,6 @@ def run_kappa(
         event_summaries[event] = kappa
         kappas.append(kappa)
 
-        '''
-        print "r1 yes: " + str(rater1_yes)
-        print "r2 yes: " + str(rater2_yes)
-        print "both yes: " + str(agreements)
-        print "disagreements: " + str(disagreements)
-        print "total: " + str(total)
-        print "p0: " + str(p0)
-        print "pe: " + str(pe)
-        print kappa
-        '''
-
     #print case_name + " " + rater1 + " " + rater2
     #print event_summaries
     return (kappas, event_summaries)
