@@ -36,4 +36,11 @@ html,body{
   bottom:-5em;
 }
 
+.gradeScore {
+  border-style : solid;
+  padding : 1em;
+}
 
+.text-padless { 
+  margin : 0px;
+}

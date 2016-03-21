@@ -16,7 +16,7 @@
     <br/>
     <div class="row">
       <div class="col-md-offset-4 col-md-4">
-        <a class="btn btn-block btn-default" href="{{ url_for('route_report', data_dir='recent') }}">Most Recent Session</a>
+        <a class="btn btn-block btn-primary" href="{{ url_for('route_report', data_dir='recent') }}">Most Recent Session</a>
       </div>
     </div>
     <br/>
@@ -35,7 +35,7 @@
           <tr>
             <td >{{ entry['title'] }}</td>
             <td >{{ entry['video_time'] }}</td>
-            <td ><a class="btn btn-default btn-block" href="{{ url_for('route_report', data_dir=entry['url']) }}">View Report</a></td>
+            <td ><a class="btn btn-info btn-block" href="{{ url_for('route_report', data_dir=entry['url']) }}">View Report</a></td>
           </tr>
           {% endfor %}
         </tbody>

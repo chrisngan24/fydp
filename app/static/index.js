@@ -44,7 +44,7 @@ $(document).ready( function(){
     },
   ];
 
-  var width = 10;
+  var width = 1;
   var chartOptions = {
     //tooltipTemplate: "<%if (datasetLabel){%><%=datasetLabel%>: <%}%><%=argLabel%>, <%=valueLabel%>",
     xScaleOverride : true,
@@ -88,7 +88,6 @@ $(document).ready( function(){
     if ( x > CHART_PADDING){
       headChart.updateLine(x);
       wheelChart.updateLine(x);
-      console.log(canvasX);
       var vidTime = (canvasX - CHART_PADDING)/(this.clientWidth - CHART_PADDING)*videoData['video_time'];
       video.currentTime(vidTime);
     }

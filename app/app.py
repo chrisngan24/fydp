@@ -15,25 +15,28 @@ def flatten_df(df, meta):
     will like
     """
     df_og = df.copy()
-    df.index = df['frameIndex']
-    df = df.groupby('frameIndex', as_index=False).first().reindex(
-            index=list(xrange(0,meta['frames'])), method='nearest')
+    #df.index = df['frameIndex']
+    #df = df.groupby('frameIndex', as_index=False).first().reindex(
+    #        index=list(xrange(1,meta['frames']+1)), method='backfill')
     vid_length = meta['frames']/float(meta['fps'])
-    frames = list(xrange(0, meta['frames']))
+    #frames = list(xrange(1, meta['frames']+1))
+    frames = df['frameIndex'].tolist()
     noseX = []
     if 'noseX' in df.columns.tolist():
         noseX = df['noseX'].fillna(0).tolist()
     theta = []
     if 'theta' in df.columns.tolist():
         theta = df['theta'].fillna(0).tolist()
+    else:
+        theta = [0] * len(df)
     headData = []
-    for i in xrange(meta['frames']):
+    for i in xrange(len(frames)):
        headData.append(dict(
            x = frames[i],
            y = noseX[i],
            ))
     wheelData = []
-    for i in xrange(meta['frames']):
+    for i in xrange(len(frames)):
        wheelData.append(dict(
            x = frames[i],
            y = theta[i],
@@ -56,6 +59,7 @@ def flatten_df(df, meta):
 
     ## COuld be function, but SHIP IT
     laneEvents = []
+    lane_sentiment_count = 0.
     if meta['lane_events'] != None:
         for lane_event in meta['lane_events']:
             #start_frame = df_og.loc[int(lane_event[0])]['frameIndex']
@@ -64,11 +68,22 @@ def flatten_df(df, meta):
             end_frame = int(lane_event[1])
             event       = lane_event[2]
             sentiment   = lane_event[3]
+            lane_sentiment_count += sentiment
             laneEvents.append(dict(
                 startFrame=start_frame,
                 endFrame=end_frame,
                 sentimentGood=sentiment,
                 ))
+
+    grade = '--'
+    if len(laneEvents) > 0:
+        score = lane_sentiment_count / len(laneEvents)
+        if score > 0.8:
+            grade = 'A'
+        elif score > 0.7:
+            grade = 'B'
+        else:
+            grade = 'F'
 
 
     return dict(
@@ -78,6 +93,7 @@ def flatten_df(df, meta):
         wheelData=wheelData,
         headEvents=headEvents,
         laneEvents=laneEvents,
+        grade=grade,
         )
 
 
@@ -97,7 +113,7 @@ def render_interactive(data_dir = 'default'):
             fps=frame_per_second,
             frames=meta['frames'],
             video_file = m_dir + '/annotated_fused.mp4',
-            video_time=frames/frame_per_second,
+            video_time=float(frames)/frame_per_second,
             session_name=data_dir,
             )
     return render_template('index.html', fused=fused_meta, video=video_meta)
