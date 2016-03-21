@@ -129,7 +129,8 @@ def main():
 
     test_case_list = sorted(next(os.walk(testing_dir))[1])
     print test_case_list
-
+    print "Total count: " + str(len(test_case_list))
+ 
     for test in test_case_list:
         
         # Need to find the two raters
