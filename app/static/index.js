@@ -43,8 +43,11 @@ $(document).ready( function(){
       data: fusedData.wheelData,
     },
   ];
-
+  var dataLength = videoData['frames'];
   var width = 1;
+  if (dataLength > 700){
+    width = 20;
+  }
   var chartOptions = {
     //tooltipTemplate: "<%if (datasetLabel){%><%=datasetLabel%>: <%}%><%=argLabel%>, <%=valueLabel%>",
     xScaleOverride : true,
