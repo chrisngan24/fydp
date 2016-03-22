@@ -55,6 +55,9 @@ class CameraSensor(BaseSensor):
         return row
 
 
+    def stop(self):
+        BaseSensor.stop(self)
+        self.camera.release()
     def filter(self, df):
         return df
 
