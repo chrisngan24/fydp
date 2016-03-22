@@ -16,6 +16,7 @@ Chart.types.Scatter.extend({
     this.yL = canvasHeight - horPadding;
     this.sentimentEvents = [];
     this.dataLength = data[0]['data'].length;
+    this.frames = videoData['frames'];
   },
   draw: function(){
     Chart.types.Scatter.prototype.draw.apply(this, arguments);
@@ -44,11 +45,12 @@ Chart.types.Scatter.extend({
       var ctx = that.chart.ctx;
       var yU = 0;
       var canvasWidth = $('#' +  ctx.canvas.id).width();
-      var xL = startF / that.dataLength * (canvasWidth - CHART_PADDING) + CHART_PADDING - 10;
-      var xR = endF / that.dataLength * (canvasWidth - CHART_PADDING) + CHART_PADDING - 10;
+      var xL = startF / that.frames * (canvasWidth - CHART_PADDING) + CHART_PADDING - 10;
+      var xR = endF / that.frames * (canvasWidth - CHART_PADDING) + CHART_PADDING - 10;
       ctx.fillStyle = "black";
+      ctx.font = "20px Arial";
       if (that.textOnBox == true){
-        ctx.fillText(sEvent['eventID'], xL + 10, yU + 20);
+        ctx.fillText(sEvent['eventID'], xL + (endF - startF) / 2.2, that.yL + 10) ;
       }
       if (sentiment){
         ctx.fillStyle = "rgba(102, 204, 0, 0.2)";

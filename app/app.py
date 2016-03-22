@@ -18,7 +18,7 @@ def flatten_df(df, meta):
     #df.index = df['frameIndex']
     #df = df.groupby('frameIndex', as_index=False).first().reindex(
     #        index=list(xrange(1,meta['frames']+1)), method='backfill')
-    vid_length = meta['frames']/float(meta['fps'])
+    video_time = meta['frames']/float(meta['fps'])
     #frames = list(xrange(1, meta['frames']+1))
     frames = df['frameIndex'].tolist()
     noseX = []
@@ -62,20 +62,28 @@ def flatten_df(df, meta):
     lane_sentiment_count = 0.
     counter = 0
     if meta['lane_events'] != None:
-        for lane_event in meta['lane_events']:
+        lane_events = meta['lane_events']
+        lane_events = sorted(lane_events, key=lambda x: x[0], )
+        for lane_event in lane_events:
             #start_frame = df_og.loc[int(lane_event[0])]['frameIndex']
             #end_frame   = df_og.loc[int(lane_event[1])]['frameIndex']
             start_frame = int(lane_event[0])
             end_frame = int(lane_event[1])
             event       = lane_event[2]
             sentiment   = lane_event[3]
-            sentiment_reason = 'no'
+            if sentiment:
+                sentiment_reason = 'Good job'
+            else:
+                sentiment_reason = 'Poor form'
             if len(lane_event) == 5:
                 sentiment_reason = lane_event[4]
 
             lane_sentiment_count += sentiment
             laneEvents.append(dict(
-                eventID=counter,
+                count = counter,
+                eventType = event,
+                eventID='#%s' % (counter + 1),
+                videoTime = float(start_frame)/meta['frames'] * video_time,
                 startFrame=start_frame,
                 endFrame=end_frame,
                 sentimentGood=sentiment,
