@@ -224,15 +224,15 @@ class LaneAnnotator(EventAnnotator):
         l_start = OrderedDict()
         r_start = OrderedDict()
 
-        for i in xrange(len(predicted_labels_test) - 2):
+        for i in xrange(len(predicted_labels_test) - 4):
             # starts with OO
-            if predicted_labels_test[i+1] == pos_label and predicted_labels_test[i+2] == pos_label \
+            if predicted_labels_test[i+1] == pos_label and len(set(predicted_labels_test[i+1:i+4])) == 1 \
             and (predicted_labels_test[i] == null_label or predicted_labels_test[i] == neg_label or i == 0):
                 l_start[i] = 0
                 for k in r_start.keys():
                     r_start[k] += 1
             # starts with <<
-            if predicted_labels_test[i+1] == neg_label and predicted_labels_test[i+2] == neg_label \
+            if predicted_labels_test[i+1] == neg_label and len(set(predicted_labels_test[i+1:i+4])) == 1 \
             and (predicted_labels_test[i] == null_label or predicted_labels_test[i] == pos_label or i == 0):
                 r_start[i] = 0
                 for k in l_start.keys():
