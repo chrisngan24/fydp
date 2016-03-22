@@ -1,6 +1,7 @@
 {% extends "layout.html" %}
 {% block body %}
   <div class="container">
+    <br/>
     <div class="row">
       <div class="col-md-12">
         <h1 class="text-center">Driven</h1>
@@ -11,22 +12,30 @@
         <li class="active">Home</li>
       </ol>
     </div>
+    <br/>
+    <br/>
     <div class="row">
-      <div class="col-md-12">
-        <h2 class="text-center"><a href="{{ url_for('route_report', data_dir='recent') }}">Most Recent Session</a></h1>
+      <div class="col-md-offset-4 col-md-4">
+        <a class="btn btn-block btn-primary" href="{{ url_for('route_report', data_dir='recent') }}">Most Recent Session</a>
       </div>
     </div>
+    <br/>
+    <br/>
     <div class="row">
       <div class="col-md-12">
-        <h1>Past Sessions</h1>
-        <table class="table table-bordered">
+        <h2 class="text-center">Past Sessions</h2>
+        <table class="table table-bordered text-center">
           <tbody>
-          <thead>
-            <th>Session</th>
-          </thead>
+            <thead class="text-center">
+              <th class="text-center">Session Name</th>
+              <th class="text-center">Session Length</th>
+              <th></th>
+            </thead>
           {% for entry in urls %}
           <tr>
-            <td ><a href="{{ url_for('route_report', data_dir=entry['url']) }}">{{ entry['url'] }}</a></tr>
+            <td >{{ entry['title'] }}</td>
+            <td >{{ entry['video_time'] }}</td>
+            <td ><a class="btn btn-info btn-block" href="{{ url_for('route_report', data_dir=entry['url']) }}">View Report</a></td>
           </tr>
           {% endfor %}
         </tbody>

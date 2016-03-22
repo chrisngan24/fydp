@@ -21,12 +21,13 @@ $(document).ready( function(){
   });
   var videoID = video.id() + '_html5_api';
 
-
+  var pointColor = '#808080';
+  var textColor = 'rgba(128, 128, 128,0)';
   var headData = [
     {
       label: 'Head',
-      strokeColor: '#F16220',
-      pointColor: '#F16220',
+      strokeColor: pointColor,
+      pointColor: pointColor,
       pointStrokeColor: '#fff',
       data: fusedData.headData,
     },
@@ -36,14 +37,14 @@ $(document).ready( function(){
   var wheelData = [
     {
       label: 'Wheel',
-      strokeColor: '#F16220',
-      pointColor: '#F16220',
+      strokeColor: pointColor,
+      pointColor: pointColor,
       pointStrokeColor: '#fff',
       data: fusedData.wheelData,
     },
   ];
 
-  var width = 20;
+  var width = 1;
   var chartOptions = {
     //tooltipTemplate: "<%if (datasetLabel){%><%=datasetLabel%>: <%}%><%=argLabel%>, <%=valueLabel%>",
     xScaleOverride : true,
@@ -52,16 +53,18 @@ $(document).ready( function(){
     xScaleStartValue: 0,
     pointDotRadius:0.5, 
     datasetStrokeWidth: 4,
+    showYAxisValues: 0,
+    scaleFontColor: textColor,
 
   };
 
   var headCtx = document.getElementById(headChartID).getContext("2d");
   var headChart = new Chart(headCtx).VideoChart(headData, chartOptions);
-  headChart.setSentimentEvents(fusedData['headEvents']);
+  headChart.setSentimentEvents(fusedData['headEvents'], false);
 
   var wheelCtx = document.getElementById(wheelChartID).getContext("2d");
   var wheelChart = new Chart(wheelCtx).VideoChart(wheelData,chartOptions);
-  wheelChart.setSentimentEvents(fusedData['laneEvents']);
+  wheelChart.setSentimentEvents(fusedData['laneEvents'], true);
 
   function updateCharts() {
     var canvasWidth = $('#' + headChartID).width();
@@ -85,7 +88,6 @@ $(document).ready( function(){
     if ( x > CHART_PADDING){
       headChart.updateLine(x);
       wheelChart.updateLine(x);
-      console.log(canvasX);
       var vidTime = (canvasX - CHART_PADDING)/(this.clientWidth - CHART_PADDING)*videoData['video_time'];
       video.currentTime(vidTime);
     }

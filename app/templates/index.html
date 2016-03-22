@@ -14,28 +14,67 @@
   </div>
   <div class="row">
     <div class="col-md-7 center-block">
-
       <div class="row">
-        <h2 class="text-center">Face Tracker</h2>
-        <div class="col-md-12 center-block">
+        <h2 class="text-center">Nose Tracker</h2>
+        <div class="col-md-1">
+          <p class="verticaltext">Horizontal Position in Frame</p>
+        </div>
+        <div class="col-md-11 center-block">
           <canvas id="headChart" class="video-chart"></canvas>
         </div>
-        <h5 class="text-center">Frame Index</h5>
+        <h5 class="text-center">Video Time</h5>
       </div>
       <div class="row">
         <h2 class="text-center">Wheel Tracker</h2>
-        <div class="col-md-12 center-block">
+        <div class="col-md-1">
+          <p class="verticaltext">Steering Wheel Angle</p>
+        </div>
+
+        <div class="col-md-11 center-block">
           <canvas id="wheelChart" class="video-chart"></canvas>
         </div>
-        <h5 class="text-center">Frame Index</h5>
+        <h5 class="text-center">Video Time</h5>
       </div>
     </div>
     <div class="col-md-5 center-block">
+      <div clas="row">
         <h2 class="text-center">Video Review</h2>
-      <div class="driven-vid video-js vjs-default-skin  vjs-controls-enabled vjs-has-started vjs-user-active vjs-paused">
-        <video id="annotated_vid" width="320" height="240" class="vjs-tech" controls preload="auto">
-        <source src="{{ url_for('static', filename=video['video_file']) }}" type="video/mp4">
-        </video>
+        <div class="driven-vid video-js vjs-default-skin  vjs-controls-enabled vjs-has-started vjs-user-active vjs-paused">
+          <video id="annotated_vid" width="320" height="240" class="vjs-tech" controls preload="auto">
+          <source src="{{ url_for('static', filename=video['video_file']) }}" type="video/mp4">
+          </video>
+        </div>
+      </div>
+      <div class="row">
+        {% if fused['overall'] == 'bad' %}
+        <div class="col-md-offset-2 col-md-8 gradeScore bg-danger">
+        {% elif fused['overall'] == 'good' %}
+        <div class="col-md-offset-2 col-md-8 gradeScore bg-success">
+        {% else %}
+        <div class="col-md-offset-2 col-md-8 gradeScore">
+        {% endif %}
+            <h1 class="text-center text-padless">Grade: {{ fused['grade'] }}</h1>
+        </div>
+      </div>
+      <div class="row">
+        <h3 class="text-center">Lane Change Analysis</h3>
+        <table class="table table-bordered table-hover">
+          <tbody>
+            <thead class="text-center">
+              <th>Lane Event ID</th>
+              <th>Feedback</th>
+            </thead>
+            {% for laneEvent in fused['laneEvents'] %}
+              {% if laneEvent['sentimentGood'] %}
+              <tr class="success">
+              {% else %}
+              <tr class="danger">
+              {% endif %}
+                <td>{{ laneEvent['eventID'] }}</td>
+                <td>{{ laneEvent['sentimentReason'] }}</td>
+              </tr>
+            {% endfor %}
+        </table>
       </div>
     </div>
   </div>
