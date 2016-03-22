@@ -57,7 +57,19 @@ class SignalLaneClassifier(SignalClassifier):
                     lane_events_sentiment.append((True, ''))
                 else:
                     print 'bad head turn'
-                    lane_events_sentiment.append((False, 'Bad head turn'))
+                    #import pdb; pdb.set_trace()
+                    i = head_event_indice[0]
+                    indices = xrange(
+                            head_events_list[i][0],
+                            head_events_list[i][1]+1,
+                            )
+                    time_diff = df.loc[indices]['time'].max() - \
+                            df.loc[indices]['time'].min()
+                    MEAN_THRESH = 1.5
+                    if time_diff > MEAN_THRESH:
+                        lane_events_sentiment.append((False, 'Head turn too long'))
+                    else:
+                        lane_events_sentiment.append((False, 'Head turn too short'))
                 
             else:
                 print 'missing head turn'

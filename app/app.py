@@ -77,6 +77,8 @@ def flatten_df(df, meta):
                 sentiment_reason = 'Poor form'
             if len(lane_event) == 5:
                 sentiment_reason = lane_event[4]
+                if sentiment_reason == '':
+                    sentiment_reason = 'Good form'
 
             lane_sentiment_count += sentiment
             laneEvents.append(dict(
