@@ -81,6 +81,7 @@ def flatten_df(df, meta):
             lane_sentiment_count += sentiment
             laneEvents.append(dict(
                 count = counter,
+                eventType = event,
                 eventID='#%s' % (counter + 1),
                 videoTime = float(start_frame)/meta['frames'] * video_time,
                 startFrame=start_frame,
