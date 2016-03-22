@@ -16,64 +16,64 @@ cv2.putText(img = layered,
             org = (2,30), 
             fontFace = default_font, 
             fontScale = 1, 
-            color = (255,255,255), 
-            thickness = 1)
+            color = (0,0,0), 
+            thickness = 2)
 
 cv2.putText(img = layered, 
             text = "Turn", 
             org = (50,60), 
             fontFace = default_font, 
             fontScale = 1, 
-            color = (255,255,255), 
-            thickness = 1)
+            color = (0,0,0), 
+            thickness = 2)
 
 cv2.putText(img = layered, 
             text = "Left Head", 
             org = (675,30), 
             fontFace = default_font, 
             fontScale = 1, 
-            color = (255,255,255), 
-            thickness = 1)
+            color = (0,0,0), 
+            thickness = 2)
 
 cv2.putText(img = layered, 
             text = "Turn", 
             org = (715,60), 
             fontFace = default_font, 
             fontScale = 1, 
-            color = (255,255,255), 
-            thickness = 1)
+            color = (0,0,0), 
+            thickness = 2)
 
 cv2.putText(img = layered, 
             text = "Right Lane", 
             org = (2,200), 
             fontFace = default_font, 
             fontScale = 1, 
-            color = (255,255,255), 
-            thickness = 1)
+            color = (0,0,0), 
+            thickness = 2)
 
 cv2.putText(img = layered, 
             text = "Change", 
             org = (30,235), 
             fontFace = default_font, 
             fontScale = 1, 
-            color = (255,255,255), 
-            thickness = 1)
+            color = (0,0,0), 
+            thickness = 2)
 
 cv2.putText(img = layered, 
             text = "Left Lane", 
             org = (675,200), 
             fontFace = default_font, 
             fontScale = 1, 
-            color = (255,255,255), 
-            thickness = 1)
+            color = (0,0,0), 
+            thickness = 2)
 
 cv2.putText(img = layered, 
             text = "Change", 
             org = (690,235), 
             fontFace = default_font, 
             fontScale = 1, 
-            color = (255,255,255), 
-            thickness = 1)
+            color = (0,0,0), 
+            thickness = 2)
 
 # Add sentiments
 cv2.putText(img = layered, 
