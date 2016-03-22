@@ -70,7 +70,7 @@ def run_fusion(
         ###
         # All events that are dependent on the steering wheel
         ###
-        lane_events_hash, lane_events_list = LaneAnnotator().annotate_events(df)
+        lane_events_hash, lane_events_list = LaneAnnotator(data_direc).annotate_events(df)
 
     if has_wheel and has_camera:
         slc = SignalLaneClassifier(df, lane_events_list, head_events_list, head_events_hash, head_events_sentiment)
