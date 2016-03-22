@@ -12,11 +12,16 @@ from sklearn import preprocessing
 
 from collections import OrderedDict
 
+import numpy.fft as fft
+
+import statistics
+
 class LaneAnnotator(EventAnnotator):
-    def __init__(self):
+    def __init__(self, data_direc):
         m_dir = os.path.dirname(__file__)
         self.base_dir = os.path.join(m_dir, '../models/lane_changes/')
-        
+        self.data_direc = os.path.join(m_dir, '../%s' %data_direc)
+
         self.left = []
         self.right = []
         self.left_turn = []
@@ -31,7 +36,7 @@ class LaneAnnotator(EventAnnotator):
                     self.left.append(pd.read_csv("%s/model.csv" %os.path.join(dtw_models_direc, d)))
                 elif d.startswith("right_") and not d.startswith("right_turn"):
                     self.right.append(pd.read_csv("%s/model.csv" %os.path.join(dtw_models_direc, d)))
-                elif d.startswith("left_turn") or d.startswith("right_turn"):
+                else:
                     self.neg.append(pd.read_csv("%s/model.csv" %os.path.join(dtw_models_direc, d)))
 
         self.model = joblib.load('%s/knn.pkl' % self.base_dir) 
@@ -44,18 +49,156 @@ class LaneAnnotator(EventAnnotator):
 
         self.events = []
 
-    def is_valid_event(self, signal, e_type):
-        left_cost = min([fastdtw(signal, x['theta'].tolist())[0] for x in self.left])
-        right_cost = min([fastdtw(signal, x['theta'].tolist())[0] for x in self.right])
-        neg_cost = min([fastdtw(signal, x['theta'].tolist())[0] for x in self.neg])
+    def is_valid_event(self, signal, start_index, end_index, e_type):
+        if len(signal) < 60:
+            return False
+
+        if max(signal) - min(signal) < 20:
+            return False
+
+        left_costs = [fastdtw(signal, x['theta'].tolist())[0] for x in self.left]
+        right_costs = [fastdtw(signal, x['theta'].tolist())[0] for x in self.right]
+        neg_costs = [fastdtw(signal, x['theta'].tolist())[0] for x in self.neg]
+
+        min_left_cost = min(left_costs)
+        min_right_cost = min(right_costs)
+        min_neg_cost = min(neg_costs)
+
+        median_left_cost = statistics.median(left_costs)
+        median_right_cost = statistics.median(right_costs)
+        median_neg_cost = statistics.median(neg_costs)
+
+        self.stats_file.write("start and end indices: ")
+        self.stats_file.write(str(start_index) + " " + str(end_index))
+        self.stats_file.write("\n")
+
+        self.stats_file.write("signal length: ")
+        self.stats_file.write(str(len(signal)))
+        self.stats_file.write("\n")
+
+        self.stats_file.write("signal max and min: ")
+        self.stats_file.write(str(max(signal)) + " " + str(min(signal)))
+        self.stats_file.write("\n")
+
+        self.stats_file.write("location of signal max and min: ")
+        self.stats_file.write(str(signal.index(max(signal))) + " " + str(signal.index(min(signal))))
+        self.stats_file.write("\n")
+
+        self.stats_file.write("input event type: ")
+        self.stats_file.write(e_type)
+        self.stats_file.write("\n")
+
+        self.stats_file.write("min left: ")
+        self.stats_file.write(str(min_left_cost))
+        self.stats_file.write("\n")
+
+        self.stats_file.write("min left index: ")
+        left_index = left_costs.index(min_left_cost)
+        self.stats_file.write(str(left_index))
+        self.stats_file.write("\n")
+
+        self.stats_file.write("min right: ")
+        self.stats_file.write(str(min_right_cost))
+        self.stats_file.write("\n")
+
+        self.stats_file.write("min right index: ")
+        right_index = right_costs.index(min_right_cost)
+        self.stats_file.write(str(right_index))
+        self.stats_file.write("\n")
+
+        self.stats_file.write("min neg: ")
+        self.stats_file.write(str(min_neg_cost))
+        self.stats_file.write("\n")
+
+        self.stats_file.write("min neg index: ")
+        neg_index = neg_costs.index(min_neg_cost)
+        self.stats_file.write(str(neg_index))
+        self.stats_file.write("\n")
+
+        self.stats_file.write("average of 3 min lefts: ")
+        self.stats_file.write(str(statistics.mean(sorted(left_costs)[:3])))
+        self.stats_file.write("\n")
+
+        self.stats_file.write("average of 3 min rights: ")
+        self.stats_file.write(str(statistics.mean(sorted(right_costs)[:3])))
+        self.stats_file.write("\n")
+
+        self.stats_file.write("average of 3 min negs: ")
+        self.stats_file.write(str(statistics.mean(sorted(neg_costs)[:3])))
+        self.stats_file.write("\n")
+
+        self.stats_file.write("median left: ")
+        self.stats_file.write(str(median_left_cost))
+        self.stats_file.write("\n")
+
+        self.stats_file.write("median right: ")
+        self.stats_file.write(str(median_right_cost))
+        self.stats_file.write("\n")
+
+        self.stats_file.write("median neg: ")
+        self.stats_file.write(str(median_neg_cost))
+        self.stats_file.write("\n")
+
+        self.stats_file.write("min left signal length: ")
+        self.stats_file.write(str(len(self.left[left_index])))
+        self.stats_file.write("\n")
+
+        self.stats_file.write("min right signal length: ")
+        self.stats_file.write(str(len(self.right[right_index])))
+        self.stats_file.write("\n")
+
+        self.stats_file.write("min neg signal length: ")
+        self.stats_file.write(str(len(self.neg[neg_index])))
+        self.stats_file.write("\n")
+
+        spectrum = fft.fft(signal)
+        max_frequency = max(abs(spectrum))
+        median_frequency = statistics.median(abs(spectrum))
+
+        self.stats_file.write("max frequency: ")
+        self.stats_file.write(str(max_frequency))
+        self.stats_file.write("\n")
+
+        self.stats_file.write("median frequency: ")
+        self.stats_file.write(str(median_frequency))
+        self.stats_file.write("\n")
+
+        self.stats_file.write("classified type: ")
+        if min_left_cost < min_right_cost and min_left_cost < min_neg_cost and signal.index(max(signal)) < signal.index(min(signal)) and abs(max(signal) - signal[0]) + 10 > abs(signal[0] - min(signal)):
+            self.stats_file.write("left")
+        elif min_right_cost < min_left_cost and min_right_cost < min_neg_cost and signal.index(min(signal)) < signal.index(max(signal)) and abs(signal[0] - min(signal)) + 10 > abs(max(signal) - signal[0]):
+            self.stats_file.write("right")
+        else:
+            self.stats_file.write("neg")
+        self.stats_file.write("\n")
+        self.stats_file.write("\n")
 
         if e_type == 'left':
-            return left_cost < right_cost and left_cost < neg_cost
+            return min_left_cost < min_right_cost and min_left_cost < min_neg_cost and signal.index(max(signal)) < signal.index(min(signal)) and abs(max(signal) - signal[0] + 20) > abs(signal[0] - min(signal))
         else:
-            return right_cost < left_cost and right_cost < neg_cost
+            return min_right_cost < min_left_cost and min_right_cost < min_neg_cost and signal.index(min(signal)) < signal.index(max(signal)) and abs(signal[0] - min(signal)) + 10 > abs(max(signal) - signal[0])
+
+        # self.stats_file.write("classified type: ")
+        # if median_left_cost < median_right_cost and median_left_cost < median_neg_cost:
+        #     self.stats_file.write("left")
+        # elif median_right_cost < median_left_cost and median_right_cost < median_neg_cost:
+        #     self.stats_file.write("right")
+        # else:
+        #     self.stats_file.write("neg")
+        # self.stats_file.write("\n")
+        # self.stats_file.write("\n")
+
+        # if e_type == 'left':
+        #     return median_left_cost < median_right_cost and median_left_cost < median_neg_cost
+        # else:
+        #     return median_right_cost < median_left_cost and median_right_cost < median_neg_cost
 
 
     def annotate_events(self, df, index_col='frameIndex'):
+        self.stats_file = open('%s/stats.txt' % self.data_direc, 'a')
+        self.stats_file.seek(0)
+        self.stats_file.truncate()
+
         df['gz'] = util.movingaverage(df['gz'], self.moving_average_size)
         windowed_df_test = util.generate_windows(df, window=self.window_size, ignore_columns=self.ignore_columns)
         windowed_df_test = windowed_df_test[self.active_features]
@@ -99,36 +242,34 @@ class LaneAnnotator(EventAnnotator):
             and (predicted_labels_test[i+2] == null_label or predicted_labels_test[i+2] == neg_label):
                 found = False
                 for k, v in l_start.items():
-                    if v >= 1:
+                    if v >= 2:
                         del l_start[k]
                         if found:
                             continue
                         signal = df.iloc[k:i]['theta'].tolist()
-                        if self.is_valid_event(signal, 'left'):
+                        if self.is_valid_event(signal, k, i, 'left'):
                             if (len(events['right_lc_end']) > 0 and k > max(events['right_lc_end']) or len(events['right_lc_end']) == 0) \
                             and (len(events['left_lc_end']) > 0 and k > max(events['left_lc_end']) or len(events['left_lc_end']) == 0):
-                                if (i - k) > 40:
-                                    events['left_lc_start'].add(k)
-                                    events['left_lc_end'].add(i)
-                                    found = True
+                                events['left_lc_start'].add(k)
+                                events['left_lc_end'].add(i)
+                                found = True
 
             # ends with <<
             if predicted_labels_test[i] == neg_label and predicted_labels_test[i+1] == neg_label \
             and (predicted_labels_test[i+2] == null_label or predicted_labels_test[i+2] == pos_label):
                 found = False
                 for k, v in r_start.items():
-                    if v >= 1:
+                    if v >= 2:
                         del r_start[k]
                         if found:
                             continue
                         signal = df.iloc[k:i]['theta'].tolist()
-                        if self.is_valid_event(signal, 'right'):
+                        if self.is_valid_event(signal, k, i, 'right'):
                             if (len(events['right_lc_end']) > 0 and k > max(events['right_lc_end']) or len(events['right_lc_end']) == 0) \
                             and (len(events['left_lc_end']) > 0 and k > max(events['left_lc_end']) or len(events['left_lc_end']) == 0):
-                                if (i - k) > 40:
-                                    events['right_lc_start'].add(k)
-                                    events['right_lc_end'].add(i)
-                                    found = True
+                                events['right_lc_start'].add(k)
+                                events['right_lc_end'].add(i)
+                                found = True
 
         for k, v in events.iteritems():
             events[k] = sorted(list(v))
@@ -142,6 +283,8 @@ class LaneAnnotator(EventAnnotator):
             t = (events['right_lc_start'][i], events['right_lc_end'][i], 'right_lane_change')
             events_indices.append(t)
 
+        self.stats_file.close()
+        
         print events_indices
         
         return events, events_indices
