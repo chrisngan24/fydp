@@ -50,7 +50,7 @@ Chart.types.Scatter.extend({
       ctx.fillStyle = "black";
       ctx.font = "20px Arial";
       if (that.textOnBox == true){
-        ctx.fillText(sEvent['eventID'], xL + 10, that.yL + 10) ;
+        ctx.fillText(sEvent['eventID'], xL + (endF - startF) / 2.2, that.yL + 10) ;
       }
       if (sentiment){
         ctx.fillStyle = "rgba(102, 204, 0, 0.2)";

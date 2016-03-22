@@ -164,9 +164,9 @@ class LaneAnnotator(EventAnnotator):
         self.stats_file.write("\n")
 
         self.stats_file.write("classified type: ")
-        if min_left_cost < min_right_cost and min_left_cost < min_neg_cost and signal.index(max(signal)) < signal.index(min(signal)) and abs(max(signal) - signal[0]) + 10 > abs(signal[0] - min(signal)):
+        if min_left_cost < min_right_cost and min_left_cost < min_neg_cost and signal.index(max(signal)) < signal.index(min(signal)) and abs(max(signal) - signal[0]) + 30 > abs(signal[0] - min(signal)):
             self.stats_file.write("left")
-        elif min_right_cost < min_left_cost and min_right_cost < min_neg_cost and signal.index(min(signal)) < signal.index(max(signal)) and abs(signal[0] - min(signal)) + 10 > abs(max(signal) - signal[0]):
+        elif min_right_cost < min_left_cost and min_right_cost < min_neg_cost and signal.index(min(signal)) < signal.index(max(signal)) and abs(signal[0] - min(signal)) + 30 > abs(max(signal) - signal[0]):
             self.stats_file.write("right")
         else:
             self.stats_file.write("neg")
@@ -174,9 +174,9 @@ class LaneAnnotator(EventAnnotator):
         self.stats_file.write("\n")
 
         if e_type == 'left':
-            return min_left_cost < min_right_cost and min_left_cost < min_neg_cost and signal.index(max(signal)) < signal.index(min(signal)) and abs(max(signal) - signal[0] + 20) > abs(signal[0] - min(signal))
+            return min_left_cost < min_right_cost and min_left_cost < min_neg_cost and signal.index(max(signal)) < signal.index(min(signal)) and abs(max(signal) - signal[0] + 30) > abs(signal[0] - min(signal))
         else:
-            return min_right_cost < min_left_cost and min_right_cost < min_neg_cost and signal.index(min(signal)) < signal.index(max(signal)) and abs(signal[0] - min(signal)) + 10 > abs(max(signal) - signal[0])
+            return min_right_cost < min_left_cost and min_right_cost < min_neg_cost and signal.index(min(signal)) < signal.index(max(signal)) and abs(signal[0] - min(signal)) + 30 > abs(max(signal) - signal[0])
 
         # self.stats_file.write("classified type: ")
         # if median_left_cost < median_right_cost and median_left_cost < median_neg_cost:
@@ -242,7 +242,7 @@ class LaneAnnotator(EventAnnotator):
             and (predicted_labels_test[i+2] == null_label or predicted_labels_test[i+2] == neg_label):
                 found = False
                 for k, v in l_start.items():
-                    if v >= 2:
+                    if v >= 1:
                         del l_start[k]
                         if found:
                             continue
@@ -259,7 +259,7 @@ class LaneAnnotator(EventAnnotator):
             and (predicted_labels_test[i+2] == null_label or predicted_labels_test[i+2] == pos_label):
                 found = False
                 for k, v in r_start.items():
-                    if v >= 2:
+                    if v >= 1:
                         del r_start[k]
                         if found:
                             continue
