@@ -6,12 +6,16 @@ class SignalLaneClassifier(SignalClassifier):
         self.head_indices = head_indices
         self.head_events_hash = head_events_hash
         self.head_events_sentiment = head_events_sentiment
+        self.head_turns_to_keep = []
+
+    def update_head_events(self):
+        import pdb; pdb.set_trace()
     
     def classify_signals(self):
         """
         Classify the lane change with heuristic
         """
-        time_thresh = 1 # second
+        time_thresh = 2 # second
         lane_events_sentiment = []
         lane_events_list = self.signal_indices
         head_events_list = self.head_indices
@@ -44,7 +48,8 @@ class SignalLaneClassifier(SignalClassifier):
                                     in enumerate(head_events_list) \
                                     if int(e) == relevant_end_index \
                                     and event == end_head_turn_event.replace('_end', '')]
-
+                
+                #self.head_turns_to_keep.append(head_event_indice[0])
 
                 print head_events_sentiment
                 if head_events_sentiment[head_event_indice[0]][0] == True:
@@ -58,3 +63,4 @@ class SignalLaneClassifier(SignalClassifier):
                 print 'missing head turn'
                 lane_events_sentiment.append((False, 'Missing head turn'))  
         return lane_events_sentiment
+
