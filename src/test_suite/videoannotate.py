@@ -61,7 +61,10 @@ while (not happy):
         if k == ord('q'):
             break
         elif k == ord('l'):
-            frame_index += 1
+            if (frame_index + 1) == max_index:
+                print "At end of video. Cannot move forward. (Press q to end annotating)"
+            else:
+                frame_index += 1
         elif k == ord('k'):
             if (frame_index == 0):
                 print "Already at start of video. Cannot step back."
