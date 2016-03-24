@@ -1,0 +1,24 @@
+start and end indices: 99 170
+signal length: 71
+signal max and min: 6.84356789095 -16.8588368137
+location of signal max and min: 0 47
+input event type: right
+min left: 583.906577695
+min left index: 6
+min right: 529.755377824
+min right index: 1
+min neg: 720.920289241
+min neg index: 4
+average of 3 min lefts: 710.730894575
+average of 3 min rights: 721.208728184
+average of 3 min negs: 1218.05106926
+median left: 1289.30940879
+median right: 1078.53631929
+median neg: 12401.2424796
+min left signal length: 140
+min right signal length: 110
+min neg signal length: 100
+max frequency: 597.446826054
+median frequency: 14.4642989023
+classified type: neg
+

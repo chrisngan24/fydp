@@ -1,0 +1,216 @@
+start and end indices: 60 153
+signal length: 93
+signal max and min: 13.5453911098 -18.2835677499
+location of signal max and min: 3 91
+input event type: right
+min left: 745.403186438
+min left index: 13
+min right: 734.093686099
+min right index: 1
+min neg: 848.671187619
+min neg index: 4
+average of 3 min lefts: 1043.71486645
+average of 3 min rights: 1010.22113502
+average of 3 min negs: 1521.58193021
+median left: 1577.99335627
+median right: 1514.78577705
+median neg: 12193.1375106
+min left signal length: 120
+min right signal length: 110
+min neg signal length: 100
+max frequency: 755.741716367
+median frequency: 22.1004039415
+classified type: neg
+
+start and end indices: 84 185
+signal length: 101
+signal max and min: 1.17993183049 -22.9562625469
+location of signal max and min: 100 76
+input event type: left
+min left: 1275.55850683
+min left index: 9
+min right: 717.460438539
+min right index: 1
+min neg: 812.772682098
+min neg index: 4
+average of 3 min lefts: 1351.82603245
+average of 3 min rights: 835.652860864
+average of 3 min negs: 1342.81004233
+median left: 2006.10072764
+median right: 1356.42109251
+median neg: 12050.5312726
+min left signal length: 118
+min right signal length: 110
+min neg signal length: 100
+max frequency: 1114.06059839
+median frequency: 12.2826021914
+classified type: right
+
+start and end indices: 101 185
+signal length: 84
+signal max and min: 1.17993183049 -22.9562625469
+location of signal max and min: 83 59
+input event type: left
+min left: 1137.78653243
+min left index: 9
+min right: 606.73789423
+min right index: 3
+min neg: 855.433945601
+min neg index: 4
+average of 3 min lefts: 1332.53333601
+average of 3 min rights: 640.647922927
+average of 3 min negs: 1457.14634852
+median left: 1976.88434633
+median right: 1335.03000117
+median neg: 12180.7762113
+min left signal length: 118
+min right signal length: 140
+min neg signal length: 100
+max frequency: 892.277055402
+median frequency: 12.0330790964
+classified type: right
+
+start and end indices: 139 200
+signal length: 61
+signal max and min: 4.98228396642 -22.9562625469
+location of signal max and min: 55 21
+input event type: right
+min left: 1150.25744665
+min left index: 9
+min right: 641.453985285
+min right index: 7
+min neg: 834.371355735
+min neg index: 3
+average of 3 min lefts: 1295.69665159
+average of 3 min rights: 693.426210493
+average of 3 min negs: 1301.06135722
+median left: 2073.34041523
+median right: 1092.36369843
+median neg: 12328.3461024
+min left signal length: 118
+min right signal length: 131
+min neg signal length: 140
+max frequency: 497.912426487
+median frequency: 5.41997800578
+classified type: right
+
+start and end indices: 157 268
+signal length: 111
+signal max and min: 4.98228396642 -22.9562625469
+location of signal max and min: 37 3
+input event type: left
+min left: 1158.34114857
+min left index: 9
+min right: 718.950072272
+min right index: 7
+min neg: 1070.38209647
+min neg index: 4
+average of 3 min lefts: 1238.81521408
+average of 3 min rights: 1039.12702355
+average of 3 min negs: 1773.39296022
+median left: 1784.4649594
+median right: 1695.9013729
+median neg: 10991.6453612
+min left signal length: 118
+min right signal length: 131
+min neg signal length: 100
+max frequency: 929.682456838
+median frequency: 15.3996610596
+classified type: right
+
+start and end indices: 190 287
+signal length: 97
+signal max and min: 4.98228396642 -15.787367457
+location of signal max and min: 4 96
+input event type: right
+min left: 800.344347736
+min left index: 9
+min right: 534.971259735
+min right index: 3
+min neg: 992.069040284
+min neg index: 4
+average of 3 min lefts: 934.363349468
+average of 3 min rights: 640.039518625
+average of 3 min negs: 1316.48935552
+median left: 1633.03932479
+median right: 1163.31216925
+median neg: 12353.1487304
+min left signal length: 118
+min right signal length: 140
+min neg signal length: 100
+max frequency: 718.293910437
+median frequency: 17.5342725245
+classified type: neg
+
+start and end indices: 255 318
+signal length: 63
+signal max and min: 0.134925860312 -19.9101357268
+location of signal max and min: 16 52
+input event type: left
+min left: 1301.39100245
+min left index: 9
+min right: 948.397631074
+min right index: 7
+min neg: 724.595079355
+min neg index: 4
+average of 3 min lefts: 1363.50683887
+average of 3 min rights: 1033.30966307
+average of 3 min negs: 1672.54351577
+median left: 1787.60437497
+median right: 1678.19772762
+median neg: 12434.9569797
+min left signal length: 118
+min right signal length: 131
+min neg signal length: 100
+max frequency: 726.885157854
+median frequency: 3.98393763224
+classified type: neg
+
+start and end indices: 272 367
+signal length: 95
+signal max and min: 0.0994971461412 -28.4760922365
+location of signal max and min: 0 94
+input event type: right
+min left: 947.387580163
+min left index: 9
+min right: 847.197782193
+min right index: 1
+min neg: 549.165593013
+min neg index: 4
+average of 3 min lefts: 1170.17126571
+average of 3 min rights: 982.977579105
+average of 3 min negs: 1557.55722723
+median left: 1731.57332242
+median right: 1482.3842625
+median neg: 12502.4014147
+min left signal length: 118
+min right signal length: 110
+min neg signal length: 100
+max frequency: 1386.74678331
+median frequency: 22.4431595994
+classified type: neg
+
+start and end indices: 309 395
+signal length: 86
+signal max and min: -10.0719688796 -32.3981346654
+location of signal max and min: 85 61
+input event type: left
+min left: 1650.95830141
+min left index: 9
+min right: 986.749755787
+min right index: 1
+min neg: 700.090517716
+min neg index: 4
+average of 3 min lefts: 1695.71298129
+average of 3 min rights: 1076.85331993
+average of 3 min negs: 1914.4135858
+median left: 2197.56082928
+median right: 1678.58170439
+median neg: 12183.9566107
+min left signal length: 118
+min right signal length: 110
+min neg signal length: 100
+max frequency: 1531.98621665
+median frequency: 7.10570202072
+classified type: neg
+
