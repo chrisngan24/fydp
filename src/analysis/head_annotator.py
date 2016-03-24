@@ -63,30 +63,32 @@ class HeadAnnotator(EventAnnotator):
             'right_turn_end'  : [],
             }
         threshold = 2
-        event_thresh = 10 
+        event_thresh = 15 
         timed_events = []
+        min_event_length = 2 # minumn length event must be
 
 
         def end_event(event_key, start_index, end_index):
             assert(event_key in set([1,3]))
-            if event_key == 1:
-                event_start = 'left_turn_start'
-                event_end   = 'left_turn_end'
-                event = 'left_turn'
-            elif event_key == 3:
-                event_start = 'right_turn_start'
-                event_end   = 'right_turn_end'
-                event = 'right_turn'
+            if end_index - start_index >= min_event_length:
+                if event_key == 1:
+                    event_start = 'left_turn_start'
+                    event_end   = 'left_turn_end'
+                    event = 'left_turn'
+                elif event_key == 3:
+                    event_start = 'right_turn_start'
+                    event_end   = 'right_turn_end'
+                    event = 'right_turn'
 
 
 
-            events[event_start].append(start_index)
-            events[event_end].append(end_index)
-            timed_events.append((
-                start_index,
-                end_index,
-                event,
-                ))
+                events[event_start].append(start_index)
+                events[event_end].append(end_index)
+                timed_events.append((
+                    start_index,
+                    end_index,
+                    event,
+                    ))
 
 
 

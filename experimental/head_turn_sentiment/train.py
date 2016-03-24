@@ -67,7 +67,8 @@ if __name__ == '__main__':
         os.makedirs(base_dir)
     path = '%s/%s.pkl' % (base_dir, model_name)
     df_cols = pd.DataFrame(dict(columns=active_features))
-    joblib.dump(rf, path)
+    #joblib.dump(rf, path)
+    joblib.dump(svm, path)
     df_cols.to_csv('%s/active_features.csv' % base_dir, index=False)
 
     ######

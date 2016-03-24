@@ -16,19 +16,48 @@ import os
 
 logging.basicConfig(stream=sys.stdout, level=logging.DEBUG)
 
+# Returns a tuple boolean (event pass, sentiment pass)
+def is_a_pass(start, end, type, is_good, baseline, coverage=0.5):
+
+    for i in xrange(len(baseline)):
+    
+        # Check event type first
+        base_event_type = baseline[i]['type']
+        if base_event_type != type:
+            continue
+
+        base_start = baseline[i]['start']
+        base_end = baseline[i]['end']
+        base_is_good = baseline[i]['is_good']
+        
+        annotated_set = set(range(base_start, base_end))
+        predicted_set = set(range(start,end))
+        overlap_set = annotated_set.intersection(predicted_set)
+
+        test_coverage = float(len(overlap_set)) / max(len(annotated_set), len(predicted_set))
+
+        if test_coverage > coverage:
+            return (True, base_is_good == is_good)
+    
+    # Finished all baseline events, we failed
+    return (False, False)
+
 def map_sentiment(col_name, is_good):
     if is_good:
         return col_name + '_good'
     else:
         return col_name + '_bad'
 
-def create_event_dict(event_types, numerator, denominator):
+def create_event_dict(event_types, keys):
 
     event_dict = dict()
     for event_type in event_types:
+        
         event_dict[event_type] = dict()
-        event_dict[event_type][numerator] = 0
-        event_dict[event_type][denominator] = 0
+
+        for key in keys:
+            event_dict[event_type][key] = 0
+
     return event_dict
 
 def run_single_test(
@@ -150,43 +179,31 @@ def run_single_test(
         event_summaries['fn_count_%s' % event] = \
             sum(annotations[not_predicted_frame_index] == 1)
 
-    # Perform a by-event calculation of precision
-    event_precision = create_event_dict(event_types, 'marked', 'correct')
+    # Perform a by-event calculation 
+    event_results = create_event_dict(event_types, ['marked', 'given', 'correct'])
+    
+    # Check each predicted value for a match
     for i in xrange(len(predicted_events_list)):
         start = int(df.iloc[predicted_events_list[i][0]]['frameIndex'])
         end = int(df.iloc[predicted_events_list[i][1]]['frameIndex'])
         event_type = predicted_events_list[i][2]
         is_good = sentiment_events_list[i][0]
 
-        local_annotation_frames = annotation_frames[event_type][start:end]
+        # Check if this event overlaps with any annotated test
+        (event_pass, sentiment_pass) = is_a_pass(start, end, event_type, is_good, baseline)
 
-        if (len(local_annotation_frames) == 0):
-            continue
+        event_results[map_sentiment(event_type, is_good)]['marked'] += 1
+        event_results[map_sentiment(event_type, is_good)]['correct'] += int(sentiment_pass)
+        event_results[event_type]['marked'] += 1
+        event_results[event_type]['correct'] += int(event_pass)
 
-        coverage = sum(local_annotation_frames) / float(len(local_annotation_frames))
-        event_precision[map_sentiment(event_type, is_good)]['marked'] += 1
-        event_precision[map_sentiment(event_type, is_good)]['correct'] += round(coverage)
-        event_precision[event_type]['marked'] += 1
-        event_precision[event_type]['correct'] += round(coverage)
-
-    # Perform a by-event calculation of recall
-    event_recall = create_event_dict(event_types, 'given', 'found')
+    # Also sum up the values in baseline, used for recall
     for i in xrange(len(baseline)):
-        start = baseline[i]['start']
-        end = baseline[i]['end']
         event_type = baseline[i]['type']
         is_good = baseline[i]['is_good']
 
-        local_prediction_frames = event_frames[event_type][start:end]
-        
-        if (len(local_prediction_frames) == 0):
-            continue
-        
-        coverage = sum(local_prediction_frames) / float(len(local_prediction_frames))
-        event_recall[map_sentiment(event_type, is_good)]['given'] += 1
-        event_recall[map_sentiment(event_type, is_good)]['found'] += round(coverage)
-        event_recall[event_type]['given'] += 1
-        event_recall[event_type]['found'] += round(coverage)
+        event_results[map_sentiment(event_type, is_good)]['given'] += 1
+        event_results[event_type]['given'] += 1
 
     test_results_events = dict(
         case_name=case_name,
@@ -216,18 +233,18 @@ def run_single_test(
                 round(tp_count / float(max(tp_count + fn_count,1)), 3)
         
         # Event precision based metrics
-        if (event_precision[event]['marked'] == 0):
+        if (event_results[event]['marked'] == 0):
             test_results_events['%s_event_precision' % event] = None
         else:
             test_results_events['%s_event_precision' % event] = \
-                float(event_precision[event]['correct']) / float(event_precision[event]['marked'])
+                float(event_results[event]['correct']) / float(event_results[event]['marked'])
 
         # Event recall based metrics
-        if (event_recall[event]['given'] == 0):
+        if (event_results[event]['given'] == 0):
             test_results_events['%s_event_recall' % event] = None
         else:
             test_results_events['%s_event_recall' % event] = \
-                float(event_recall[event]['found']) / float(event_recall[event]['given'])
+                float(event_results[event]['correct']) / float(event_results[event]['given'])
 
     results_list_events.append(test_results_events)
     results_list_frames.append(test_results_frames)
