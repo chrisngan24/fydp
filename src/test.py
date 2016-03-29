@@ -72,7 +72,7 @@ def run_single_test(
             'right_lane_change',
             ],
         annotation_file = 'annotation_josh.txt', 
-        testing_dir='test_suite/test_cases/'):
+        testing_dir='test_suite/new_test_cases/'):
     
     # modify event types to include sentiment:
     event_types = reduce(
@@ -251,7 +251,7 @@ def run_single_test(
 
 def main(build_name = None):
     print "Running tests"
-    testing_dir = 'test_suite/test_cases/'
+    testing_dir = 'test_suite/new_test_cases/'
     output_dir = 'test_results/'
     #results_df = pd.DataFrame(columns=['case_name', 'left_turn', 'right_turn', 'left_lane_change', 'right_lane_change'])
     results_list_frames = []
