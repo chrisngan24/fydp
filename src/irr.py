@@ -36,12 +36,12 @@ def run_kappa(
     max_index = -1
 
     for i in xrange(len(baseline_r1)):
-        end = baseline_r1[i]['end']
+        end = baseline_r1[i-1]['end']
         if (end > max_index):
             max_index = end
 
     for i in xrange(len(baseline_r2)):
-        end = baseline_r1[i]['end']
+        end = baseline_r1[i-1]['end']
         if (end > max_index):
             max_index = end
 
@@ -120,35 +120,38 @@ def main():
     print test_case_list
     print "Total count: " + str(len(test_case_list))
  
-    for test in test_case_list:
-        
-        # Need to find the two raters
-        rater1 = None
-        rater2 = None
+    raters = ['clement', 'chris', 'angela', 'josh']
+    rater_pairs = ['clement_chris', 'clement_angela', 'clement_josh', 'chris_angela', 'chris_josh', 'angela_josh']
 
-        for fi in sorted(os.listdir(testing_dir + test)):
-            if fi.find('drivelog_temp_annotated_') == 0:        
-                # Remove the first 24 characters ('drivelog_temp_annotated_') and last 4 ('.txt')
-                rater = fi[24:-4]
-                if rater1 == None:
-                    rater1 = rater
-                else:
-                    rater2 = rater
+    for raters in rater_pairs:
 
-        if (rater1 != None and rater2 != None):
+        raters_list = raters.split("_")
+        rater1 = raters_list[0]
+        rater2 = raters_list[1]
+
+        for test in test_case_list:
             
-            (kappas, kappa_summary) = run_kappa(test, rater1, rater2)
-            raters = rater1 + '_' + rater2
+            found_raters = 0
 
-            if raters not in rater_pairings_detailed:
-                rater_pairings_detailed[raters] = []
-                kappa_list[raters] = []
-            
-            rater_pairings_detailed[raters].append(kappa_summary)
-            kappa_list[raters] = kappa_list[raters] + kappas
+            for fi in sorted(os.listdir(testing_dir + test)):
+                
+                if fi.find('drivelog_temp_annotated_') == 0:        
+                    
+                    # Remove the first 24 characters ('drivelog_temp_annotated_') and last 4 ('.txt')
+                    rater = fi[24:-4]
+                    if rater in raters_list:
+                        found_raters += 1
+                    
+            if (found_raters == 2):
+                
+                (kappas, kappa_summary) = run_kappa(test, rater1, rater2)
 
-        else:
-            print "WARNING: " + test + " does not have at least 2 raters!" 
+                if raters not in rater_pairings_detailed:
+                    rater_pairings_detailed[raters] = []
+                    kappa_list[raters] = []
+                
+                rater_pairings_detailed[raters].append(kappa_summary)
+                kappa_list[raters] = kappa_list[raters] + kappas
 
     for raters in kappa_list:
         average_kappa = sum(kappa_list[raters]) / len(kappa_list[raters])

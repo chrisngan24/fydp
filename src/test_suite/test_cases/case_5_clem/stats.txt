@@ -4,11 +4,11 @@ signal max and min: 8.69658259415 -16.0968370885
 location of signal max and min: 80 55
 input event type: right
 min left: 840.094651063
-min left index: 13
+min left index: 10
 min right: 190.560110702
-min right index: 8
+min right index: 9
 min neg: 843.723045977
-min neg index: 3
+min neg index: 0
 average of 3 min lefts: 1020.74867667
 average of 3 min rights: 442.012861669
 average of 3 min negs: 1033.3843173
