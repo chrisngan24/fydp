@@ -15,6 +15,8 @@ class HeadAnnotator(EventAnnotator):
         m_dir = os.path.dirname(__file__)
         base_dir = os.path.join(m_dir, '../models/head_turns/')
         self.model = joblib.load('%s/head_turns.pkl' % base_dir) 
+        #base_dir = os.path.join(m_dir, '../models/head_turns_v2/')
+        #self.model = joblib.load('%s/head_turns_v2.pkl' % base_dir) 
         print self.model.__class__
         config_fi = open('%s/config.json' % base_dir, 'r')
         self.config = json.loads(reduce(lambda x, y: x + y, config_fi))
@@ -69,8 +71,7 @@ class HeadAnnotator(EventAnnotator):
 
 
         def end_event(event_key, start_index, end_index):
-            assert(event_key in set([1,3]))
-            if end_index - start_index >= min_event_length:
+            if event_key in set([1,3]) and end_index - start_index >= min_event_length:
                 if event_key == 1:
                     event_start = 'left_turn_start'
                     event_end   = 'left_turn_end'

@@ -4,11 +4,11 @@ signal max and min: 14.7200944232 -8.98285558747
 location of signal max and min: 151 214
 input event type: left
 min left: 413.877657533
-min left index: 5
+min left index: 12
 min right: 1552.97092421
-min right index: 17
+min right index: 7
 min neg: 1782.64503857
-min neg index: 1
+min neg index: 4
 average of 3 min lefts: 811.493313701
 average of 3 min rights: 1663.09975487
 average of 3 min negs: 2189.60932813
@@ -28,11 +28,11 @@ signal max and min: 14.6906497438 -8.98285558747
 location of signal max and min: 0 58
 input event type: right
 min left: 565.459026584
-min left index: 10
+min left index: 13
 min right: 1079.45598847
-min right index: 9
+min right index: 8
 min neg: 1264.23016947
-min neg index: 1
+min neg index: 4
 average of 3 min lefts: 772.370920242
 average of 3 min rights: 1144.95984145
 average of 3 min negs: 1667.59633547
@@ -52,11 +52,11 @@ signal max and min: 10.8103993465 -14.4186774422
 location of signal max and min: 34 223
 input event type: left
 min left: 1281.08159147
-min left index: 8
+min left index: 6
 min right: 2352.24914187
-min right index: 19
+min right index: 2
 min neg: 1865.38701745
-min neg index: 1
+min neg index: 4
 average of 3 min lefts: 1542.50484723
 average of 3 min rights: 2412.66255631
 average of 3 min negs: 2460.89343495
@@ -76,11 +76,11 @@ signal max and min: 9.95450763295 -20.7674120322
 location of signal max and min: 0 214
 input event type: right
 min left: 1680.41893171
-min left index: 2
+min left index: 9
 min right: 1464.63850217
-min right index: 4
+min right index: 16
 min neg: 1353.62063447
-min neg index: 1
+min neg index: 4
 average of 3 min lefts: 1945.72876051
 average of 3 min rights: 1508.0440155
 average of 3 min negs: 2082.53081984
@@ -100,11 +100,11 @@ signal max and min: 3.43872984066 -20.7674120322
 location of signal max and min: 118 179
 input event type: right
 min left: 1421.56740734
-min left index: 5
+min left index: 12
 min right: 950.366887038
-min right index: 17
+min right index: 7
 min neg: 1473.75224516
-min neg index: 0
+min neg index: 3
 average of 3 min lefts: 1676.0202863
 average of 3 min rights: 1126.0211627
 average of 3 min negs: 1629.86016814
@@ -124,11 +124,11 @@ signal max and min: 3.43872984066 -20.7674120322
 location of signal max and min: 59 120
 input event type: right
 min left: 1163.93757816
-min left index: 5
+min left index: 12
 min right: 554.222784072
-min right index: 4
+min right index: 16
 min neg: 1259.00170116
-min neg index: 1
+min neg index: 4
 average of 3 min lefts: 1314.58016442
 average of 3 min rights: 622.693962357
 average of 3 min negs: 1334.66590991
@@ -148,11 +148,11 @@ signal max and min: 15.3010543966 -22.5017350066
 location of signal max and min: 142 95
 input event type: left
 min left: 1452.04691554
-min left index: 10
+min left index: 13
 min right: 1191.31431329
-min right index: 17
+min right index: 7
 min neg: 1765.1694272
-min neg index: 0
+min neg index: 3
 average of 3 min lefts: 1667.54421256
 average of 3 min rights: 1306.6001218
 average of 3 min negs: 2194.71843333
@@ -172,11 +172,11 @@ signal max and min: 16.7148936446 -22.5017350066
 location of signal max and min: 80 28
 input event type: right
 min left: 1547.31868206
-min left index: 3
+min left index: 0
 min right: 703.319215148
-min right index: 6
+min right index: 17
 min neg: 1710.03975103
-min neg index: 6
+min neg index: 2
 average of 3 min lefts: 1872.4391667
 average of 3 min rights: 1041.68464172
 average of 3 min negs: 2036.49383252
@@ -196,11 +196,11 @@ signal max and min: 16.7148936446 -22.4493191059
 location of signal max and min: 47 0
 input event type: left
 min left: 845.959564234
-min left index: 3
+min left index: 0
 min right: 1084.37515261
-min right index: 2
+min right index: 15
 min neg: 2127.64367154
-min neg index: 0
+min neg index: 3
 average of 3 min lefts: 979.477440118
 average of 3 min rights: 1343.45794174
 average of 3 min negs: 2327.16276625
