@@ -1,4 +1,4 @@
 bin/retrain
-cp -r models/head_turns_v3/ ../../src/models/head_turns_v3
+cp -r models/head_turns_v1/ ../../src/models/head_turns_v1
 cp head_features.py ../../src/analysis/head_features.py
 
